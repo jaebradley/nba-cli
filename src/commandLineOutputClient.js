@@ -18,7 +18,7 @@ function outputUpcomingGameTable(data) {
   var table = new Table(defaultTableFormatting);
   table.push(
     ['HOME', 'AWAY', 'START TIME', 'WATCH IT ON', 'ARENA'],
-    [data.homeName, data.visitorName, data.formattedDate + ' ' + data.formattedEstStartTime, data.broadcasts.toString(), data.arena + ", " + data.city + ", " + data.state]
+    [data.homeName, data.visitorName, data.formattedLocalizedStartDate, data.broadcasts.toString(), data.arena + ", " + data.city + ", " + data.state]
   );
   console.log(table.toString());
 }

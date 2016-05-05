@@ -1,3 +1,11 @@
+const moment = require("moment-timezone");
+const jstz = require("jstimezonedetect");
+
+const DEFAULT_TIMEZONE = "America/New_York";
+const DATE_START_TIME_FORMAT = "YYYYMMDDHHmm";
+const TRANSLATED_DATE_FORMAT = "LLL";
+const USER_TIMEZONE = jstz.determine().name();
+
 function getBroadcasts(data) {
   const broadcasts = [];
   data.tv.broadcaster.forEach(function(broadcast) {
@@ -17,6 +25,18 @@ function getTeamLinescores(data) {
     );
   });
   return linescores;
+}
+
+function getUtcDateStartTime(dateStartTime) {
+  return getDefaultDateStartTime(dateStartTime).tz("UTC").format(TRANSLATED_DATE_FORMAT);
+}
+
+function getDefaultDateStartTime(dateStartTime) {
+  return moment.tz(dateStartTime, DATE_START_TIME_FORMAT).tz(DEFAULT_TIMEZONE);
+}
+
+function getLocalizedDateStartTime(dateStartTime) {
+  return getDefaultDateStartTime(dateStartTime).clone().tz(USER_TIMEZONE).format(TRANSLATED_DATE_FORMAT);
 }
 
 module.exports = {
@@ -41,17 +61,18 @@ module.exports = {
       const homeLinescores = [];
       if ("linescores" in game.home) {
         homeLinescores = getTeamLinescores(game.home.linescores);
-      }      
-      
+      }
+
+      const dateStartTime = game.date.concat(game.time);
+      const localDateStartTime = game.home_start_date.concat(game.home_start_time);
+
       games[game.id] = {
         url: game.game_url,
-        formattedDate: game.date,
-        formattedEstStartTime: game.time,
+        formattedUtcDateStartTime: getUtcDateStartTime(dateStartTime),
         arena: game.arena,
         city: game.city,
         state: game.state,
-        formattedLocalStartDate: game.home_start_date,
-        formattedLocalStartTime: game.home_start_time,
+        formattedLocalizedStartDate: getLocalizedDateStartTime(localDateStartTime),
         isPreviewAvailable: isPreviewAvailable,
         isRecapAvailable: isRecapAvailable,
         periodValue: game.period_time.period_value,
