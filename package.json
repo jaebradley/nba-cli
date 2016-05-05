@@ -16,7 +16,9 @@
     "request": "latest",
     "moment": "latest",
     "commander": "latest",
-    "cli-table": "latest"
+    "cli-table": "latest",
+    "jstimezonedetect": "latest",
+    "moment-timezone": "latest"
   },
   "repository": {
      "type": "git",

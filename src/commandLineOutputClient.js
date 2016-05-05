@@ -1,5 +1,6 @@
 const Table = require('cli-table');
-const NbaDataClient = require("./nbaDataClient.js");
+const NbaDataClient = require('./nbaDataClient.js');
+const moment = require('moment-timezone');
 
 const defaultTableFormatting = {
   chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
@@ -8,23 +9,31 @@ const defaultTableFormatting = {
          , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
 };
 
-function outputUpcomingGamesTable(data) {
+function outputGames(data) {
   for (const key in data) {
-    outputUpcomingGameTable(data[key]);
+    const gameData = data[key];
+    if (isGameUpcoming(gameData)) {
+      outputUpcomingGameTable(data[key]);
+    }
   }
 }
 
 function outputUpcomingGameTable(data) {
   var table = new Table(defaultTableFormatting);
+  const location = data.arena.concat(',', data.city, ',', data.state);
   table.push(
     ['HOME', 'AWAY', 'START TIME', 'WATCH IT ON', 'ARENA'],
-    [data.homeName, data.visitorName, data.formattedDate + ' ' + data.formattedEstStartTime, data.broadcasts.toString(), data.arena + ", " + data.city + ", " + data.state]
+    [data.homeName, data.visitorName, data.formattedLocalizedStartDate, data.broadcasts.toString(), location]
   );
   console.log(table.toString());
 }
 
+function isGameUpcoming(data) {
+  return data.unixMillisecondsStartTime > moment().valueOf();
+}
+
 module.exports = {
   outputTodayGames: function() {
-    NbaDataClient.fetchTodayGames(outputUpcomingGamesTable);
+    NbaDataClient.fetchTodayGames(outputGames);
   }
 };
