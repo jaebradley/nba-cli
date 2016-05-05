@@ -27,12 +27,16 @@ function getTeamLinescores(data) {
   return linescores;
 }
 
+function getUnixMillisecondsStartTime(dateStartTime) {
+  return getDefaultDateStartTime(dateStartTime).tz("UTC").valueOf();
+}
+
 function getUtcDateStartTime(dateStartTime) {
   return getDefaultDateStartTime(dateStartTime).tz("UTC").format(TRANSLATED_DATE_FORMAT);
 }
 
 function getDefaultDateStartTime(dateStartTime) {
-  return moment.tz(dateStartTime, DATE_START_TIME_FORMAT).tz(DEFAULT_TIMEZONE);
+  return moment(dateStartTime, DATE_START_TIME_FORMAT).tz(DEFAULT_TIMEZONE);
 }
 
 function getLocalizedDateStartTime(dateStartTime) {
@@ -68,6 +72,7 @@ module.exports = {
 
       games[game.id] = {
         url: game.game_url,
+        unixMillisecondsStartTime: getUnixMillisecondsStartTime(dateStartTime),
         formattedUtcDateStartTime: getUtcDateStartTime(dateStartTime),
         arena: game.arena,
         city: game.city,

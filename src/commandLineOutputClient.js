@@ -1,5 +1,6 @@
 const Table = require('cli-table');
-const NbaDataClient = require("./nbaDataClient.js");
+const NbaDataClient = require('./nbaDataClient.js');
+const moment = require('moment-timezone');
 
 const defaultTableFormatting = {
   chars: { 'top': '═' , 'top-mid': '╤' , 'top-left': '╔' , 'top-right': '╗'
@@ -8,9 +9,12 @@ const defaultTableFormatting = {
          , 'right': '║' , 'right-mid': '╢' , 'middle': '│' }
 };
 
-function outputUpcomingGamesTable(data) {
+function outputGames(data) {
   for (const key in data) {
-    outputUpcomingGameTable(data[key]);
+    const gameData = data[key];
+    if (isGameUpcoming(gameData)) {
+      outputUpcomingGameTable(data[key]);
+    }
   }
 }
 
@@ -24,8 +28,12 @@ function outputUpcomingGameTable(data) {
   console.log(table.toString());
 }
 
+function isGameUpcoming(data) {
+  return data.unixMillisecondsStartTime > moment().valueOf();
+}
+
 module.exports = {
   outputTodayGames: function() {
-    NbaDataClient.fetchTodayGames(outputUpcomingGamesTable);
+    NbaDataClient.fetchTodayGames(outputGames);
   }
 };
