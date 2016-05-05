@@ -1,0 +1,43 @@
+{
+  "commonPlayerInfo": [
+    {
+      "personId": 201939,
+      "firstName": "Stephen",
+      "lastName": "Curry",
+      "displayFirstLast": "Stephen Curry",
+      "displayLastCommaFirst": "Curry, Stephen",
+      "displayFiLast": "S. Curry",
+      "birthdate": "1988-03-14T00:00:00",
+      "school": "Davidson",
+      "country": "USA",
+      "lastAffiliation": "Davidson/USA",
+      "height": "6-3",
+      "weight": "190",
+      "seasonExp": 6,
+      "jersey": "30",
+      "position": "Guard",
+      "rosterstatus": "Active",
+      "teamId": 1610612744,
+      "teamName": "Warriors",
+      "teamAbbreviation": "GSW",
+      "teamCode": "warriors",
+      "teamCity": "Golden State",
+      "playercode": "stephen_curry",
+      "fromYear": 2009,
+      "toYear": 2015,
+      "dleagueFlag": "N",
+      "gamesPlayedFlag": "Y"
+    }
+  ],
+  "playerHeadlineStats": [
+    {
+      "playerId": 201939,
+      "playerName": "Stephen Curry",
+      "timeFrame": "2015-16",
+      "pts": 30,
+      "ast": 6.6,
+      "reb": 5.3,
+      "pie": 0.203
+    }
+  ]
+}

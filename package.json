@@ -1,0 +1,25 @@
+{
+  "name": "nba-scoreboard",
+  "version": "0.0.1",
+  "description": "nba scoreboard",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jae Bradley",
+  "license": "MIT",
+  "preferGlobal": true,
+  "bin": {
+    "nba": "src/commandLineClient.js"
+  },
+  "dependencies": {
+    "nba": "latest",
+    "request": "latest",
+    "moment": "latest",
+    "commander": "latest",
+    "cli-table": "latest"
+  },
+  "repository": {
+     "type": "git",
+     "url": "https://github.com/jaebradley/nba-cli/tree/master"
+   }
+}

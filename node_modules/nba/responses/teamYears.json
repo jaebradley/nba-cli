@@ -1,0 +1,317 @@
+[
+  {
+    "leagueId": "00",
+    "teamId": 1610612737,
+    "minYear": "1949",
+    "maxYear": "2015",
+    "abbreviation": "ATL"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612738,
+    "minYear": "1946",
+    "maxYear": "2015",
+    "abbreviation": "BOS"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612739,
+    "minYear": "1970",
+    "maxYear": "2015",
+    "abbreviation": "CLE"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612740,
+    "minYear": "2002",
+    "maxYear": "2015",
+    "abbreviation": "NOP"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612741,
+    "minYear": "1966",
+    "maxYear": "2015",
+    "abbreviation": "CHI"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612742,
+    "minYear": "1980",
+    "maxYear": "2015",
+    "abbreviation": "DAL"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612743,
+    "minYear": "1976",
+    "maxYear": "2015",
+    "abbreviation": "DEN"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612744,
+    "minYear": "1946",
+    "maxYear": "2015",
+    "abbreviation": "GSW"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612745,
+    "minYear": "1967",
+    "maxYear": "2015",
+    "abbreviation": "HOU"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612746,
+    "minYear": "1970",
+    "maxYear": "2015",
+    "abbreviation": "LAC"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612747,
+    "minYear": "1948",
+    "maxYear": "2015",
+    "abbreviation": "LAL"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612748,
+    "minYear": "1988",
+    "maxYear": "2015",
+    "abbreviation": "MIA"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612749,
+    "minYear": "1968",
+    "maxYear": "2015",
+    "abbreviation": "MIL"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612750,
+    "minYear": "1989",
+    "maxYear": "2015",
+    "abbreviation": "MIN"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612751,
+    "minYear": "1976",
+    "maxYear": "2015",
+    "abbreviation": "BKN"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612752,
+    "minYear": "1946",
+    "maxYear": "2015",
+    "abbreviation": "NYK"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612753,
+    "minYear": "1989",
+    "maxYear": "2015",
+    "abbreviation": "ORL"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612754,
+    "minYear": "1976",
+    "maxYear": "2015",
+    "abbreviation": "IND"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612755,
+    "minYear": "1949",
+    "maxYear": "2015",
+    "abbreviation": "PHI"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612756,
+    "minYear": "1968",
+    "maxYear": "2015",
+    "abbreviation": "PHX"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612757,
+    "minYear": "1970",
+    "maxYear": "2015",
+    "abbreviation": "POR"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612758,
+    "minYear": "1948",
+    "maxYear": "2015",
+    "abbreviation": "SAC"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612759,
+    "minYear": "1976",
+    "maxYear": "2015",
+    "abbreviation": "SAS"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612760,
+    "minYear": "1967",
+    "maxYear": "2015",
+    "abbreviation": "OKC"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612761,
+    "minYear": "1995",
+    "maxYear": "2015",
+    "abbreviation": "TOR"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612762,
+    "minYear": "1974",
+    "maxYear": "2015",
+    "abbreviation": "UTA"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612763,
+    "minYear": "1995",
+    "maxYear": "2015",
+    "abbreviation": "MEM"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612764,
+    "minYear": "1961",
+    "maxYear": "2015",
+    "abbreviation": "WAS"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612765,
+    "minYear": "1948",
+    "maxYear": "2015",
+    "abbreviation": "DET"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610612766,
+    "minYear": "1988",
+    "maxYear": "2015",
+    "abbreviation": "CHA"
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610029,
+    "minYear": "1948",
+    "maxYear": "1948",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610025,
+    "minYear": "1946",
+    "maxYear": "1949",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610034,
+    "minYear": "1946",
+    "maxYear": "1949",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610036,
+    "minYear": "1946",
+    "maxYear": "1950",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610024,
+    "minYear": "1947",
+    "maxYear": "1954",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610027,
+    "minYear": "1949",
+    "maxYear": "1949",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610030,
+    "minYear": "1949",
+    "maxYear": "1952",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610033,
+    "minYear": "1949",
+    "maxYear": "1949",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610037,
+    "minYear": "1949",
+    "maxYear": "1949",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610031,
+    "minYear": "1946",
+    "maxYear": "1946",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610023,
+    "minYear": "1949",
+    "maxYear": "1949",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610028,
+    "minYear": "1946",
+    "maxYear": "1946",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610026,
+    "minYear": "1946",
+    "maxYear": "1946",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610032,
+    "minYear": "1946",
+    "maxYear": "1948",
+    "abbreviation": null
+  },
+  {
+    "leagueId": "00",
+    "teamId": 1610610035,
+    "minYear": "1946",
+    "maxYear": "1946",
+    "abbreviation": null
+  }
+]

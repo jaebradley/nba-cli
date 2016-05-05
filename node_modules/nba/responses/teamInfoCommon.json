@@ -1,0 +1,36 @@
+{
+  "teamInfoCommon": [
+    {
+      "teamId": 1610612744,
+      "seasonYear": "2015-16",
+      "teamCity": "Golden State",
+      "teamName": "Warriors",
+      "teamAbbreviation": "GSW",
+      "teamConference": "West",
+      "teamDivision": "Pacific",
+      "teamCode": "warriors",
+      "w": 51,
+      "l": 5,
+      "pct": 0.911,
+      "confRank": 1,
+      "divRank": 1,
+      "minYear": "1946",
+      "maxYear": "2015"
+    }
+  ],
+  "teamSeasonRanks": [
+    {
+      "leagueId": "00",
+      "seasonId": "22015",
+      "teamId": 1610612744,
+      "ptsRank": 1,
+      "ptsPg": 115.1,
+      "rebRank": 3,
+      "rebPg": 46.6,
+      "astRank": 1,
+      "astPg": 29,
+      "oppPtsRank": 21,
+      "oppPtsPg": 103.7
+    }
+  ]
+}
