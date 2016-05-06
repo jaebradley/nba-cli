@@ -6,9 +6,7 @@ function getLocation(arena, city, state) {
 
 module.exports = {
   createUpcomingGamesTable: function(data) {
-    const table = new Table();
-    table.push([{ content: 'UPCOMING GAMES', colSpan: 5 }],
-               ['START TIME', 'HOME', 'AWAY', 'WATCH', 'ARENA']);
+    const table = new Table({head: ['UPCOMING', 'HOME', 'AWAY', 'WATCH', 'ARENA']});
     data.forEach(function(upcomingGame) {
       table.push([upcomingGame.formattedLocalizedStartDate,
                   upcomingGame.homeName,

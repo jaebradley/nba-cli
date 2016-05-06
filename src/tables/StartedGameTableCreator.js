@@ -1,4 +1,5 @@
 const Table = require('cli-table2');
+const Colors = require('colors');
 
 function createStartedGameTableHeaders(linescores) {
   const headers = [''];
@@ -13,12 +14,23 @@ function getStartedGameTableColumns(linescores) {
   return linescores.length + 2;
 }
 
-function generateTeamLinescoresTableRow(linescores, total) {
+function formatTotal(total, opponentTotal) {
+  const formattedTotal = Colors.bold;
+  if (total > opponentTotal) {
+    return formattedTotal.green(total);
+  } else if (total < opponentTotal) {
+    return formattedTotal.red(total);
+  }
+
+  return formattedTotal.blue(total);
+}
+
+function generateTeamLinescoresTableRow(linescores, total, opponentTotal) {
   const row = [];
   linescores.forEach(function(linescore) {
     row.push(linescore.score);
   });
-  row.push(total);
+  row.push(formatTotal(total, opponentTotal));
   return row;
 }
 
@@ -81,8 +93,8 @@ module.exports = {
     const table = new Table({
       head: createStartedGameTableHeaders(homeLinescores)
     });
-    homeLinescoresRow[data.homeAbbreviation] = generateTeamLinescoresTableRow(homeLinescores, data.homeScore);
-    visitorLinescoresRow[data.visitorAbbreviation] = generateTeamLinescoresTableRow(visitorLinescores, data.visitorScore);
+    homeLinescoresRow[data.homeAbbreviation] = generateTeamLinescoresTableRow(homeLinescores, data.homeScore, data.visitorScore);
+    visitorLinescoresRow[data.visitorAbbreviation] = generateTeamLinescoresTableRow(visitorLinescores, data.visitorScore, data.homeScore);
     const numberOfColumns = getStartedGameTableColumns(homeLinescores);
     const gameSituationRow = [{ content: identifyGameSituation(data.status, data.periodValue, data.gameClock), colSpan: numberOfColumns }];
     const metadataMap = generateStartedGameMetadataMap(data.homeName, data.visitorName, data.formattedLocalizedStartDate, data.broadcasts.toString());
