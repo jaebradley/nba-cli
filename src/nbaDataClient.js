@@ -19,6 +19,10 @@ function generateYesterdayFormattedDate() {
   return moment().subtract(1, 'days').format(dateFormat);
 }
 
+function generateTomorrowFormattedDate() {
+  return moment().add(1, 'days').format(dateFormat); 
+}
+
 function fetch(gameUrl, callback) {
   request(gameUrl, function (error, response, body) {
     if (!error && response.statusCode == 200) {
@@ -36,6 +40,11 @@ module.exports = {
 
   fetchYesterdayGames: function(callback) {
     const gameUrl = generateDailyGamesUrl(generateYesterdayFormattedDate());
+    fetch(gameUrl, callback);
+  },
+
+  fetchTomorrowGames: function(callback) {
+    const gameUrl = generateDailyGamesUrl(generateTomorrowFormattedDate());
     fetch(gameUrl, callback);
   }
 };
