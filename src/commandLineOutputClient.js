@@ -10,12 +10,14 @@ const defaultTableFormatting = {
 };
 
 function outputGames(data) {
-  for (const key in data) {
+  Object.keys(data).forEach(function(key) {
     const gameData = data[key];
-    if (!isGameUpcoming(gameData)) {
-      outputStartedGameTable(data[key]);
+    if (isGameUpcoming(gameData)) {
+      outputUpcomingGameTable(gameData);
+    } else {
+      outputStartedGameTable(gameData);
     }
-  }
+  });
 }
 
 function outputUpcomingGameTable(data) {
@@ -109,5 +111,9 @@ module.exports = {
 
   outputYesterdayGames: function() {
     NbaDataClient.fetchYesterdayGames(outputGames);
+  },
+
+  outputTomorrowGames: function() {
+    NbaDataClient.fetchTomorrowGames(outputGames);
   }
 };

@@ -14,6 +14,8 @@ program
       CommandLineOutputClient.outputTodayGames();
     } else if (time == "yesterday") {
       CommandLineOutputClient.outputYesterdayGames();
+    } else if (time == "tomorrow") {
+      CommandLineOutputClient.outputTomorrowGames();
     }
   });
 
