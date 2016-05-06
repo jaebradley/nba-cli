@@ -6,6 +6,7 @@ const NbaDataTranslator = require("./nbaDataTranslator.js");
 
 const baseUrl = "http://data.nba.com";
 const dateFormat = "YYYYMMDD";
+const DEFAULT_TIMEZONE = "America/New_York";
 
 function generateDailyGamesUrl(formattedDate) {
   return baseUrl + "/data/5s/json/cms/noseason/scoreboard/" + formattedDate + "/games.json";
@@ -21,6 +22,10 @@ function generateYesterdayFormattedDate() {
 
 function generateTomorrowFormattedDate() {
   return moment().add(1, 'days').format(dateFormat); 
+}
+
+function generateCustomFormattedDate(date) {
+  return date.clone().tz(DEFAULT_TIMEZONE).format(dateFormat);
 }
 
 function fetch(gameUrl, callback) {
@@ -45,6 +50,11 @@ module.exports = {
 
   fetchTomorrowGames: function(callback) {
     const gameUrl = generateDailyGamesUrl(generateTomorrowFormattedDate());
+    fetch(gameUrl, callback);
+  },
+
+  fetchCustomDateGames: function(date, callback) {
+    const gameUrl = generateDailyGamesUrl(generateCustomFormattedDate(date));
     fetch(gameUrl, callback);
   }
 };
