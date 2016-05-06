@@ -18,7 +18,8 @@
     "commander": "latest",
     "cli-table2": "latest",
     "jstimezonedetect": "latest",
-    "moment-timezone": "latest"
+    "moment-timezone": "latest",
+    "colors": "latest"
   },
   "repository": {
      "type": "git",
