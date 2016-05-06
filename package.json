@@ -16,7 +16,7 @@
     "request": "latest",
     "moment": "latest",
     "commander": "latest",
-    "cli-table": "latest",
+    "cli-table2": "latest",
     "jstimezonedetect": "latest",
     "moment-timezone": "latest"
   },
