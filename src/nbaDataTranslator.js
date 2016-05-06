@@ -4,6 +4,12 @@ const jstz = require("jstimezonedetect");
 const DEFAULT_TIMEZONE = "America/New_York";
 const DATE_START_TIME_FORMAT = "YYYYMMDDHHmm";
 const TRANSLATED_DATE_FORMAT = "LLL";
+const GAME_STATUS_MAP = {
+  1: 'PREGAME',
+  2: 'LIVE',
+  3: 'FINAL'
+};
+
 const USER_TIMEZONE = jstz.determine().name();
 
 function getBroadcasts(data) {
@@ -16,14 +22,23 @@ function getBroadcasts(data) {
 
 function getTeamLinescores(data) {
   const linescores = [];
-  data.period.forEach(function(period) {
+  if ('period_name' in data.period && 'score' in data.period) {
     linescores.push(
       {
-        period: period.period_name,
-        score: period.score
+        period: data.period.period_name,
+        score: data.period.score
       }
     );
-  });
+  } else {
+    data.period.forEach(function(period) {
+      linescores.push(
+        {
+          period: period.period_name,
+          score: period.score
+        }
+      );
+    });
+  }
   return linescores;
 }
 
@@ -57,12 +72,12 @@ module.exports = {
         isRecapAvailable = true;
       }
 
-      const visitorLinescores = [];
+      var visitorLinescores = [];
       if ("linescores" in game.visitor) {
         visitorLinescores = getTeamLinescores(game.visitor.linescores);
       }
 
-      const homeLinescores = [];
+      var homeLinescores = [];
       if ("linescores" in game.home) {
         homeLinescores = getTeamLinescores(game.home.linescores);
       }
@@ -71,6 +86,7 @@ module.exports = {
       const localDateStartTime = game.home_start_date.concat(game.home_start_time);
 
       games[game.id] = {
+        status: GAME_STATUS_MAP[game.period_time.game_status],
         url: game.game_url,
         unixMillisecondsStartTime: getUnixMillisecondsStartTime(dateStartTime),
         formattedUtcDateStartTime: getUtcDateStartTime(dateStartTime),

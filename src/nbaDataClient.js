@@ -1,4 +1,4 @@
-const moment = require("moment");
+const moment = require("moment-timezone");
 const request = require("request");
 
 const NbaDataTranslator = require("./nbaDataTranslator.js");
@@ -15,14 +15,27 @@ function generateCurrentFormattedDate() {
   return moment().format(dateFormat);
 }
 
+function generateYesterdayFormattedDate() {
+  return moment().subtract(1, 'days').format(dateFormat);
+}
+
+function fetch(gameUrl, callback) {
+  request(gameUrl, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+      const translatedGameData = NbaDataTranslator.translateGameData(JSON.parse(body));
+      callback(translatedGameData);
+    };
+  });
+}
+
 module.exports = {
   fetchTodayGames: function(callback) {
     const gameUrl = generateDailyGamesUrl(generateCurrentFormattedDate());
-    request(gameUrl, function (error, response, body) {
-      if (!error && response.statusCode == 200) {
-        const translatedGameData = NbaDataTranslator.translateGameData(JSON.parse(body));
-        callback(translatedGameData);
-      };
-    });
+    fetch(gameUrl, callback);
+  },
+
+  fetchYesterdayGames: function(callback) {
+    const gameUrl = generateDailyGamesUrl(generateYesterdayFormattedDate());
+    fetch(gameUrl, callback);
   }
 };
