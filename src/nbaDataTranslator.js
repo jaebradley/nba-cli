@@ -1,6 +1,8 @@
 const moment = require("moment-timezone");
 const jstz = require("jstimezonedetect");
 
+const HtmlEscaper = require("./utils/HtmlEscaper.js");
+
 const DEFAULT_TIMEZONE = "America/New_York";
 const DATE_START_TIME_FORMAT = "YYYYMMDDHHmm";
 const TRANSLATED_DATE_FORMAT = "LLL";
@@ -98,22 +100,22 @@ module.exports = {
         url: game.game_url,
         unixMillisecondsStartTime: getUnixMillisecondsStartTime(dateStartTime),
         formattedUtcDateStartTime: getUtcDateStartTime(dateStartTime),
-        arena: game.arena,
-        city: game.city,
-        state: game.state,
+        arena: HtmlEscaper.escapeHtml(game.arena),
+        city: HtmlEscaper.escapeHtml(game.city),
+        state: HtmlEscaper.escapeHtml(game.state),
         formattedLocalizedStartDate: getLocalizedDateStartTime(localDateStartTime),
         isPreviewAvailable: isPreviewAvailable,
         isRecapAvailable: isRecapAvailable,
-        periodValue: game.period_time.period_value,
-        periodStatus: game.period_time.period_status,
-        gameClock: game.period_time.game_clock,
+        periodValue: HtmlEscaper.escapeHtml(game.period_time.period_value),
+        periodStatus: HtmlEscaper.escapeHtml(game.period_time.period_status),
+        gameClock: HtmlEscaper.escapeHtml(game.period_time.game_clock),
         broadcasts: getBroadcasts(game.broadcasters),
-        visitorAbbreviation: game.visitor.abbreviation,
-        visitorName: game.visitor.city + " " + game.visitor.nickname,
+        visitorAbbreviation: HtmlEscaper.escapeHtml(game.visitor.abbreviation),
+        visitorName: HtmlEscaper.escapeHtml(game.visitor.city) + " " + HtmlEscaper.escapeHtml(game.visitor.nickname),
         visitorScore: game.visitor.score,
         visitorLinescores: visitorLinescores,
-        homeAbbreviation: game.home.abbreviation,
-        homeName: game.home.city + " " + game.home.nickname,
+        homeAbbreviation: HtmlEscaper.escapeHtml(game.home.abbreviation),
+        homeName: HtmlEscaper.escapeHtml(game.home.city) + " " + HtmlEscaper.escapeHtml(game.home.nickname),
         homeScore: game.home.score,
         homeLinescores: homeLinescores
       };
