@@ -58,6 +58,14 @@ function getLocalizedDateStartTime(dateStartTime) {
   return getDefaultDateStartTime(dateStartTime).clone().tz(USER_TIMEZONE).format(TRANSLATED_DATE_FORMAT);
 }
 
+function getGameStatus(periodStatus, gameStatus) {
+  if (periodStatus != "Halftime") {
+    return GAME_STATUS_MAP[gameStatus];
+  }
+
+  return periodStatus;
+}
+
 module.exports = {
   translateGameData: function(data) {
     const games = {};
@@ -86,7 +94,7 @@ module.exports = {
       const localDateStartTime = game.home_start_date.concat(game.home_start_time);
 
       games[game.id] = {
-        status: GAME_STATUS_MAP[game.period_time.game_status],
+        status: getGameStatus(game.period_time.period_status, game.period_time.game_status),
         url: game.game_url,
         unixMillisecondsStartTime: getUnixMillisecondsStartTime(dateStartTime),
         formattedUtcDateStartTime: getUtcDateStartTime(dateStartTime),
