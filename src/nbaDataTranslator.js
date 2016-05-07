@@ -28,7 +28,7 @@ function getTeamLinescores(data) {
     linescores.push(
       {
         period: data.period.period_name,
-        score: data.period.score
+        score: parseInt(data.period.score)
       }
     );
   } else {
@@ -36,7 +36,7 @@ function getTeamLinescores(data) {
       linescores.push(
         {
           period: period.period_name,
-          score: period.score
+          score: parseInt(period.score)
         }
       );
     });
@@ -112,11 +112,11 @@ module.exports = {
         broadcasts: getBroadcasts(game.broadcasters),
         visitorAbbreviation: HtmlEscaper.escapeHtml(game.visitor.abbreviation),
         visitorName: HtmlEscaper.escapeHtml(game.visitor.city) + " " + HtmlEscaper.escapeHtml(game.visitor.nickname),
-        visitorScore: game.visitor.score,
+        visitorScore: parseInt(game.visitor.score),
         visitorLinescores: visitorLinescores,
         homeAbbreviation: HtmlEscaper.escapeHtml(game.home.abbreviation),
         homeName: HtmlEscaper.escapeHtml(game.home.city) + " " + HtmlEscaper.escapeHtml(game.home.nickname),
-        homeScore: game.home.score,
+        homeScore: parseInt(game.home.score),
         homeLinescores: homeLinescores
       };
     });

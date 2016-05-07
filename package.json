@@ -19,7 +19,9 @@
     "cli-table2": "latest",
     "jstimezonedetect": "latest",
     "moment-timezone": "latest",
-    "colors": "latest"
+    "colors": "latest",
+    "node-emoji": "latest",
+    "nba-images": "latest"
   },
   "repository": {
      "type": "git",
