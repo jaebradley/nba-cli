@@ -1,46 +1,83 @@
 const Table = require('cli-table2');
 const Colors = require('colors');
+const emoji = require('node-emoji');
+const nbaImages = require('nba-images');
 
-function createStartedGameTableHeaders(linescores) {
-  const headers = [''];
+const HOME_EMOJI_VALUE = 'house';
+const VISITOR_EMOJI_VALUE = 'bus';
+const START_TIME_EMOJI_VALUE = 'alarm_clock';
+const BROADCASTS_EMOJI_VALUE = 'tv';
+
+function getStartedGameTableColumns(linescores) {
+  return linescores.length + 3;
+}
+
+function formatGamePeriod(periodValue) {
+  if (parseInt(periodValue) > 4) {
+    return 'OT'.concat(periodValue - 4);
+  }
+
+  return 'Q'.concat(periodValue);
+}
+
+function identifyGameSituation(status, periodValue, gameClock) {
+  if (status == "LIVE") {
+    const formattedGamePeriod = formatGamePeriod(periodValue);
+    return gameClock.concat(" ", formattedGamePeriod);
+  }
+
+  return status;
+}
+
+function createStartedGameTableHeaders(linescores, status, periodValue, gameClock) {
+  const gameSituation = identifyGameSituation(status, periodValue, gameClock);
+  const headers = ['', gameSituation.bold.magenta];
   linescores.forEach(function(linescore) {
-    headers.push(linescore.period);
+    headers.push(linescore.period.bold.cyan);
   });
-  headers.push('Total');
+  headers.push('Total'.bold.underline.cyan);
   return headers;
 }
 
-function getStartedGameTableColumns(linescores) {
-  return linescores.length + 2;
+function formatTeamAbbreviation(abbreviation) {
+  return abbreviation.concat(" ", nbaImages.getTeamEmoji(abbreviation));
 }
 
-function formatTotal(total, opponentTotal) {
-  const formattedTotal = Colors.bold;
-  if (total > opponentTotal) {
-    return formattedTotal.green(total);
-  } else if (total < opponentTotal) {
-    return formattedTotal.red(total);
+function formatScore(score, opponentScore) {
+  if (score > opponentScore) {
+    return score.green;
+  } else if (score < opponentScore) {
+    return score.red;
   }
 
-  return formattedTotal.blue(total);
+  return score.blue;
 }
 
-function generateTeamLinescoresTableRow(linescores, total, opponentTotal) {
-  const row = [];
-  linescores.forEach(function(linescore) {
-    row.push(linescore.score);
-  });
-  row.push(formatTotal(total, opponentTotal));
-  return row;
+function formatTotalScore(score, opponentScore) {
+  return formatScore(score, opponentScore).bold;
 }
 
-function generateStartedGameMetadataMap(homeTeamName, visitingTeamName, startTime, broadcasts) {
-  return {
-    'HOME': homeTeamName,
-    'AWAY': visitingTeamName,
-    'START': startTime,
-    'WATCH': broadcasts
-  };
+function generateLinescoresTableRows(homeAbbreviation, visitorAbbreviation, homeLinescores, visitorLinescores, homeTotal, visitorTotal) {
+  const homeRow = [emoji.get(HOME_EMOJI_VALUE), formatTeamAbbreviation(homeAbbreviation)];
+  const visitorRow = [emoji.get(VISITOR_EMOJI_VALUE), formatTeamAbbreviation(visitorAbbreviation)];
+
+  for (var i = 0; i < homeLinescores.length; i++) {
+    var homeScore = homeLinescores[i].score;
+    var visitorScore = visitorLinescores[i].score;
+    homeRow.push(formatScore(homeScore, visitorScore));
+    visitorRow.push(formatScore(visitorScore, homeScore));
+  }
+
+  homeRow.push(formatTotalScore(homeTotal, visitorTotal));
+  visitorRow.push(formatTotalScore(visitorTotal, homeTotal));
+  return [homeRow, visitorRow];
+}
+
+function generateStartedGameMetadataMap(startTime, broadcasts) {
+  const map = {};
+  map[emoji.get(START_TIME_EMOJI_VALUE)] = startTime;
+  map[emoji.get(BROADCASTS_EMOJI_VALUE)] = broadcasts;
+  return map;
 }
 
 function generateStartedGameMetadataRow(label, value, numberOfColumns) {
@@ -66,43 +103,34 @@ function generateStartedGameMetadataRows(metadataMap, numberOfColumns) {
   return rows;
 }
 
-function formatGamePeriod(periodValue) {
-  if (parseInt(periodValue) > 4) {
-    return 'OT'.concat(periodValue - 4);
-  }
-
-  return 'Q'.concat(periodValue);
-}
-
-function identifyGameSituation(status, periodValue, gameClock) {
-  if (status == "LIVE") {
-    const formattedGamePeriod = formatGamePeriod(periodValue);
-    return gameClock + "LEFT IN " + formattedGamePeriod;
-  }
-
-  return status;
+function generateStartedGameTableRows(data) {
+  const rows = [];
+  const homeLinescores = data.homeLinescores;
+  const visitorLinescores = data.visitorLinescores;
+  const homeAbbreviation = data.homeAbbreviation;
+  const visitorAbbreviation = data.visitorAbbreviation;
+  const homeScore = data.homeScore;
+  const visitorScore = data.visitorScore;
+  const startTime = data.formattedLocalizedStartDate;
+  const broadcasts = data.broadcasts.toString();
+  const linescoresRows = generateLinescoresTableRows(homeAbbreviation, visitorAbbreviation, homeLinescores, visitorLinescores, homeScore, visitorScore);
+  const numberOfColumns = getStartedGameTableColumns(homeLinescores);
+  const metadataMap = generateStartedGameMetadataMap(startTime, broadcasts);
+  const metadataRows = generateStartedGameMetadataRows(metadataMap, numberOfColumns);
+  rows.push.apply(rows, linescoresRows);
+  rows.push.apply(rows, metadataRows);
+  return rows;
 }
 
 module.exports = {
   createStartedGameTable: function(data) {
     const homeLinescores = data.homeLinescores;
-    const visitorLinescores = data.visitorLinescores;
-    const homeLinescoresRow = {};
-    const visitorLinescoresRow = {};
-    const visitorAbbreviation = data.visitorAbbreviation;
-    const table = new Table({
-      head: createStartedGameTableHeaders(homeLinescores)
-    });
-    homeLinescoresRow[data.homeAbbreviation] = generateTeamLinescoresTableRow(homeLinescores, data.homeScore, data.visitorScore);
-    visitorLinescoresRow[data.visitorAbbreviation] = generateTeamLinescoresTableRow(visitorLinescores, data.visitorScore, data.homeScore);
-    const numberOfColumns = getStartedGameTableColumns(homeLinescores);
-    const gameSituationRow = [{ content: identifyGameSituation(data.status, data.periodValue, data.gameClock), colSpan: numberOfColumns }];
-    const metadataMap = generateStartedGameMetadataMap(data.homeName, data.visitorName, data.formattedLocalizedStartDate, data.broadcasts.toString());
-    const metadataRows = generateStartedGameMetadataRows(metadataMap, numberOfColumns);
-    table.push(homeLinescoresRow,
-               visitorLinescoresRow,
-               gameSituationRow);
-    metadataRows.forEach(function(row) {
+    const gameStatus = data.status;
+    const periodValue = data.periodValue;
+    const gameClock = data.gameClock;
+    const table = new Table({ head: createStartedGameTableHeaders(homeLinescores, gameStatus, periodValue, gameClock) });
+    const rows = generateStartedGameTableRows(data);
+    rows.forEach(function(row) {
       table.push(row);
     });
     return table.toString();
