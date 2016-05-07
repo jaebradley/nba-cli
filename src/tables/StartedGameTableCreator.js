@@ -7,6 +7,7 @@ const HOME_EMOJI_VALUE = 'house';
 const VISITOR_EMOJI_VALUE = 'bus';
 const START_TIME_EMOJI_VALUE = 'alarm_clock';
 const BROADCASTS_EMOJI_VALUE = 'tv';
+const SCORE_100_EMOJI_VALUE = '100';
 
 function getStartedGameTableColumns(linescores) {
   return linescores.length + 3;
@@ -45,15 +46,18 @@ function formatTeamAbbreviation(abbreviation) {
 
 function formatScore(score, opponentScore) {
   if (score > opponentScore) {
-    return score.green;
+    return score.toString().green;
   } else if (score < opponentScore) {
-    return score.red;
+    return score.toString().red;
   }
 
-  return score.blue;
+  return score.toString().blue;
 }
 
 function formatTotalScore(score, opponentScore) {
+  if (score == 100) {
+    return emoji.get(SCORE_100_EMOJI_VALUE);
+  }
   return formatScore(score, opponentScore).bold;
 }
 
