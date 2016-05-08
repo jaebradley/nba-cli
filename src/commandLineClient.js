@@ -19,8 +19,8 @@ program
       var endDate = moment().tz(USER_TIMEZONE).endOf("day");
       CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
     } else if (time == "yesterday") {
-      var startDate = moment().substract(1, "days").tz(USER_TIMEZONE).startOf("day");
-      var endDate = moment().substract(1, "days").tz(USER_TIMEZONE).endOf("day");
+      var startDate = moment().subtract(1, "days").tz(USER_TIMEZONE).startOf("day");
+      var endDate = moment().subtract(1, "days").tz(USER_TIMEZONE).endOf("day");
       CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
     } else if (time == "tomorrow") {
       var startDate = moment().add(1, "days").tz(USER_TIMEZONE).startOf("day");
