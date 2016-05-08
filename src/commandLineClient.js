@@ -15,14 +15,21 @@ program
   .description("get nba games")
   .action(function(time) {
     if (time == "today" || time == null) {
-      CommandLineOutputClient.outputTodayGames();
+      var startDate = moment().tz(USER_TIMEZONE).startOf("day");
+      var endDate = moment().tz(USER_TIMEZONE).endOf("day");
+      CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
     } else if (time == "yesterday") {
-      CommandLineOutputClient.outputYesterdayGames();
+      var startDate = moment().substract(1, "days").tz(USER_TIMEZONE).startOf("day");
+      var endDate = moment().substract(1, "days").tz(USER_TIMEZONE).endOf("day");
+      CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
     } else if (time == "tomorrow") {
-      CommandLineOutputClient.outputTomorrowGames();
+      var startDate = moment().add(1, "days").tz(USER_TIMEZONE).startOf("day");
+      var endDate = moment().add(1, "days").tz(USER_TIMEZONE).endOf("day");
+      CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
     } else if (moment(time).isValid()) {
-      const date = moment(time).tz(USER_TIMEZONE);
-      CommandLineOutputClient.outputCustomDateGames(date);
+      var startDate = moment(time).tz(USER_TIMEZONE).startOf("day");
+      var endDate = moment(time).tz(USER_TIMEZONE).endOf("day");
+      CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
     } else {
       console.log("hmmm that doesn't look right");
     }

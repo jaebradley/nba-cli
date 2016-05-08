@@ -26,19 +26,7 @@ function isGameUpcoming(data) {
 
 
 module.exports = {
-  outputTodayGames: function() {
-    NbaDataClient.fetchTodayGames(outputGames);
-  },
-
-  outputYesterdayGames: function() {
-    NbaDataClient.fetchYesterdayGames(outputGames);
-  },
-
-  outputTomorrowGames: function() {
-    NbaDataClient.fetchTomorrowGames(outputGames);
-  },
-
-  outputCustomDateGames: function(date) {
-    NbaDataClient.fetchCustomDateGames(date, outputGames);
+  outputCustomDateRangeGames: function(startDate, endDate) {
+    NbaDataClient.fetchDateRangeGames(startDate, endDate, outputGames);
   }
 };
