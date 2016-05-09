@@ -3,11 +3,7 @@ const Colors = require('colors');
 const emoji = require('node-emoji');
 const nbaImages = require('nba-images');
 
-const HOME_EMOJI_VALUE = 'house';
-const VISITOR_EMOJI_VALUE = 'bus';
-const START_TIME_EMOJI_VALUE = 'alarm_clock';
-const BROADCASTS_EMOJI_VALUE = 'tv';
-const SCORE_100_EMOJI_VALUE = '100';
+const Constants = require('../constants/Constants.js');
 
 function getStartedGameTableColumns(linescores) {
   return linescores.length + 3;
@@ -56,14 +52,14 @@ function formatScore(score, opponentScore) {
 
 function formatTotalScore(score, opponentScore) {
   if (score == 100) {
-    return emoji.get(SCORE_100_EMOJI_VALUE);
+    return emoji.get(Constants.SCORE_100_EMOJI_VALUE);
   }
   return formatScore(score, opponentScore).bold;
 }
 
 function generateLinescoresTableRows(homeAbbreviation, visitorAbbreviation, homeLinescores, visitorLinescores, homeTotal, visitorTotal) {
-  const homeRow = [emoji.get(HOME_EMOJI_VALUE), formatTeamAbbreviation(homeAbbreviation)];
-  const visitorRow = [emoji.get(VISITOR_EMOJI_VALUE), formatTeamAbbreviation(visitorAbbreviation)];
+  const homeRow = [emoji.get(Constants.HOME_EMOJI_VALUE), formatTeamAbbreviation(homeAbbreviation)];
+  const visitorRow = [emoji.get(Constants.VISITOR_EMOJI_VALUE), formatTeamAbbreviation(visitorAbbreviation)];
 
   for (var i = 0; i < homeLinescores.length; i++) {
     var homeScore = homeLinescores[i].score;
@@ -79,8 +75,8 @@ function generateLinescoresTableRows(homeAbbreviation, visitorAbbreviation, home
 
 function generateStartedGameMetadataMap(startTime, broadcasts) {
   const map = {};
-  map[emoji.get(START_TIME_EMOJI_VALUE)] = startTime;
-  map[emoji.get(BROADCASTS_EMOJI_VALUE)] = broadcasts;
+  map[emoji.get(Constants.START_TIME_EMOJI_VALUE)] = startTime;
+  map[emoji.get(Constants.BROADCASTS_EMOJI_VALUE)] = broadcasts;
   return map;
 }
 

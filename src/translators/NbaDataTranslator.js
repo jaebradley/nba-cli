@@ -2,15 +2,7 @@ const moment = require("moment-timezone");
 const jstz = require("jstimezonedetect");
 
 const HtmlEscaper = require("../utils/HtmlEscaper.js");
-
-const DEFAULT_TIMEZONE = "America/New_York";
-const DATE_START_TIME_FORMAT = "YYYYMMDDHHmm";
-const TRANSLATED_DATE_FORMAT = "LLL";
-const GAME_STATUS_MAP = {
-  1: 'PREGAME',
-  2: 'LIVE',
-  3: 'FINAL'
-};
+const Constants = require("../constants/Constants.js");
 
 const USER_TIMEZONE = jstz.determine().name();
 
@@ -45,31 +37,36 @@ function getTeamLinescores(data) {
 }
 
 function getUnixMillisecondsStartTime(dateStartTime) {
-  return getDefaultDateStartTime(dateStartTime).clone().tz("UTC").valueOf();
+  return getDefaultDateStartTime(dateStartTime).clone()
+                                               .tz("UTC")
+                                               .valueOf();
 }
 
 function getUtcDateStartTime(dateStartTime) {
-  return getDefaultDateStartTime(dateStartTime).clone().tz("UTC").format(TRANSLATED_DATE_FORMAT);
+  return getDefaultDateStartTime(dateStartTime).clone()
+                                               .tz("UTC")
+                                               .format(Constants.TRANSLATED_DATE_FORMAT);
 }
 
 function getDefaultDateStartTime(dateStartTime) {
-  return moment(dateStartTime, DATE_START_TIME_FORMAT).tz(DEFAULT_TIMEZONE);
+  return moment(dateStartTime, Constants.TRANSLATED_NBA_DATE_TIME_FORMAT).tz(Constants.DEFAULT_TIMEZONE);
 }
 
 function getLocalizedDateStartTime(dateStartTime) {
-  return getDefaultDateStartTime(dateStartTime).clone().tz(USER_TIMEZONE).format(TRANSLATED_DATE_FORMAT);
+  return getDefaultDateStartTime(dateStartTime).clone()
+                                               .tz(USER_TIMEZONE)
+                                               .format(Constants.TRANSLATED_DATE_FORMAT);
 }
 
 function getGameStatus(periodStatus, gameStatus) {
   if (periodStatus != "Halftime") {
-    return GAME_STATUS_MAP[gameStatus];
+    return Constants.TRANSLATED_GAME_STATUS_MAP[gameStatus];
   }
 
   return periodStatus;
 }
 
 module.exports = {
-  DEFAULT_TIMEZONE: DEFAULT_TIMEZONE,
   
   translateGameData: function(data) {
     const games = {};
