@@ -3,18 +3,16 @@ const rp = require('request-promise');
 
 const NbaDataTranslator = require("../translators/NbaDataTranslator.js");
 const ScoreboardFilter = require("../filters/data/ScoreboardFilter.js");
-
-const BASE_NBA_DATA_URL = "http://data.nba.com";
-const BASE_NBA_DATA_SCOREBOARD_URL = BASE_NBA_DATA_URL.concat("/data/5s/json/cms/noseason/scoreboard/");
-
-const DEFAULT_DATE_FORMAT = "YYYYMMDD";
+const Constants = require("../constants/Constants.js");
 
 function generatScoreboardUrl(formattedDate) {
-  return BASE_NBA_DATA_SCOREBOARD_URL.concat(formattedDate, "/games.json");
+  return Constants.BASE_NBA_DATA_SCOREBOARD_URL.concat(formattedDate, "/games.json");
 }
 
 function generateCustomFormattedDate(date) {
-  return date.clone().tz(NbaDataTranslator.DEFAULT_TIMEZONE).format(DEFAULT_DATE_FORMAT);
+  return date.clone()
+             .tz(Constants.DEFAULT_TIMEZONE)
+             .format(Constants.DEFAULT_DATE_FORMAT);
 }
 
 function fetchScoreboardData(scoreboardUrl, unixMillisecondsStartTime, unixMillisecondsEndTime, callback) {
@@ -42,8 +40,10 @@ function fetchScoreboardDataForDateRange(startDate, endDate, callback) {
 module.exports = {
 
   fetchDateRangeGames: function(startDate, endDate, callback) {
-    const estStartDate = startDate.clone().tz(NbaDataTranslator.DEFAULT_TIMEZONE);
-    const estEndDate = endDate.clone().tz(NbaDataTranslator.DEFAULT_TIMEZONE);
+    const estStartDate = startDate.clone()
+                                  .tz(Constants.DEFAULT_TIMEZONE);
+    const estEndDate = endDate.clone()
+                              .tz(Constants.DEFAULT_TIMEZONE);
     fetchScoreboardDataForDateRange(estStartDate, estEndDate, callback);
   }
 };
