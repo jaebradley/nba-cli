@@ -45,11 +45,11 @@ function getTeamLinescores(data) {
 }
 
 function getUnixMillisecondsStartTime(dateStartTime) {
-  return getDefaultDateStartTime(dateStartTime).tz("UTC").valueOf();
+  return getDefaultDateStartTime(dateStartTime).clone().tz("UTC").valueOf();
 }
 
 function getUtcDateStartTime(dateStartTime) {
-  return getDefaultDateStartTime(dateStartTime).tz("UTC").format(TRANSLATED_DATE_FORMAT);
+  return getDefaultDateStartTime(dateStartTime).clone().tz("UTC").format(TRANSLATED_DATE_FORMAT);
 }
 
 function getDefaultDateStartTime(dateStartTime) {
@@ -93,7 +93,6 @@ module.exports = {
       }
 
       const dateStartTime = game.date.concat(game.time);
-      const localDateStartTime = game.home_start_date.concat(game.home_start_time);
 
       games[game.id] = {
         status: getGameStatus(game.period_time.period_status, game.period_time.game_status),
@@ -103,7 +102,7 @@ module.exports = {
         arena: HtmlEscaper.escapeHtml(game.arena),
         city: HtmlEscaper.escapeHtml(game.city),
         state: HtmlEscaper.escapeHtml(game.state),
-        formattedLocalizedStartDate: getLocalizedDateStartTime(localDateStartTime),
+        formattedLocalizedStartDate: getLocalizedDateStartTime(dateStartTime),
         isPreviewAvailable: isPreviewAvailable,
         isRecapAvailable: isRecapAvailable,
         periodValue: HtmlEscaper.escapeHtml(game.period_time.period_value),

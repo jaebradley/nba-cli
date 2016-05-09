@@ -12,49 +12,38 @@ function generateDailyGamesUrl(formattedDate) {
   return baseUrl + "/data/5s/json/cms/noseason/scoreboard/" + formattedDate + "/games.json";
 }
 
-function generateCurrentFormattedDate() {
-  return moment().format(dateFormat);
-}
-
-function generateYesterdayFormattedDate() {
-  return moment().subtract(1, 'days').format(dateFormat);
-}
-
-function generateTomorrowFormattedDate() {
-  return moment().add(1, 'days').format(dateFormat); 
-}
-
 function generateCustomFormattedDate(date) {
   return date.clone().tz(DEFAULT_TIMEZONE).format(dateFormat);
 }
 
-function fetch(gameUrl, callback) {
+function fetch(gameUrl, unixMillisecondsStartDate, unixMillisecondsEndDate, callback) {
   request(gameUrl, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       const translatedGameData = NbaDataTranslator.translateGameData(JSON.parse(body));
-      callback(translatedGameData);
+      const filteredGameData = {};
+      Object.keys(translatedGameData).forEach(function(key) {
+        const gameUnixMilliseconds = translatedGameData[key].unixMillisecondsStartTime;
+        if (unixMillisecondsStartDate <= gameUnixMilliseconds && unixMillisecondsEndDate >= gameUnixMilliseconds) {
+          filteredGameData[key] = translatedGameData[key];
+        }
+      });
+      callback(filteredGameData);
     };
   });
 }
 
+function fetchForDateRange(startDate, endDate, callback) {
+  for (var currentDate = startDate; currentDate.isBefore(endDate); currentDate.add(1, 'days')) {
+    const gameUrl = generateDailyGamesUrl(generateCustomFormattedDate(currentDate));
+    fetch(gameUrl, startDate.valueOf(), endDate.valueOf(), callback);
+  }
+}
+
 module.exports = {
-  fetchTodayGames: function(callback) {
-    const gameUrl = generateDailyGamesUrl(generateCurrentFormattedDate());
-    fetch(gameUrl, callback);
-  },
 
-  fetchYesterdayGames: function(callback) {
-    const gameUrl = generateDailyGamesUrl(generateYesterdayFormattedDate());
-    fetch(gameUrl, callback);
-  },
-
-  fetchTomorrowGames: function(callback) {
-    const gameUrl = generateDailyGamesUrl(generateTomorrowFormattedDate());
-    fetch(gameUrl, callback);
-  },
-
-  fetchCustomDateGames: function(date, callback) {
-    const gameUrl = generateDailyGamesUrl(generateCustomFormattedDate(date));
-    fetch(gameUrl, callback);
+  fetchDateRangeGames: function(startDate, endDate, callback) {
+    const estStartDate = startDate.clone().tz(DEFAULT_TIMEZONE);
+    const estEndDate = endDate.clone().tz(DEFAULT_TIMEZONE);
+    fetchForDateRange(estStartDate, estEndDate, callback);
   }
 };
