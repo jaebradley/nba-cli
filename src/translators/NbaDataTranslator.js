@@ -1,7 +1,7 @@
 const moment = require("moment-timezone");
 const jstz = require("jstimezonedetect");
 
-const HtmlEscaper = require("./utils/HtmlEscaper.js");
+const HtmlEscaper = require("../utils/HtmlEscaper.js");
 
 const DEFAULT_TIMEZONE = "America/New_York";
 const DATE_START_TIME_FORMAT = "YYYYMMDDHHmm";
@@ -69,6 +69,8 @@ function getGameStatus(periodStatus, gameStatus) {
 }
 
 module.exports = {
+  DEFAULT_TIMEZONE: DEFAULT_TIMEZONE,
+  
   translateGameData: function(data) {
     const games = {};
     data.sports_content.games.game.forEach(function(game) {
