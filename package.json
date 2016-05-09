@@ -21,7 +21,8 @@
     "moment-timezone": "latest",
     "colors": "latest",
     "node-emoji": "latest",
-    "nba-images": "latest"
+    "nba-images": "latest",
+    "request-promise": "latest"
   },
   "repository": {
      "type": "git",
