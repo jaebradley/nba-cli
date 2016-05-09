@@ -22,17 +22,17 @@ program
   .description("get nba games")
   .action(function(time) {
     const upperCaseTimeValue = time.toUpperCase();
-    if (upperCaseTimeValue == GAMES_OPTIONS[upperCaseTimeValue] || time == null) {
+    if (upperCaseTimeValue == GAMES_OPTIONS.TODAY || time == null) {
       var startDate = moment().tz(USER_TIMEZONE).startOf("day");
       var endDate = moment().tz(USER_TIMEZONE).endOf("day");
       CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
 
-    } else if (upperCaseTimeValue == GAMES_OPTIONS[upperCaseTimeValue]) {
+    } else if (upperCaseTimeValue == GAMES_OPTIONS.YESTERDAY) {
       var startDate = moment().subtract(1, "days").tz(USER_TIMEZONE).startOf("day");
       var endDate = moment().subtract(1, "days").tz(USER_TIMEZONE).endOf("day");
       CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
 
-    } else if (upperCaseTimeValue == GAMES_OPTIONS[upperCaseTimeValue]) {
+    } else if (upperCaseTimeValue == GAMES_OPTIONS.TOMORROW) {
       var startDate = moment().add(1, "days").tz(USER_TIMEZONE).startOf("day");
       var endDate = moment().add(1, "days").tz(USER_TIMEZONE).endOf("day");
       CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
