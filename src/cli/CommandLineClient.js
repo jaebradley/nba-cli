@@ -22,7 +22,7 @@ program
   .description("get nba games")
   .action(function(time) {
     const upperCaseTimeValue = time.toUpperCase();
-    if (upperCaseTimeValue == GAMES_OPTIONS.TODAY || time == null) {
+    if (time == null || upperCaseTimeValue == GAMES_OPTIONS.TODAY) {
       var startDate = moment().tz(USER_TIMEZONE).startOf("day");
       var endDate = moment().tz(USER_TIMEZONE).endOf("day");
       CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
