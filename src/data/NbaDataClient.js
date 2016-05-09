@@ -31,10 +31,10 @@ function fetchScoreboardData(scoreboardUrl, unixMillisecondsStartTime, unixMilli
 }
 
 function fetchScoreboardDataForDateRange(startDate, endDate, callback) {
+  const startDateUnixTimestampMilliseconds = startDate.valueOf();
+  const endDateUnixTimestampMilliseconds = endDate.valueOf();
   for (var currentDate = startDate; currentDate.isBefore(endDate); currentDate.add(1, 'days')) {
     const scoreboardUrl = generatScoreboardUrl(generateCustomFormattedDate(currentDate));
-    const startDateUnixTimestampMilliseconds = startDate.valueOf();
-    const endDateUnixTimestampMilliseconds = endDate.valueOf();
     fetchScoreboardData(scoreboardUrl, startDateUnixTimestampMilliseconds, endDateUnixTimestampMilliseconds, callback);
   }
 }
