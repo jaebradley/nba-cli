@@ -1,8 +1,9 @@
 const Table = require('cli-table2');
-const NbaDataClient = require('./nbaDataClient.js');
 const moment = require('moment-timezone');
-const StartedGameTableCreator = require('./tables/StartedGameTableCreator.js');
-const UpcomingGameTableCreator = require('./tables/UpcomingGameTableCreator.js');
+
+const NbaDataClient = require('../../data/NbaDataClient.js');
+const StartedGameTableCreator = require('../../tables/StartedGameTableCreator.js');
+const UpcomingGameTableCreator = require('../../tables/UpcomingGameTableCreator.js');
 
 function outputGames(data) {
   const upcomingGameData = [];

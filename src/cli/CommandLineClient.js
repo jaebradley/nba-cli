@@ -1,9 +1,16 @@
 #!/usr/bin/env node
 
 const program = require("commander");
-const CommandLineOutputClient = require("./commandLineOutputClient.js");
 const moment = require("moment-timezone");
 const jstz = require("jstimezonedetect");
+
+const CommandLineOutputClient = require("./output/CommandLineOutputClient.js");
+
+const GAMES_OPTIONS = {
+  TODAY: "TODAY",
+  YESTERDAY: "YESTERDAY",
+  TOMORROW: "TOMORROW"
+};
 
 const USER_TIMEZONE = jstz.determine().name();
 
@@ -14,22 +21,27 @@ program
   .command("games [time]")
   .description("get nba games")
   .action(function(time) {
-    if (time == "today" || time == null) {
+    const upperCaseTimeValue = time.toUpperCase();
+    if (upperCaseTimeValue == GAMES_OPTIONS[upperCaseTimeValue] || time == null) {
       var startDate = moment().tz(USER_TIMEZONE).startOf("day");
       var endDate = moment().tz(USER_TIMEZONE).endOf("day");
       CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
-    } else if (time == "yesterday") {
+
+    } else if (upperCaseTimeValue == GAMES_OPTIONS[upperCaseTimeValue]) {
       var startDate = moment().subtract(1, "days").tz(USER_TIMEZONE).startOf("day");
       var endDate = moment().subtract(1, "days").tz(USER_TIMEZONE).endOf("day");
       CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
-    } else if (time == "tomorrow") {
+
+    } else if (upperCaseTimeValue == GAMES_OPTIONS[upperCaseTimeValue]) {
       var startDate = moment().add(1, "days").tz(USER_TIMEZONE).startOf("day");
       var endDate = moment().add(1, "days").tz(USER_TIMEZONE).endOf("day");
       CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
+
     } else if (moment(time).isValid()) {
       var startDate = moment(time).tz(USER_TIMEZONE).startOf("day");
       var endDate = moment(time).tz(USER_TIMEZONE).endOf("day");
       CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
+
     } else {
       console.log("hmmm that doesn't look right");
     }
