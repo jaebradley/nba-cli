@@ -1,6 +1,9 @@
 ### Get NBA Data From The Command Line
 Are you a huge NBA fan? Do you :heart: the command line? Well, now you never have to leave your terminal to get the latest and greatest NBA data.
 
+### Install
+`npm install nba-scoreboard`
+
 ### Commands
 * `nba games today`: Get today's NBA games
 * `nba games tomorrow`: ...and tomorrow's NBA games
