@@ -5,6 +5,7 @@ const NbaDataClient = require('../../data/NbaDataClient.js');
 const StartedGameTableCreator = require('../../tables/StartedGameTableCreator.js');
 const UpcomingGameTableCreator = require('../../tables/UpcomingGameTableCreator.js');
 const PlayByPlayTableCreator = require('../../tables/PlayByPlayTableCreator.js');
+const BoxScoreTableCreator = require('../../tables/BoxScoreTableCreator.js');
 
 function outputGames(data) {
   const upcomingGameData = [];
@@ -13,12 +14,22 @@ function outputGames(data) {
     if (isGameUpcoming(gameData)) {
       upcomingGameData.push(gameData);
     } else {
+      var tables = [];
       var table = new Table();
       var startedGameTable = StartedGameTableCreator.createStartedGameTable(gameData);
+      tables.push(startedGameTable);
       if (typeof gameData.playByPlay !== 'undefined' && gameData.playByPlay.length > 0) {
-        var playByPlayTable = PlayByPlayTableCreator.createPlayByPlayTable(data[key].playByPlay);
-        table.push([startedGameTable, playByPlayTable]);
+        var playByPlayTable = PlayByPlayTableCreator.createPlayByPlayTable(gameData.playByPlay);
+        tables.push(playByPlayTable);
       }
+
+      if (typeof gameData.boxScore !== 'undefined') {
+        var boxScoreTables = BoxScoreTableCreator.createBoxScoreTable(gameData.boxScore);
+        tables.push(boxScoreTables.homeTable);
+        tables.push(boxScoreTables.visitorTable);
+      }
+
+      table.push(tables);
       console.log(table.toString());
     }
   });

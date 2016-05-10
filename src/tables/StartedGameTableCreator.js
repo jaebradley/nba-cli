@@ -4,7 +4,6 @@ const emoji = require('node-emoji');
 const nbaImages = require('nba-images');
 
 const Constants = require('../constants/Constants.js');
-const TeamAbbreviations = require('../constants/TeamAbbreviations.js');
 
 function getStartedGameTableColumns(linescores) {
   return linescores.length + 3;
