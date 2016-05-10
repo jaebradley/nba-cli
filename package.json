@@ -22,7 +22,8 @@
     "colors": "latest",
     "node-emoji": "latest",
     "nba-images": "latest",
-    "request-promise": "latest"
+    "request-promise": "latest",
+    "q": "latest"
   },
   "repository": {
      "type": "git",
