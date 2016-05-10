@@ -15,6 +15,7 @@ function outputGames(data) {
       upcomingGameData.push(gameData);
     } else {
       var tables = [];
+      var otherTables = [];
       var table = new Table();
       var startedGameTable = StartedGameTableCreator.createStartedGameTable(gameData);
       tables.push(startedGameTable);
@@ -25,11 +26,12 @@ function outputGames(data) {
 
       if (typeof gameData.boxScore !== 'undefined') {
         var boxScoreTables = BoxScoreTableCreator.createBoxScoreTable(gameData.boxScore);
-        tables.push(boxScoreTables.homeTable);
-        tables.push(boxScoreTables.visitorTable);
+        otherTables.push(boxScoreTables.homeTable);
+        otherTables.push(boxScoreTables.visitorTable);
       }
 
       table.push(tables);
+      table.push(otherTables);
       console.log(table.toString());
     }
   });
