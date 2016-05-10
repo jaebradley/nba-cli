@@ -3,6 +3,7 @@ const rp = require('request-promise');
 const Q = require('q');
 
 const PlayByPlayClient = require('./clients/PlayByPlayClient.js');
+const BoxScoreClient = require('./clients/BoxScoreClient.js');
 const NbaDataTranslator = require('../translators/NbaDataTranslator.js');
 const ScoreboardFilter = require("../filters/data/ScoreboardFilter.js");
 const Constants = require('../constants/Constants.js');
@@ -21,11 +22,28 @@ function fetchPlayByPlayData(filteredGameData) {
   var the_promises = [];
   Object.keys(filteredGameData).forEach(function(gameId) {
     var gameData = filteredGameData[gameId];
-    if (moment().valueOf() >= gameData.unixMillisecondsStartTime) {
+    if (moment().valueOf() >= gameData.unixMillisecondsStartTime && gameData.status != "PREGAME") {
       const deferred = Q.defer();
       const formattedGameDate = gameData.nbaFormatStartDate;
       PlayByPlayClient.fetchPlayByPlayData(formattedGameDate, gameId, function(data) {
         filteredGameData[gameId]['playByPlay'] = data;
+        deferred.resolve(data);
+      });
+      the_promises.push(deferred.promise);
+    }
+  });
+  return Q.all(the_promises);
+}
+
+function fetchBoxScoreData(filteredGameData) {
+  var the_promises = [];
+  Object.keys(filteredGameData).forEach(function(gameId) {
+    var gameData = filteredGameData[gameId];
+    if (moment().valueOf() >= gameData.unixMillisecondsStartTime  && gameData.status != "PREGAME") {
+      const deferred = Q.defer();
+      const formattedGameDate = gameData.nbaFormatStartDate;
+      BoxScoreClient.fetchBoxScoreData(formattedGameDate, gameId, function(data) {
+        filteredGameData[gameId]['boxScore'] = data;
         deferred.resolve(data);
       });
       the_promises.push(deferred.promise);
@@ -42,6 +60,8 @@ function fetchScoreboardData(scoreboardUrl, unixMillisecondsStartTime, unixMilli
       filteredGameData = ScoreboardFilter.filterScoreboardData(translatedData, unixMillisecondsStartTime, unixMillisecondsEndTime); })
     .then(function () {
       return fetchPlayByPlayData(filteredGameData); })
+    .then(function () {
+      return fetchBoxScoreData(filteredGameData); })
     .then(function (data) {
       callback(filteredGameData);
     })
