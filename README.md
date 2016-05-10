@@ -5,10 +5,10 @@ Are you a huge NBA fan? Do you :heart: the command line? Well, now you never hav
 `npm install nba-scoreboard`
 
 ### Commands
-* `nba games today`: Get today's NBA games
-* `nba games tomorrow`: ...and tomorrow's NBA games
-* `nba games yesterday`: ...and yesterday's NBA games
-* `nba games 2016-01-01`: ...and a custom date's NBA games
+* `nba games today`: Get NBA games that started today
+* `nba games tomorrow`: ...and NBA games that start tomorrow
+* `nba games yesterday`: ...and NBA games that started yesterday
+* `nba games 2016-01-01`: ...and NBA games that started on a custom date
 
 ### Example output
 
