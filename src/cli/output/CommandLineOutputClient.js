@@ -4,6 +4,7 @@ const moment = require('moment-timezone');
 const NbaDataClient = require('../../data/NbaDataClient.js');
 const StartedGameTableCreator = require('../../tables/StartedGameTableCreator.js');
 const UpcomingGameTableCreator = require('../../tables/UpcomingGameTableCreator.js');
+const PlayByPlayTableCreator = require('../../tables/PlayByPlayTableCreator.js');
 
 function outputGames(data) {
   const upcomingGameData = [];
@@ -12,7 +13,13 @@ function outputGames(data) {
     if (isGameUpcoming(gameData)) {
       upcomingGameData.push(gameData);
     } else {
-      console.log(StartedGameTableCreator.createStartedGameTable(gameData));
+      var table = new Table();
+      var startedGameTable = StartedGameTableCreator.createStartedGameTable(gameData);
+      if (typeof gameData.playByPlay !== 'undefined' && gameData.playByPlay.length > 0) {
+        var playByPlayTable = PlayByPlayTableCreator.createPlayByPlayTable(data[key].playByPlay);
+        table.push([startedGameTable, playByPlayTable]);
+      }
+      console.log(table.toString());
     }
   });
 

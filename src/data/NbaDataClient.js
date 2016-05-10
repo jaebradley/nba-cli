@@ -19,7 +19,7 @@ function generateCustomFormattedDate(date) {
 
 function fetchPlayByPlayData(filteredGameData) {
   var the_promises = [];
-  for (var gameId in filteredGameData) {
+  Object.keys(filteredGameData).forEach(function(gameId) {
     var gameData = filteredGameData[gameId];
     if (moment().valueOf() >= gameData.unixMillisecondsStartTime) {
       const deferred = Q.defer();
@@ -30,7 +30,7 @@ function fetchPlayByPlayData(filteredGameData) {
       });
       the_promises.push(deferred.promise);
     }
-  };
+  });
   return Q.all(the_promises);
 }
 
