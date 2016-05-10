@@ -1,5 +1,6 @@
-const BASE_NBA_DATA_URL = "http://data.nba.com";
-const BASE_NBA_DATA_SCOREBOARD_URL = BASE_NBA_DATA_URL.concat("/data/5s/json/cms/noseason/scoreboard/");
+const BASE_NBA_DATA_URL = "http://data.nba.com/";
+const BASE_NBA_DATA_SCOREBOARD_URL = BASE_NBA_DATA_URL.concat("data/5s/json/cms/noseason/scoreboard/");
+const BASE_NBA_DATA_PLAY_BY_PLAY_URL = BASE_NBA_DATA_URL.concat("data/5s/json/cms/noseason/game/");
 
 const DEFAULT_DATE_FORMAT = "YYYYMMDD";
 const DEFAULT_TIMEZONE = "America/New_York";
@@ -27,6 +28,7 @@ const GAMES_OPTIONS = {
 
 module.exports = {
   BASE_NBA_DATA_SCOREBOARD_URL: BASE_NBA_DATA_SCOREBOARD_URL,
+  BASE_NBA_DATA_PLAY_BY_PLAY_URL: BASE_NBA_DATA_PLAY_BY_PLAY_URL,
   DEFAULT_DATE_FORMAT: DEFAULT_DATE_FORMAT,
   DEFAULT_TIMEZONE: DEFAULT_TIMEZONE,
   TRANSLATED_NBA_DATE_TIME_FORMAT: TRANSLATED_NBA_DATE_TIME_FORMAT,

@@ -1,9 +1,11 @@
-const moment = require("moment-timezone");
+const moment = require('moment-timezone');
 const rp = require('request-promise');
+const Q = require('q');
 
-const NbaDataTranslator = require("../translators/NbaDataTranslator.js");
+const PlayByPlayClient = require('./clients/PlayByPlayClient.js');
+const NbaDataTranslator = require('../translators/NbaDataTranslator.js');
 const ScoreboardFilter = require("../filters/data/ScoreboardFilter.js");
-const Constants = require("../constants/Constants.js");
+const Constants = require('../constants/Constants.js');
 
 function generatScoreboardUrl(formattedDate) {
   return Constants.BASE_NBA_DATA_SCOREBOARD_URL.concat(formattedDate, "/games.json");
@@ -15,14 +17,34 @@ function generateCustomFormattedDate(date) {
              .format(Constants.DEFAULT_DATE_FORMAT);
 }
 
+function fetchPlayByPlayData(filteredGameData) {
+  var the_promises = [];
+  for (var gameId in filteredGameData) {
+    var gameData = filteredGameData[gameId];
+    if (moment().valueOf() >= gameData.unixMillisecondsStartTime) {
+      const deferred = Q.defer();
+      const formattedGameDate = gameData.nbaFormatStartDate;
+      PlayByPlayClient.fetchPlayByPlayData(formattedGameDate, gameId, function(data) {
+        filteredGameData[gameId]['playByPlay'] = data;
+        deferred.resolve(data);
+      });
+      the_promises.push(deferred.promise);
+    }
+  };
+  return Q.all(the_promises);
+}
+
 function fetchScoreboardData(scoreboardUrl, unixMillisecondsStartTime, unixMillisecondsEndTime, callback) {
-  rp( {uri: scoreboardUrl, json: true} )
+  var filteredGameData = {};
+  rp( { uri: scoreboardUrl, json: true } )
     .then(function (scoreboardData) {
-      return NbaDataTranslator.translateGameData(scoreboardData); })
-    .then(function (translatedData) {
-      return ScoreboardFilter.filterScoreboardData(translatedData, unixMillisecondsStartTime, unixMillisecondsEndTime) })
-    .then(function (filteredGameData) {
-      callback(filteredGameData); })
+      const translatedData = NbaDataTranslator.translateGameData(scoreboardData);
+      filteredGameData = ScoreboardFilter.filterScoreboardData(translatedData, unixMillisecondsStartTime, unixMillisecondsEndTime); })
+    .then(function () {
+      return fetchPlayByPlayData(filteredGameData); })
+    .then(function (data) {
+      callback(filteredGameData);
+    })
     .catch(function (err) {
       console.log(err);
     });

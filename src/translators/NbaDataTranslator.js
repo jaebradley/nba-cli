@@ -96,6 +96,7 @@ module.exports = {
       games[game.id] = {
         status: getGameStatus(game.period_time.period_status, game.period_time.game_status),
         url: game.game_url,
+        nbaFormatStartDate: game.date,
         unixMillisecondsStartTime: getUnixMillisecondsStartTime(dateStartTime),
         formattedUtcDateStartTime: getUtcDateStartTime(dateStartTime),
         arena: HtmlEscaper.escapeHtml(game.arena),
