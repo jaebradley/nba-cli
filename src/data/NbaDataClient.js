@@ -4,7 +4,7 @@ const Q = require('q');
 
 const PlayByPlayClient = require('./clients/PlayByPlayClient.js');
 const BoxScoreClient = require('./clients/BoxScoreClient.js');
-const NbaDataTranslator = require('../translators/NbaDataTranslator.js');
+const ScoreboardDataTranslator = require('../translators/data/ScoreboardDataTranslator.js');
 const ScoreboardFilter = require("../filters/data/ScoreboardFilter.js");
 const Constants = require('../constants/Constants.js');
 
@@ -18,45 +18,49 @@ function generateCustomFormattedDate(date) {
              .format(Constants.DEFAULT_DATE_FORMAT);
 }
 
+function shouldFetchData(unixMillisecondsStartTime, gameStatus) {
+  return moment().valueOf() >= unixMillisecondsStartTime && gameStatus != Constants.PREGAME;
+}
+
 function fetchPlayByPlayData(filteredGameData) {
-  var the_promises = [];
+  var promises = [];
   Object.keys(filteredGameData).forEach(function(gameId) {
     var gameData = filteredGameData[gameId];
-    if (moment().valueOf() >= gameData.unixMillisecondsStartTime && gameData.status != "PREGAME") {
+    if (shouldFetchData(gameData.unixMillisecondsStartTime, gameData.status)) {
       const deferred = Q.defer();
       const formattedGameDate = gameData.nbaFormatStartDate;
       PlayByPlayClient.fetchPlayByPlayData(formattedGameDate, gameId, function(data) {
         filteredGameData[gameId]['playByPlay'] = data;
         deferred.resolve(data);
       });
-      the_promises.push(deferred.promise);
+      promises.push(deferred.promise);
     }
   });
-  return Q.all(the_promises);
+  return Q.all(promises);
 }
 
 function fetchBoxScoreData(filteredGameData) {
-  var the_promises = [];
+  var promises = [];
   Object.keys(filteredGameData).forEach(function(gameId) {
     var gameData = filteredGameData[gameId];
-    if (moment().valueOf() >= gameData.unixMillisecondsStartTime  && gameData.status != "PREGAME") {
+    if (shouldFetchData(gameData.unixMillisecondsStartTime, gameData.status)) {
       const deferred = Q.defer();
       const formattedGameDate = gameData.nbaFormatStartDate;
       BoxScoreClient.fetchBoxScoreData(formattedGameDate, gameId, function(data) {
         filteredGameData[gameId]['boxScore'] = data;
         deferred.resolve(data);
       });
-      the_promises.push(deferred.promise);
+      promises.push(deferred.promise);
     }
   });
-  return Q.all(the_promises);
+  return Q.all(promises);
 }
 
 function fetchScoreboardData(scoreboardUrl, unixMillisecondsStartTime, unixMillisecondsEndTime, callback) {
   var filteredGameData = {};
   rp( { uri: scoreboardUrl, json: true } )
     .then(function (scoreboardData) {
-      const translatedData = NbaDataTranslator.translateGameData(scoreboardData);
+      const translatedData = ScoreboardDataTranslator.translateGameData(scoreboardData);
       filteredGameData = ScoreboardFilter.filterScoreboardData(translatedData, unixMillisecondsStartTime, unixMillisecondsEndTime); })
     .then(function () {
       return fetchPlayByPlayData(filteredGameData); })
