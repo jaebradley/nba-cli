@@ -1,5 +1,5 @@
 ### Get NBA Data From The Command Line
-Are you a huge NBA fan? Do you :heart: the command line? Well, now you never have to leave your terminal to get the latest and greatest NBA data.
+Are you a huge NBA fan? Do you :heart: the command line as much as you :heart: :basketball:? Well, now you never have to leave your terminal to get the latest and greatest NBA data.
 
 ### Install
 `npm install nba-scoreboard`
