@@ -12,7 +12,7 @@ module.exports = {
     var startDate = moment().tz(USER_TIMEZONE).startOf("day");
     var endDate = moment().tz(USER_TIMEZONE).endOf("day");
     if (typeof time === "undefined") {
-      CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
+      CommandLineOutputClient.outputGamesForDateRange(startDate, endDate);
       return;
     }
 
@@ -42,6 +42,6 @@ module.exports = {
         break;
     }
 
-    CommandLineOutputClient.outputCustomDateRangeGames(startDate, endDate);
+    CommandLineOutputClient.outputGamesForDateRange(startDate, endDate);
   }
 };
