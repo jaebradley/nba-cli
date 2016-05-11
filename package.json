@@ -14,7 +14,6 @@
   "dependencies": {
     "nba": "latest",
     "request": "latest",
-    "moment": "latest",
     "commander": "latest",
     "cli-table2": "latest",
     "jstimezonedetect": "latest",

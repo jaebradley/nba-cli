@@ -4,30 +4,14 @@ const emoji = require('node-emoji');
 const nbaImages = require('nba-images');
 
 const Constants = require('../constants/Constants.js');
+const Formatter = require('./formatters/Formatter.js');
 
 function getStartedGameTableColumns(linescores) {
   return linescores.length + 3;
 }
 
-function formatGamePeriod(periodValue) {
-  if (parseInt(periodValue) > 4) {
-    return 'OT'.concat(periodValue - 4);
-  }
-
-  return 'Q'.concat(periodValue);
-}
-
-function identifyGameSituation(status, periodValue, gameClock) {
-  if (status == "LIVE") {
-    const formattedGamePeriod = formatGamePeriod(periodValue);
-    return gameClock.concat(" ", formattedGamePeriod);
-  }
-
-  return status;
-}
-
 function createStartedGameTableHeaders(linescores, status, periodValue, gameClock) {
-  const gameSituation = identifyGameSituation(status, periodValue, gameClock);
+  const gameSituation = Formatter.formatGameSituation(status, periodValue, gameClock);
   const headers = ['', gameSituation.bold.magenta];
   linescores.forEach(function(linescore) {
     headers.push(linescore.period.bold.cyan);
@@ -36,40 +20,19 @@ function createStartedGameTableHeaders(linescores, status, periodValue, gameCloc
   return headers;
 }
 
-function formatTeamAbbreviation(abbreviation) {
-  return abbreviation.concat(" ", nbaImages.getTeamEmoji(abbreviation));
-}
-
-function formatScore(score, opponentScore) {
-  if (score > opponentScore) {
-    return score.toString().green;
-  } else if (score < opponentScore) {
-    return score.toString().red;
-  }
-
-  return score.toString().blue;
-}
-
-function formatTotalScore(score, opponentScore) {
-  if (score == 100) {
-    return emoji.get(Constants.SCORE_100_EMOJI_VALUE);
-  }
-  return formatScore(score, opponentScore).bold;
-}
-
 function generateLinescoresTableRows(homeAbbreviation, visitorAbbreviation, homeLinescores, visitorLinescores, homeTotal, visitorTotal) {
-  const homeRow = [emoji.get(Constants.HOME_EMOJI_VALUE), formatTeamAbbreviation(homeAbbreviation)];
-  const visitorRow = [emoji.get(Constants.VISITOR_EMOJI_VALUE), formatTeamAbbreviation(visitorAbbreviation)];
+  const homeRow = [emoji.get(Constants.HOME_EMOJI_VALUE), Formatter.formatTeamAbbreviation(homeAbbreviation)];
+  const visitorRow = [emoji.get(Constants.VISITOR_EMOJI_VALUE), Formatter.formatTeamAbbreviation(visitorAbbreviation)];
 
   for (var i = 0; i < homeLinescores.length; i++) {
     var homeScore = homeLinescores[i].score;
     var visitorScore = visitorLinescores[i].score;
-    homeRow.push(formatScore(homeScore, visitorScore));
-    visitorRow.push(formatScore(visitorScore, homeScore));
+    homeRow.push(Formatter.formatScore(homeScore, visitorScore));
+    visitorRow.push(Formatter.formatScore(visitorScore, homeScore));
   }
 
-  homeRow.push(formatTotalScore(homeTotal, visitorTotal));
-  visitorRow.push(formatTotalScore(visitorTotal, homeTotal));
+  homeRow.push(Formatter.formatTotalScore(homeTotal, visitorTotal));
+  visitorRow.push(Formatter.formatTotalScore(visitorTotal, homeTotal));
   return [homeRow, visitorRow];
 }
 

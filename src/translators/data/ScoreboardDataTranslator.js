@@ -1,8 +1,8 @@
 const moment = require("moment-timezone");
 const jstz = require("jstimezonedetect");
 
-const HtmlEscaper = require("../utils/HtmlEscaper.js");
-const Constants = require("../constants/Constants.js");
+const HtmlEscaper = require("../../utils/HtmlEscaper.js");
+const Constants = require("../../constants/Constants.js");
 
 const USER_TIMEZONE = jstz.determine().name();
 
