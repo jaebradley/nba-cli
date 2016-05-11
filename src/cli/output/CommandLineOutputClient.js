@@ -7,6 +7,41 @@ const UpcomingGameTableCreator = require('../../tables/UpcomingGameTableCreator.
 const PlayByPlayTableCreator = require('../../tables/PlayByPlayTableCreator.js');
 const BoxScoreTableCreator = require('../../tables/BoxScoreTableCreator.js');
 
+
+function isGameUpcoming(data) {
+  return data.unixMillisecondsStartTime > moment().valueOf();
+}
+
+function hasPlayByPlay(gameData) {
+  return typeof gameData.playByPlay !== 'undefined' && gameData.playByPlay.length > 0;
+}
+
+function hasBoxScore(gameData) {
+  return typeof gameData.boxScore !== 'undefined';
+}
+
+function outputStartedGameTable(gameData) {
+  var table = new Table();
+  var firstRow = [];
+  var secondRow = [];
+  
+  firstRow.push(StartedGameTableCreator.createStartedGameTable(gameData));
+  
+  if (hasPlayByPlay(gameData)) {
+    firstRow.push(PlayByPlayTableCreator.createPlayByPlayTable(gameData.playByPlay))
+  }
+
+  if (hasBoxScore(gameData)) {
+    var boxScoreTables = BoxScoreTableCreator.createBoxScoreTable(gameData.boxScore);
+    secondRow.push(boxScoreTables.homeTable);
+    secondRow.push(boxScoreTables.visitorTable);
+  }
+
+  table.push(firstRow);
+  table.push(secondRow);
+  console.log(table.toString());
+}
+
 function outputGames(data) {
   const upcomingGameData = [];
   Object.keys(data).forEach(function(key) {
@@ -14,25 +49,7 @@ function outputGames(data) {
     if (isGameUpcoming(gameData)) {
       upcomingGameData.push(gameData);
     } else {
-      var tables = [];
-      var otherTables = [];
-      var table = new Table();
-      var startedGameTable = StartedGameTableCreator.createStartedGameTable(gameData);
-      tables.push(startedGameTable);
-      if (typeof gameData.playByPlay !== 'undefined' && gameData.playByPlay.length > 0) {
-        var playByPlayTable = PlayByPlayTableCreator.createPlayByPlayTable(gameData.playByPlay);
-        tables.push(playByPlayTable);
-      }
-
-      if (typeof gameData.boxScore !== 'undefined') {
-        var boxScoreTables = BoxScoreTableCreator.createBoxScoreTable(gameData.boxScore);
-        otherTables.push(boxScoreTables.homeTable);
-        otherTables.push(boxScoreTables.visitorTable);
-      }
-
-      table.push(tables);
-      table.push(otherTables);
-      console.log(table.toString());
+      outputStartedGameTable(gameData);
     }
   });
 
@@ -41,13 +58,8 @@ function outputGames(data) {
   }
 }
 
-function isGameUpcoming(data) {
-  return data.unixMillisecondsStartTime > moment().valueOf();
-}
-
-
 module.exports = {
-  outputCustomDateRangeGames: function(startDate, endDate) {
+  outputGamesForDateRange: function(startDate, endDate) {
     NbaDataClient.fetchDateRangeGames(startDate, endDate, outputGames);
   }
 };

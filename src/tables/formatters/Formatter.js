@@ -51,6 +51,6 @@ module.exports = {
   },
 
   formatShortName: function(firstName, lastName) {
-    return firstName.charAt(0).concat(". ", lastName);
+    return firstName.charAt(0).concat(".", lastName);
   },
 };
