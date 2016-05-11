@@ -18,6 +18,8 @@ module.exports = {
 
     const upperCaseTimeValue = time.toUpperCase();
     switch (upperCaseTimeValue) {
+      case Constants.GAMES_OPTIONS.TODAY:
+        break;
 
       case Constants.GAMES_OPTIONS.YESTERDAY:
         startDate = moment().subtract(1, "days").tz(USER_TIMEZONE).startOf("day");
