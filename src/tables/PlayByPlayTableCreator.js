@@ -1,26 +1,15 @@
 const Table = require('cli-table2');
-const Colors = require('colors');
-const emoji = require('node-emoji');
-const nbaImages = require('nba-images');
 
 const Constants = require('../constants/Constants.js');
 const TeamAbbreviations = require('../constants/TeamAbbreviations.js');
-
-function formatGamePeriod(periodValue) {
-  if (parseInt(periodValue) > 4) {
-    return 'OT'.concat(periodValue - 4);
-  }
-
-  return 'Q'.concat(periodValue);
-}
+const Formatter = require('./formatters/Formatter.js');
 
 function lastPlays(data) {
-  const index = Math.min(data.length, 4);
-  const lastFive = data.slice(-index);
   const rows = [];
+  const lastFive = data.slice(-Math.min(data.length, 4));
   lastFive.forEach(function(play) {
     rows.push([
-      play.clock.concat(" ", formatGamePeriod(play.period)),
+      play.clock.concat(" ", Formatter.formatGamePeriod(play.period)),
       play.description
     ]);
   });

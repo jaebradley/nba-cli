@@ -4,20 +4,18 @@ const emoji = require('node-emoji');
 const nbaImages = require('nba-images');
 
 const Constants = require('../constants/Constants.js');
+const Formatter = require('./formatters/Formatter.js');
 
 function generateLeaders(data) {
   const leaders = [];
   data.leaders.forEach(function(leader) {
-    const firstName = leader.FirstName;
-    const firstInitial = firstName.charAt(0);
-    leaders.push(firstInitial.concat(".", leader.LastName));
+    leaders.push(Formatter.formatShortName(leader.FirstName, leader.LastName));
   });
   return leaders.toString();
 }
 
 function generateRows(data) {
-  rows = [];
-
+  const rows = [];
   var pointsLeaders = "";
   if (typeof data.points.leaders !== 'undefined') {
     pointsLeaders = generateLeaders(data.points);

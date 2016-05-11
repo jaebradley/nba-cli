@@ -45,4 +45,12 @@ module.exports = {
   formatScore: function(score, opponentScore) {
     return formatScore(score, opponentScore);
   },
+
+  formatGamePeriod: function(period) {
+    return formatGamePeriod(period);
+  },
+
+  formatShortName: function(firstName, lastName) {
+    return firstName.charAt(0).concat(". ", lastName);
+  },
 };
