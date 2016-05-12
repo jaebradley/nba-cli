@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/jaebradley/nba-cli.svg?branch=master)](https://travis-ci.org/jaebradley/nba-cli)
-[![Coverage Status](https://coveralls.io/repos/github/jaebradley/nba-cli/badge.svg?branch=master)](https://coveralls.io/github/jaebradley/nba-cli?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/jaebradley/nba-cli/badge.svg?branch=tests)](https://coveralls.io/github/jaebradley/nba-cli?branch=tests)
 ### Get NBA Data From The Command Line
 Are you a huge NBA fan? Do you :heart: the command line as much as you :heart: :basketball:? Well, now you never have to leave your terminal to get the latest and greatest NBA data.
 
