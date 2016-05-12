@@ -9,8 +9,7 @@
   "license": "MIT",
   "preferGlobal": true,
   "bin": {
-    "nba": "src/cli/CommandLineClient.js",
-    "coveralls": "./bin/coveralls.js"
+    "nba": "src/cli/CommandLineClient.js"
   },
   "dependencies": {
     "commander": "2.9.0",
@@ -29,6 +28,9 @@
     "coveralls": "2.11.9",
     "mocha-lcov-reporter": "1.2.0 ",
     "istanbul": "0.4.3 "
+  },
+  "directories": {
+    "test": "test"
   },
   "repository": {
      "type": "git",
