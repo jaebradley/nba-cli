@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "description": "nba scoreboard",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "mocha"
   },
   "author": "Jae Bradley",
   "license": "MIT",
@@ -24,7 +24,9 @@
   },
   "devDependencies": {
     "chai": "3.5.0",
-    "mocha": "2.4.5"
+    "mocha": "2.4.5",
+    "coveralls": "2.11.9",
+    "mocha-lcov-reporter": "1.2.0 "
   },
   "repository": {
      "type": "git",

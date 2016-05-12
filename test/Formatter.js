@@ -1,7 +1,5 @@
-'use es6';
-
 const expect    = require('chai').expect;
-const Formatter = require('../../../src/tables/formatters');
+const Formatter = require('../src/tables/formatters/Formatter.js');
 
 describe('Table display formatting', function() {
   describe('Game period formatting', function() {
