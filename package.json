@@ -3,7 +3,7 @@
   "version": "0.0.4",
   "description": "nba scoreboard",
   "scripts": {
-    "test": "mocha"
+    "test": "make test-coveralls"
   },
   "author": "Jae Bradley",
   "license": "MIT",
