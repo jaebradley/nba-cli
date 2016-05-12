@@ -71,12 +71,12 @@ module.exports = {
   translateGameData: function(data) {
     const games = {};
     data.sports_content.games.game.forEach(function(game) {
-      const isPreviewAvailable = false;
+      var isPreviewAvailable = false;
       if (game.previewAvailable == 1) {
         isPreviewAvailable = true;
       }
 
-      const isRecapAvailable = false;
+      var isRecapAvailable = false;
       if (game.recapAvailable == 1) {
         isRecapAvailable = true;
       }
