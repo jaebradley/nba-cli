@@ -9,7 +9,8 @@
   "license": "MIT",
   "preferGlobal": true,
   "bin": {
-    "nba": "src/cli/CommandLineClient.js"
+    "nba": "src/cli/CommandLineClient.js",
+    "coveralls": "./bin/coveralls.js"
   },
   "dependencies": {
     "commander": "2.9.0",
