@@ -8,12 +8,15 @@ const NbaGamesCommandHelp = require("../constants/NbaGamesCommandHelp.js");
 program
   .version("0.0.1");
 
+program.on('help', function(){ 
+  console.log(NbaGamesCommandHelp.TEXT);
+  process.exit(1);
+});
+
 program
   .command("games [time]")
   .description("get nba games")
   .action(GamesCommand.getGamesForTime);
-
-program.on('help', function(){ console.log(NbaGamesCommandHelp.TEXT); });
 
 program
   .parse(process.argv);
