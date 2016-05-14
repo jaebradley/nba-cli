@@ -1,26 +1,32 @@
 #!/usr/bin/env node
 
+'use es6';
+
 const program = require("commander");
 
-const GamesCommand = require("./commands/Games.js");
-const NbaGamesCommandHelp = require("../constants/NbaGamesCommandHelp.js");
+import GamesCommand from "./commands/GamesCommand";
+import {HELP} from "../constants/NbaGamesCommandHelp";
+
+let gamesCommand = new GamesCommand();
 
 program
   .version("0.0.1");
 
-program.on('help', function(){ 
-  console.log(NbaGamesCommandHelp.TEXT);
+program.on('help', function() { 
+  console.log(HELP);
   process.exit(1);
 });
 
 program
   .command("games [time]")
   .description("get nba games")
-  .action(GamesCommand.getGamesForTime);
+  .action(function(time) {
+    gamesCommand.run(time);
+  });
 
 program
   .parse(process.argv);
 
 if (program.args.length === 0) {
-  console.log(NbaGamesCommandHelp.TEXT);
+  console.log(HELP);
 }
