@@ -1,32 +1,22 @@
-const rp = require('request-promise');
-const Q = require('q');
+import rp from 'request-promise';
+import Q from 'q';
 
-const Constants = require('../../constants/Constants.js');
 import PlayByPlayDataTranslator from '../../translators/data/PlayByPlayDataTranslator';
 
-const playByPlayDataTranslator = new PlayByPlayDataTranslator();
-
-function generatePlayByPlayUrl(formattedGameDate, gameId) {
-  return Constants.BASE_NBA_DATA_PLAY_BY_PLAY_URL.concat(formattedGameDate, "/", gameId, "/pbp_all.json");
-}
-
-function fetchPlayByPlayData(playByPlayUrl, callback) {
-  rp( { uri: playByPlayUrl, json: true } )
-    .then(function (playByPlayData) {
-      return playByPlayDataTranslator.translatePlayByPlayData(playByPlayData);
-    })
-    .then(function (translatedPlayByPlayData) {
-      callback(translatedPlayByPlayData);
-    })
-    .catch(function (err) {
-      console.log(err);
-    });
-}
-
-module.exports = {
-  fetchPlayByPlayData: function(formattedGameDate, gameId, callback) {
-    const playByPlayUrl = generatePlayByPlayUrl(formattedGameDate, gameId);
-    return fetchPlayByPlayData(playByPlayUrl, callback);
+export default class PlayByPlayClient {
+  constructor() {
+    this.playByPlayDataTranslator = new PlayByPlayDataTranslator();
+    this.basePlayByPlayUrl = "http://data.nba.com/data/5s/json/cms/noseason/game/";
   }
-};
 
+  generatePlayByPlayUrl(formattedGameDate, gameId) {
+    return `${this.basePlayByPlayUrl}/${formattedGameDate}/${gameId}/pbp_all.json`;
+  }
+
+  fetch(formattedGameDate, gameId, callback) {
+    const playByPlayUrl = this.generatePlayByPlayUrl(formattedGameDate, gameId);
+    rp( { uri: playByPlayUrl, json: true } )
+      .then(playByPlayData => callback(this.playByPlayDataTranslator.translatePlayByPlayData(playByPlayData)))
+      .catch(err => console.log(err));
+  }
+}
