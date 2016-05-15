@@ -1,21 +1,26 @@
-const Table = require('cli-table2');
+import Table from 'cli-table2';
 
-const UPCOMING_GAME_TABLE_HEADER = ['UPCOMING', 'HOME', 'AWAY', 'WATCH', 'ARENA'];
+export default class UpcomingGameTableCreator {
+  constructor() {
+    this.header = ['UPCOMING', 'HOME', 'AWAY', 'WATCH', 'ARENA'];
+    this.defaultFormat = { head: this.header };
+  }
 
-function getLocation(arena, city, state) {
-  return arena.concat(', ', city, ', ', state);
-}
-
-module.exports = {
-  createUpcomingGamesTable: function(data) {
-    const table = new Table({head: UPCOMING_GAME_TABLE_HEADER});
-    data.forEach(function(upcomingGame) {
-      table.push([upcomingGame.formattedLocalizedStartDate,
-                  upcomingGame.homeName,
-                  upcomingGame.visitorName,
-                  upcomingGame.broadcasts.toString(),
-                  getLocation(upcomingGame.arena, upcomingGame.city, upcomingGame.state)]);
-    });
+  create(upcomingGamesData) {
+    const table = new Table(this.defaultFormat);
+    data.map(upcomingGame => (
+      table.push([
+        upcomingGame.formattedLocalizedStartDate,
+        upcomingGame.homeName,
+        upcomingGame.visitorName,
+        upcomingGame.broadcasts.toString(),
+        UpcomingGameTableCreator.getLocation(upcomingGame.arena, upcomingGame.city, upcomingGame.state)
+      ])
+    ));
     return table.toString();
   }
-};
+
+  static formatLocation(arena, city, state) {
+    return `${arena}, ${city}, ${state}`;
+  }
+}

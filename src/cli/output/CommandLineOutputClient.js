@@ -3,12 +3,13 @@ const moment = require('moment-timezone');
 
 import NbaDataClient from '../../data/NbaDataClient';
 const StartedGameTableCreator = require('../../tables/StartedGameTableCreator.js');
-const UpcomingGameTableCreator = require('../../tables/UpcomingGameTableCreator.js');
+import UpcomingGameTableCreator from '../../tables/UpcomingGameTableCreator';
 import PlayByPlayTableCreator from '../../tables/PlayByPlayTableCreator';
 const BoxScoreTableCreator = require('../../tables/BoxScoreTableCreator.js');
 
 const nbaDataClient = new NbaDataClient();
 const playByPlayTableCreator = new PlayByPlayTableCreator();
+const upcomingGameTableCreator = new UpcomingGameTableCreator();
 
 function isGameUpcoming(data) {
   return data.unixMillisecondsStartTime > moment().valueOf();
@@ -56,7 +57,7 @@ function outputGames(data) {
   });
 
   if (upcomingGameData.length > 0) {
-    console.log(UpcomingGameTableCreator.createUpcomingGamesTable(upcomingGameData));
+    console.log(upcomingGameTableCreator.create(upcomingGameData));
   }
 }
 
