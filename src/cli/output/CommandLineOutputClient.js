@@ -5,11 +5,12 @@ import NbaDataClient from '../../data/NbaDataClient';
 const StartedGameTableCreator = require('../../tables/StartedGameTableCreator.js');
 import UpcomingGameTableCreator from '../../tables/UpcomingGameTableCreator';
 import PlayByPlayTableCreator from '../../tables/PlayByPlayTableCreator';
-const BoxScoreTableCreator = require('../../tables/BoxScoreTableCreator.js');
+import BoxScoreTableCreator from '../../tables/BoxScoreTableCreator';
 
 const nbaDataClient = new NbaDataClient();
 const playByPlayTableCreator = new PlayByPlayTableCreator();
 const upcomingGameTableCreator = new UpcomingGameTableCreator();
+const boxScoreTableCreator = new BoxScoreTableCreator();
 
 function isGameUpcoming(data) {
   return data.unixMillisecondsStartTime > moment().valueOf();
@@ -35,9 +36,10 @@ function outputStartedGameTable(gameData) {
   }
 
   if (hasBoxScore(gameData)) {
-    var boxScoreTables = BoxScoreTableCreator.createBoxScoreTable(gameData.boxScore);
-    secondRow.push(boxScoreTables.homeTable);
-    secondRow.push(boxScoreTables.visitorTable);
+    let homeBoxScoreTable = boxScoreTableCreator.create(gameData.boxScore.home);
+    let visitorBoxScoreTable = boxScoreTableCreator.create(gameData.boxScore.visitor);
+    secondRow.push(homeBoxScoreTable);
+    secondRow.push(visitorBoxScoreTable);
   }
 
   table.push(firstRow);

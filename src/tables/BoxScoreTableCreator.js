@@ -1,51 +1,34 @@
-const Table = require('cli-table2');
-const Colors = require('colors');
-const emoji = require('node-emoji');
-const nbaImages = require('nba-images');
+import Table from 'cli-table2';
+import Colors from 'colors';
+import emoji from 'node-emoji';
+import NbaImages from 'nba-images';
 
-const Constants = require('../constants/Constants.js');
+import Constants from '../constants/Constants';
 import Formatter from './formatters/Formatter';
 
-function generateLeaders(data) {
-  const leaders = [];
-  data.leaders.forEach(function(leader) {
-    leaders.push(Formatter.formatShortPlayerName(leader.FirstName, leader.LastName));
-  });
-  return leaders.toString();
-}
+export default class BoxScoreTableCreator {
+  constructor() {
+    this.defaultFormat = { head: [ { content: 'Leaders', colSpan: 3} ] };
+    this.pointsHeader = 'Points';
+    this.assistsHeader = 'Assists';
+    this.reboundsHeader = 'Rebounds';
+  }
+  
+  generateRows(boxScoreData) {
+    const rows = [];
+    rows.push([this.pointsHeader, boxScoreData.points.value, BoxScoreTableCreator.generateLeaders(boxScoreData.points.leaders).toString()]);
+    rows.push([this.assistsHeader, boxScoreData.assists.value, BoxScoreTableCreator.generateLeaders(boxScoreData.assists.leaders).toString()]);
+    rows.push([this.reboundsHeader, boxScoreData.rebounds.value, BoxScoreTableCreator.generateLeaders(boxScoreData.rebounds.leaders).toString()]);
+    return rows;
+  }
 
-function generateRows(data) {
-  const rows = [];
-  var pointsLeaders = "";
-  if (typeof data.points.leaders !== 'undefined') {
-    pointsLeaders = generateLeaders(data.points);
+  create(boxScoreData) {
+    const table = new Table(this.defaultFormat);
+    this.generateRows(boxScoreData).map(row => table.push(row));
+    return table.toString();
   }
-  var assistsLeaders = "";
-  if (typeof data.assists.leaders !== 'undefined') {
-    assistsLeaders = generateLeaders(data.assists);
-  }
-  var reboundsLeaders = "";
-  if (typeof data.rebounds.leaders !== 'undefined') {
-    reboundsLeaders = generateLeaders(data.rebounds);
-  }
-  rows.push(['Points', data.points.value, pointsLeaders]);
-  rows.push(['Assists', data.assists.value, assistsLeaders]);
-  rows.push(['Rebounds', data.rebounds.value, reboundsLeaders]);
-  return rows;
-}
 
-module.exports = {
-  createBoxScoreTable: function(data) {
-    const homeTable = new Table({ head: [ { content: 'Home Leaders', colSpan: 3} ]});
-    const homeRows = generateRows(data.home);
-    homeRows.forEach(function(row) {
-      homeTable.push(row);
-    });
-    const visitorTable = new Table({ head: [ { content: 'Away Leaders', colSpan: 3} ]});
-    const visitorRows = generateRows(data.visitor);
-    visitorRows.forEach(function(row) {
-      visitorTable.push(row);
-    });
-    return {homeTable: homeTable.toString(), visitorTable: visitorTable.toString()};
+  static generateLeaders(leaderData) {
+    return leaderData.map(leader => Formatter.formatShortPlayerName(leader.firstName, leader.lastName));
   }
-};
+}

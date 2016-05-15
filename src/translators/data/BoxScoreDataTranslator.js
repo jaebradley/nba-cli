@@ -1,4 +1,15 @@
 export default class BoxScoreDataTranslator {
+  static translateStatLeaders(statLeaderData) {
+    const statLeaders = {
+      value: statLeaderData.StatValue,
+      leaders: [],
+    }
+    statLeaderData.leader.map(leader => statLeaders.leaders.push(
+      {firstName: leader.FirstName, lastName: leader.LastName}
+    ));
+    return statLeaders;
+  }
+
   static translateBoxScoreData(data) {
     const boxScore = {
       visitor: {
@@ -14,30 +25,12 @@ export default class BoxScoreDataTranslator {
     };
     const visitorLeaders = data.sports_content.game.visitor.Leaders;
     const homeLeaders = data.sports_content.game.home.Leaders;
-    boxScore.visitor.points = {
-      value: visitorLeaders.Points.StatValue,
-      leaders: visitorLeaders.Points.leader
-    };
-    boxScore.visitor.assists = {
-      value: visitorLeaders.Assists.StatValue,
-      leaders: visitorLeaders.Assists.leader
-    };
-    boxScore.visitor.rebounds = {
-      value: visitorLeaders.Rebounds.StatValue,
-      leaders: visitorLeaders.Rebounds.leader
-    };
-    boxScore.home.points = {
-      value: homeLeaders.Points.StatValue,
-      leaders: homeLeaders.Points.leader
-    };
-    boxScore.home.assists = {
-      value: homeLeaders.Assists.StatValue,
-      leaders: homeLeaders.Assists.leader
-    };
-    boxScore.home.rebounds = {
-      value: homeLeaders.Rebounds.StatValue,
-      leaders: homeLeaders.Rebounds.leader
-    };
+    boxScore.visitor.points = BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Points);
+    boxScore.visitor.assists = BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Assists);
+    boxScore.visitor.rebounds = BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Rebounds);
+    boxScore.home.points = BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Points);
+    boxScore.home.assists = BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Assists);
+    boxScore.home.rebounds = BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Rebounds);
     return boxScore;
   }
 }
