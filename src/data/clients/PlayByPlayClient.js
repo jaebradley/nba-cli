@@ -4,6 +4,8 @@ const Q = require('q');
 const Constants = require('../../constants/Constants.js');
 import PlayByPlayDataTranslator from '../../translators/data/PlayByPlayDataTranslator';
 
+const playByPlayDataTranslator = new PlayByPlayDataTranslator();
+
 function generatePlayByPlayUrl(formattedGameDate, gameId) {
   return Constants.BASE_NBA_DATA_PLAY_BY_PLAY_URL.concat(formattedGameDate, "/", gameId, "/pbp_all.json");
 }
@@ -11,7 +13,7 @@ function generatePlayByPlayUrl(formattedGameDate, gameId) {
 function fetchPlayByPlayData(playByPlayUrl, callback) {
   rp( { uri: playByPlayUrl, json: true } )
     .then(function (playByPlayData) {
-      return PlayByPlayDataTranslator.translatePlayByPlayData(playByPlayData);
+      return playByPlayDataTranslator.translatePlayByPlayData(playByPlayData);
     })
     .then(function (translatedPlayByPlayData) {
       callback(translatedPlayByPlayData);
