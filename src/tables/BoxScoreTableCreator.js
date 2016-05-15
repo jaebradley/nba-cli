@@ -13,16 +13,12 @@ export default class BoxScoreTableCreator {
     this.assistsHeader = 'Assists';
     this.reboundsHeader = 'Rebounds';
   }
-
-  static generateLeaders(leaderData) {
-    return leaderData.leaders.map(leader => Formatter.formatShortPlayerName(leader.FirstName, leader.LastName));
-  }
-
+  
   generateRows(boxScoreData) {
     const rows = [];
-    rows.push([this.pointsHeader, boxScoreData.points.value, generateLeaders(boxScoreData.points.leaders)]);
-    rows.push([this.assistsHeader, boxScoreData.assists.value, generateLeaders(boxScoreData.assists.leaders)]);
-    rows.push([this.reboundsHeader, boxScoreData.rebounds.value, generateLeaders(boxScoreData.rebounds.leaders)]);
+    rows.push([this.pointsHeader, boxScoreData.points.value, BoxScoreTableCreator.generateLeaders(boxScoreData.points.leaders).toString()]);
+    rows.push([this.assistsHeader, boxScoreData.assists.value, BoxScoreTableCreator.generateLeaders(boxScoreData.assists.leaders).toString()]);
+    rows.push([this.reboundsHeader, boxScoreData.rebounds.value, BoxScoreTableCreator.generateLeaders(boxScoreData.rebounds.leaders).toString()]);
     return rows;
   }
 
@@ -30,5 +26,9 @@ export default class BoxScoreTableCreator {
     const table = new Table(this.defaultFormat);
     this.generateRows(boxScoreData).map(row => table.push(row));
     return table.toString();
+  }
+
+  static generateLeaders(leaderData) {
+    return leaderData.map(leader => Formatter.formatShortPlayerName(leader.firstName, leader.lastName));
   }
 }

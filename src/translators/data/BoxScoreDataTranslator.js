@@ -1,8 +1,8 @@
 export default class BoxScoreDataTranslator {
   static translateStatLeaders(statLeaderData) {
     const statLeaders = {
-      value: statLeaderData.StatValue;
-      leaders: []
+      value: statLeaderData.StatValue,
+      leaders: [],
     }
     statLeaderData.leader.map(leader => statLeaders.leaders.push(
       {firstName: leader.FirstName, lastName: leader.LastName}
