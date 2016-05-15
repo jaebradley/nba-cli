@@ -1,4 +1,5 @@
 import NbaImages from 'nba-images';
+import emoji from 'node-emoji';
 
 import Constants from '../../constants/Constants';
 

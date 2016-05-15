@@ -4,7 +4,7 @@ const emoji = require('node-emoji');
 const nbaImages = require('nba-images');
 
 const Constants = require('../constants/Constants.js');
-const Formatter = require('./formatters/Formatter.js');
+import Formatter from './formatters/Formatter';
 
 function getStartedGameTableColumns(linescores) {
   return linescores.length + 3;
