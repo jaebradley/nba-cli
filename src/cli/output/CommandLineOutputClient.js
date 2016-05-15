@@ -1,12 +1,13 @@
 const Table = require('cli-table2');
 const moment = require('moment-timezone');
 
-const NbaDataClient = require('../../data/NbaDataClient.js');
+import NbaDataClient from '../../data/NbaDataClient';
 const StartedGameTableCreator = require('../../tables/StartedGameTableCreator.js');
 const UpcomingGameTableCreator = require('../../tables/UpcomingGameTableCreator.js');
 const PlayByPlayTableCreator = require('../../tables/PlayByPlayTableCreator.js');
 const BoxScoreTableCreator = require('../../tables/BoxScoreTableCreator.js');
 
+const nbaDataClient = new NbaDataClient();
 
 function isGameUpcoming(data) {
   return data.unixMillisecondsStartTime > moment().valueOf();
@@ -60,6 +61,6 @@ function outputGames(data) {
 
 module.exports = {
   outputGamesForDateRange: function(startDate, endDate) {
-    NbaDataClient.fetchDateRangeGames(startDate, endDate, outputGames);
+    nbaDataClient.fetchDataForDateRange(startDate, endDate, outputGames);
   }
 };

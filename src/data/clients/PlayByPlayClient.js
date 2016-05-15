@@ -15,7 +15,7 @@ export default class PlayByPlayClient {
 
   fetch(formattedGameDate, gameId, callback) {
     const playByPlayUrl = this.generatePlayByPlayUrl(formattedGameDate, gameId);
-    rp( { uri: playByPlayUrl, json: true } )
+    return rp( { uri: playByPlayUrl, json: true } )
       .then(playByPlayData => callback(this.playByPlayDataTranslator.translatePlayByPlayData(playByPlayData)))
       .catch(err => console.log(err));
   }

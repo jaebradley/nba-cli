@@ -14,7 +14,7 @@ export default class BoxScoreClient {
 
   fetch(formattedGameDate, gameId, callback) {
     const boxScoreUrl = this.generateBoxScoreUrl(formattedGameDate, gameId);
-    rp( { uri: boxScoreUrl, json: true } )
+    return rp( { uri: boxScoreUrl, json: true } )
       .then(boxScoreData => callback(BoxScoreDataTranslator.translateBoxScoreData(boxScoreData)))
       .catch(err => console.log(err));
   }
