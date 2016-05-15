@@ -38,7 +38,7 @@ export default class GamesCommand {
         };
 
       default:
-        let customDateTime = new Date(time);
+        let customDateTime = new Date(timeRangeOption);
         if (moment(customDateTime).isValid()) {
           return {
             startDate: moment(customDateTime).tz(this.userTimezone).startOf("day"),

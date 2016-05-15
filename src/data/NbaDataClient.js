@@ -4,9 +4,11 @@ const Q = require('q');
 
 const PlayByPlayClient = require('./clients/PlayByPlayClient.js');
 const BoxScoreClient = require('./clients/BoxScoreClient.js');
-const ScoreboardDataTranslator = require('../translators/data/ScoreboardDataTranslator.js');
+import ScoreboardDataTranslator from '../translators/data/ScoreboardDataTranslator';
 const ScoreboardFilter = require("../filters/data/ScoreboardFilter.js");
 const Constants = require('../constants/Constants.js');
+
+const scoreboardTranslator = new ScoreboardDataTranslator();
 
 function generatScoreboardUrl(formattedDate) {
   return Constants.BASE_NBA_DATA_SCOREBOARD_URL.concat(formattedDate, "/games.json");
@@ -60,7 +62,7 @@ function fetchScoreboardData(scoreboardUrl, unixMillisecondsStartTime, unixMilli
   var filteredGameData = {};
   rp( { uri: scoreboardUrl, json: true } )
     .then(function (scoreboardData) {
-      const translatedData = ScoreboardDataTranslator.translateGameData(scoreboardData);
+      const translatedData = scoreboardTranslator.translateScoreboardData(scoreboardData);
       filteredGameData = ScoreboardFilter.filterScoreboardData(translatedData, unixMillisecondsStartTime, unixMillisecondsEndTime); })
     .then(function () {
       return fetchPlayByPlayData(filteredGameData); })
