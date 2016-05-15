@@ -4,12 +4,12 @@ const emoji = require('node-emoji');
 const nbaImages = require('nba-images');
 
 const Constants = require('../constants/Constants.js');
-const Formatter = require('./formatters/Formatter.js');
+import Formatter from './formatters/Formatter';
 
 function generateLeaders(data) {
   const leaders = [];
   data.leaders.forEach(function(leader) {
-    leaders.push(Formatter.formatShortName(leader.FirstName, leader.LastName));
+    leaders.push(Formatter.formatShortPlayerName(leader.FirstName, leader.LastName));
   });
   return leaders.toString();
 }

@@ -15,7 +15,7 @@ export default class PlayByPlayTableCreator {
   }
 
   static generateFormattedPlayClock(playClock, playPeriod) {
-    const formattedGamePeriod = Formatter.formatGamePeriod(playPeriod);
+    const formattedGamePeriod = Formatter.formatLiveGamePeriod(playPeriod);
     return `${playClock} ${formattedGamePeriod}`;
   }
 
