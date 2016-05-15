@@ -2,13 +2,14 @@ const moment = require('moment-timezone');
 const rp = require('request-promise');
 const Q = require('q');
 
+import BoxScoreClient from './clients/BoxScoreClient';
 import PlayByPlayClient from './clients/PlayByPlayClient';
-const BoxScoreClient = require('./clients/BoxScoreClient.js');
 import ScoreboardDataTranslator from '../translators/data/ScoreboardDataTranslator';
 const ScoreboardFilter = require("../filters/data/ScoreboardFilter.js");
 const Constants = require('../constants/Constants.js');
 
 const scoreboardTranslator = new ScoreboardDataTranslator();
+const boxScoreClient = new BoxScoreClient();
 const playByPlayClient = new PlayByPlayClient();
 
 function generatScoreboardUrl(formattedDate) {
@@ -49,7 +50,7 @@ function fetchBoxScoreData(filteredGameData) {
     if (shouldFetchData(gameData.unixMillisecondsStartTime, gameData.status)) {
       const deferred = Q.defer();
       const formattedGameDate = gameData.nbaFormatStartDate;
-      BoxScoreClient.fetchBoxScoreData(formattedGameDate, gameId, function(data) {
+      boxScoreClient.fetch(formattedGameDate, gameId, function(data) {
         filteredGameData[gameId]['boxScore'] = data;
         deferred.resolve(data);
       });
