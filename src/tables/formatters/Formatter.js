@@ -1,56 +1,53 @@
-const NbaImages = require('nba-images');
+import NbaImages from 'nba-images';
 
-const Constants = require('../../constants/Constants.js');
+import Constants from '../../constants/Constants';
 
-function formatGamePeriod(periodValue) {
-  if (parseInt(periodValue) > 4) {
-    return 'OT'.concat(periodValue - 4);
+export default class Formatter {
+  constructor() {}
+
+  static formatLiveGamePeriod(period) {
+    if (parseInt(period) > 4) {
+      return 'OT'.concat(period - 4);
+    }
+
+    return 'Q'.concat(period);
   }
 
-  return 'Q'.concat(periodValue);
-}
+  static formatScore(score, opponentScore) {
+    const strValue = score.toString();
+    if (score > opponentScore) {
+      return strValue.green;
+    
+    } else if (score < opponentScore) {
+      return strValue.red;
+    }
 
-function formatScore(score, opponentScore) {
-  const strValue = score.toString();
-  if (score > opponentScore) {
-    return strValue.green;
-  } else if (score < opponentScore) {
-    return strValue.red;
+    return strValue.blue;
   }
 
-  return strValue.blue;
-};
-
-module.exports = {
-  
-  formatGameSituation: function(status, period, clock) {
+  static formatGameSituation(status, period, clock) {
     if (status == Constants.LIVE) {
-      return clock.concat(" ", formatGamePeriod(period));
+      const formattedLiveGamePeriod = Formatter.formatLiveGamePeriod(period);
+      return `${clock} ${formattedLiveGamePeriod}`;
     }
 
     return status;
-  },
+  }
 
-  formatTeamAbbreviation: function(abbreviation) {
-    return abbreviation.concat(" ", NbaImages.getTeamEmoji(abbreviation));
-  },
+  static formatTeamAbbreviation(abbreviation) {
+    const teamEmoji = NbaImages.getTeamEmoji(abbreviation);
+    return `${abbreviation} ${teamEmoji}`;
+  }
 
-  formatTotalScore: function(score, opponentScore) {
+  static formatTotalScore(score, opponentScore) {
     if (score == Constants.ONE_HUNDRED) {
       return emoji.get(Constants.SCORE_100_EMOJI_VALUE);
     }
-    return formatScore(score, opponentScore).bold;
-  },
+    return Formatter.formatScore(score, opponentScore).bold;
+  }
 
-  formatScore: function(score, opponentScore) {
-    return formatScore(score, opponentScore);
-  },
-
-  formatGamePeriod: function(period) {
-    return formatGamePeriod(period);
-  },
-
-  formatShortName: function(firstName, lastName) {
-    return firstName.charAt(0).concat(".", lastName);
-  },
-};
+  static formatShortPlayerName(firstName, lastName) {
+    const firstCharacter = firstName.charAt(0);
+    return `${firstCharacter}. ${lastName}`;
+  }
+}
