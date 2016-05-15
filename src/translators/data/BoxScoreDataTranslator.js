@@ -1,5 +1,5 @@
-module.exports = {
-  translateBoxScoreData: function(data) {
+export default class BoxScoreDataTranslator {
+  static translateBoxScoreData(data) {
     const boxScore = {
       visitor: {
         points: {},
@@ -40,4 +40,4 @@ module.exports = {
     };
     return boxScore;
   }
-};
+}
