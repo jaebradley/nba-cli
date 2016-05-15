@@ -4,7 +4,7 @@
   "description": "nba scoreboard",
   "scripts": {
     "test": "npm run build && mocha --compilers js:babel-core/register",
-    "coverage": "`npm bin`/istanbul cover node_modules/.bin/_mocha",
+    "coverage": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/.bin/_mocha",
     "coveralls": "npm run-script coverage && node_modules/.bin/coveralls < coverage/lcov.info",
     "build": "babel src --presets babel-preset-es2015 --out-dir build",
     "prepublish": "npm run build"

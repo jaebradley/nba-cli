@@ -1,5 +1,3 @@
-import 'babel-polyfill';
-
 import {expect} from 'chai';
 import ScoreboardDataTranslator from '../src/translators/data/ScoreboardDataTranslator';
 
