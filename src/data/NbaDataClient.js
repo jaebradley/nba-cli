@@ -50,7 +50,7 @@ function fetchBoxScoreData(filteredGameData) {
     if (shouldFetchData(gameData.unixMillisecondsStartTime, gameData.status)) {
       const deferred = Q.defer();
       const formattedGameDate = gameData.nbaFormatStartDate;
-      boxScoreClient.fetchBoxScoreData(formattedGameDate, gameId, function(data) {
+      boxScoreClient.fetch(formattedGameDate, gameId, function(data) {
         filteredGameData[gameId]['boxScore'] = data;
         deferred.resolve(data);
       });
