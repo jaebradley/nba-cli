@@ -1,101 +1,107 @@
-const Table = require('cli-table2');
-const Colors = require('colors');
-const emoji = require('node-emoji');
-const nbaImages = require('nba-images');
+import Table from 'cli-table2';
+import Colors from 'colors';
+import emoji from 'node-emoji';
+import NbaImages from 'nba-images';
 
-const Constants = require('../constants/Constants.js');
+import Constants from '../constants/Constants';
 import Formatter from './formatters/Formatter';
 
-function getStartedGameTableColumns(linescores) {
-  return linescores.length + 3;
-}
-
-function createStartedGameTableHeaders(linescores, status, periodValue, gameClock) {
-  const gameSituation = Formatter.formatGameSituation(status, periodValue, gameClock);
-  const headers = ['', gameSituation.bold.magenta];
-  linescores.forEach(function(linescore) {
-    headers.push(linescore.period.bold.cyan);
-  });
-  headers.push('Total'.bold.underline.cyan);
-  return headers;
-}
-
-function generateLinescoresTableRows(homeAbbreviation, visitorAbbreviation, homeLinescores, visitorLinescores, homeTotal, visitorTotal) {
-  const homeRow = [emoji.get(Constants.HOME_EMOJI_VALUE), Formatter.formatTeamAbbreviation(homeAbbreviation)];
-  const visitorRow = [emoji.get(Constants.VISITOR_EMOJI_VALUE), Formatter.formatTeamAbbreviation(visitorAbbreviation)];
-
-  for (var i = 0; i < homeLinescores.length; i++) {
-    var homeScore = homeLinescores[i].score;
-    var visitorScore = visitorLinescores[i].score;
-    homeRow.push(Formatter.formatScore(homeScore, visitorScore));
-    visitorRow.push(Formatter.formatScore(visitorScore, homeScore));
+export default class StartedGameTableCreator {
+  constructor() {
+    this.nonLinescoresColumnsLength = 3;
+    this.totalHeaderValue = 'Total';
+    this.metadataLabelColSpan = 1;
   }
 
-  homeRow.push(Formatter.formatTotalScore(homeTotal, visitorTotal));
-  visitorRow.push(Formatter.formatTotalScore(visitorTotal, homeTotal));
-  return [homeRow, visitorRow];
-}
+  static applyGameSituationFormatting(gameSituation) {
+    return gameSituation.bold.magenta;
+  }
 
-function generateStartedGameMetadataMap(startTime, broadcasts) {
-  const map = {};
-  map[emoji.get(Constants.START_TIME_EMOJI_VALUE)] = startTime;
-  map[emoji.get(Constants.BROADCASTS_EMOJI_VALUE)] = broadcasts;
-  return map;
-}
+  static applyPeriodFormatting(period) {
+    return period.bold.cyan;
+  }
 
-function generateStartedGameMetadataRow(label, value, numberOfColumns) {
-  return [
-    {
-      content: label,
-      colSpan: 1
-    },
-    {
-      content: value,
-      colSpan: numberOfColumns - 1
+  static applyTotalFormatting(total) {
+    return total.bold.underline.cyan;
+  }
+
+  generateFormattedTotalHeader() {
+    return StartedGameTableCreator.applyTotalFormatting(this.totalHeaderValue);
+  }
+
+  getTableColumnLength(linescoresLength) {
+    return linescoresLength + this.nonLinescoresColumnsLength;
+  }
+
+  generateHeaders(linescorePeriods, gameSituation) {
+    const headers = ['', StartedGameTableCreator.applyGameSituationFormatting(gameSituation))];
+    linescorePeriods.map(period => headers.push(StartedGameTableCreator.applyPeriodFormatting(period)));
+    headers.push(this.generateFormattedTotalHeader());
+    return headers;
+  }
+
+  generateLinescoresRows() {
+    const homeRow = [emoji.get(Constants.HOME_EMOJI_VALUE), Formatter.formatTeamAbbreviation(homeAbbreviation)];
+    const visitorRow = [emoji.get(Constants.VISITOR_EMOJI_VALUE), Formatter.formatTeamAbbreviation(visitorAbbreviation)];
+
+    for (var i = 0; i < homeLinescores.length; i++) {
+      var homeScore = homeLinescores[i].score;
+      var visitorScore = visitorLinescores[i].score;
+      homeRow.push(Formatter.formatScore(homeScore, visitorScore));
+      visitorRow.push(Formatter.formatScore(visitorScore, homeScore));
     }
-  ];
-}
 
-function generateStartedGameMetadataRows(metadataMap, numberOfColumns) {
-  const rows = [];
-  Object.keys(metadataMap).forEach(function(key) {
-    rows.push(
-        generateStartedGameMetadataRow(key, metadataMap[key], numberOfColumns)
-    );
-  });
-  return rows;
-}
+    homeRow.push(Formatter.formatTotalScore(homeTotal, visitorTotal));
+    visitorRow.push(Formatter.formatTotalScore(visitorTotal, homeTotal));
+    return [homeRow, visitorRow];
+  }
 
-function generateStartedGameTableRows(data) {
-  const rows = [];
-  const homeLinescores = data.homeLinescores;
-  const visitorLinescores = data.visitorLinescores;
-  const homeAbbreviation = data.homeAbbreviation;
-  const visitorAbbreviation = data.visitorAbbreviation;
-  const homeScore = data.homeScore;
-  const visitorScore = data.visitorScore;
-  const startTime = data.formattedLocalizedStartDate;
-  const broadcasts = data.broadcasts.toString();
-  const linescoresRows = generateLinescoresTableRows(homeAbbreviation, visitorAbbreviation, homeLinescores, visitorLinescores, homeScore, visitorScore);
-  const numberOfColumns = getStartedGameTableColumns(homeLinescores);
-  const metadataMap = generateStartedGameMetadataMap(startTime, broadcasts);
-  const metadataRows = generateStartedGameMetadataRows(metadataMap, numberOfColumns);
-  rows.push.apply(rows, linescoresRows);
-  rows.push.apply(rows, metadataRows);
-  return rows;
-}
+  generateStartedGameMetadataRow(label, value, numberOfColumns) {
+    return [
+      {
+        content: label,
+        colSpan: this.metadataLabelColSpan,
+      },
+      {
+        content: value,
+        colSpan: numberOfColumns - 1,
+      }
+    ];
+  }
 
-module.exports = {
-  createStartedGameTable: function(data) {
+  generateStartedGameMetadataRows(startTime, broadcasts, numberOfColumns) {
+    const rows = [];
+    rows.push(this.generateMetadataRow(emoji.get(Constants.START_TIME_EMOJI_VALUE), startTime, numberOfColumns));
+    rows.push(this.generateMetadataRow(emoji.get(Constants.BROADCASTS_EMOJI_VALUE), broadcasts, numberOfColumns));
+    return rows;
+  }
+
+  generateRows(gameData) {
     const homeLinescores = data.homeLinescores;
-    const gameStatus = data.status;
-    const periodValue = data.periodValue;
-    const gameClock = data.gameClock;
-    const table = new Table({ head: createStartedGameTableHeaders(homeLinescores, gameStatus, periodValue, gameClock) });
-    const rows = generateStartedGameTableRows(data);
-    rows.forEach(function(row) {
-      table.push(row);
-    });
+    const visitorLinescores = data.visitorLinescores;
+    const homeAbbreviation = data.homeAbbreviation;
+    const visitorAbbreviation = data.visitorAbbreviation;
+    const homeScore = data.homeScore;
+    const visitorScore = data.visitorScore;
+    const startTime = data.formattedLocalizedStartDate;
+    const broadcasts = data.broadcasts.toString();
+    const numberOfColumns = this.getTableColumnLength(homeLinescores.length);
+    const linescoresRows = this,.generateLinescoresRows(homeAbbreviation, visitorAbbreviation, homeLinescores, visitorLinescores, homeScore, visitorScore);
+    const metadataRows = generateStartedGameMetadataRows(startTime, broadcasts, numberOfColumns);
+    const rows = [];
+    rows.push.apply(rows, linescoresRows);
+    rows.push.apply(rows, metadataRows);
+    return rows;
+  }
+
+  create(gameData) {
+    const homeLinescores = gameData.homeLinescores;
+    const gameStatus = gameData.status;
+    const periodValue = gameData.periodValue;
+    const gameClock = gameData.gameClock;
+    const periodValues = homeLinescores.map(linescore => linescore.periodValue);
+    const table = new Table({ head: this.generateHeaders(periodValues, gameStatus, periodValue, gameClock) });
+    this.generateRows(gameData).map(row => table.push(row));
     return table.toString();
   }
-};
+}
