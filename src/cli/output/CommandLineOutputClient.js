@@ -7,7 +7,6 @@ import UpcomingGameTableCreator from '../../tables/UpcomingGameTableCreator';
 import PlayByPlayTableCreator from '../../tables/PlayByPlayTableCreator';
 import BoxScoreTableCreator from '../../tables/BoxScoreTableCreator';
 
-<<<<<<< HEAD
 export default class CommandLineOutputClient {
   constructor() {
     this.nbaDataClient = new NbaDataClient();
@@ -16,13 +15,6 @@ export default class CommandLineOutputClient {
     this.upcomingGameTableCreator = new UpcomingGameTableCreator();
     this.boxScoreTableCreator = new BoxScoreTableCreator();
   }
-=======
-const nbaDataClient = new NbaDataClient();
-const playByPlayTableCreator = new PlayByPlayTableCreator();
-const upcomingGameTableCreator = new UpcomingGameTableCreator();
-const boxScoreTableCreator = new BoxScoreTableCreator();
-const startedGameTableCreator = new StartedGameTableCreator();
->>>>>>> master
 
   static hasPlayByPlay(data) {
     return typeof data.playByPlay !== 'undefined' && gameData.playByPlay.length > 0;
@@ -40,7 +32,6 @@ const startedGameTableCreator = new StartedGameTableCreator();
     return row;
   }
 
-<<<<<<< HEAD
   generateSecondRow(data) {
     const row = [];
     if (CommandLineOutputClient.hasBoxScore(data)) {
@@ -48,17 +39,6 @@ const startedGameTableCreator = new StartedGameTableCreator();
       row.push(boxScoreTableCreator.create(data.boxScore.visitor));
     }
     return row;
-=======
-function outputStartedGameTable(gameData) {
-  var table = new Table();
-  var firstRow = [];
-  var secondRow = [];
-  
-  firstRow.push(startedGameTableCreator.create(gameData));
-  
-  if (hasPlayByPlay(gameData)) {
-    firstRow.push(playByPlayTableCreator.create(gameData.playByPlay))
->>>>>>> master
   }
 
   outputStartedGameTable(data) {
@@ -73,20 +53,15 @@ function outputStartedGameTable(gameData) {
   }
 
   outputGames(data) {
-
-  }
-}
-
-function outputGames(data) {
-  const upcomingGames = [];
-  Object.keys(data).forEach(function(key) {
-    const gameData = data[key];
-    if (isGameUpcoming(gameData)) {
-      upcomingGameData.push(gameData);
-    } else {
-      outputStartedGameTable(gameData);
+    const upcomingGames = [];
+    for (let gameId in data) {
+      const gameData = data[gameId];
+      if (gameData.isUpcoming) {
+        upcomingGames.push(gameData);
+      } else {
+        this.outputStartedGameTable(gameData);
+      }
     }
-  });
-
-  this.outputUpcomingGames(upcomingGames);
+    this.outputUpcomingGames(upcomingGames);
+  }
 }
