@@ -7,6 +7,7 @@ import UpcomingGameTableCreator from '../../tables/UpcomingGameTableCreator';
 import PlayByPlayTableCreator from '../../tables/PlayByPlayTableCreator';
 import BoxScoreTableCreator from '../../tables/BoxScoreTableCreator';
 
+<<<<<<< HEAD
 export default class CommandLineOutputClient {
   constructor() {
     this.nbaDataClient = new NbaDataClient();
@@ -15,6 +16,13 @@ export default class CommandLineOutputClient {
     this.upcomingGameTableCreator = new UpcomingGameTableCreator();
     this.boxScoreTableCreator = new BoxScoreTableCreator();
   }
+=======
+const nbaDataClient = new NbaDataClient();
+const playByPlayTableCreator = new PlayByPlayTableCreator();
+const upcomingGameTableCreator = new UpcomingGameTableCreator();
+const boxScoreTableCreator = new BoxScoreTableCreator();
+const startedGameTableCreator = new StartedGameTableCreator();
+>>>>>>> master
 
   static hasPlayByPlay(data) {
     return typeof data.playByPlay !== 'undefined' && gameData.playByPlay.length > 0;
@@ -32,6 +40,7 @@ export default class CommandLineOutputClient {
     return row;
   }
 
+<<<<<<< HEAD
   generateSecondRow(data) {
     const row = [];
     if (CommandLineOutputClient.hasBoxScore(data)) {
@@ -39,6 +48,17 @@ export default class CommandLineOutputClient {
       row.push(boxScoreTableCreator.create(data.boxScore.visitor));
     }
     return row;
+=======
+function outputStartedGameTable(gameData) {
+  var table = new Table();
+  var firstRow = [];
+  var secondRow = [];
+  
+  firstRow.push(startedGameTableCreator.create(gameData));
+  
+  if (hasPlayByPlay(gameData)) {
+    firstRow.push(playByPlayTableCreator.create(gameData.playByPlay))
+>>>>>>> master
   }
 
   outputStartedGameTable(data) {
