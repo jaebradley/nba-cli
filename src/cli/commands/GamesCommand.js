@@ -11,6 +11,7 @@ import Constants from '../../constants/Constants.js';
 export default class GamesCommand {
   constructor() {
     this.userTimezone = jstz.determine().name();
+    this.commandLineOutputClient = new CommandLineOutputClient();
   }
 
   generateDateRange(timeRangeOption) {
@@ -50,6 +51,6 @@ export default class GamesCommand {
 
   run(timeRangeOption) {
     let dateRange = this.generateDateRange(timeRangeOption);
-    CommandLineOutputClient.outputGamesForDateRange(dateRange.startDate, dateRange.endDate);
+    this.commandLineOutputClient.outputGamesForDateRange(dateRange.startDate, dateRange.endDate);
   }
 };

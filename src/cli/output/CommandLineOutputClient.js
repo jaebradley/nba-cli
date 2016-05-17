@@ -17,7 +17,7 @@ export default class CommandLineOutputClient {
   }
 
   static hasPlayByPlay(data) {
-    return typeof data.playByPlay !== 'undefined' && gameData.playByPlay.length > 0;
+    return typeof data.playByPlay !== 'undefined' && data.playByPlay.length > 0;
   }
 
   static hasBoxScore(data) {
@@ -35,14 +35,14 @@ export default class CommandLineOutputClient {
   generateSecondRow(data) {
     const row = [];
     if (CommandLineOutputClient.hasBoxScore(data)) {
-      row.push(boxScoreTableCreator.create(data.boxScore.home));
-      row.push(boxScoreTableCreator.create(data.boxScore.visitor));
+      row.push(this.boxScoreTableCreator.create(data.boxScore.home));
+      row.push(this.boxScoreTableCreator.create(data.boxScore.visitor));
     }
     return row;
   }
 
   outputStartedGameTable(data) {
-    var table = new Table();
+    let table = new Table();
     table.push(this.generateFirstRow(data));
     table.push(this.generateSecondRow(data));
     console.log(table.toString());
@@ -55,7 +55,7 @@ export default class CommandLineOutputClient {
   outputGames(data) {
     const upcomingGames = [];
     for (let gameId in data) {
-      const gameData = data[gameId];
+      let gameData = data[gameId];
       if (gameData.isUpcoming) {
         upcomingGames.push(gameData);
       } else {
@@ -63,5 +63,9 @@ export default class CommandLineOutputClient {
       }
     }
     this.outputUpcomingGames(upcomingGames);
+  }
+
+  outputGamesForDateRange(startDate, endDate) {
+    this.nbaDataClient.fetchDataForDateRange(startDate, endDate, this.outputGames.bind(this));
   }
 }
