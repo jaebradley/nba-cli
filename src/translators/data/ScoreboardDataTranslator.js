@@ -37,7 +37,7 @@ export default class ScoreboardDataTranslator {
     const visitorCity = HtmlEscaper.escapeHtml(gameData.visitor.city);
     const visitorNickname = HtmlEscaper.escapeHtml(gameData.visitor.nickname);
     const visitorScore = parseInt(gameData.visitor.score);
-    
+
     const homeAbbreviation = HtmlEscaper.escapeHtml(gameData.home.abbreviation);
     const homeCity = HtmlEscaper.escapeHtml(gameData.home.city);
     const homeNickname = HtmlEscaper.escapeHtml(gameData.home.nickname);
@@ -48,6 +48,7 @@ export default class ScoreboardDataTranslator {
       url: gameUrl,
       nbaFormatStartDate: startDate,
       unixMillisecondsStartTime: ScoreboardDataTranslator.getUnixMillisecondsStartTime(dateStartTime),
+      isUpcoming: ScoreboardDataTranslator.isUpcoming(dateStartTime),
       arena: arena,
       city: city,
       state: state,
@@ -116,6 +117,10 @@ export default class ScoreboardDataTranslator {
 
   static getUnixMillisecondsStartTime(dateStartTime) {
     return ScoreboardDataTranslator.getDefaultDateStartTime(dateStartTime).clone().tz("UTC").valueOf();
+  }
+
+  static isUpcoming(dateStartTime) {
+    return ScoreboardDataTranslator.getUnixMillisecondsStartTime(dateStartTime) > moment().valueOf();
   }
 
   static getGameStatus(periodStatus, gameStatus) {
