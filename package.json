@@ -13,7 +13,7 @@
   "license": "MIT",
   "preferGlobal": true,
   "bin": {
-    "nba": "build/cli/CommandLineClient.js"
+    "nba": "build/index.js"
   },
   "dependencies": {
     "commander": "2.9.0",
