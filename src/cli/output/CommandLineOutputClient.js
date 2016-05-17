@@ -53,7 +53,6 @@ export default class CommandLineOutputClient {
   }
 
   outputGames(data) {
-    console.log(data);
     const upcomingGames = [];
     for (let gameId in data) {
       let gameData = data[gameId];
