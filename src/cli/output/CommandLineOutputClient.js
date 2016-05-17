@@ -2,7 +2,7 @@ const Table = require('cli-table2');
 const moment = require('moment-timezone');
 
 import NbaDataClient from '../../data/NbaDataClient';
-const StartedGameTableCreator = require('../../tables/StartedGameTableCreator.js');
+import StartedGameTableCreator from '../../tables/StartedGameTableCreator';
 import UpcomingGameTableCreator from '../../tables/UpcomingGameTableCreator';
 import PlayByPlayTableCreator from '../../tables/PlayByPlayTableCreator';
 import BoxScoreTableCreator from '../../tables/BoxScoreTableCreator';
@@ -11,6 +11,7 @@ const nbaDataClient = new NbaDataClient();
 const playByPlayTableCreator = new PlayByPlayTableCreator();
 const upcomingGameTableCreator = new UpcomingGameTableCreator();
 const boxScoreTableCreator = new BoxScoreTableCreator();
+const startedGameTableCreator = new StartedGameTableCreator();
 
 function isGameUpcoming(data) {
   return data.unixMillisecondsStartTime > moment().valueOf();
@@ -29,7 +30,7 @@ function outputStartedGameTable(gameData) {
   var firstRow = [];
   var secondRow = [];
   
-  firstRow.push(StartedGameTableCreator.createStartedGameTable(gameData));
+  firstRow.push(startedGameTableCreator.create(gameData));
   
   if (hasPlayByPlay(gameData)) {
     firstRow.push(playByPlayTableCreator.create(gameData.playByPlay))
