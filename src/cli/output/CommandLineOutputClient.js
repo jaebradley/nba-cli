@@ -49,10 +49,11 @@ export default class CommandLineOutputClient {
   }
 
   outputUpcomingGames(upcomingGames) {
-    upcomingGames.map(game => console.log(upcomingGameTableCreator.create(game)));
+    upcomingGames.map(game => console.log(this.upcomingGameTableCreator.create(game)));
   }
 
   outputGames(data) {
+    console.log(data);
     const upcomingGames = [];
     for (let gameId in data) {
       let gameData = data[gameId];

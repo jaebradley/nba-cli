@@ -6,17 +6,15 @@ export default class UpcomingGameTableCreator {
     this.defaultFormat = { head: this.header };
   }
 
-  create(upcomingGamesData) {
+  create(upcomingGame) {
     const table = new Table(this.defaultFormat);
-    upcomingGamesData.map(upcomingGame => (
-      table.push([
-        upcomingGame.formattedLocalizedStartDate,
-        upcomingGame.homeName,
-        upcomingGame.visitorName,
-        upcomingGame.broadcasts.toString(),
-        UpcomingGameTableCreator.formatLocation(upcomingGame.arena, upcomingGame.city, upcomingGame.state)
-      ])
-    ));
+    table.push([
+      upcomingGame.formattedLocalizedStartDate,
+      upcomingGame.homeName,
+      upcomingGame.visitorName,
+      upcomingGame.broadcasts.toString(),
+      UpcomingGameTableCreator.formatLocation(upcomingGame.arena, upcomingGame.city, upcomingGame.state)
+    ]);
     return table.toString();
   }
 

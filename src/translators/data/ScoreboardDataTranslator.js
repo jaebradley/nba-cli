@@ -48,7 +48,7 @@ export default class ScoreboardDataTranslator {
       url: gameUrl,
       nbaFormatStartDate: startDate,
       unixMillisecondsStartTime: ScoreboardDataTranslator.getUnixMillisecondsStartTime(dateStartTime),
-      isUpcoming: ScoreboardDataTranslator.isUpcoming(),
+      isUpcoming: ScoreboardDataTranslator.isUpcoming(dateStartTime),
       arena: arena,
       city: city,
       state: state,
