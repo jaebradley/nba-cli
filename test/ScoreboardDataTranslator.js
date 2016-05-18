@@ -1,3 +1,5 @@
+'use es6';
+
 import {expect} from 'chai';
 import ScoreboardDataTranslator from '../src/translators/data/ScoreboardDataTranslator';
 

@@ -1,3 +1,5 @@
+'use es6';
+
 import {expect} from 'chai';
 import StatisticalLeaders from '../src/data/models/StatisticalLeaders';
 import Player from '../src/data/models/Player';

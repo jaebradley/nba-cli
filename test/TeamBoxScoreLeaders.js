@@ -1,3 +1,5 @@
+'use es6';
+
 import {expect} from 'chai';
 import TeamBoxScoreLeaders from '../src/data/models/TeamBoxScoreLeaders';
 import StatisticalLeaders from '../src/data/models/StatisticalLeaders';
