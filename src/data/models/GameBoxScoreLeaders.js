@@ -3,7 +3,7 @@ import TeamBoxScoreLeaders from './TeamBoxScoreLeaders';
 
 const defaults = {
   home : new TeamBoxScoreLeaders(),
-  away: new TeamBoxScoreLeaders(),
+  visitor: new TeamBoxScoreLeaders(),
 };
 
 export default class GameBoxScoreLeaders extends Record(defaults) {
