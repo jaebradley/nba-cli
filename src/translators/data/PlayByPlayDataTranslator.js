@@ -11,7 +11,7 @@ export default class PlayByPlayDataTranslator {
     const index = Math.min(this.maximumPlaysNumber, playByPlayData.length);
     const lastFivePlaysOrLess = playByPlayData.slice(-index);
     return lastFivePlaysOrLess.map(play =>
-      new PlayByPlay(play.description, play.clock, play.period)
-      );
+      new PlayByPlay({ description: play.description, clock: play.clock, period: play.period, teamAbbreviation: play.team_abr, })
+    );
   }
 }
