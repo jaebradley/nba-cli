@@ -16,9 +16,9 @@ export default class BoxScoreTableCreator {
   
   generateRows(boxScoreData) {
     const rows = [];
-    rows.push([this.pointsHeader, boxScoreData.points.value, BoxScoreTableCreator.generateLeaders(boxScoreData.points.leaders).toString()]);
-    rows.push([this.assistsHeader, boxScoreData.assists.value, BoxScoreTableCreator.generateLeaders(boxScoreData.assists.leaders).toString()]);
-    rows.push([this.reboundsHeader, boxScoreData.rebounds.value, BoxScoreTableCreator.generateLeaders(boxScoreData.rebounds.leaders).toString()]);
+    rows.push([this.pointsHeader, boxScoreData.points.value, boxScoreData.points.getLeadersAbbreviatedNames()]);
+    rows.push([this.assistsHeader, boxScoreData.assists.value, boxScoreData.assists.getLeadersAbbreviatedNames()]);
+    rows.push([this.reboundsHeader, boxScoreData.rebounds.value, boxScoreData.rebounds.getLeadersAbbreviatedNames()]);
     return rows;
   }
 
@@ -26,9 +26,5 @@ export default class BoxScoreTableCreator {
     const table = new Table(this.defaultFormat);
     this.generateRows(boxScoreData).map(row => table.push(row));
     return table.toString();
-  }
-
-  static generateLeaders(leaderData) {
-    return leaderData.map(leader => Formatter.formatShortPlayerName(leader.firstName, leader.lastName));
   }
 }

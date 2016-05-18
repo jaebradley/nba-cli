@@ -8,6 +8,6 @@ const defaults = {
 export default class StatisticalLeaders extends Record(defaults) {
 
   getLeadersAbbreviatedNames() {
-    return leaders.map(leader => leader.getAbbreviatedName()).toString();
+    return this.leaders.map(leader => leader.getAbbreviatedName()).toString();
   }
 };

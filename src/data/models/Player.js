@@ -15,6 +15,6 @@ export default class Player extends Record(defaults) {
   }
 
   getAbbreviatedName() {
-    return `${this.getAbbreviatedFirstName}. ${this.lastName}`;
+    return `${this.getAbbreviatedFirstName()}.${this.lastName}`;
   }
 };
