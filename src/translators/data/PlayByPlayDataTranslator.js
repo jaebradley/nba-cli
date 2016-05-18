@@ -1,3 +1,6 @@
+import PlayByPlay from '../../data/models/PlayByPlay';
+
+
 export default class PlayByPlayDataTranslator {
   constructor() {
     this.maximumPlaysNumber = 4;
@@ -7,14 +10,8 @@ export default class PlayByPlayDataTranslator {
     const playByPlayData = data.sports_content.game.play;
     const index = Math.min(this.maximumPlaysNumber, playByPlayData.length);
     const lastFivePlaysOrLess = playByPlayData.slice(-index);
-    return lastFivePlaysOrLess.map(play => 
-      (
-        {
-          description: play.description,
-          clock: play.clock,
-          period: play.period 
-        }
-      )
-    );
+    return lastFivePlaysOrLess.map(play =>
+      new PlayByPlay(play.description, play.clock, play.period)
+      );
   }
 }
