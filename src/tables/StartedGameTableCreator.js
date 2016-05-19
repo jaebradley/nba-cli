@@ -73,16 +73,16 @@ export default class StartedGameTableCreator {
   }
 
   generateRows(gameData) {
-    const homeLinescores = gameData.homeLinescores;
-    const visitorLinescores = gameData.visitorLinescores;
+    const periodScores = gameData.periodScores;
+    const totalScore = gameData.totalScore;
     const homeAbbreviation = gameData.homeAbbreviation;
     const visitorAbbreviation = gameData.visitorAbbreviation;
     const homeScore = gameData.homeScore;
     const visitorScore = gameData.visitorScore;
     const startTime = gameData.formattedLocalizedStartDate;
     const broadcasts = gameData.getBroadcasts();
-    const numberOfColumns = this.getTableColumnLength(homeLinescores.length);
-    const linescoresRows = this.generateLinescoresRows(homeAbbreviation, visitorAbbreviation, homeLinescores, visitorLinescores, homeScore, visitorScore);
+    const numberOfColumns = this.getTableColumnLength(periodScores.length);
+    const linescoresRows = this.generateLinescoresRows(homeAbbreviation, visitorAbbreviation, periodScores, totalScore);
     const metadataRows = this.generateMetadataRows(startTime, broadcasts, numberOfColumns);
     const rows = [];
     rows.push.apply(rows, linescoresRows);
@@ -91,11 +91,11 @@ export default class StartedGameTableCreator {
   }
 
   create(gameData) {
-    const homeLinescores = gameData.homeLinescores;
+    const periodScores = gameData.periodScores;
     const gameStatus = gameData.status;
     const periodValue = gameData.periodValue;
     const gameClock = gameData.gameClock;
-    const periodValues = homeLinescores.map(linescore => linescore.period);
+    const periodValues = periodScores.map(linescore => linescore.periodValue);
     const table = new Table({ head: this.generateHeaders(periodValues, gameStatus) });
     this.generateRows(gameData).map(row => table.push(row));
     return table.toString();

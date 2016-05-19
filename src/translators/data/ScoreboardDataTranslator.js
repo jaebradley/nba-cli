@@ -93,7 +93,7 @@ export default class ScoreboardDataTranslator {
     }
 
     const homeLinescores = homeTeamData.linescores;
-    const visitorLinescore = visitorTeamData.linescores;
+    const visitorLinescores = visitorTeamData.linescores;
     if (ScoreboardDataTranslator.hasOnlyOneLinescorePeriod(homeLinescores.period)) {
       linescores.push(
         new PeriodScore({

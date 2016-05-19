@@ -22,7 +22,7 @@ export default class PeriodScore extends Record(defaults){
     }
   }
 
-  getFormattedScore(score, opponentScore) {
+  static getFormattedScore(score, opponentScore) {
     const strValue = score.toString();
     if (score > opponentScore) {
       return strValue.green;
@@ -35,11 +35,11 @@ export default class PeriodScore extends Record(defaults){
   }
 
   getFormattedHomeScore() {
-    return getFormattedScore(this.homeScore, this.visitorScore);
+    return PeriodScore.getFormattedScore(this.homeScore, this.visitorScore);
   }
 
   getFormattedVisitorScore() {
-    return getFormattedScore(this.visitorScore, this.homeScore); 
+    return PeriodScore.getFormattedScore(this.visitorScore, this.homeScore); 
   }
 
   getFormattedPeriodName() {

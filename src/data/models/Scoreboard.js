@@ -31,4 +31,8 @@ export default class Scoreboard extends Record(defaults) {
   getBroadcasts() {
     return this.broadcasts.toString();
   }
+
+  getFormattedLocation() {
+    return `${this.arena}, ${this.city}, ${this.state}`;
+  }
 };

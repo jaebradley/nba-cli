@@ -1,5 +1,6 @@
 import {Record} from 'immutable';
 import emoji from 'node-emoji';
+import Constants from '../../constants/Constants';
 
 const defaults = {
   homeScore: 0,
@@ -22,7 +23,7 @@ export default class TotalScore extends Record(defaults){
     }
   }
 
-  getFormattedScore(score, opponentScore) {
+  static getFormattedScore(score, opponentScore) {
     if (score == Constants.ONE_HUNDRED) {
       return emoji.get(Constants.SCORE_100_EMOJI_VALUE);
     }
@@ -38,10 +39,10 @@ export default class TotalScore extends Record(defaults){
   }
 
   getFormattedHomeScore() {
-    return getFormattedScore(this.homeScore, this.visitorScore);
+    return TotalScore.getFormattedScore(this.homeScore, this.visitorScore);
   }
 
   getFormattedVisitorScore() {
-    return getFormattedScore(this.visitorScore, this.homeScore); 
+    return TotalScore.getFormattedScore(this.visitorScore, this.homeScore); 
   }
 };
