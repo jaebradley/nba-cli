@@ -45,7 +45,7 @@ export default class NbaDataClient {
       let gameData = filteredGameData[gameId];
       if (NbaDataClient.shouldFetchData(gameData.unixMillisecondsStartTime, gameData.status)) {
         const deferred = Q.defer();
-        const formattedGameDate = gameData.nbaFormatStartDate;
+        const formattedGameDate = gameData.nbaStatsFormattedStartDate;
         this.playByPlayClient.fetch(formattedGameDate, gameId, function(data) {
           filteredGameData[gameId]['playByPlay'] = data;
           deferred.resolve(data);
@@ -62,7 +62,7 @@ export default class NbaDataClient {
       let gameData = filteredGameData[gameId];
       if (NbaDataClient.shouldFetchData(gameData.unixMillisecondsStartTime, gameData.status)) {
         const deferred = Q.defer();
-        const formattedGameDate = gameData.nbaFormatStartDate;
+        const formattedGameDate = gameData.nbaStatsFormattedStartDate;
         this.boxScoreClient.fetch(formattedGameDate, gameId, function(data) {
           filteredGameData[gameId]['boxScore'] = data;
           deferred.resolve(data);
