@@ -35,4 +35,8 @@ export default class Scoreboard extends Record(defaults) {
   getFormattedLocation() {
     return `${this.arena}, ${this.city}, ${this.state}`;
   }
+
+  getPeriodValues() {
+    return this.periodScores.map(periodScore => periodScore.periodValue);
+  }
 };

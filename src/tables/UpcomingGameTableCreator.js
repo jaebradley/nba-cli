@@ -12,7 +12,7 @@ export default class UpcomingGameTableCreator {
       upcomingGame.localizedStartDate,
       upcomingGame.homeName,
       upcomingGame.visitorName,
-      upcomingGame.broadcasts.toString(),
+      upcomingGame.getBroadcasts(),
       upcomingGame.getFormattedLocation(),
     ]);
     return table.toString();
