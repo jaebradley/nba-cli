@@ -1,6 +1,10 @@
 import moment from 'moment-timezone';
 import jstz from 'jstimezonedetect';
 
+import Scoreboard from '../../data/models/Scoreboard';
+import TotalScore from '../../data/models/TotalScore';
+import PeriodScore from '../../data/models/PeriodScore';
+
 import HtmlEscaper from '../../utils/HtmlEscaper';
 import Constants from '../../constants/Constants';
 
@@ -43,16 +47,16 @@ export default class ScoreboardDataTranslator {
     const homeNickname = HtmlEscaper.escapeHtml(gameData.home.nickname);
     const homeScore = parseInt(gameData.home.score);
 
-    return {
+    return new Scoreboard({
       status: ScoreboardDataTranslator.getGameStatus(periodStatus, gameStatus),
       url: gameUrl,
-      nbaFormatStartDate: startDate,
+      nbaStatsFormattedStartDate: startDate,
       unixMillisecondsStartTime: ScoreboardDataTranslator.getUnixMillisecondsStartTime(dateStartTime),
+      localizedStartDate: this.getLocalizedDateStartTime(dateStartTime),
       isUpcoming: ScoreboardDataTranslator.isUpcoming(dateStartTime),
       arena: arena,
       city: city,
       state: state,
-      formattedLocalizedStartDate: this.getLocalizedDateStartTime(dateStartTime),
       isPreviewAvailable: ScoreboardDataTranslator.isPreviewAvailable(previewAvailable),
       isRecapAvailable: ScoreboardDataTranslator.isRecapAvailable(recapAvailable),
       periodValue: periodValue,
@@ -61,13 +65,11 @@ export default class ScoreboardDataTranslator {
       broadcasts: ScoreboardDataTranslator.getBroadcasts(gameData.broadcasters),
       visitorAbbreviation: visitorAbbreviation,
       visitorName:  ScoreboardDataTranslator.generateTeamName(visitorCity, visitorNickname),
-      visitorScore: visitorScore,
-      visitorLinescores: ScoreboardDataTranslator.getTeamLinescores(gameData.visitor),
       homeAbbreviation: homeAbbreviation,
       homeName: ScoreboardDataTranslator.generateTeamName(homeCity, homeNickname),
-      homeScore: homeScore,
-      homeLinescores: ScoreboardDataTranslator.getTeamLinescores(gameData.home)
-    };
+      totalScore: new TotalScore({homeScore: homeScore, visitorScore: visitorScore}),
+      periodScores: ScoreboardDataTranslator.getTeamLinescores(gameData.home, gameData.visitor)
+    });
   }
 
   translateScoreboardData(scoreboardData) {
@@ -84,29 +86,32 @@ export default class ScoreboardDataTranslator {
     return 'period_name' in periodData && 'score' in periodData;
   }
 
-  static getTeamLinescores(teamData) {
+  static getTeamLinescores(homeTeamData, visitorTeamData) {
     const linescores = [];
-    if (!('linescores' in teamData)) {
+    if (!('linescores' in homeTeamData) || !('linescores' in visitorTeamData)) {
       return linescores;
     }
 
-    const linescoresData = teamData.linescores;
-    if (ScoreboardDataTranslator.hasOnlyOneLinescorePeriod(linescoresData.period)) {
+    const homeLinescores = homeTeamData.linescores;
+    const visitorLinescore = visitorTeamData.linescores;
+    if (ScoreboardDataTranslator.hasOnlyOneLinescorePeriod(homeLinescores.period)) {
       linescores.push(
-        {
-          period: linescoresData.period.period_name,
-          score: parseInt(linescoresData.period.score)
-        }
+        new PeriodScore({
+          periodValue: homeLinescores.period.period_name,
+          homeScore: parseInt(homeLinescores.period.score),
+          visitorScore: parseInt(visitorLinescores.period.score),
+        })
       );
     } else {
-      linescoresData.period.forEach(function(period) {
+      for (let index = 0; index < homeLinescores.period.length; index++) {
         linescores.push(
-          {
-            period: period.period_name,
-            score: parseInt(period.score)
-          }
+          new PeriodScore({
+            periodValue: homeLinescores.period[index].period_name,
+            homeScore: parseInt(homeLinescores.period[index].score),
+            visitorScore: parseInt(visitorLinescores.period[index].score),
+          })
         );
-      });
+      }
     }
     return linescores;
   }

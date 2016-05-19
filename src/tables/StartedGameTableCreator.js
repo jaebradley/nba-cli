@@ -40,19 +40,15 @@ export default class StartedGameTableCreator {
     return headers;
   }
 
-  generateLinescoresRows(homeAbbreviation, visitorAbbreviation, homeLinescores, visitorLinescores, homeTotal, visitorTotal) {
+  generateLinescoresRows(homeAbbreviation, visitorAbbreviation, periodScores, totalScore) {
     const homeRow = [emoji.get(Constants.HOME_EMOJI_VALUE), Formatter.formatTeamAbbreviation(homeAbbreviation)];
     const visitorRow = [emoji.get(Constants.VISITOR_EMOJI_VALUE), Formatter.formatTeamAbbreviation(visitorAbbreviation)];
-
-    for (let i = 0; i < homeLinescores.length; i++) {
-      let homeScore = homeLinescores[i].score;
-      let visitorScore = visitorLinescores[i].score;
-      homeRow.push(Formatter.formatScore(homeScore, visitorScore));
-      visitorRow.push(Formatter.formatScore(visitorScore, homeScore));
-    }
-
-    homeRow.push(Formatter.formatTotalScore(homeTotal, visitorTotal));
-    visitorRow.push(Formatter.formatTotalScore(visitorTotal, homeTotal));
+    periodScores.map(periodScore => {
+      homeRow.push(periodScore.getFormattedHomeScore());
+      visitorRow.push(periodScore.getFormattedVisitorScore());
+    });
+    homeRow.push(totalScore.getFormattedHomeScore());
+    visitorRow.push(totalScore.getFormattedVisitorScore());
     return [homeRow, visitorRow];
   }
 
@@ -84,7 +80,7 @@ export default class StartedGameTableCreator {
     const homeScore = gameData.homeScore;
     const visitorScore = gameData.visitorScore;
     const startTime = gameData.formattedLocalizedStartDate;
-    const broadcasts = gameData.broadcasts.toString();
+    const broadcasts = gameData.getBroadcasts();
     const numberOfColumns = this.getTableColumnLength(homeLinescores.length);
     const linescoresRows = this.generateLinescoresRows(homeAbbreviation, visitorAbbreviation, homeLinescores, visitorLinescores, homeScore, visitorScore);
     const metadataRows = this.generateMetadataRows(startTime, broadcasts, numberOfColumns);
