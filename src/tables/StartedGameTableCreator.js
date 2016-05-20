@@ -93,7 +93,7 @@ export default class StartedGameTableCreator {
     const gameStatus = gameData.status;
     const periodValue = gameData.periodValue;
     const gameClock = gameData.gameClock;
-    const periodValues = periodScores.getPeriodValues();
+    const periodValues = gameData.getPeriodValues();
     const table = new Table({ head: this.generateHeaders(periodValues, gameStatus) });
     this.generateRows(gameData).map(row => table.push(row));
     return table.toString();

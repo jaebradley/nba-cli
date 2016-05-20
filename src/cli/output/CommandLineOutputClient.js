@@ -17,7 +17,7 @@ export default class CommandLineOutputClient {
   }
 
   generateFirstRow(data) {
-    const row = [this.startedGameTableCreator.create(data)];
+    const row = [this.startedGameTableCreator.create(data.scoreboard)];
     row.push(this.playByPlayTableCreator.create(data.playByPlay));
     return row;
   }
@@ -44,8 +44,8 @@ export default class CommandLineOutputClient {
     const upcomingGames = [];
     for (let gameId in data) {
       let gameData = data[gameId];
-      if (gameData.isUpcoming()) {
-        upcomingGames.push(gameData);
+      if (gameData.scoreboard.isUpcoming) {
+        upcomingGames.push(gameData.scoreboard);
       } else {
         this.outputStartedGameTable(gameData);
       }
