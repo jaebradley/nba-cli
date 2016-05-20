@@ -16,28 +16,16 @@ export default class CommandLineOutputClient {
     this.boxScoreTableCreator = new BoxScoreTableCreator();
   }
 
-  static hasPlayByPlay(data) {
-    return typeof data.playByPlay !== 'undefined' && data.playByPlay.length > 0;
-  }
-
-  static hasBoxScore(data) {
-    return typeof data.boxScore !== 'undefined';
-  }
-
   generateFirstRow(data) {
-    const row = [this.startedGameTableCreator.create(data)];
-    if (CommandLineOutputClient.hasPlayByPlay(data)) {
-      row.push(this.playByPlayTableCreator.create(data.playByPlay));
-    }
+    const row = [this.startedGameTableCreator.create(data.scoreboard)];
+    row.push(this.playByPlayTableCreator.create(data.playByPlay));
     return row;
   }
 
   generateSecondRow(data) {
     const row = [];
-    if (CommandLineOutputClient.hasBoxScore(data)) {
-      row.push(this.boxScoreTableCreator.create(data.boxScore.home));
-      row.push(this.boxScoreTableCreator.create(data.boxScore.visitor));
-    }
+    row.push(this.boxScoreTableCreator.create(data.gameBoxScoreLeaders.home));
+    row.push(this.boxScoreTableCreator.create(data.gameBoxScoreLeaders.visitor));
     return row;
   }
 
@@ -56,8 +44,8 @@ export default class CommandLineOutputClient {
     const upcomingGames = [];
     for (let gameId in data) {
       let gameData = data[gameId];
-      if (gameData.isUpcoming) {
-        upcomingGames.push(gameData);
+      if (gameData.scoreboard.isUpcoming) {
+        upcomingGames.push(gameData.scoreboard);
       } else {
         this.outputStartedGameTable(gameData);
       }

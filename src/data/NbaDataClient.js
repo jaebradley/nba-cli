@@ -6,6 +6,8 @@ import BoxScoreClient from './clients/BoxScoreClient';
 import PlayByPlayClient from './clients/PlayByPlayClient';
 import ScoreboardClient from './clients/ScoreboardClient';
 
+import GameData from './models/GameData';
+
 import ScoreboardFilter from '../filters/data/ScoreboardFilter.js';
 import Constants from '../constants/Constants';
 
@@ -27,19 +29,28 @@ export default class NbaDataClient {
   }
 
   fetchDataForDate(date, startDateUnixTimestampMilliseconds,  endDateUnixTimestampMilliseconds, callback) {
-    let filteredGameData = {};
+    let filteredScoreboardData = {};
+    let playByPlay = {};
+    let boxScore = {};
+    let gameData = {}
     const formattedDate = NbaDataClient.generateCustomFormattedDate(date);
     this.scoreboardClient
         .fetch(formattedDate, function(scoreboardData) {
-          filteredGameData = ScoreboardFilter.filter(scoreboardData, startDateUnixTimestampMilliseconds,  endDateUnixTimestampMilliseconds);
-          return filteredGameData;
+          filteredScoreboardData = ScoreboardFilter.filter(scoreboardData, startDateUnixTimestampMilliseconds,  endDateUnixTimestampMilliseconds);
+          return filteredScoreboardData;
         })
-        .then(scoreboardData => this.fetchPlayByPlayData(filteredGameData))
-        .then(playByPlayData => this.fetchBoxScoreData(filteredGameData))
-        .then(boxScoreData => callback(filteredGameData));
+        .then(scoreboardData => this.fetchPlayByPlayData(filteredScoreboardData, playByPlay))
+        .then(playByPlayData => this.fetchBoxScoreData(filteredScoreboardData, boxScore))
+        .then(function(boxScoreData) {
+          for (let gameId in filteredScoreboardData) {
+            gameData[gameId] = new GameData({scoreboard: filteredScoreboardData[gameId], gameBoxScoreLeaders: boxScore[gameId], playByPlay: playByPlay[gameId]});
+          }
+          return gameData;
+        })
+        .then(boxScoreData => callback(gameData));
   }
 
-  fetchPlayByPlayData(filteredGameData) {
+  fetchPlayByPlayData(filteredGameData, playByPlay) {
     let promises = [];
     for (let gameId in filteredGameData) {
       let gameData = filteredGameData[gameId];
@@ -47,7 +58,7 @@ export default class NbaDataClient {
         const deferred = Q.defer();
         const formattedGameDate = gameData.nbaStatsFormattedStartDate;
         this.playByPlayClient.fetch(formattedGameDate, gameId, function(data) {
-          filteredGameData[gameId]['playByPlay'] = data;
+          playByPlay[gameId] = data;
           deferred.resolve(data);
         });
         promises.push(deferred.promise);
@@ -56,7 +67,7 @@ export default class NbaDataClient {
     return Q.all(promises);
   }
 
-  fetchBoxScoreData(filteredGameData) {
+  fetchBoxScoreData(filteredGameData, boxScore) {
     let promises = [];
     for (let gameId in filteredGameData) {
       let gameData = filteredGameData[gameId];
@@ -64,7 +75,7 @@ export default class NbaDataClient {
         const deferred = Q.defer();
         const formattedGameDate = gameData.nbaStatsFormattedStartDate;
         this.boxScoreClient.fetch(formattedGameDate, gameId, function(data) {
-          filteredGameData[gameId]['boxScore'] = data;
+          boxScore[gameId] = data;
           deferred.resolve(data);
         });
         promises.push(deferred.promise);
