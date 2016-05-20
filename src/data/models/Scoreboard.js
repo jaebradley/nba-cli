@@ -1,5 +1,5 @@
 import {Record} from 'immutable';
-import TotalScore from './TotalScore';
+import Score from './Score';
 
 const defaults = {
   status: "",
@@ -24,7 +24,7 @@ const defaults = {
   homeName: "",
   homeScore: 0,
   periodScores: [],
-  totalScore: new TotalScore(),
+  totalScore: new Score(),
 }
 
 export default class Scoreboard extends Record(defaults) {
