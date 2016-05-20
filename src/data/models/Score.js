@@ -16,26 +16,18 @@ export default class Score extends Record(defaults){
     return Score.formatScore(this.visitorScore, this.homeScore);
   }
 
-  getFormattedHomeTotalScore() {
-    return Score.formatScore(this.homeScore, this.visitorScore).bold;
-  }
-
-  getFormattedVisitorTotalScore() {
-    return Score.formatScore(this.visitorScore, this.homeScore).bold;
-  }
-
   static calculateWinner(score, opponentScore) {
-    const scoreDifference = this.homeScore - this.visitorScore;
+    const scoreDifference = score - opponentScore;
     if (scoreDifference == 0) {
       return 'TIE';
     }
 
     else if (scoreDifference < 0) {
-      return 'US';
+      return 'OPPONENT';
     }
 
     else {
-      return 'OPPONENT';
+      return 'US';
     }
   }
 
