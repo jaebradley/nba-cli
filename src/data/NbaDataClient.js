@@ -64,7 +64,7 @@ export default class NbaDataClient {
         const deferred = Q.defer();
         const formattedGameDate = gameData.nbaStatsFormattedStartDate;
         this.boxScoreClient.fetch(formattedGameDate, gameId, function(data) {
-          filteredGameData[gameId]['boxScore'] = data;
+          filteredGameData[gameId]['gameBoxScoreLeaders'] = data;
           deferred.resolve(data);
         });
         promises.push(deferred.promise);
