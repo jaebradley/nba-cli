@@ -26,7 +26,7 @@ export default class PeriodScore extends Record(defaults){
     const strValue = score.toString();
     if (score > opponentScore) {
       return strValue.green;
-    
+
     } else if (score < opponentScore) {
       return strValue.red;
     }
@@ -39,14 +39,14 @@ export default class PeriodScore extends Record(defaults){
   }
 
   getFormattedVisitorScore() {
-    return PeriodScore.getFormattedScore(this.visitorScore, this.homeScore); 
+    return PeriodScore.getFormattedScore(this.visitorScore, this.homeScore);
   }
 
   getFormattedPeriodName() {
     if (this.periodValue > 4) {
-      return 'OT'.concat(this.periodValue - 4);
+      return `OT${this.periodValue - 4}`;
       }
 
-      return 'Q'.concat(this.periodValue);
+      return `Q${this.periodValue}`;
     }
 };
