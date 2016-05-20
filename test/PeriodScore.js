@@ -63,4 +63,10 @@ describe('Period score model object', function() {
     expect(customPeriodScoreVisitorWin.getFormattedHomeScore()).to.equal('5'.red);
     expect(customPeriodScoreVisitorWin.getFormattedPeriodName()).to.equal('OT1');
   });
+
+  it('tests score formatting static method', function() {
+    expect(PeriodScore.getFormattedScore(0, 0)).to.equal('0'.blue);
+    expect(PeriodScore.getFormattedScore(0, 1)).to.equal('0'.red);
+    expect(PeriodScore.getFormattedScore(0, -1)).to.equal('0'.green);
+  });
 });

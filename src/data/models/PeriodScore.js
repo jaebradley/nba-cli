@@ -7,6 +7,7 @@ const defaults = {
 }
 
 export default class PeriodScore extends Record(defaults){
+
   getWinningTeam() {
     const scoreDifference = this.homeScore - this.visitorScore;
     if (scoreDifference == 0) {
