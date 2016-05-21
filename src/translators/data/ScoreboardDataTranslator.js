@@ -1,29 +1,21 @@
 import moment from 'moment-timezone';
 import jstz from 'jstimezonedetect';
 
-import Scoreboard from '../../data/models/Scoreboard';
+import TranslatedScoreboard from '../../data/models/TranslatedScoreboard';
+import GameMetadata from '../../data/models/GameMetadata';
 import Score from '../../data/models/Score';
 import PeriodScore from '../../data/models/PeriodScore';
+import Team from '../../data/models/Team';
+import Location from '../../data/models/Location';
 
 import HtmlEscaper from '../../utils/HtmlEscaper';
 import Constants from '../../constants/Constants';
 
 
 export default class ScoreboardDataTranslator {
-  constructor() {
-    this.userTimezone = jstz.determine().name();
-  }
 
-  getLocalizedDateStartTime(dateStartTime) {
-    return ScoreboardDataTranslator
-          .getDefaultDateStartTime(dateStartTime)
-          .clone().tz(this.userTimezone)
-          .format(Constants.TRANSLATED_DATE_FORMAT);
-  }
-
-  translateGameData(gameData) {
-    const startDate = gameData.date;
-    const dateStartTime = startDate.concat(gameData.time);
+  static translateGameData(gameData) {
+    const dateStartTime = `${gameData.date}${gameData.time}`;
 
     const previewAvailable = gameData.previewAvailable;
     const recapAvailable = gameData.recapAvailable;
@@ -33,42 +25,48 @@ export default class ScoreboardDataTranslator {
     const gameStatus = gameData.period_time.game_status;
     const gameClock = HtmlEscaper.escapeHtml(gameData.period_time.game_clock);
     const gameUrl = gameData.gameUrl;
-    const arena = HtmlEscaper.escapeHtml(gameData.arena);
-    const city = HtmlEscaper.escapeHtml(gameData.city);
-    const state = HtmlEscaper.escapeHtml(gameData.state);
 
-    const visitorAbbreviation = HtmlEscaper.escapeHtml(gameData.visitor.abbreviation);
-    const visitorCity = HtmlEscaper.escapeHtml(gameData.visitor.city);
-    const visitorNickname = HtmlEscaper.escapeHtml(gameData.visitor.nickname);
-    const visitorScore = parseInt(gameData.visitor.score);
+    const location = new Location({
+      arena: HtmlEscaper.escapeHtml(gameData.arena),
+      city: HtmlEscaper.escapeHtml(gameData.city),
+      state: HtmlEscaper.escapeHtml(gameData.state),
+    })
 
-    const homeAbbreviation = HtmlEscaper.escapeHtml(gameData.home.abbreviation);
-    const homeCity = HtmlEscaper.escapeHtml(gameData.home.city);
-    const homeNickname = HtmlEscaper.escapeHtml(gameData.home.nickname);
-    const homeScore = parseInt(gameData.home.score);
+    const visitorTeam = new Team({
+      city: HtmlEscaper.escapeHtml(gameData.visitor.abbreviation),
+      nickname: HtmlEscaper.escapeHtml(gameData.visitor.city),
+      abbreviation: HtmlEscaper.escapeHtml(gameData.visitor.nickname),
+    });
 
-    return new Scoreboard({
+    const homeTeam = new Team({
+      city: HtmlEscaper.escapeHtml(gameData.home.abbreviation),
+      nickname: HtmlEscaper.escapeHtml(gameData.home.city),
+      abbreviation: HtmlEscaper.escapeHtml(gameData.home.nickname),
+    });
+
+    const metadata = new GameMetadata({
       status: ScoreboardDataTranslator.getGameStatus(periodStatus, gameStatus),
       url: gameUrl,
-      nbaStatsFormattedStartDate: startDate,
       unixMillisecondsStartTime: ScoreboardDataTranslator.getUnixMillisecondsStartTime(dateStartTime),
-      localizedStartDate: this.getLocalizedDateStartTime(dateStartTime),
-      isUpcoming: ScoreboardDataTranslator.isUpcoming(dateStartTime),
-      arena: arena,
-      city: city,
-      state: state,
+      location: location,
       isPreviewAvailable: ScoreboardDataTranslator.isPreviewAvailable(previewAvailable),
       isRecapAvailable: ScoreboardDataTranslator.isRecapAvailable(recapAvailable),
       periodValue: periodValue,
       periodStatus: periodStatus,
       gameClock: gameClock,
       broadcasts: ScoreboardDataTranslator.getBroadcasts(gameData.broadcasters),
-      visitorAbbreviation: visitorAbbreviation,
-      visitorName:  ScoreboardDataTranslator.generateTeamName(visitorCity, visitorNickname),
-      homeAbbreviation: homeAbbreviation,
-      homeName: ScoreboardDataTranslator.generateTeamName(homeCity, homeNickname),
-      totalScore: new Score({homeScore: homeScore, visitorScore: visitorScore}),
-      periodScores: ScoreboardDataTranslator.getTeamLinescores(gameData.home, gameData.visitor)
+      visitor: visitorTeam,
+      home: homeTeam,
+    });
+
+    const scores = new GameScores({
+      periodScores: ScoreboardDataTranslator.getTeamLinescores(gameData.home, gameData.visitor),
+      totalScore: new Score({homeScore: parseInt(gameData.home.score), visitorScore: parseInt(gameData.visitor.score)}),
+    });
+
+    return new TranslatedScoreboard({
+      gameScores: scores,
+      gameMetadata: metadata,
     });
   }
 
@@ -118,16 +116,8 @@ export default class ScoreboardDataTranslator {
     return linescores;
   }
 
-  static getDefaultDateStartTime(dateStartTime) {
-    return moment(dateStartTime, Constants.TRANSLATED_NBA_DATE_TIME_FORMAT).tz(Constants.DEFAULT_TIMEZONE);
-  }
-
   static getUnixMillisecondsStartTime(dateStartTime) {
-    return ScoreboardDataTranslator.getDefaultDateStartTime(dateStartTime).clone().tz("UTC").valueOf();
-  }
-
-  static isUpcoming(dateStartTime) {
-    return ScoreboardDataTranslator.getUnixMillisecondsStartTime(dateStartTime) > moment().valueOf();
+    return moment(dateStartTime, Constants.TRANSLATED_NBA_DATE_TIME_FORMAT).tz(Constants.DEFAULT_TIMEZONE).clone().tz("UTC").valueOf();
   }
 
   static getGameStatus(periodStatus, gameStatus) {
@@ -144,9 +134,5 @@ export default class ScoreboardDataTranslator {
 
   static isRecapAvailable(isAvailable) {
     return isAvailable == 1;
-  }
-
-  static generateTeamName(city, nickname) {
-    return `${city} ${nickname}`;
   }
 }
