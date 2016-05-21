@@ -19,10 +19,8 @@ const defaults = {
   broadcasts: [],
   visitorAbbreviation: "",
   visitorName: "",
-  visitorScore: 0,
   homeAbbreviation: "",
   homeName: "",
-  homeScore: 0,
   periodScores: [],
   totalScore: new Score(),
 }
