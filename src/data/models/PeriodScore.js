@@ -1,53 +1,30 @@
 import {Record} from 'immutable';
+import Score from './Score';
 
 const defaults = {
   periodValue: 1,
-  homeScore: 0,
-  visitorScore: 0,
+  score: new Score(),
 }
 
 export default class PeriodScore extends Record(defaults){
 
-  getWinningTeam() {
-    const scoreDifference = this.homeScore - this.visitorScore;
-    if (scoreDifference == 0) {
-      return 'TIE';
-    }
-
-    else if (scoreDifference < 0) {
-      return 'VISITOR';
-    }
-
-    else {
-      return 'HOME';
-    }
-  }
-
-  static getFormattedScore(score, opponentScore) {
-    const strValue = score.toString();
-    if (score > opponentScore) {
-      return strValue.green;
-
-    } else if (score < opponentScore) {
-      return strValue.red;
-    }
-
-    return strValue.blue;
-  }
-
   getFormattedHomeScore() {
-    return PeriodScore.getFormattedScore(this.homeScore, this.visitorScore);
+    return Score.formatScore(this.score.homeScore, this.score.visitorScore);
   }
 
   getFormattedVisitorScore() {
-    return PeriodScore.getFormattedScore(this.visitorScore, this.homeScore);
+    return Score.formatScore(this.score.visitorScore, this.score.homeScore);
   }
 
-  getFormattedPeriodName() {
-    if (this.periodValue > 4) {
-      return `OT${this.periodValue - 4}`;
-      }
+  getFormattedPeriodValue() {
+    return PeriodScore.formatPeriodValue(this.periodValue);
+  }
 
-      return `Q${this.periodValue}`;
+  static formatPeriodValue(periodValue) {
+    if (periodValue > 4) {
+      return `OT${periodValue - 4}`;
     }
+
+    return `Q${periodValue}`;
+  }
 };

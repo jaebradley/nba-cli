@@ -47,8 +47,8 @@ export default class StartedGameTableCreator {
       homeRow.push(periodScore.getFormattedHomeScore());
       visitorRow.push(periodScore.getFormattedVisitorScore());
     });
-    homeRow.push(totalScore.getFormattedHomeScore());
-    visitorRow.push(totalScore.getFormattedVisitorScore());
+    homeRow.push(StartedGameTableCreator.applyTotalFormatting(totalScore.getFormattedHomeScore()));
+    visitorRow.push(StartedGameTableCreator.applyTotalFormatting(totalScore.getFormattedVisitorScore()));
     return [homeRow, visitorRow];
   }
 

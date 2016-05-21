@@ -2,7 +2,7 @@ import moment from 'moment-timezone';
 import jstz from 'jstimezonedetect';
 
 import Scoreboard from '../../data/models/Scoreboard';
-import TotalScore from '../../data/models/TotalScore';
+import Score from '../../data/models/Score';
 import PeriodScore from '../../data/models/PeriodScore';
 
 import HtmlEscaper from '../../utils/HtmlEscaper';
@@ -67,7 +67,7 @@ export default class ScoreboardDataTranslator {
       visitorName:  ScoreboardDataTranslator.generateTeamName(visitorCity, visitorNickname),
       homeAbbreviation: homeAbbreviation,
       homeName: ScoreboardDataTranslator.generateTeamName(homeCity, homeNickname),
-      totalScore: new TotalScore({homeScore: homeScore, visitorScore: visitorScore}),
+      totalScore: new Score({homeScore: homeScore, visitorScore: visitorScore}),
       periodScores: ScoreboardDataTranslator.getTeamLinescores(gameData.home, gameData.visitor)
     });
   }
@@ -95,20 +95,22 @@ export default class ScoreboardDataTranslator {
     const homeLinescores = homeTeamData.linescores;
     const visitorLinescores = visitorTeamData.linescores;
     if (ScoreboardDataTranslator.hasOnlyOneLinescorePeriod(homeLinescores.period)) {
+      let score = new Score({ homeScore: parseInt(homeLinescores.period[index].score),
+                              visitorScore: parseInt(visitorLinescores.period[index].score) });
       linescores.push(
         new PeriodScore({
           periodValue: homeLinescores.period.period_name,
-          homeScore: parseInt(homeLinescores.period.score),
-          visitorScore: parseInt(visitorLinescores.period.score),
+          score: score,
         })
       );
     } else {
       for (let index = 0; index < homeLinescores.period.length; index++) {
+        let score = new Score({ homeScore: parseInt(homeLinescores.period[index].score),
+                                visitorScore: parseInt(visitorLinescores.period[index].score) });
         linescores.push(
           new PeriodScore({
             periodValue: homeLinescores.period[index].period_name,
-            homeScore: parseInt(homeLinescores.period[index].score),
-            visitorScore: parseInt(visitorLinescores.period[index].score),
+            score: score,
           })
         );
       }
