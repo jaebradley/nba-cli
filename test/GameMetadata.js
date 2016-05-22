@@ -27,12 +27,12 @@ describe('game metadata model', function() {
     expect(defaultMetadata.broadcasts.length).to.equal(0);
     expect(defaultMetadata.getBroadcastsString()).to.equal('');
     expect(defaultMetadata.getNbaStatsFormattedStartDate()).to.equal('19691231');
-    expect(defaultMetadata.getLocalizedStartDateTime()).to.equal('December 31, 1969 7:00 PM');
+    expect(defaultMetadata.getLocalizedStartDateTime()).to.equal('January 1, 1970 12:00 AM'); // Travis CI in UTC
     expect(defaultMetadata.isUpcoming()).to.equal(false);
 
     expect(customMetadata.unixMillisecondsStartTime).to.equal(1451606400000);
     expect(customMetadata.getNbaStatsFormattedStartDate()).to.equal('20151231');
-    expect(customMetadata.getLocalizedStartDateTime()).to.equal('December 31, 2015 7:00 PM');
+    expect(customMetadata.getLocalizedStartDateTime()).to.equal('January 1, 2016 12:00 AM');
     expect(customMetadata.isUpcoming()).to.equal(false);
     expect(customMetadata.getBroadcastsString()).to.equal('TNT,NBATV');
 
