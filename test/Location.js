@@ -28,6 +28,6 @@ describe('Location model', function() {
       state: 'state',
     });
 
-    expect(customLocation.getFormattedLocation()).to.equal('arena city state');
+    expect(customLocation.getFormattedLocation()).to.equal('arena, city, state');
   });
 });

@@ -4,9 +4,6 @@ import {expect} from 'chai';
 import ScoreboardDataTranslator from '../src/translators/data/ScoreboardDataTranslator';
 
 describe('Translate scoreboard data', function() {
-  it('Generates team name', function() {
-    expect(ScoreboardDataTranslator.generateTeamName('JaE', 'bRaDleY')).to.equal('JaE bRaDleY');
-  });
 
   it('Indicates if recap is available', function() {
     expect(ScoreboardDataTranslator.isRecapAvailable(1)).to.equal(true);
