@@ -7,5 +7,5 @@ const defaults = {
   rebounds: new StatisticalLeaders(),
 };
 
-export default class BoxScoreLeaders extends Record(defaults) {
+export default class TeamBoxScoreLeaders extends Record(defaults) {
 };
