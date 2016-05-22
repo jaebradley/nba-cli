@@ -1,3 +1,5 @@
+'use es6';
+
 import {Record} from 'immutable';
 import StatisticalLeaders from './StatisticalLeaders';
 

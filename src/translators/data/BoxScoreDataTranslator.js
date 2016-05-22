@@ -9,7 +9,7 @@ import Player from '../../data/models/Player';
 export default class BoxScoreDataTranslator {
   static translateStatLeaders(leaderData) {
     const leaders = leaderData.leader.map(leader => new Player({firstName: leader.FirstName, lastName: leader.LastName}));
-    return new StatisticalLeaders({value: leaderData.StatValue, leaders: leaders});
+    return new StatisticalLeaders({value: parseInt(leaderData.StatValue), leaders: leaders});
   }
 
   static translateBoxScoreData(data) {
@@ -57,7 +57,6 @@ export default class BoxScoreDataTranslator {
       assists: homeAssistsLeaders,
       rebounds: homeReboundsLeaders,
     });
-    
     return new GameBoxScoreLeaders({home: homeBoxScoreLeaders, visitor: visitorBoxScoreLeaders});
   }
 }
