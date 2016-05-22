@@ -7,12 +7,18 @@ import Score from '../../data/models/Score';
 import PeriodScore from '../../data/models/PeriodScore';
 import Team from '../../data/models/Team';
 import Location from '../../data/models/Location';
+import GameScores from '../../data/models/GameScores';
 
 import HtmlEscaper from '../../utils/HtmlEscaper';
 import Constants from '../../constants/Constants';
 
-
 export default class ScoreboardDataTranslator {
+
+  translate(scoreboardData) {
+    const translatedData = {};
+    scoreboardData.sports_content.games.game.map(gameData => (translatedData[gameData.id] = ScoreboardDataTranslator.translateGameData(gameData)));
+    return translatedData;
+  }
 
   static translateGameData(gameData) {
     const dateStartTime = `${gameData.date}${gameData.time}`;
@@ -33,18 +39,19 @@ export default class ScoreboardDataTranslator {
     })
 
     const visitorTeam = new Team({
-      city: HtmlEscaper.escapeHtml(gameData.visitor.abbreviation),
-      nickname: HtmlEscaper.escapeHtml(gameData.visitor.city),
-      abbreviation: HtmlEscaper.escapeHtml(gameData.visitor.nickname),
+      abbreviation: HtmlEscaper.escapeHtml(gameData.visitor.abbreviation),
+      city: HtmlEscaper.escapeHtml(gameData.visitor.city),
+      nickname: HtmlEscaper.escapeHtml(gameData.visitor.nickname),
     });
 
     const homeTeam = new Team({
-      city: HtmlEscaper.escapeHtml(gameData.home.abbreviation),
-      nickname: HtmlEscaper.escapeHtml(gameData.home.city),
-      abbreviation: HtmlEscaper.escapeHtml(gameData.home.nickname),
+      abbreviation: HtmlEscaper.escapeHtml(gameData.home.abbreviation),
+      city: HtmlEscaper.escapeHtml(gameData.home.city),
+      nickname: HtmlEscaper.escapeHtml(gameData.home.nickname),
     });
 
     const metadata = new GameMetadata({
+      id: gameData.id,
       status: ScoreboardDataTranslator.getGameStatus(periodStatus, gameStatus),
       url: gameUrl,
       unixMillisecondsStartTime: ScoreboardDataTranslator.getUnixMillisecondsStartTime(dateStartTime),
@@ -70,12 +77,6 @@ export default class ScoreboardDataTranslator {
     });
   }
 
-  translateScoreboardData(scoreboardData) {
-    const translatedData = {};
-    scoreboardData.sports_content.games.game.map(gameData => (translatedData[gameData.id] = this.translateGameData(gameData)));
-    return translatedData;
-  }
-
   static getBroadcasts(scoreboardData) {
     return scoreboardData.tv.broadcaster.map(broadcast => broadcast.display_name);
   }
@@ -93,8 +94,8 @@ export default class ScoreboardDataTranslator {
     const homeLinescores = homeTeamData.linescores;
     const visitorLinescores = visitorTeamData.linescores;
     if (ScoreboardDataTranslator.hasOnlyOneLinescorePeriod(homeLinescores.period)) {
-      let score = new Score({ homeScore: parseInt(homeLinescores.period[index].score),
-                              visitorScore: parseInt(visitorLinescores.period[index].score) });
+      let score = new Score({ homeScore: parseInt(homeLinescores.period.score),
+                              visitorScore: parseInt(visitorLinescores.period.score) });
       linescores.push(
         new PeriodScore({
           periodValue: homeLinescores.period.period_name,

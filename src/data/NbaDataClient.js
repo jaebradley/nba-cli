@@ -43,20 +43,25 @@ export default class NbaDataClient {
         .then(playByPlayData => this.fetchBoxScoreData(filteredScoreboardData, boxScore))
         .then(function(boxScoreData) {
           for (let gameId in filteredScoreboardData) {
-            gameData[gameId] = new GameData({scoreboard: filteredScoreboardData[gameId], gameBoxScoreLeaders: boxScore[gameId], playByPlay: playByPlay[gameId]});
+            gameData[gameId] = new GameData({
+              metadata: filteredScoreboardData[gameId].gameMetadata,
+              scores: filteredScoreboardData[gameId].gameScores,
+              boxScoreLeaders: boxScore[gameId], 
+              playByPlay: playByPlay[gameId]
+            });
           }
           return gameData;
         })
-        .then(boxScoreData => callback(gameData));
+      .then(gameData => callback(gameData));
   }
 
   fetchPlayByPlayData(filteredGameData, playByPlay) {
     let promises = [];
     for (let gameId in filteredGameData) {
       let gameData = filteredGameData[gameId];
-      if (NbaDataClient.shouldFetchData(gameData.unixMillisecondsStartTime, gameData.status)) {
+      if (NbaDataClient.shouldFetchData(gameData.gameMetadata.unixMillisecondsStartTime, gameData.status)) {
         const deferred = Q.defer();
-        const formattedGameDate = gameData.nbaStatsFormattedStartDate;
+        const formattedGameDate = gameData.gameMetadata.getNbaStatsFormattedStartDate();
         this.playByPlayClient.fetch(formattedGameDate, gameId, function(data) {
           playByPlay[gameId] = data;
           deferred.resolve(data);
@@ -71,9 +76,9 @@ export default class NbaDataClient {
     let promises = [];
     for (let gameId in filteredGameData) {
       let gameData = filteredGameData[gameId];
-      if (NbaDataClient.shouldFetchData(gameData.unixMillisecondsStartTime, gameData.status)) {
+      if (NbaDataClient.shouldFetchData(gameData.gameMetadata.unixMillisecondsStartTime, gameData.status)) {
         const deferred = Q.defer();
-        const formattedGameDate = gameData.nbaStatsFormattedStartDate;
+        const formattedGameDate = gameData.gameMetadata.getNbaStatsFormattedStartDate();
         this.boxScoreClient.fetch(formattedGameDate, gameId, function(data) {
           boxScore[gameId] = data;
           deferred.resolve(data);

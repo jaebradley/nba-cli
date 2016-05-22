@@ -5,7 +5,7 @@ import ScoreboardDataTranslator from '../../translators/data/ScoreboardDataTrans
 
 export default class ScoreboardClient {
   constructor() {
-    this.scoreboardDataTranslator = new ScoreboardDataTranslator();
+    this.translator = new ScoreboardDataTranslator();
     this.baseScoreboardUrl = "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/";
   }
 
@@ -16,7 +16,7 @@ export default class ScoreboardClient {
   fetch(formattedGameDate, callback) {
     const scoreboardUrl = this.generateScoreboardUrl(formattedGameDate);
     return rp( { uri: scoreboardUrl, json: true } )
-      .then(scoreboardData => callback(this.scoreboardDataTranslator.translateScoreboardData(scoreboardData)))
+      .then(scoreboardData => callback(this.translator.translate(scoreboardData)))
       .catch(err => console.log(err));
   }
 }

@@ -4,7 +4,7 @@ export default class ScoredboardFilter {
   static filter(data, unixMillisecondsStartTime, unixMillisecondsEndTime) {
     const filteredData = {};
     for (let gameId in data) {
-      const gameUnixMilliseconds = data[gameId].unixMillisecondsStartTime;
+      const gameUnixMilliseconds = data[gameId].gameMetadata.unixMillisecondsStartTime;
       if (unixMillisecondsStartTime <= gameUnixMilliseconds && unixMillisecondsEndTime >= gameUnixMilliseconds) {
         filteredData[gameId] = data[gameId];
       }

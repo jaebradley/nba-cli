@@ -1,16 +1,18 @@
 import {Record} from 'immutable';
 import GameBoxScoreLeaders from './GameBoxScoreLeaders';
-import Scoreboard from './Scoreboard';
+import GameScores from './GameScores';
+import GameMetadata from './GameMetadata';
 import moment from 'moment-timezone';
 
 const defaults = {
-  scoreboard: new Scoreboard(),
-  gameBoxScoreLeaders: new GameBoxScoreLeaders(),
+  metadata: new GameMetadata(),
+  scores: new GameScores(),
+  boxScoreLeaders: new GameBoxScoreLeaders(),
   playByPlay: [],
 };
 
 export default class GameData extends Record(defaults) {
   isUpcoming() {
-    return this.scoreboard.unixMillisecondsStartTime < moment().valueOf();
+    return this.metadata.unixMillisecondsStartTime > moment().valueOf();
   }
 }

@@ -10,6 +10,7 @@ import Location from '../../data/models/Location';
 import Constants from '../../constants/Constants';
 
 const defaults = {
+  id: 0,
   status: "",
   url: "",
   unixMillisecondsStartTime: 0,
@@ -28,12 +29,16 @@ export default class GameMetadata extends Record(defaults) {
   getNbaStatsFormattedStartDate() {
     const userTimezone = jstz.determine().name();
     return moment(this.unixMillisecondsStartTime).tz(userTimezone)
-              .format(Constants.TRANSLATED_NBA_DATE_TIME_FORMAT);
+              .format(Constants.DEFAULT_DATE_FORMAT);
   }
 
   getLocalizedStartDateTime() {
     const userTimezone = jstz.determine().name();
     return moment(this.unixMillisecondsStartTime).tz(userTimezone)
             .format(Constants.TRANSLATED_DATE_FORMAT);
+  }
+
+  getBroadcastsString() {
+    return this.broadcasts.toString();
   }
 };

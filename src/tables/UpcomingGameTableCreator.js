@@ -9,11 +9,11 @@ export default class UpcomingGameTableCreator {
   create(upcomingGame) {
     const table = new Table(this.defaultFormat);
     table.push([
-      upcomingGame.localizedStartDate,
-      upcomingGame.homeName,
-      upcomingGame.visitorName,
-      upcomingGame.getBroadcasts(),
-      upcomingGame.getFormattedLocation(),
+      upcomingGame.getLocalizedStartDateTime(),
+      upcomingGame.home.getName(),
+      upcomingGame.visitor.getName(),
+      upcomingGame.getBroadcastsString(),
+      upcomingGame.location.getFormattedLocation(),
     ]);
     return table.toString();
   }
