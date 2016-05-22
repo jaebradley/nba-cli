@@ -6,8 +6,9 @@ import GameMetadata from '../src/data/models/GameMetadata';
 describe('game metadata model', function() {
   it('creates game metadata model', function() {
     const defaultMetadata = new GameMetadata();
-    const customTimeMetadata = new GameMetadata({
-      unixMillisecondsStartTime: 1451606400000 // 2016-01-01 00:00:00
+    const customMetadata = new GameMetadata({
+      unixMillisecondsStartTime: 1451606400000, // 2016-01-01 00:00:00
+      broadcasts: ['TNT', 'NBATV'],
     });
 
     expect(defaultMetadata.id).to.equal(0);
@@ -24,7 +25,8 @@ describe('game metadata model', function() {
     expect(defaultMetadata.getNbaStatsFormattedStartDate()).to.equal('19691231');
     expect(defaultMetadata.getLocalizedStartDateTime()).to.equal('December 31, 1969 7:00 PM');
 
-    expect(customTimeMetadata.getNbaStatsFormattedStartDate()).to.equal('20151231');
-    expect(customTimeMetadata.getLocalizedStartDateTime()).to.equal('December 31, 2015 7:00 PM');
+    expect(customMetadata.getNbaStatsFormattedStartDate()).to.equal('20151231');
+    expect(customMetadata.getLocalizedStartDateTime()).to.equal('December 31, 2015 7:00 PM');
+    expect(customMetadata.getBroadcastsString()).to.equal('TNT,NBATV');
   });
 });
