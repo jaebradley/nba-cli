@@ -1,6 +1,7 @@
 'use es6';
 
 import {expect} from 'chai';
+import moment from 'moment-timezone';
 import GameMetadata from '../src/data/models/GameMetadata';
 
 describe('game metadata model', function() {
@@ -10,6 +11,9 @@ describe('game metadata model', function() {
       unixMillisecondsStartTime: 1451606400000, // 2016-01-01 00:00:00
       broadcasts: ['TNT', 'NBATV'],
     });
+    const isUpcomingMetadata = new GameMetadata({
+      unixMillisecondsStartTime: moment().valueOf() * 1000,
+    })
 
     expect(defaultMetadata.id).to.equal(0);
     expect(defaultMetadata.status).to.equal('');
@@ -24,9 +28,14 @@ describe('game metadata model', function() {
     expect(defaultMetadata.getBroadcastsString()).to.equal('');
     expect(defaultMetadata.getNbaStatsFormattedStartDate()).to.equal('19691231');
     expect(defaultMetadata.getLocalizedStartDateTime()).to.equal('December 31, 1969 7:00 PM');
+    expect(defaultMetadata.isUpcoming()).to.equal(false);
 
+    expect(customMetadata.unixMillisecondsStartTime).to.equal(1451606400000);
     expect(customMetadata.getNbaStatsFormattedStartDate()).to.equal('20151231');
     expect(customMetadata.getLocalizedStartDateTime()).to.equal('December 31, 2015 7:00 PM');
+    expect(customMetadata.isUpcoming()).to.equal(false);
     expect(customMetadata.getBroadcastsString()).to.equal('TNT,NBATV');
+
+    expect(isUpcomingMetadata.isUpcoming()).to.equal(true);
   });
 });

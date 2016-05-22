@@ -12,7 +12,4 @@ const defaults = {
 };
 
 export default class GameData extends Record(defaults) {
-  isUpcoming() {
-    return this.metadata.unixMillisecondsStartTime > moment().valueOf();
-  }
 }

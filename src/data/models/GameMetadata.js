@@ -41,4 +41,8 @@ export default class GameMetadata extends Record(defaults) {
   getBroadcastsString() {
     return this.broadcasts.toString();
   }
+
+  isUpcoming() {
+    return this.unixMillisecondsStartTime > moment().valueOf();
+  }
 };
