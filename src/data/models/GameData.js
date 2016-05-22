@@ -2,7 +2,6 @@ import {Record} from 'immutable';
 import GameBoxScoreLeaders from './GameBoxScoreLeaders';
 import GameScores from './GameScores';
 import GameMetadata from './GameMetadata';
-import moment from 'moment-timezone';
 
 const defaults = {
   metadata: new GameMetadata(),
