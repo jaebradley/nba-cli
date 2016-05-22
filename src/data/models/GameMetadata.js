@@ -28,7 +28,7 @@ const defaults = {
 export default class GameMetadata extends Record(defaults) {
   getNbaStatsFormattedStartDate() {
     const userTimezone = jstz.determine().name();
-    return moment(this.unixMillisecondsStartTime).tz(userTimezone)
+    return moment(this.unixMillisecondsStartTime).tz(Constants.DEFAULT_TIMEZONE)
               .format(Constants.DEFAULT_DATE_FORMAT);
   }
 
@@ -40,5 +40,9 @@ export default class GameMetadata extends Record(defaults) {
 
   getBroadcastsString() {
     return this.broadcasts.toString();
+  }
+
+  isUpcoming() {
+    return this.unixMillisecondsStartTime > moment().valueOf();
   }
 };

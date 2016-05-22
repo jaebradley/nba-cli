@@ -44,7 +44,7 @@ export default class CommandLineOutputClient {
     const upcomingGames = [];
     for (let gameId in data) {
       let gameData = data[gameId];
-      if (gameData.isUpcoming()) {
+      if (gameData.metadata.isUpcoming()) {
         upcomingGames.push(gameData.metadata);
       } else {
         this.outputStartedGameTable(gameData);
