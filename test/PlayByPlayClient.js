@@ -9,15 +9,14 @@ import PlayByPlayClient from '../src/data/clients/PlayByPlayClient';
 describe('Play by play client', function() {
   const playByPlayClient = new PlayByPlayClient();
 
-  it('fetches play by play from 20160508 for game id 0041500234' function() {
+  it('fetches play by play from 20160508 for game id 0041500234', function() {
     playByPlayClient.fetch('20160508', '0041500234', function(data) {
       expect(data).to.equal(pbp);
     });
   });
 
   it('test the constructor', function() {
-    expect(playByPlayClient.generatePlayByPlayUrl).to.equal('http://data.nba.com/data/5s/json/cms/noseason/game/');
-    expect(playByPlayClient.playByPlayDataTranslator).is.a('PlayByPlayClient');
+    expect(playByPlayClient.basePlayByPlayUrl).to.equal('http://data.nba.com/data/5s/json/cms/noseason/game');
   });
 
   it('test the url creation', function() {
