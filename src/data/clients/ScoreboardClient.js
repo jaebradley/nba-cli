@@ -6,7 +6,7 @@ import ScoreboardDataTranslator from '../../translators/data/ScoreboardDataTrans
 export default class ScoreboardClient {
   constructor() {
     this.translator = new ScoreboardDataTranslator();
-    this.baseScoreboardUrl = "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/";
+    this.baseScoreboardUrl = "http://data.nba.com/data/5s/json/cms/noseason/scoreboard";
   }
 
   generateScoreboardUrl(formattedGameDate) {
