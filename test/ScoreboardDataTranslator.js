@@ -1,11 +1,13 @@
 'use es6';
 
-import {expect} from 'chai';
+import {expect, assert} from 'chai';
 import ScoreboardDataTranslator from '../src/translators/data/ScoreboardDataTranslator';
 
 import firstQuarterScoreboard from './data/scoreboard/first-quarter.json';
 
 describe('Translate scoreboard data', function() {
+
+  const firstQuarterFirstGameData = firstQuarterScoreboard.sports_content.games.game[0];
 
   it('Indicates if recap is available', function() {
     expect(ScoreboardDataTranslator.isRecapAvailable(1)).to.equal(true);
@@ -33,7 +35,12 @@ describe('Translate scoreboard data', function() {
   });
 
   it('Identifies tv broadcasts', function() {
-    const broadcasters = firstQuarterScoreboard.sports_content.games.game[0].broadcasters;
+    const broadcasters = firstQuarterFirstGameData.broadcasters;
     expect(ScoreboardDataTranslator.getBroadcasts(broadcasters)).to.eql(['TNT', 'Sportsnet One']);
-  })
+  });
+
+  it('Identifiers if first period', function() {
+    const firstQuarterPeriod = firstQuarterFirstGameData.visitor.linescores.period;
+    assert.isOk(ScoreboardDataTranslator.hasOnlyOneLinescorePeriod(firstQuarterPeriod));
+  });
 });
