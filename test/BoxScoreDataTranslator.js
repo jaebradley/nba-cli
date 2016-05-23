@@ -66,7 +66,26 @@ describe('Box score data translator', function() {
     expect(BoxScoreDataTranslator.translateBoxScoreData(firstQuarterBoxScore)).to.eql(expected);
   });
 
-it('translate first quarter stat leader', function() {
-  
-});
+  it('translate first quarter stat leader', function() {
+    const visitorPointsLeaders = firstQuarterBoxScore.sports_content.game.visitor.Leaders.Points;
+    const visitorAssistsLeaders = firstQuarterBoxScore.sports_content.game.visitor.Leaders.Assists;
+
+    const expectedPoints = new StatisticalLeaders({
+      value: 2,
+      leaders: [
+        new Player({firstName: 'Kevin', lastName: 'Durant'}),
+        new Player({firstName: 'Serge', lastName: 'Ibaka'}),
+        new Player({firstName: 'Andre', lastName: 'Roberson'}),
+        new Player({firstName: 'Steven', lastName: 'Adams'}),
+      ]
+    });
+
+    const expectedAssists = new StatisticalLeaders({
+      value: 2,
+      leaders: [new Player({firstName: 'Russell', lastName: 'Westbrook'})]
+    });
+
+    expect(BoxScoreDataTranslator.translateStatLeaders(visitorPointsLeaders)).to.eql(expectedPoints);
+    expect(BoxScoreDataTranslator.translateStatLeaders(visitorAssistsLeaders)).to.eql(expectedAssists);
+  });
 });
