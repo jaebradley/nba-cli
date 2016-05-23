@@ -15,7 +15,7 @@ describe('Play by play client', function() {
     });
   });
 
-  it('test the constructor' function() {
+  it('test the constructor', function() {
     expect(playByPlayClient.generatePlayByPlayUrl).to.equal('http://data.nba.com/data/5s/json/cms/noseason/game/');
     expect(playByPlayClient.playByPlayDataTranslator).is.a('PlayByPlayClient');
   });
