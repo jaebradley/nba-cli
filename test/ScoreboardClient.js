@@ -20,6 +20,6 @@ describe('Scoreboard client', function() {
   });
 
   it('test the url creation', function() {
-    expect(scoreboardClient.generateScoreboardUrl('20160508').to.equal('http://data.nba.com/data/5s/json/cms/noseason/scoreboard/20160508/games.json');
+    expect(scoreboardClient.generateScoreboardUrl('20160508')).to.equal('http://data.nba.com/data/5s/json/cms/noseason/scoreboard/20160508/games.json');
   });
 });
