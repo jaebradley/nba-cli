@@ -4,8 +4,8 @@ import {expect, assert} from 'chai';
 
 import boxscore from './data/boxscore/final';
 
-import BoxScoreDataTranslator from '../src/data/BoxScoreDataTranslator';
-import BoxScoreTableCreator from '../src/data/clients/BoxScoreTableCreator';
+import BoxScoreDataTranslator from '../src/translators/data/BoxScoreDataTranslator';
+import BoxScoreTableCreator from '../src/tables/BoxScoreTableCreator';
 import GameBoxScoreLeaders from '../src/data/models/GameBoxScoreLeaders';
 import TeamBoxScoreLeaders from '../src/data/models/TeamBoxScoreLeaders';
 import StatisticalLeaders from '../src/data/models/StatisticalLeaders';
