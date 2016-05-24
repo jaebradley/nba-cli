@@ -6,7 +6,7 @@ import PlayByPlayDataTranslator from '../../translators/data/PlayByPlayDataTrans
 export default class PlayByPlayClient {
   constructor() {
     this.playByPlayDataTranslator = new PlayByPlayDataTranslator();
-    this.basePlayByPlayUrl = "http://data.nba.com/data/5s/json/cms/noseason/game/";
+    this.basePlayByPlayUrl = "http://data.nba.com/data/5s/json/cms/noseason/game";
   }
 
   generatePlayByPlayUrl(formattedGameDate, gameId) {
