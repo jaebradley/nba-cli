@@ -5,7 +5,7 @@ import BoxScoreDataTranslator from '../../translators/data/BoxScoreDataTranslato
 
 export default class BoxScoreClient {
   constructor() {
-    this.boxScoreBaseUrl = 'http://data.nba.com/data/5s/json/cms/noseason/game/';
+    this.boxScoreBaseUrl = 'http://data.nba.com/data/5s/json/cms/noseason/game';
   }
 
   generateBoxScoreUrl(formattedGameDate, gameId) {
