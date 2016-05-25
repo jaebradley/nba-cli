@@ -52,6 +52,6 @@ describe('Score model object', function() {
     expect(Score.formatScore(100, 100)).to.equal(emoji.get(Constants.SCORE_100_EMOJI_VALUE));
     expect(Score.formatScore(99, 99)).to.equal('99'.blue);
     expect(Score.formatScore(99, 98)).to.equal('99'.green);
-    expect(Score.formatScore(98, 99)).to.equal('99'.red);
+    expect(Score.formatScore(98, 99)).to.equal('98'.red);
   })
 });
