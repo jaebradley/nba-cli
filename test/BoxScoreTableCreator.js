@@ -60,4 +60,8 @@ describe('Box score table creator', function() {
     expect(tableCreator.generateRows(new GameBoxScoreLeaders().home)).to.eql(emptyRows);
     expect(tableCreator.generateRows(boxScore.home)).to.eql(filledRows);
   });
+
+  it('test box score table creator', function() {
+    expect(tableCreator.create(boxScore.home)).to.equal('\u001b[90m┌──────────────────────────────────┐\u001b[39m\n\u001b[90m│\u001b[39m\u001b[31m Leaders                          \u001b[39m\u001b[90m│\u001b[39m\n\u001b[90m├──────────\u001b[39m\u001b[90m┬───\u001b[39m\u001b[90m┬───────────────────┤\u001b[39m\n\u001b[90m│\u001b[39m Points   \u001b[90m│\u001b[39m 1 \u001b[90m│\u001b[39m J.Bradley,S.Curry \u001b[90m│\u001b[39m\n\u001b[90m├──────────\u001b[39m\u001b[90m┼───\u001b[39m\u001b[90m┼───────────────────┤\u001b[39m\n\u001b[90m│\u001b[39m Assists  \u001b[90m│\u001b[39m 2 \u001b[90m│\u001b[39m K.Bryant          \u001b[90m│\u001b[39m\n\u001b[90m├──────────\u001b[39m\u001b[90m┼───\u001b[39m\u001b[90m┼───────────────────┤\u001b[39m\n\u001b[90m│\u001b[39m Rebounds \u001b[90m│\u001b[39m 3 \u001b[90m│\u001b[39m L.James           \u001b[90m│\u001b[39m\n\u001b[90m└──────────\u001b[39m\u001b[90m┴───\u001b[39m\u001b[90m┴───────────────────┘\u001b[39m');
+  });
 });
