@@ -45,4 +45,8 @@ export default class GameMetadata extends Record(defaults) {
   isUpcoming() {
     return this.unixMillisecondsStartTime > moment().valueOf();
   }
+
+  hasStarted() {
+    return this.isUpcoming() && this.status != Constants.PREGAME;
+  }
 };

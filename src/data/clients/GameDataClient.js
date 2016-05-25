@@ -34,7 +34,7 @@ export default class NbaDataClient {
     let filteredScoreboardData = {};
     let playByPlay = {};
     let boxScore = {};
-    let gameData = {}
+    let gameData = {};
     const formattedDate = NbaDataClient.generateCustomFormattedDate(date);
     return this.scoreboardClient
         .fetch(formattedDate)
@@ -47,9 +47,9 @@ export default class NbaDataClient {
         .then(function(boxScoreData) {
           for (let gameId in filteredScoreboardData) {
             gameData[gameId] = new GameData({
-              metadata: filteredScoreboardData[gameId].gameMetadata,
-              scores: filteredScoreboardData[gameId].gameScores,
-              boxScoreLeaders: boxScore[gameId], 
+              metadata: filteredScoreboardData[gameId].metadata,
+              scores: filteredScoreboardData[gameId].scores,
+              boxScoreLeaders: boxScore[gameId],
               playByPlay: playByPlay[gameId]
             });
           }
@@ -62,8 +62,8 @@ export default class NbaDataClient {
     let promises = [];
     for (let gameId in filteredGameData) {
       let gameData = filteredGameData[gameId];
-      if (NbaDataClient.shouldFetchData(gameData.gameMetadata.unixMillisecondsStartTime, gameData.status)) {
-        const formattedGameDate = gameData.gameMetadata.getNbaStatsFormattedStartDate();
+      if (gameData.metadata.hasStarted()) {
+        const formattedGameDate = gameData.metadata.getNbaStatsFormattedStartDate();
         promises.push(this.playByPlayClient.fetch(formattedGameDate, gameId).then(data => (playByPlay[gameId] = data)));
       }
     };
@@ -74,14 +74,9 @@ export default class NbaDataClient {
     let promises = [];
     for (let gameId in filteredGameData) {
       let gameData = filteredGameData[gameId];
-      if (NbaDataClient.shouldFetchData(gameData.gameMetadata.unixMillisecondsStartTime, gameData.status)) {
-        const deferred = Q.defer();
-        const formattedGameDate = gameData.gameMetadata.getNbaStatsFormattedStartDate();
-        this.boxScoreClient.fetch(formattedGameDate, gameId, function(data) {
-          boxScore[gameId] = data;
-          deferred.resolve(data);
-        });
-        promises.push(deferred.promise);
+      if (gameData.metadata.hasStarted()) {
+        const formattedGameDate = gameData.metadata.getNbaStatsFormattedStartDate();
+        promises.push(this.boxScoreClient.fetch(formattedGameDate, gameId).then(data => (boxScore[gameId] = data)));
       }
     };
     return Q.all(promises);
@@ -90,9 +85,5 @@ export default class NbaDataClient {
   static generateCustomFormattedDate(date) {
     return date.clone().tz(Constants.DEFAULT_TIMEZONE)
                .format(Constants.DEFAULT_DATE_FORMAT);
-  }
-
-  static shouldFetchData(unixMillisecondsStartTime, gameStatus) {
-    return moment().valueOf() >= unixMillisecondsStartTime && gameStatus != Constants.PREGAME;
   }
 }
