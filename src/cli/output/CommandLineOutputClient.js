@@ -53,7 +53,11 @@ export default class CommandLineOutputClient {
     this.outputUpcomingGames(upcomingGames);
   }
 
+  outputDateRange(data) {
+    data.map(dayData => this.outputGames(dayData));
+  }
+
   outputGamesForDateRange(startDate, endDate) {
-    this.nbaDataClient.fetchDataForDateRange(startDate, endDate, this.outputGames.bind(this));
+    this.nbaDataClient.fetchDataForDateRange(startDate, endDate).then(data => this.outputDateRange(data));
   }
 }

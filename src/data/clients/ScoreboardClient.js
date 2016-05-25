@@ -13,10 +13,10 @@ export default class ScoreboardClient {
     return `${this.baseScoreboardUrl}/${formattedGameDate}/games.json`;
   }
 
-  fetch(formattedGameDate, callback) {
+  fetch(formattedGameDate) {
     const scoreboardUrl = this.generateScoreboardUrl(formattedGameDate);
     return rp( { uri: scoreboardUrl, json: true } )
-      .then(scoreboardData => callback(this.translator.translate(scoreboardData)))
+      .then(scoreboardData => this.translator.translate(scoreboardData))
       .catch(err => console.log(err));
   }
 }

@@ -23,19 +23,22 @@ export default class NbaDataClient {
     const transformedEndDate = endDate.clone().tz(Constants.DEFAULT_TIMEZONE);
     const startDateUnixTimestampMilliseconds = transformedStartDate.valueOf();
     const endDateUnixTimestampMilliseconds = transformedEndDate.valueOf();
+    let promises = [];
     for (let currentDate = startDate; currentDate.isBefore(endDate); currentDate.add(1, 'days')) {
-      this.fetchDataForDate(currentDate, startDateUnixTimestampMilliseconds, endDateUnixTimestampMilliseconds, callback);
+      promises.push(this.fetchDataForDate(currentDate, startDateUnixTimestampMilliseconds, endDateUnixTimestampMilliseconds));
     }
+    return Q.all(promises);
   }
 
-  fetchDataForDate(date, startDateUnixTimestampMilliseconds,  endDateUnixTimestampMilliseconds, callback) {
+  fetchDataForDate(date, startDateUnixTimestampMilliseconds,  endDateUnixTimestampMilliseconds) {
     let filteredScoreboardData = {};
     let playByPlay = {};
     let boxScore = {};
     let gameData = {}
     const formattedDate = NbaDataClient.generateCustomFormattedDate(date);
-    this.scoreboardClient
-        .fetch(formattedDate, function(scoreboardData) {
+    return this.scoreboardClient
+        .fetch(formattedDate)
+        .then(function(scoreboardData) {
           filteredScoreboardData = ScoreboardFilter.filter(scoreboardData, startDateUnixTimestampMilliseconds,  endDateUnixTimestampMilliseconds);
           return filteredScoreboardData;
         })
@@ -52,7 +55,7 @@ export default class NbaDataClient {
           }
           return gameData;
         })
-      .then(gameData => callback(gameData));
+        .then(data => gameData);
   }
 
   fetchPlayByPlayData(filteredGameData, playByPlay) {
@@ -60,13 +63,8 @@ export default class NbaDataClient {
     for (let gameId in filteredGameData) {
       let gameData = filteredGameData[gameId];
       if (NbaDataClient.shouldFetchData(gameData.gameMetadata.unixMillisecondsStartTime, gameData.status)) {
-        const deferred = Q.defer();
         const formattedGameDate = gameData.gameMetadata.getNbaStatsFormattedStartDate();
-        this.playByPlayClient.fetch(formattedGameDate, gameId, function(data) {
-          playByPlay[gameId] = data;
-          deferred.resolve(data);
-        });
-        promises.push(deferred.promise);
+        promises.push(this.playByPlayClient.fetch(formattedGameDate, gameId).then(data => (playByPlay[gameId] = data)));
       }
     };
     return Q.all(promises);
