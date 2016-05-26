@@ -47,6 +47,6 @@ export default class GameMetadata extends Record(defaults) {
   }
 
   hasStarted() {
-    return this.isUpcoming() && this.status != Constants.PREGAME;
+    return !this.isUpcoming() && this.status != Constants.PREGAME;
   }
 };
