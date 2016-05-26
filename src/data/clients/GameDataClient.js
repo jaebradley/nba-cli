@@ -2,16 +2,16 @@ import moment from 'moment-timezone';
 import rp from 'request-promise';
 import Q from 'q';
 
-import BoxScoreClient from './clients/BoxScoreClient';
-import PlayByPlayClient from './clients/PlayByPlayClient';
-import ScoreboardClient from './clients/ScoreboardClient';
+import BoxScoreClient from './BoxScoreClient';
+import PlayByPlayClient from './PlayByPlayClient';
+import ScoreboardClient from './ScoreboardClient';
 
-import GameData from './models/GameData';
+import GameData from '../models/GameData';
 
-import ScoreboardFilter from '../filters/data/ScoreboardFilter.js';
-import Constants from '../constants/Constants';
+import ScoreboardFilter from '../../filters/data/ScoreboardFilter.js';
+import Constants from '../../constants/Constants';
 
-export default class NbaDataClient {
+export default class GameDataClient {
   constructor() {
     this.scoreboardClient = new ScoreboardClient();
     this.boxScoreClient = new BoxScoreClient();

@@ -3,6 +3,7 @@
 import {expect} from 'chai';
 import moment from 'moment-timezone';
 import GameMetadata from '../src/data/models/GameMetadata';
+import Constants from '../src/constants/Constants';
 
 describe('game metadata model', function() {
   it('creates game metadata model', function() {
@@ -13,6 +14,7 @@ describe('game metadata model', function() {
     });
     const isUpcomingMetadata = new GameMetadata({
       unixMillisecondsStartTime: moment().valueOf() * 1000,
+      status: Constants.PREGAME,
     })
 
     expect(defaultMetadata.id).to.equal(0);
@@ -37,5 +39,7 @@ describe('game metadata model', function() {
     expect(customMetadata.getBroadcastsString()).to.equal('TNT,NBATV');
 
     expect(isUpcomingMetadata.isUpcoming()).to.equal(true);
+
+    expect(isUpcomingMetadata.hasStarted).to.equal(true);
   });
 });
