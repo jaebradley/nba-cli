@@ -40,6 +40,6 @@ describe('game metadata model', function() {
 
     expect(isUpcomingMetadata.isUpcoming()).to.equal(true);
 
-    expect(isUpcomingMetadata.hasStarted).to.equal(true);
+    expect(isUpcomingMetadata.hasStarted()).to.equal(true);
   });
 });
