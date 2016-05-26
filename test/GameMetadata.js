@@ -15,6 +15,11 @@ describe('game metadata model', function() {
     const isUpcomingMetadata = new GameMetadata({
       unixMillisecondsStartTime: moment().valueOf() * 1000,
       status: Constants.PREGAME,
+    });
+
+    const isStartedMetadata = new GameMetadata({
+      unixMillisecondsStartTime: 0,
+      status: Constants.PREGAME,
     })
 
     expect(defaultMetadata.id).to.equal(0);
@@ -40,6 +45,7 @@ describe('game metadata model', function() {
 
     expect(isUpcomingMetadata.isUpcoming()).to.equal(true);
 
-    expect(isUpcomingMetadata.hasStarted()).to.equal(true);
+    expect(isUpcomingMetadata.hasStarted()).to.equal(false);
+    expect(isStartedMetadata.hasStarted()).to.equal(true);
   });
 });
