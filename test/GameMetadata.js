@@ -19,7 +19,7 @@ describe('game metadata model', function() {
 
     const isStartedMetadata = new GameMetadata({
       unixMillisecondsStartTime: 0,
-      status: Constants.PREGAME,
+      status: Constants.LIVE,
     })
 
     expect(defaultMetadata.id).to.equal(0);
