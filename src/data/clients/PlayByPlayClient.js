@@ -13,10 +13,10 @@ export default class PlayByPlayClient {
     return `${this.basePlayByPlayUrl}/${formattedGameDate}/${gameId}/pbp_all.json`;
   }
 
-  fetch(formattedGameDate, gameId, callback) {
+  fetch(formattedGameDate, gameId) {
     const playByPlayUrl = this.generatePlayByPlayUrl(formattedGameDate, gameId);
     return rp( { uri: playByPlayUrl, json: true } )
-      .then(playByPlayData => callback(this.playByPlayDataTranslator.translatePlayByPlayData(playByPlayData)))
+      .then(playByPlayData => this.playByPlayDataTranslator.translatePlayByPlayData(playByPlayData))
       .catch(err => console.log(err));
   }
 }

@@ -1,7 +1,7 @@
 import Table from 'cli-table2';
 import moment from 'moment-timezone';
 
-import NbaDataClient from '../../data/NbaDataClient';
+import GameDataClient from '../../data/clients/GameDataClient';
 import StartedGameTableCreator from '../../tables/StartedGameTableCreator';
 import UpcomingGameTableCreator from '../../tables/UpcomingGameTableCreator';
 import PlayByPlayTableCreator from '../../tables/PlayByPlayTableCreator';
@@ -9,7 +9,7 @@ import BoxScoreTableCreator from '../../tables/BoxScoreTableCreator';
 
 export default class CommandLineOutputClient {
   constructor() {
-    this.nbaDataClient = new NbaDataClient();
+    this.client = new GameDataClient();
     this.startedGameTableCreator = new StartedGameTableCreator();
     this.playByPlayTableCreator = new PlayByPlayTableCreator();
     this.upcomingGameTableCreator = new UpcomingGameTableCreator();
@@ -53,7 +53,11 @@ export default class CommandLineOutputClient {
     this.outputUpcomingGames(upcomingGames);
   }
 
+  outputDateRange(data) {
+    data.map(dayData => this.outputGames(dayData));
+  }
+
   outputGamesForDateRange(startDate, endDate) {
-    this.nbaDataClient.fetchDataForDateRange(startDate, endDate, this.outputGames.bind(this));
+    this.client.fetchDataForDateRange(startDate, endDate).then(data => this.outputDateRange(data));
   }
 }

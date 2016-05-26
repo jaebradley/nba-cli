@@ -6,15 +6,17 @@ export default class UpcomingGameTableCreator {
     this.defaultFormat = { head: this.header };
   }
 
-  create(upcomingGame) {
+  create(upcomingGameMetadataList) {
     const table = new Table(this.defaultFormat);
-    table.push([
-      upcomingGame.getLocalizedStartDateTime(),
-      upcomingGame.home.getName(),
-      upcomingGame.visitor.getName(),
-      upcomingGame.getBroadcastsString(),
-      upcomingGame.location.getFormattedLocation(),
-    ]);
+    upcomingGameMetadataList.map(upcomingGameMetadata => (
+      table.push([
+        upcomingGameMetadata.getLocalizedStartDateTime(),
+        upcomingGameMetadata.home.getName(),
+        upcomingGameMetadata.visitor.getName(),
+        upcomingGameMetadata.getBroadcastsString(),
+        upcomingGameMetadata.location.getFormattedLocation(),
+      ])
+    ));
     return table.toString();
   }
 }
