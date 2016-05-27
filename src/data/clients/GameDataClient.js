@@ -35,7 +35,7 @@ export default class GameDataClient {
     let playByPlay = {};
     let boxScore = {};
     let gameData = {};
-    const formattedDate = NbaDataClient.generateCustomFormattedDate(date);
+    const formattedDate = GameDataClient.generateCustomFormattedDate(date);
     return this.scoreboardClient
         .fetch(formattedDate)
         .then(function(scoreboardData) {

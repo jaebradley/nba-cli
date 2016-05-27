@@ -37,7 +37,7 @@ export default class CommandLineOutputClient {
   }
 
   outputUpcomingGames(upcomingGames) {
-    upcomingGames.map(game => console.log(this.upcomingGameTableCreator.create(game)));
+    console.log(this.upcomingGameTableCreator.create(upcomingGames));
   }
 
   outputGames(data) {
@@ -58,6 +58,6 @@ export default class CommandLineOutputClient {
   }
 
   outputGamesForDateRange(startDate, endDate) {
-    this.client.fetchDataForDateRange(startDate, endDate).then(data => this.outputDateRange(data));
+    return this.client.fetchDataForDateRange(startDate, endDate).then(data => this.outputDateRange(data));
   }
 }

@@ -72,8 +72,8 @@ export default class ScoreboardDataTranslator {
     });
 
     return new TranslatedScoreboard({
-      gameScores: scores,
-      gameMetadata: metadata,
+      scores: scores,
+      metadata: metadata,
     });
   }
 
