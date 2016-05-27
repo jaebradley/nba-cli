@@ -1,6 +1,6 @@
 {
   "name": "nba-scoreboard",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "nba scoreboard",
   "scripts": {
     "test": "npm run build && mocha --compilers js:babel-core/register",

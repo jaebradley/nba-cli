@@ -30,7 +30,7 @@ export default class ScoreboardDataTranslator {
     const periodValue = HtmlEscaper.escapeHtml(gameData.period_time.period_value);
     const gameStatus = gameData.period_time.game_status;
     const gameClock = HtmlEscaper.escapeHtml(gameData.period_time.game_clock);
-    const gameUrl = gameData.gameUrl;
+    const gameUrl = gameData.game_url;
 
     const location = new Location({
       arena: HtmlEscaper.escapeHtml(gameData.arena),
@@ -39,15 +39,15 @@ export default class ScoreboardDataTranslator {
     })
 
     const visitorTeam = new Team({
-      abbreviation: HtmlEscaper.escapeHtml(gameData.visitor.abbreviation),
       city: HtmlEscaper.escapeHtml(gameData.visitor.city),
       nickname: HtmlEscaper.escapeHtml(gameData.visitor.nickname),
+      abbreviation: HtmlEscaper.escapeHtml(gameData.visitor.abbreviation),
     });
 
     const homeTeam = new Team({
-      abbreviation: HtmlEscaper.escapeHtml(gameData.home.abbreviation),
       city: HtmlEscaper.escapeHtml(gameData.home.city),
       nickname: HtmlEscaper.escapeHtml(gameData.home.nickname),
+      abbreviation: HtmlEscaper.escapeHtml(gameData.home.abbreviation),
     });
 
     const metadata = new GameMetadata({
