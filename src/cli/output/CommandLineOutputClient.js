@@ -37,7 +37,9 @@ export default class CommandLineOutputClient {
   }
 
   outputUpcomingGames(upcomingGames) {
-    console.log(this.upcomingGameTableCreator.create(upcomingGames));
+    if (upcomingGames.length > 0) {
+      console.log(this.upcomingGameTableCreator.create(upcomingGames));
+    }
   }
 
   outputGames(data) {
