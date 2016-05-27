@@ -1,0 +1,168 @@
+{
+  "sports_content": {
+    "sports_meta": {
+      "date_time": "20160526 2030",
+      "season_meta": {
+        "calendar_date": "20160526",
+        "season_year": "2015",
+        "stats_season_year": "2015",
+        "stats_season_id": "42015",
+        "stats_season_stage": "4",
+        "roster_season_year": "2015",
+        "schedule_season_year": "2015",
+        "standings_season_year": "2015",
+        "season_id": "42015",
+        "display_year": "2015-16",
+        "display_season": "Post Season",
+        "season_stage": "4"
+      },
+      "next": {
+        "url": "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/20160526/games.json"
+      }
+    },
+    "games": {
+      "game": [
+        {
+          "id": "0041500315",
+          "game_url": "20160526/OKCGSW",
+          "season_id": "42015",
+          "date": "20160526",
+          "time": "2100",
+          "arena": "ORACLE Arena",
+          "city": "Oakland",
+          "state": "CA",
+          "country": "",
+          "home_start_date": "20160526",
+          "home_start_time": "1800",
+          "visitor_start_date": "20160526",
+          "visitor_start_time": "2000",
+          "previewAvailable": "1",
+          "recapAvailable": "0",
+          "notebookAvailable": "0",
+          "tnt_ot": "1",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": ""
+          },
+          "period_time": {
+            "period_value": "0",
+            "period_status": "9:00 pm ET",
+            "game_status": "1",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "true",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+              {
+                "name": "TNT",
+                "long_nm": "",
+                "code": "tnt",
+                "url": "http://www.tntdrama.com/watchtnt/",
+                "mobile_url": "",
+                "home_visitor": "natl"
+              },
+              {
+                "name": "TNTOT",
+                "long_nm": "",
+                "code": "tntot",
+                "url": "http://www.nba.com/tntovertime/",
+                "mobile_url": "",
+                "home_visitor": "natl"
+              }
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "WWLS 98.1FM OKC / 930AM (ESP)"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "KNBR 680 AM"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "natl",
+                  "home_visitor": "natl",
+                  "display_name": "TNT"
+                },
+                {
+                  "scope": "can",
+                  "home_visitor": "can",
+                  "display_name": "TSN"
+                }
+              ]
+            }
+          },
+          "playoffs": {
+            "round": "3",
+            "conference": "West",
+            "series": "1",
+            "gameId": "0041500315",
+            "gameStatus": "1",
+            "game_number": "5",
+            "game_necessary_flag": "0",
+            "home_seed": "1",
+            "visitor_seed": "3",
+            "home_wins": "1",
+            "visitor_wins": "3"
+          },
+          "visitor": {
+            "id": "1610612760",
+            "team_key": "OKC",
+            "city": "Oklahoma City",
+            "abbreviation": "OKC",
+            "nickname": "Thunder",
+            "url_name": "thunder",
+            "team_code": "thunder",
+            "score": "0"
+          },
+          "home": {
+            "id": "1610612744",
+            "team_key": "GSW",
+            "city": "Golden State",
+            "abbreviation": "GSW",
+            "nickname": "Warriors",
+            "url_name": "warriors",
+            "team_code": "warriors",
+            "score": "0"
+          }
+        }
+      ]
+    }
+  }
+}

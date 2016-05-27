@@ -1,9 +1,20 @@
 'use es6';
 
 import {expect, assert} from 'chai';
+import immutable from 'immutable';
 import ScoreboardDataTranslator from '../src/translators/data/ScoreboardDataTranslator';
+import Constants from '../src/constants/Constants';
+
+import TranslatedScoreboard from '../src/data/models/TranslatedScoreboard';
+import GameMetadata from '../src/data/models/GameMetadata';
+import Score from '../src/data/models/Score';
+import PeriodScore from '../src/data/models/PeriodScore';
+import Team from '../src/data/models/Team';
+import Location from '../src/data/models/Location';
+import GameScores from '../src/data/models/GameScores';
 
 import firstQuarterScoreboard from './data/scoreboard/first-quarter.json';
+import pregame from './data/scoreboard/pregame.json';
 
 describe('Translate scoreboard data', function() {
 
@@ -39,8 +50,28 @@ describe('Translate scoreboard data', function() {
     expect(ScoreboardDataTranslator.getBroadcasts(broadcasters)).to.eql(['TNT', 'Sportsnet One']);
   });
 
-  it('Identifiers if first period', function() {
+  it('Identifies if first period', function() {
     const firstQuarterPeriod = firstQuarterFirstGameData.visitor.linescores.period;
     assert.isOk(ScoreboardDataTranslator.hasOnlyOneLinescorePeriod(firstQuarterPeriod));
+  });
+
+  it('Generate pregame translated data', function() {
+    const metadata = new GameMetadata({
+      id: '0041500315',
+      status: Constants.PREGAME,
+      url: "20160526/OKCGSW",
+      unixMillisecondsStartTime: 1464310800000,
+      location: new Location({ arena: "ORACLE Arena", city: "Oakland", state: "CA" }),
+      isPreviewAvailable: true,
+      isRecapAvailable: false,
+      periodValue: '0',
+      periodStatus: '9:00 pm ET',
+      gameClock: '',
+      broadcasts: ['TNT','TSN'],
+      visitor: new Team({ city: "Oklahoma City", nickname: "Thunder", abbreviation: "OKC" }),
+      home: new Team({ city: "Golden State", nickname: "Warriors", abbreviation: "GSW" }),
+    });
+    const expectedOutput = new TranslatedScoreboard({ scores: new GameScores(), metadata: metadata });
+    const firstGame = pregame.sports_content.games.game[0];
   });
 });
