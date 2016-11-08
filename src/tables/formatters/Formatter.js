@@ -1,4 +1,4 @@
-import NbaImages from 'nba-images';
+import NbaEmoji from 'nba-emoji';
 import emoji from 'node-emoji';
 
 import Constants from '../../constants/Constants';
@@ -18,7 +18,7 @@ export default class Formatter {
     const strValue = score.toString();
     if (score > opponentScore) {
       return strValue.green;
-    
+
     } else if (score < opponentScore) {
       return strValue.red;
     }
@@ -36,7 +36,7 @@ export default class Formatter {
   }
 
   static formatTeamAbbreviation(abbreviation) {
-    const teamEmoji = NbaImages.getTeamEmoji(abbreviation);
+    const teamEmoji = NbaEmoji.getEmoji(abbreviation);
     return `${abbreviation} ${teamEmoji}`;
   }
 
