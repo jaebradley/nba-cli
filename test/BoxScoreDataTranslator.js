@@ -20,19 +20,19 @@ describe('Box score data translator', function() {
     const visitorPointsLeaders = new StatisticalLeaders({
       value: 2,
       leaders: [
-        new Player({firstName: 'Kevin', lastName: 'Durant'}),
-        new Player({firstName: 'Serge', lastName: 'Ibaka'}),
-        new Player({firstName: 'Andre', lastName: 'Roberson'}),
-        new Player({firstName: 'Steven', lastName: 'Adams'}),
+        new Player('Kevin', 'Durant'),
+        new Player('Serge', 'Ibaka'),
+        new Player('Andre', 'Roberson'),
+        new Player('Steven', 'Adams'),
       ]
     });
     const visitorAssistsLeaders = new StatisticalLeaders({
       value: 2,
-      leaders: [new Player({firstName: 'Russell', lastName: 'Westbrook'})]
+      leaders: [new Player('Russell', 'Westbrook')]
     });
     const visitorReboundsLeaders = new StatisticalLeaders({
       value: 2,
-      leaders: [new Player({firstName: 'Steven', lastName: 'Adams'})]
+      leaders: [new Player('Steven', 'Adams')]
     })
     const visitorBoxScoreLeaders = new TeamBoxScoreLeaders({
       points: visitorPointsLeaders,
@@ -42,19 +42,19 @@ describe('Box score data translator', function() {
 
     const homePointsLeaders = new StatisticalLeaders({
       value: 4,
-      leaders: [new Player({firstName: 'Klay', lastName: 'Thompson'})]
+      leaders: [new Player('Klay', 'Thompson')]
     });
     const homeAssistsLeaders = new StatisticalLeaders({
       value: 1,
       leaders: [
-        new Player({firstName: 'Andrew', lastName: 'Bogut'}),
-        new Player({firstName: 'Stephen', lastName: 'Curry'}),
-        new Player({firstName: 'Draymond', lastName: 'Green'}),
+        new Player('Andrew', 'Bogut'),
+        new Player('Stephen', 'Curry'),
+        new Player('Draymond', 'Green'),
       ]
     });
     const homeReboundsLeaders = new StatisticalLeaders({
       value: 1,
-      leaders: [new Player({firstName: 'Draymond', lastName: 'Green'})]
+      leaders: [new Player('Draymond', 'Green')]
     })
     const homeBoxScoreLeaders = new TeamBoxScoreLeaders({
       points: homePointsLeaders,
@@ -73,16 +73,16 @@ describe('Box score data translator', function() {
     const expectedPoints = new StatisticalLeaders({
       value: 2,
       leaders: [
-        new Player({firstName: 'Kevin', lastName: 'Durant'}),
-        new Player({firstName: 'Serge', lastName: 'Ibaka'}),
-        new Player({firstName: 'Andre', lastName: 'Roberson'}),
-        new Player({firstName: 'Steven', lastName: 'Adams'}),
+        new Player('Kevin', 'Durant'),
+        new Player('Serge', 'Ibaka'),
+        new Player('Andre', 'Roberson'),
+        new Player('Steven', 'Adams'),
       ]
     });
 
     const expectedAssists = new StatisticalLeaders({
       value: 2,
-      leaders: [new Player({firstName: 'Russell', lastName: 'Westbrook'})]
+      leaders: [new Player('Russell', 'Westbrook')]
     });
 
     expect(BoxScoreDataTranslator.translateStatLeaders(visitorPointsLeaders)).to.eql(expectedPoints);

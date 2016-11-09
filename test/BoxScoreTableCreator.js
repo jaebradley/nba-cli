@@ -17,15 +17,15 @@ describe('Box score table creator', function() {
 
   const pointsLeaders = new StatisticalLeaders({
     value: 1,
-    leaders:[new Player({firstName: 'Jae', lastName: 'Bradley'}), new Player({firstName: 'Steph', lastName: 'Curry'})],
+    leaders:[new Player('Jae', 'Bradley'), new Player('Steph', 'Curry')],
   });
   const assistsLeaders = new StatisticalLeaders({
     value: 2,
-    leaders:[new Player({firstName: 'Kobe', lastName: 'Bryant'})],
+    leaders:[new Player('Kobe', 'Bryant')],
   });
   const reboundsLeaders = new StatisticalLeaders({
     value: 3,
-    leaders:[new Player({firstName: 'Lebron', lastName: 'James'})],
+    leaders:[new Player('Lebron', 'James')],
   });
   const boxScoreLeaders = new TeamBoxScoreLeaders({
     points: pointsLeaders,

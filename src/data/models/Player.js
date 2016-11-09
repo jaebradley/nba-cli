@@ -1,13 +1,18 @@
 import {Record} from 'immutable';
 
-export default class Player extends Record {
+let defaults = {
+  firstName: '',
+  lastName: ''
+};
+
+export default class Player extends Record(defaults) {
   constructor(firstName, lastName) {
     if (typeof firstName !== "string") {
-      throw new Error("player first name is not a string");
+      throw new TypeError("player first name is not a string");
     }
 
     if (typeof lastName !== "string") {
-      throw new Error("player last name is not a string");
+      throw new TypeError("player last name is not a string");
     }
 
     super({
