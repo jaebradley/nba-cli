@@ -17,4 +17,8 @@ describe('Table display formatting', function() {
   it('formats player name', function() {
     expect(Formatter.formatShortPlayerName('jae', 'bradley')).to.equal('j. bradley');
   });
+
+  it('formats team abbreviation', function() {
+    expect(Formatter.formatTeamAbbreviation('BOS')).to.eql('BOS 🍀');
+  })
 });
