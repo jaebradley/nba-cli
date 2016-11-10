@@ -39,7 +39,7 @@ export default class GameScore extends Record(defaults){
       return Outcome.TIE;
     }
 
-    else if (homeTeamDifferential < 0) {
+    else if (homeTeamDifferential > 0) {
       return Outcome.HOME_WIN;
     }
 
