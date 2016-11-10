@@ -9,70 +9,40 @@ const defaults = {
 }
 
 export default class GameScore extends Record(defaults){
-  constructor(homeScore, visitorScore) {
-    if (typeof homeScore !== 'number') {
+  constructor(homeTeam, awayTeam) {
+    if (typeof homeTeam !== 'number') {
       throw new TypeError('expected home score to be a number');
     }
 
-    if (typeof visitorScore !== 'number') {
+    if (typeof awayTeam !== 'number') {
       throw new TypeError('expected visitor score to be a number');
     }
 
-    if (homeScore < 0) {
+    if (homeTeam < 0) {
       throw new RangeError('score cannot be negative');
     }
 
-    if (visitorScore < 0) {
+    if (awayTeam < 0) {
       throw new RangeError('score cannot be negative');
     }
+
+    super({
+      homeTeam: homeTeam,
+      awayTeam: awayTeam
+    });
   }
 
   getWinner() {
-    let homeScoreDifferential = this.homeScore
-  }
+    let homeTeamDifferential = this.homeTeam - this.awayTeam;
 
-  getFormattedHomeScore() {
-    return Score.formatScore(this.homeScore, this.visitorScore);
-  }
-
-  getFormattedVisitorScore() {
-    return Score.formatScore(this.visitorScore, this.homeScore);
-  }
-
-  static calculateWinner(score, opponentScore) {
-    const scoreDifference = score - opponentScore;
-    if (scoreDifference == 0) {
-      return 'TIE';
+    if (homeTeamDifferential == 0) {
+      return Outcome.TIE;
     }
 
-    else if (scoreDifference < 0) {
-      return 'OPPONENT';
+    else if (homeTeamDifferential < 0) {
+      return Outcome.HOME_WIN;
     }
 
-    else {
-      return 'US';
-    }
-  }
-
-  static formatScore(score, opponentScore) {
-    if (score === Constants.ONE_HUNDRED) {
-      return emoji.get(Constants.SCORE_100_EMOJI_VALUE);
-    }
-
-    const winner = Score.calculateWinner(score, opponentScore);
-    const scoreString = score.toString();
-    switch (winner) {
-      case 'TIE':
-        return scoreString.blue;
-
-      case 'US':
-        return scoreString.green;
-
-      case 'OPPONENT':
-        return scoreString.red;
-
-      default:
-        return scoreString.red;
-    }
+    return Outcome.AWAY_WIN;
   }
 };
