@@ -32,7 +32,7 @@ export default class GameScore extends Record(defaults){
     });
   }
 
-  getWinner() {
+  getOutcome() {
     let homeTeamDifferential = this.homeTeam - this.awayTeam;
 
     if (homeTeamDifferential == 0) {
