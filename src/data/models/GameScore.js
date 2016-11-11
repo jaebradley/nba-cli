@@ -4,8 +4,8 @@ import Constants from '../../constants/Constants';
 import Outcome from './Outcome';
 
 const defaults = {
-  homeTeam: 0,
-  awayTeam: 0,
+  score: 0,
+  opponentScore: 0,
 }
 
 export default class GameScore extends Record(defaults){

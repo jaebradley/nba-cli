@@ -7,22 +7,22 @@ import Outcome from '../src/data/models/Outcome';
 describe('GameScore object', function() {
   let loserScore = 1;
   let winnerScore = 2;
-  let awayWinGameScore = new GameScore(loserScore, winnerScore);
-  let homeWinGameScore = new GameScore(winnerScore, loserScore);
-  let tiedGameScore = new GameScore(loserScore, loserScore);
+  let losingScore = new GameScore(loserScore, winnerScore);
+  let winningScore = new GameScore(winnerScore, loserScore);
+  let tiedScore = new GameScore(loserScore, loserScore);
 
   it('creates a game score object', function() {
-    expect(awayWinGameScore.homeTeam).to.equal(loserScore);
-    expect(awayWinGameScore.awayTeam).to.equal(winnerScore);
-    expect(awayWinGameScore.getOutcome()).eql(Outcome.LOSS);
+    expect(losingScore.score).to.equal(loserScore);
+    expect(losingScore.opponentScore).to.equal(winnerScore);
+    expect(losingScore.getOutcome()).eql(Outcome.LOSS);
 
-    expect(homeWinGameScore.homeTeam).to.equal(winnerScore);
-    expect(homeWinGameScore.awayTeam).to.equal(loserScore);
-    expect(homeWinGameScore.getOutcome()).eql(Outcome.WIN);
+    expect(winningScore.score).to.equal(winnerScore);
+    expect(winningScore.opponentScore).to.equal(loserScore);
+    expect(winningScore.getOutcome()).eql(Outcome.WIN);
 
-    expect(tiedGameScore.homeTeam).to.equal(loserScore);
-    expect(tiedGameScore.awayTeam).to.equal(loserScore);
-    expect(tiedGameScore.getOutcome()).eql(Outcome.TIE);
+    expect(tiedScore.score).to.equal(loserScore);
+    expect(tiedScore.opponentScore).to.equal(loserScore);
+    expect(tiedScore.getOutcome()).eql(Outcome.TIE);
   });
 
   it('tests type checking', function() {
