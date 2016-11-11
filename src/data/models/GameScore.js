@@ -9,40 +9,40 @@ const defaults = {
 }
 
 export default class GameScore extends Record(defaults){
-  constructor(homeTeam, awayTeam) {
-    if (typeof homeTeam !== 'number') {
+  constructor(score, opponentScore) {
+    if (typeof score !== 'number') {
       throw new TypeError('expected home score to be a number');
     }
 
-    if (typeof awayTeam !== 'number') {
+    if (typeof opponentScore !== 'number') {
       throw new TypeError('expected visitor score to be a number');
     }
 
-    if (homeTeam < 0) {
+    if (score < 0) {
       throw new RangeError('score cannot be negative');
     }
 
-    if (awayTeam < 0) {
+    if (opponentScore < 0) {
       throw new RangeError('score cannot be negative');
     }
 
     super({
-      homeTeam: homeTeam,
-      awayTeam: awayTeam
+      score: score,
+      opponentScore: opponentScore,
     });
   }
 
   getOutcome() {
-    let homeTeamDifferential = this.homeTeam - this.awayTeam;
+    let scoreDifferential = this.score - this.opponentScore;
 
-    if (homeTeamDifferential == 0) {
+    if (scoreDifferential == 0) {
       return Outcome.TIE;
     }
 
-    else if (homeTeamDifferential > 0) {
-      return Outcome.HOME_WIN;
+    else if (scoreDifferential > 0) {
+      return Outcome.WIN;
     }
 
-    return Outcome.AWAY_WIN;
+    return Outcome.LOSS;
   }
 };

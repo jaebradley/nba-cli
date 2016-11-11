@@ -14,11 +14,11 @@ describe('GameScore object', function() {
   it('creates a game score object', function() {
     expect(awayWinGameScore.homeTeam).to.equal(loserScore);
     expect(awayWinGameScore.awayTeam).to.equal(winnerScore);
-    expect(awayWinGameScore.getOutcome()).eql(Outcome.AWAY_WIN);
+    expect(awayWinGameScore.getOutcome()).eql(Outcome.LOSS);
 
     expect(homeWinGameScore.homeTeam).to.equal(winnerScore);
     expect(homeWinGameScore.awayTeam).to.equal(loserScore);
-    expect(homeWinGameScore.getOutcome()).eql(Outcome.HOME_WIN);
+    expect(homeWinGameScore.getOutcome()).eql(Outcome.WIN);
 
     expect(tiedGameScore.homeTeam).to.equal(loserScore);
     expect(tiedGameScore.awayTeam).to.equal(loserScore);

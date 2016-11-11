@@ -1,6 +1,8 @@
 import NbaEmoji from 'nba-emoji';
 import emoji from 'node-emoji';
 
+import GameScore from '../../data/models/GameScore';
+import Outcome from '../../data/models/Outcome';
 import Constants from '../../constants/Constants';
 
 export default class Formatter {
@@ -50,5 +52,32 @@ export default class Formatter {
   static formatShortPlayerName(firstName, lastName) {
     const firstCharacter = firstName.charAt(0);
     return `${firstCharacter}. ${lastName}`;
+  }
+
+  static formatScore(score) {
+    if (!(score instanceof GameScore)) {
+      throw new TypeError('score should be a game score');
+    }
+
+    let scoreValue = score.score.toString();
+
+    if (score.score === Constants.ONE_HUNDRED) {
+      return emoji.get(Constants.SCORE_100_EMOJI_VALUE);
+    }
+
+    let outcome = score.getOutcome();
+    switch (outcome) {
+      case Outcome.TIE:
+        return scoreValue.blue;
+
+      case Outcome.LOSS:
+        return scoreValue.red;
+
+      case Outcome.WIN:
+        return scoreValue.green;
+
+      default:
+        return scoreValue.red;
+    }
   }
 }

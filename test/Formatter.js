@@ -2,6 +2,7 @@
 
 import {expect} from 'chai';
 import Formatter from '../src/tables/formatters/Formatter';
+import GameScore from '../src/data/models/GameScore';
 
 describe('Table display formatting', function() {
   it('formats game period', function() {
@@ -20,5 +21,19 @@ describe('Table display formatting', function() {
 
   it('formats team abbreviation', function() {
     expect(Formatter.formatTeamAbbreviation('BOS')).to.eql('BOS 🍀');
-  })
+  });
+
+  it('formats score', function() {
+    let loserScore = 1;
+    let winnerScore = 2;
+    let losingScore = new GameScore(loserScore, winnerScore);
+    let winningScore = new GameScore(winnerScore, loserScore);
+    let tiedScore = new GameScore(loserScore, loserScore);
+
+    expect(Formatter.formatScore(losingScore)).to.equal(loserScore.toString().red);
+  });
+
+  it('tests exceptional score formatting cases', function() {
+    expect(() => Formatter.formatScore(1)).to.throw(TypeError);
+  });
 });
