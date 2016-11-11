@@ -55,7 +55,7 @@ export default class Formatter {
   }
 
   static formatScore(score) {
-    if (!(score instanceof GameScore)) {
+    if (!(score instanceof Score)) {
       throw new TypeError('score should be a game score');
     }
 
@@ -79,5 +79,17 @@ export default class Formatter {
       default:
         return scoreValue.red;
     }
+  }
+
+  static formatPeriodValue(periodValue) {
+    if (typeof periodValue !== 'number' ) {
+      throw new TypeError('expected numerical period value');
+    }
+
+    if (periodValue < 0) {
+      throw new RangeError('expected non-negative period value');
+    }
+
+    return periodValue > 4 ? `OT${periodValue - 4}` : `Q${periodValue}`;
   }
 }

@@ -4,7 +4,7 @@ import {Enum} from 'enumify';
 
 export default class Outcome extends Enum {};
 Outcome.initEnum([
-  'WIN',
-  'LOSS',
+  'HOME_WIN',
+  'AWAY_WIN',
   'TIE',
 ]);

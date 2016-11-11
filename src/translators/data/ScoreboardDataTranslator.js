@@ -94,18 +94,13 @@ export default class ScoreboardDataTranslator {
     const homeLinescores = homeTeamData.linescores;
     const visitorLinescores = visitorTeamData.linescores;
     if (ScoreboardDataTranslator.hasOnlyOneLinescorePeriod(homeLinescores.period)) {
-      let score = new Score({ homeScore: parseInt(homeLinescores.period.score),
-                              visitorScore: parseInt(visitorLinescores.period.score) });
-      linescores.push(
-        new PeriodScore({
-          periodValue: homeLinescores.period.period_name,
-          score: score,
-        })
-      );
+      let score = new Score(parseInt(homeLinescores.period.score),
+                            parseInt(visitorLinescores.period.score));
+      linescores.push(new PeriodScore({homeLinescores.period.period_name, score));
     } else {
       for (let index = 0; index < homeLinescores.period.length; index++) {
-        let score = new Score({ homeScore: parseInt(homeLinescores.period[index].score),
-                                visitorScore: parseInt(visitorLinescores.period[index].score) });
+        let score = new Score(parseInt(homeLinescores.period[index].score),
+                              parseInt(visitorLinescores.period[index].score));
         linescores.push(
           new PeriodScore({
             periodValue: homeLinescores.period[index].period_name,

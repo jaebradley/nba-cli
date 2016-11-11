@@ -16,9 +16,9 @@ describe('Game scores model', function() {
 
   it('get period values', function() {
     const periodScores = [
-      new PeriodScore({periodValue: 1, score: new Score({homeScore: 2, visitorScore: 3})}),
-      new PeriodScore({periodValue: 4, score: new Score({homeScore: 5, visitorScore: 6})}),
-      new PeriodScore({periodValue: 7, score: new Score({homeScore: 8, visitorScore: 9})}),
+      new PeriodScore(1, new Score(2, 3)),
+      new PeriodScore(4, new Score(5, 6)),
+      new PeriodScore(7, new Score(8, 9)),
     ];
     const customPeriodScores = new GameScores({
       periodScores: periodScores,
