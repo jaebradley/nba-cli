@@ -11,7 +11,7 @@ describe('Period score model object', function() {
   let loserValue = 5;
   let winnerValue = 10;
   let tiedScore = new Score(winnerValue, winnerValue);
-  const periodScore = new PeriodScore(period, tiedScore);
+  let periodScore = new PeriodScore(period, tiedScore);
 
   it('creates period score with tied values', function() {
     expect(periodScore.period).to.equal(period);
