@@ -1,17 +1,17 @@
 'use es6';
 
 import {expect} from 'chai';
-import GameScore from '../src/data/models/GameScore';
+import Score from '../src/data/models/Score';
 import Outcome from '../src/data/models/Outcome';
 
-describe('GameScore object', function() {
+describe('Score object', function() {
   let loserScore = 1;
   let winnerScore = 2;
-  let losingScore = new GameScore(loserScore, winnerScore);
-  let winningScore = new GameScore(winnerScore, loserScore);
-  let tiedScore = new GameScore(loserScore, loserScore);
+  let losingScore = new Score(loserScore, winnerScore);
+  let winningScore = new Score(winnerScore, loserScore);
+  let tiedScore = new Score(loserScore, loserScore);
 
-  it('creates a game score object', function() {
+  it('creates a score object', function() {
     expect(losingScore.home).to.equal(loserScore);
     expect(losingScore.away).to.equal(winnerScore);
     expect(losingScore.getOutcome()).eql(Outcome.AWAY_WIN);
@@ -26,9 +26,9 @@ describe('GameScore object', function() {
   });
 
   it('tests type checking', function() {
-    expect(() => new GameScore('jae', 1)).to.throw(TypeError);
-    expect(() => new GameScore(2, 'bradley')).to.throw(TypeError);
-    expect(() => new GameScore(-1, 1)).to.throw(RangeError);
-    expect(() => new GameScore(1, -1)).to.throw(RangeError);
+    expect(() => new Score('jae', 1)).to.throw(TypeError);
+    expect(() => new Score(2, 'bradley')).to.throw(TypeError);
+    expect(() => new Score(-1, 1)).to.throw(RangeError);
+    expect(() => new Score(1, -1)).to.throw(RangeError);
   });
 });

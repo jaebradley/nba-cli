@@ -1,7 +1,6 @@
 import NbaEmoji from 'nba-emoji';
 import emoji from 'node-emoji';
 
-import GameScore from '../../data/models/GameScore';
 import Outcome from '../../data/models/Outcome';
 import Constants from '../../constants/Constants';
 

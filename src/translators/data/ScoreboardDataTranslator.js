@@ -96,7 +96,7 @@ export default class ScoreboardDataTranslator {
     if (ScoreboardDataTranslator.hasOnlyOneLinescorePeriod(homeLinescores.period)) {
       let score = new Score(parseInt(homeLinescores.period.score),
                             parseInt(visitorLinescores.period.score));
-      linescores.push(new PeriodScore({homeLinescores.period.period_name, score));
+      linescores.push(new PeriodScore(homeLinescores.period.period_name, score));
     } else {
       for (let index = 0; index < homeLinescores.period.length; index++) {
         let score = new Score(parseInt(homeLinescores.period[index].score),

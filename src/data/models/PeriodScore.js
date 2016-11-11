@@ -8,11 +8,13 @@ const defaults = {
 
 export default class PeriodScore extends Record(defaults){
   constructor(period, score) {
-    if (!typeof period !== 'number' ) {
+    if (typeof period !== 'number' ) {
       throw new TypeError('expected numerical period value');
     }
 
-    if (!(score instanceof Score)
+    if (!(score instanceof Score)) {
+      throw new TypeError('score must be a Score object');
+    }
 
     if (period < 0) {
       throw new RangeError('expected non-negative period value');
