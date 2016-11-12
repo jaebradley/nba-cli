@@ -16,6 +16,6 @@ describe('Game scores model', function() {
       periodScores: periodScores,
     });
 
-    expect(customPeriodScores.getPeriodValues()).to.eql([1, 4, 7]);
+    expect(customPeriodScores.getPeriodValues()).to.eql(['Q1', 'Q4', 'OT3']);
   });
 });
