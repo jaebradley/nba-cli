@@ -6,14 +6,6 @@ import PeriodScore from '../src/data/models/PeriodScore';
 import Score from '../src/data/models/Score';
 
 describe('Game scores model', function() {
-  it('creates game scores model', function() {
-    const defaultGameScores = new GameScores();
-
-    expect(defaultGameScores.periodScores).to.eql([]);
-    expect(defaultGameScores.totalScore.homeScore).to.equal(0);
-    expect(defaultGameScores.totalScore.visitorScore).to.equal(0);
-  });
-
   it('get period values', function() {
     const periodScores = [
       new PeriodScore(1, new Score(2, 3)),

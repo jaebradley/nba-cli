@@ -59,7 +59,7 @@ export default class Formatter {
       throw new TypeError('score should be a game score');
     }
 
-    let scoreValue = score.score.toString();
+    let scoreValue = score.home.toString();
 
     if (score.score === Constants.ONE_HUNDRED) {
       return emoji.get(Constants.SCORE_100_EMOJI_VALUE);
