@@ -3,6 +3,7 @@ import emoji from 'node-emoji';
 
 import Outcome from '../../data/models/Outcome';
 import Constants from '../../constants/Constants';
+import Score from '../../data/models/Score';
 
 export default class Formatter {
   constructor() {}
