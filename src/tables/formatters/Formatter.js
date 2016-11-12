@@ -61,7 +61,7 @@ export default class Formatter {
 
     let scoreValue = score.home.toString();
 
-    if (score.score === Constants.ONE_HUNDRED) {
+    if (score.home === Constants.ONE_HUNDRED) {
       return emoji.get(Constants.SCORE_100_EMOJI_VALUE);
     }
 
