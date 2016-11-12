@@ -25,7 +25,8 @@
     "nba-emoji": "0.0.5",
     "request-promise": "3.0.0",
     "q": "1.4.1",
-    "immutable": "3.8.1"
+    "immutable": "3.8.1",
+    "enumify": "1.0.4"
   },
   "devDependencies": {
     "chai": "3.5.0",
