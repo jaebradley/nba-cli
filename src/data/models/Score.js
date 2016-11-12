@@ -1,55 +1,48 @@
 import {Record} from 'immutable';
 import emoji from 'node-emoji';
 import Constants from '../../constants/Constants';
+import Outcome from './Outcome';
 
 const defaults = {
-  homeScore: 0,
-  visitorScore: 0,
+  home: 0,
+  away: 0,
 }
 
 export default class Score extends Record(defaults){
-  getFormattedHomeScore() {
-    return Score.formatScore(this.homeScore, this.visitorScore);
+  constructor(home, away) {
+    if (typeof home !== 'number') {
+      throw new TypeError('expected home score to be a number');
+    }
+
+    if (typeof away !== 'number') {
+      throw new TypeError('expected visitor score to be a number');
+    }
+
+    if (home < 0) {
+      throw new RangeError('score cannot be negative');
+    }
+
+    if (away < 0) {
+      throw new RangeError('score cannot be negative');
+    }
+
+    super({
+      home: home,
+      away: away,
+    });
   }
 
-  getFormattedVisitorScore() {
-    return Score.formatScore(this.visitorScore, this.homeScore);
-  }
+  getOutcome() {
+    let scoreDifferential = this.home - this.away;
 
-  static calculateWinner(score, opponentScore) {
-    const scoreDifference = score - opponentScore;
-    if (scoreDifference == 0) {
-      return 'TIE';
+    if (scoreDifferential == 0) {
+      return Outcome.TIE;
     }
 
-    else if (scoreDifference < 0) {
-      return 'OPPONENT';
+    else if (scoreDifferential > 0) {
+      return Outcome.HOME_WIN;
     }
 
-    else {
-      return 'US';
-    }
-  }
-
-  static formatScore(score, opponentScore) {
-    if (score === Constants.ONE_HUNDRED) {
-      return emoji.get(Constants.SCORE_100_EMOJI_VALUE);
-    }
-
-    const winner = Score.calculateWinner(score, opponentScore);
-    const scoreString = score.toString();
-    switch (winner) {
-      case 'TIE':
-        return scoreString.blue;
-
-      case 'US':
-        return scoreString.green;
-
-      case 'OPPONENT':
-        return scoreString.red;
-
-      default:
-        return scoreString.red;
-    }
+    return Outcome.AWAY_WIN;
   }
 };

@@ -2,29 +2,27 @@ import {Record} from 'immutable';
 import Score from './Score';
 
 const defaults = {
-  periodValue: 1,
-  score: new Score(),
+  period: 1,
+  score: new Score(0, 0),
 }
 
 export default class PeriodScore extends Record(defaults){
-
-  getFormattedHomeScore() {
-    return Score.formatScore(this.score.homeScore, this.score.visitorScore);
-  }
-
-  getFormattedVisitorScore() {
-    return Score.formatScore(this.score.visitorScore, this.score.homeScore);
-  }
-
-  getFormattedPeriodValue() {
-    return PeriodScore.formatPeriodValue(this.periodValue);
-  }
-
-  static formatPeriodValue(periodValue) {
-    if (periodValue > 4) {
-      return `OT${periodValue - 4}`;
+  constructor(period, score) {
+    if (typeof period !== 'number' ) {
+      throw new TypeError('expected numerical period value');
     }
 
-    return `Q${periodValue}`;
+    if (!(score instanceof Score)) {
+      throw new TypeError('score must be a Score object');
+    }
+
+    if (period < 0) {
+      throw new RangeError('expected non-negative period value');
+    }
+
+    super({
+      period: period,
+      score: score,
+    });
   }
 };

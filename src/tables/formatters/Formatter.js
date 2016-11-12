@@ -1,7 +1,9 @@
 import NbaEmoji from 'nba-emoji';
 import emoji from 'node-emoji';
 
+import Outcome from '../../data/models/Outcome';
 import Constants from '../../constants/Constants';
+import Score from '../../data/models/Score';
 
 export default class Formatter {
   constructor() {}
@@ -50,5 +52,44 @@ export default class Formatter {
   static formatShortPlayerName(firstName, lastName) {
     const firstCharacter = firstName.charAt(0);
     return `${firstCharacter}. ${lastName}`;
+  }
+
+  static formatScore(score) {
+    if (!(score instanceof Score)) {
+      throw new TypeError('score should be a Score object');
+    }
+
+    let scoreValue = score.home.toString();
+
+    if (score.home === Constants.ONE_HUNDRED) {
+      return emoji.get(Constants.SCORE_100_EMOJI_VALUE);
+    }
+
+    let outcome = score.getOutcome();
+    switch (outcome) {
+      case Outcome.TIE:
+        return scoreValue.blue;
+
+      case Outcome.AWAY_WIN:
+        return scoreValue.red;
+
+      case Outcome.HOME_WIN:
+        return scoreValue.green;
+
+      default:
+        return scoreValue.red;
+    }
+  }
+
+  static formatPeriodValue(periodValue) {
+    if (typeof periodValue !== 'number' ) {
+      throw new TypeError('expected numerical period value');
+    }
+
+    if (periodValue < 0) {
+      throw new RangeError('expected non-negative period value');
+    }
+
+    return periodValue > 4 ? `OT${periodValue - 4}` : `Q${periodValue}`;
   }
 }

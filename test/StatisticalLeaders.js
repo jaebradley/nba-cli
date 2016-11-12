@@ -6,13 +6,7 @@ import Player from '../src/data/models/Player';
 
 describe('Statistical Leaders object', function() {
   it('creates a statistical leaders object', function() {
-    const emptyStatisticalLeaders = new StatisticalLeaders();
-
-    expect(emptyStatisticalLeaders.value).to.equal(0);
-    expect(emptyStatisticalLeaders.leaders.length).to.equal(0);
-    expect(emptyStatisticalLeaders.getLeadersAbbreviatedNames()).to.equal('');
-
-    const me = new Player({firstName: 'jae', lastName: 'bradley'});
+    const me = new Player('jae', 'bradley');
     const players = [me, me, me];
     const expectedAbbreviatedNames = [me.getAbbreviatedName(), me.getAbbreviatedName(), me.getAbbreviatedName()].toString();
     const meStatisticalLeaders = new StatisticalLeaders({value: 5, leaders: players});

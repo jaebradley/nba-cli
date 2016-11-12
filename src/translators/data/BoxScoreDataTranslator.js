@@ -8,7 +8,7 @@ import Player from '../../data/models/Player';
 
 export default class BoxScoreDataTranslator {
   static translateStatLeaders(leaderData) {
-    const leaders = leaderData.leader.map(leader => new Player({firstName: leader.FirstName, lastName: leader.LastName}));
+    const leaders = leaderData.leader.map(leader => new Player(leader.FirstName, leader.LastName));
     return new StatisticalLeaders({value: parseInt(leaderData.StatValue), leaders: leaders});
   }
 

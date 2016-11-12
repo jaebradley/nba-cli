@@ -68,7 +68,7 @@ export default class ScoreboardDataTranslator {
 
     const scores = new GameScores({
       periodScores: ScoreboardDataTranslator.getTeamLinescores(gameData.home, gameData.visitor),
-      totalScore: new Score({homeScore: parseInt(gameData.home.score), visitorScore: parseInt(gameData.visitor.score)}),
+      totalScore: new Score(parseInt(gameData.home.score), parseInt(gameData.visitor.score)),
     });
 
     return new TranslatedScoreboard({
@@ -94,24 +94,15 @@ export default class ScoreboardDataTranslator {
     const homeLinescores = homeTeamData.linescores;
     const visitorLinescores = visitorTeamData.linescores;
     if (ScoreboardDataTranslator.hasOnlyOneLinescorePeriod(homeLinescores.period)) {
-      let score = new Score({ homeScore: parseInt(homeLinescores.period.score),
-                              visitorScore: parseInt(visitorLinescores.period.score) });
-      linescores.push(
-        new PeriodScore({
-          periodValue: homeLinescores.period.period_name,
-          score: score,
-        })
-      );
+      let score = new Score(parseInt(homeLinescores.period.score),
+                            parseInt(visitorLinescores.period.score));
+      linescores.push(new PeriodScore(parseInt(homeLinescores.period.period_value), score));
     } else {
       for (let index = 0; index < homeLinescores.period.length; index++) {
-        let score = new Score({ homeScore: parseInt(homeLinescores.period[index].score),
-                                visitorScore: parseInt(visitorLinescores.period[index].score) });
-        linescores.push(
-          new PeriodScore({
-            periodValue: homeLinescores.period[index].period_name,
-            score: score,
-          })
-        );
+        let score = new Score(parseInt(homeLinescores.period[index].score),
+                              parseInt(visitorLinescores.period[index].score));
+        linescores.push(new PeriodScore(parseInt(homeLinescores.period[index].period_value),
+                                        score));
       }
     }
     return linescores;
