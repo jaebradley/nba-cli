@@ -56,7 +56,7 @@ export default class Formatter {
 
   static formatScore(score) {
     if (!(score instanceof Score)) {
-      throw new TypeError('score should be a game score');
+      throw new TypeError('score should be a Score object');
     }
 
     let scoreValue = score.home.toString();
@@ -70,10 +70,10 @@ export default class Formatter {
       case Outcome.TIE:
         return scoreValue.blue;
 
-      case Outcome.LOSS:
+      case Outcome.AWAY_WIN:
         return scoreValue.red;
 
-      case Outcome.WIN:
+      case Outcome.HOME_WIN:
         return scoreValue.green;
 
       default:

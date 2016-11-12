@@ -4,6 +4,7 @@ import emoji from 'node-emoji';
 
 import Constants from '../constants/Constants';
 import Formatter from './formatters/Formatter';
+import Score from '../data/models/Score';
 
 export default class StartedGameTableCreator {
   constructor() {
@@ -33,7 +34,6 @@ export default class StartedGameTableCreator {
   }
 
   generateHeaders(periodScores, gameSituation) {
-    console.log(periodScores);
     const headers = ['', StartedGameTableCreator.applyGameSituationFormatting(gameSituation)];
     periodScores.map(period => headers.push(StartedGameTableCreator.applyPeriodFormatting(period)));
     headers.push(this.generateFormattedTotalHeader());
@@ -41,12 +41,11 @@ export default class StartedGameTableCreator {
   }
 
   generateLinescoresRows(homeAbbreviation, visitorAbbreviation, periodScores, totalScore) {
-    console.log(periodScores);
     const homeRow = [emoji.get(Constants.HOME_EMOJI_VALUE), Formatter.formatTeamAbbreviation(homeAbbreviation)];
     const visitorRow = [emoji.get(Constants.VISITOR_EMOJI_VALUE), Formatter.formatTeamAbbreviation(visitorAbbreviation)];
     periodScores.map(periodScore => {
-      homeRow.push(Formatter.formatScore(periodScore));
-      visitorRow.push(Formatter.formatScore(new Score(periodScore.away, periodScore.home)));
+      homeRow.push(Formatter.formatScore(periodScore.score));
+      visitorRow.push(Formatter.formatScore(new Score(periodScore.score.away, periodScore.score.home)));
     });
     homeRow.push(StartedGameTableCreator.applyTotalFormatting(Formatter.formatScore(totalScore)));
     visitorRow.push(StartedGameTableCreator.applyTotalFormatting(Formatter.formatScore(new Score(totalScore.away, totalScore.home))));
