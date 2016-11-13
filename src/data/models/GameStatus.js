@@ -1,15 +1,20 @@
 'use es6';
 
-import import {Enum} from 'enumify';
+import {Enum} from 'enumify';
 
 export default class GameStatus extends Enum {
   static from(nbaStatsGameStatus) {
-    if (typeof nbaStatsGameStatus !== 'string') {
-      throw new TypeError('game status from NBA Stats is not a string');
+    for (let status of GameStatus.enumvalues) {
+      if (status.nbaStatsGameStatus == nbaStatsGameStatus) {
+        return status;
+      }
     }
+
+    throw new ReferenceError('unknown nba stats game status');
   }
 };
-Outcome.initEnum(
+
+GameStatus.initEnum({
   PREGAME: {
     nbaStatsGameStatus: 1,
   },
@@ -22,4 +27,4 @@ Outcome.initEnum(
   FINAl: {
     nbaStatsGameStatus: 3,
   },
-);
+});

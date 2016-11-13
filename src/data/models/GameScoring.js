@@ -1,20 +1,20 @@
 'use es6';
 
-import {Record} from 'immutable';
+import {Record, List} from 'immutable';
 
 import PeriodScore from './PeriodScore';
 import Score from './Score';
 
 
 let defaults = {
-  periodScores: [],
-  totalScore: new Score(0, 0);
+  periodScores: new List(),
+  totalScore: new Score(0, 0),
 }
 
 
 export default class GameScoring extends Record(defaults) {
   constructor(periodScores, totalScore) {
-    if (typeof periodScores !== 'array') {
+    if (periodScores instanceof List) {
       throw new TypeError('period scores must be an array');
     }
 

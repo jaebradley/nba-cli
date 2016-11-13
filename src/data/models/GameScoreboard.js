@@ -1,6 +1,6 @@
 'use es6';
 
-import {Record} from 'immutable';
+import {Record, List} from 'immutable';
 
 import GameStatus from './GameStatus';
 import Location from './Location';
@@ -17,14 +17,14 @@ let defaults = {
   startTimestamp: 0,
   location: new Location(),
   period: new Period(0, '', ''),
-  broadcasts: [],
+  broadcasts: new List(),
   matchup: new Matchup(new Team(), new Team()),
   scoring: new GameScoring([], new Score(0, 0)),
 };
 
 export default class GameScoreboard extends Record(defaults) {
   constructor(id, status, startTimestamp, location, period, broadcasts, matchup, gameScoring) {
-    if (id typeof !== 'string') {
+    if (typeof id !== 'string') {
       throw new TypeError('id must be a string');
     }
 
@@ -44,7 +44,7 @@ export default class GameScoreboard extends Record(defaults) {
       throw new TypeError('period must be a Period');
     }
 
-    if (broadcasts typeof !== 'array') {
+    if (!(broadcasts instanceof List)) {
       throw new TypeError('broadcasts must be an array');
     }
 

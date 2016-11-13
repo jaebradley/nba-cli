@@ -120,15 +120,9 @@ export default class GameScoreboardTranslator {
     let radioBroadcasters = broadcasters.radio.broadcaster;
     let tvBroadcasters = broadcasters.tv.broadcaster;
 
-    radioBroadcasters.map(broadcast =>
-                          broadcasts.push(GameScoreboardTranslator
-                                            .getBroadcast(broadcast,
-                                                          BroadcastMedium.RADIO)));
+    radioBroadcasters.map(broadcast => broadcasts.push(GameScoreboardTranslator.getBroadcast(broadcast, BroadcastMedium.RADIO)));
 
-    tvBroadcasters.map(broadcast =>
-                       broadcasts.push(GameScoreboardTranslator
-                                        .getBroadcast(broadcast,
-                                                      BroadcastMedium.TV)));                                                                                BroadcastMedium.RADIO)));
+    tvBroadcasters.map(broadcast => broadcasts.push(GameScoreboardTranslator.getBroadcast(broadcast, BroadcastMedium.TV)));
 
     return List.of(broadcasts);
   }

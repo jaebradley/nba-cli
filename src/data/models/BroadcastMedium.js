@@ -3,8 +3,7 @@
 import {Enum} from 'enumify';
 
 export default class BroadcastMedium extends Enum {};
-
-BroadcastMedium.initEnum({
-  RADIO,
-  TV,
-});
+BroadcastMedium.initEnum([
+  'RADIO',
+  'TV',
+]);
