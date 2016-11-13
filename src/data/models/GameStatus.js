@@ -2,18 +2,24 @@
 
 import import {Enum} from 'enumify';
 
-export default class GameStatus extends Enum {};
+export default class GameStatus extends Enum {
+  static from(nbaStatsGameStatus) {
+    if (typeof nbaStatsGameStatus !== 'string') {
+      throw new TypeError('game status from NBA Stats is not a string');
+    }
+  }
+};
 Outcome.initEnum(
   PREGAME: {
-    nbaStatsPeriodValue: 1,
+    nbaStatsGameStatus: 1,
   },
   LIVE: {
-    nbaStatsPeriodValue: 2,
+    nbaStatsGameStatus: 2,
   },
   HALFTIME: {
-    nbaStatsPeriodValue: 'Halftime'
+    nbaStatsGameStatus: 'Halftime'
   },
   FINAl: {
-    nbaStatsPeriodValue: 3,
+    nbaStatsGameStatus: 3,
   },
 );
