@@ -14,36 +14,32 @@ import BroadcastMedium from '../models/BroadcastMedium';
 
 export default class ScoreboardGameTranslator {
   static translate(data) {
-    if (!('game' in data)) {
-      throw new ReferenceError('game field missing');
-    }
 
-    if (!('period_time' in data.game)) {
+    if (!('period_time' in data)) {
       throw new ReferenceError('period_time field missing');
     }
 
-    if (!('broadcasters' in data.game)) {
+    if (!('broadcasters' in data)) {
       throw new ReferenceError('broadcasters field missing');
     }
 
-    if (!('home' in data.game)) {
+    if (!('home' in data)) {
       throw new ReferenceError('home field missing');
     }
 
-    if (!('visitor' in data.game)) {
+    if (!('visitor' in data)) {
       throw new ReferenceError('visitor field missing');
     }
 
-    let gameData = data.game;
-    let periodTime = gameData.period_time;
-    let broadcasters = gameData.broadcasters;
-    let homeData = gameData.home;
-    let awayData = gameData.visitor;
+    let periodTime = data.period_time;
+    let broadcasters = data.broadcasters;
+    let homeData = data.home;
+    let awayData = data.visitor;
 
     return new GameScoreboard(gameData.id,
                               ScoreboardGamesTranslator.getGameStatus(periodTime),
-                              ScoreboardGamesTranslator.getStartTimestamp(gameData),
-                              ScoreboardGamesTranslator.getLocation(gameData),
+                              ScoreboardGamesTranslator.getStartTimestamp(data),
+                              ScoreboardGamesTranslator.getLocation(data),
                               ScoreboardGamesTranslator.getPeriod(periodTime),
                               ScoreboardGamesTranslator.getBroadcasts(broadcasters),
                               ScoreboardGamesTranslator.getMatchup(homeData, awayData),
@@ -69,7 +65,7 @@ export default class ScoreboardGameTranslator {
 
     let rawStartTime = `${gameData.date}${gameData.time}`;
 
-    return moment(dateStartTime, Constants.TRANSLATED_NBA_DATE_TIME_FORMAT)
+    return moment(rawStartTime, Constants.TRANSLATED_NBA_DATE_TIME_FORMAT)
             .tz(Constants.DEFAULT_TIMEZONE)
             .clone()
             .tz("UTC")

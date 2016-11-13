@@ -16,7 +16,11 @@ export default class ScoreboardGamesTranslator {
       throw new ReferenceError('games field missing');
     }
 
-    let games = data.sports_content.games;
+    if (!('game' in data.sports_content.games)) {
+      throw new ReferenceError('game field missing');
+    }
+
+    let games = data.sports_content.games.game;
 
     let translatedGames = [];
 

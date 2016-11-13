@@ -2,7 +2,7 @@
 
 import {Record} from 'immutable';
 
-import BroadcastMedium from 'BroadcastMedium';
+import BroadcastMedium from './BroadcastMedium';
 
 let defaults = {
   scope: '',

@@ -1,0 +1,180 @@
+{
+  "id": "0041500204",
+  "game_url": "20160508/CLEATL",
+  "season_id": "42015",
+  "date": "20160508",
+  "time": "1530",
+  "arena": "Philips Arena",
+  "city": "Atlanta",
+  "state": "GA",
+  "country": "",
+  "home_start_date": "20160508",
+  "home_start_time": "1530",
+  "visitor_start_date": "20160508",
+  "visitor_start_time": "1530",
+  "previewAvailable": "1",
+  "recapAvailable": "1",
+  "notebookAvailable": "0",
+  "tnt_ot": "0",
+  "buzzerBeater": "1",
+  "ticket": {
+    "ticket_link": ""
+  },
+  "period_time": {
+    "period_value": "4",
+    "period_status": "Final",
+    "game_status": "3",
+    "game_clock": "",
+    "total_periods": "4",
+    "period_name": "Qtr"
+  },
+  "lp": {
+    "lp_video": "true",
+    "condensed_bb": "true",
+    "visitor": {
+      "audio": {
+        "ENG": "false",
+        "SPA": "false"
+      },
+      "video": {
+        "avl": "false",
+        "onAir": "false",
+        "archBB": "false"
+      }
+    },
+    "home": {
+      "audio": {
+        "ENG": "false",
+        "SPA": "false"
+      },
+      "video": {
+        "avl": "true",
+        "onAir": "false",
+        "archBB": "true"
+      }
+    }
+  },
+  "dl": {
+    "link": [
+      {
+        "name": "ABC",
+        "long_nm": "",
+        "code": "espn",
+        "url": "http://espn.go.com/watchespn/index/_/id/2810732/1-cleveland-cavaliers-vs-4-atlanta-hawks-conference-semifinal-game-4",
+        "mobile_url": "sportscenter://x-callback-url/showGame?sportName=basketball&amp;leagueAbbrev=nba&amp;gameId=2810732&amp;openWatchStream=true",
+        "home_visitor": "natl"
+      }
+    ]
+  },
+  "broadcasters": {
+    "radio": {
+      "broadcaster": [
+        {
+          "scope": "local",
+          "home_visitor": "visitor",
+          "display_name": "WTAM 1100 / 87.7 FM (ESP)"
+        },
+        {
+          "scope": "local",
+          "home_visitor": "home",
+          "display_name": "92.9 FM \"The Game\""
+        }
+      ]
+    },
+    "tv": {
+      "broadcaster": [
+        {
+          "scope": "natl",
+          "home_visitor": "natl",
+          "display_name": "ABC"
+        },
+        {
+          "scope": "can",
+          "home_visitor": "can",
+          "display_name": "TSN"
+        }
+      ]
+    }
+  },
+  "playoffs": {
+    "round": "2",
+    "conference": "East",
+    "series": "1",
+    "gameId": "0041500204",
+    "gameStatus": "3",
+    "game_number": "4",
+    "game_necessary_flag": "0",
+    "home_seed": "4",
+    "visitor_seed": "1",
+    "home_wins": "0",
+    "visitor_wins": "4"
+  },
+  "visitor": {
+    "id": "1610612739",
+    "team_key": "CLE",
+    "city": "Cleveland",
+    "abbreviation": "CLE",
+    "nickname": "Cavaliers",
+    "url_name": "cavaliers",
+    "team_code": "cavaliers",
+    "score": "100",
+    "linescores": {
+      "period": [
+        {
+          "period_value": "1",
+          "period_name": "Q1",
+          "score": "27"
+        },
+        {
+          "period_value": "2",
+          "period_name": "Q2",
+          "score": "29"
+        },
+        {
+          "period_value": "3",
+          "period_name": "Q3",
+          "score": "25"
+        },
+        {
+          "period_value": "4",
+          "period_name": "Q4",
+          "score": "19"
+        }
+      ]
+    }
+  },
+  "home": {
+    "id": "1610612737",
+    "team_key": "ATL",
+    "city": "Atlanta",
+    "abbreviation": "ATL",
+    "nickname": "Hawks",
+    "url_name": "hawks",
+    "team_code": "hawks",
+    "score": "99",
+    "linescores": {
+      "period": [
+        {
+          "period_value": "1",
+          "period_name": "Q1",
+          "score": "36"
+        },
+        {
+          "period_value": "2",
+          "period_name": "Q2",
+          "score": "22"
+        },
+        {
+          "period_value": "3",
+          "period_name": "Q3",
+          "score": "19"
+        },
+        {
+          "period_value": "4",
+          "period_name": "Q4",
+          "score": "22"
+        }
+      ]
+    }
+  }
+}

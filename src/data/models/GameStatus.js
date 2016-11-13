@@ -4,9 +4,9 @@ import {Enum} from 'enumify';
 
 export default class GameStatus extends Enum {
   static from(nbaStatsGameStatus) {
-    for (let status of GameStatus.enumvalues) {
+    for (let status of GameStatus.enumValues) {
       if (status.nbaStatsGameStatus == nbaStatsGameStatus) {
-        return status;
+        return GameStatus.enumValueOf(status);
       }
     }
 
