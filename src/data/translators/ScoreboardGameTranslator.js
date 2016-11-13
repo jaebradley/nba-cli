@@ -9,6 +9,8 @@ import GameStatus from '../models/GameStatus';
 import Constants from '../../constants/Constants';
 import Location from '../models/Location';
 import Period from '../models/Period';
+import Matchup from '../models/Matchup';
+import Team from '../models/Team';
 import Broadcast from '../models/Broadcast';
 import BroadcastMedium from '../models/BroadcastMedium';
 
@@ -37,13 +39,13 @@ export default class ScoreboardGameTranslator {
     let awayData = data.visitor;
 
     return new GameScoreboard(gameData.id,
-                              ScoreboardGamesTranslator.getGameStatus(periodTime),
-                              ScoreboardGamesTranslator.getStartTimestamp(data),
-                              ScoreboardGamesTranslator.getLocation(data),
-                              ScoreboardGamesTranslator.getPeriod(periodTime),
-                              ScoreboardGamesTranslator.getBroadcasts(broadcasters),
-                              ScoreboardGamesTranslator.getMatchup(homeData, awayData),
-                              ScoreboardGamesTranslator.getScoring(homeData, awayData));
+                              ScoreboardGameTranslator.getGameStatus(periodTime),
+                              ScoreboardGameTranslator.getStartTimestamp(data),
+                              ScoreboardGameTranslator.getLocation(data),
+                              ScoreboardGameTranslator.getPeriod(periodTime),
+                              ScoreboardGameTranslator.getBroadcasts(broadcasters),
+                              ScoreboardGameTranslator.getMatchup(homeData, awayData),
+                              ScoreboardGameTranslator.getScoring(homeData, awayData));
   }
 
   static getGameStatus(periodTime) {
@@ -131,9 +133,9 @@ export default class ScoreboardGameTranslator {
     let radioBroadcasters = broadcasters.radio.broadcaster;
     let tvBroadcasters = broadcasters.tv.broadcaster;
 
-    radioBroadcasters.map(broadcast => broadcasts.push(ScoreboardGamesTranslator.getBroadcast(broadcast, BroadcastMedium.RADIO)));
+    radioBroadcasters.map(broadcast => broadcasts.push(ScoreboardGameTranslator.getBroadcast(broadcast, BroadcastMedium.RADIO)));
 
-    tvBroadcasters.map(broadcast => broadcasts.push(ScoreboardGamesTranslator.getBroadcast(broadcast, BroadcastMedium.TV)));
+    tvBroadcasters.map(broadcast => broadcasts.push(ScoreboardGameTranslator.getBroadcast(broadcast, BroadcastMedium.TV)));
 
     return List.of(broadcasts);
   }
@@ -155,8 +157,8 @@ export default class ScoreboardGameTranslator {
   }
 
   static getMatchup(homeData, awayData) {
-    return new Matchup(ScoreboardGamesTranslator.getTeam(homeData),
-                       ScoreboardGamesTranslator.getTeam(awayData));
+    return new Matchup(ScoreboardGameTranslator.getTeam(homeData),
+                       ScoreboardGameTranslator.getTeam(awayData));
   }
 
   static getTeam(team) {
@@ -180,8 +182,8 @@ export default class ScoreboardGameTranslator {
   }
 
   static getScoring(homeData, awayData) {
-    return new GameScoring(ScoreboardGamesTranslator.getPeriodScores(homeData, awayData),
-                           ScoreboardGamesTranslator.getTotalScore(homeData, awayData));
+    return new GameScoring(ScoreboardGameTranslator.getPeriodScores(homeData, awayData),
+                           ScoreboardGameTranslator.getTotalScore(homeData, awayData));
   }
 
   static getPeriodScores(homeData, awayData) {
@@ -213,7 +215,7 @@ export default class ScoreboardGameTranslator {
     for (let index = 0; index < homePeriodScores.length; index++) {
       let homePeriodScore = homePeriodScores[length];
       let awayPeriodScore = awayPeriodScores[length];
-      periodScores.push(ScoreboardGamesTranslator.getPeriodScore(homePeriodScore, awayPeriodScore));
+      periodScores.push(ScoreboardGameTranslator.getPeriodScore(homePeriodScore, awayPeriodScore));
     }
 
     return List.of(periodScores);

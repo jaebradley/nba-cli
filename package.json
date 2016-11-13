@@ -27,7 +27,8 @@
     "q": "1.4.1",
     "immutable": "3.8.1",
     "enumify": "1.0.4",
-    "nba-stats-client": "0.0.2"
+    "nba-stats-client": "0.0.2",
+    "chai-immutable": "1.6.0"
   },
   "devDependencies": {
     "chai": "3.5.0",
