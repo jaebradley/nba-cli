@@ -12,46 +12,42 @@ import Period from '../models/Period';
 import Broadcast from '../models/Broadcast';
 import BroadcastMedium from '../models/BroadcastMedium';
 
-export default class GameScoreboardTranslator {
+export default class ScoreboardGameTranslator {
   static translate(data) {
-    if (!('sports_content' in data)) {
-      throw new ReferenceError('sports_content field missing');
-    }
-
-    if (!('game' in data.sports_content)) {
+    if (!('game' in data)) {
       throw new ReferenceError('game field missing');
     }
 
-    if (!('period_time' in data.sports_content.game)) {
+    if (!('period_time' in data.game)) {
       throw new ReferenceError('period_time field missing');
     }
 
-    if (!('broadcasters' in data.sports_content.game)) {
+    if (!('broadcasters' in data.game)) {
       throw new ReferenceError('broadcasters field missing');
     }
 
-    if (!('home' in data.sports_content.game)) {
+    if (!('home' in data.game)) {
       throw new ReferenceError('home field missing');
     }
 
-    if (!('visitor' in data.sports_content.game)) {
+    if (!('visitor' in data.game)) {
       throw new ReferenceError('visitor field missing');
     }
 
-    let gameData = data.sports_content.game;
+    let gameData = data.game;
     let periodTime = gameData.period_time;
     let broadcasters = gameData.broadcasters;
     let homeData = gameData.home;
     let awayData = gameData.visitor;
 
     return new GameScoreboard(gameData.id,
-                              GameScoreboardTranslator.getGameStatus(periodTime),
-                              GameScoreboardTranslator.getStartTimestamp(gameData),
-                              GameScoreboardTranslator.getLocation(gameData),
-                              GameScoreboardTranslator.getPeriod(periodTime),
-                              GameScoreboardTranslator.getBroadcasts(broadcasters),
-                              GameScoreboardTranslator.getMatchup(homeData, awayData),
-                              GameScoreboardTranslator.getScoring(homeData, awayData));
+                              ScoreboardGamesTranslator.getGameStatus(periodTime),
+                              ScoreboardGamesTranslator.getStartTimestamp(gameData),
+                              ScoreboardGamesTranslator.getLocation(gameData),
+                              ScoreboardGamesTranslator.getPeriod(periodTime),
+                              ScoreboardGamesTranslator.getBroadcasts(broadcasters),
+                              ScoreboardGamesTranslator.getMatchup(homeData, awayData),
+                              ScoreboardGamesTranslator.getScoring(homeData, awayData));
   }
 
   static getGameStatus(periodTime) {
@@ -139,9 +135,9 @@ export default class GameScoreboardTranslator {
     let radioBroadcasters = broadcasters.radio.broadcaster;
     let tvBroadcasters = broadcasters.tv.broadcaster;
 
-    radioBroadcasters.map(broadcast => broadcasts.push(GameScoreboardTranslator.getBroadcast(broadcast, BroadcastMedium.RADIO)));
+    radioBroadcasters.map(broadcast => broadcasts.push(ScoreboardGamesTranslator.getBroadcast(broadcast, BroadcastMedium.RADIO)));
 
-    tvBroadcasters.map(broadcast => broadcasts.push(GameScoreboardTranslator.getBroadcast(broadcast, BroadcastMedium.TV)));
+    tvBroadcasters.map(broadcast => broadcasts.push(ScoreboardGamesTranslator.getBroadcast(broadcast, BroadcastMedium.TV)));
 
     return List.of(broadcasts);
   }
@@ -163,8 +159,8 @@ export default class GameScoreboardTranslator {
   }
 
   static getMatchup(homeData, awayData) {
-    return new Matchup(GameScoreboardTranslator.getTeam(homeData),
-                       GameScoreboardTranslator.getTeam(awayData));
+    return new Matchup(ScoreboardGamesTranslator.getTeam(homeData),
+                       ScoreboardGamesTranslator.getTeam(awayData));
   }
 
   static getTeam(team) {
@@ -188,8 +184,8 @@ export default class GameScoreboardTranslator {
   }
 
   static getScoring(homeData, awayData) {
-    return new GameScoring(GameScoreboardTranslator.getPeriodScores(homeData, awayData),
-                           GameScoreboardTranslator.getTotalScore(homeData, awayData));
+    return new GameScoring(ScoreboardGamesTranslator.getPeriodScores(homeData, awayData),
+                           ScoreboardGamesTranslator.getTotalScore(homeData, awayData));
   }
 
   static getPeriodScores(homeData, awayData) {
@@ -221,7 +217,7 @@ export default class GameScoreboardTranslator {
     for (let index = 0; index < homePeriodScores.length; index++) {
       let homePeriodScore = homePeriodScores[length];
       let awayPeriodScore = awayPeriodScores[length];
-      periodScores.push(GameScoreboardTranslator.getPeriodScore(homePeriodScore, awayPeriodScore));
+      periodScores.push(ScoreboardGamesTranslator.getPeriodScore(homePeriodScore, awayPeriodScore));
     }
 
     return List.of(periodScores);
@@ -263,9 +259,5 @@ export default class GameScoreboardTranslator {
 
     return new Score(parseInt(homeData.score),
                      parseInt(awayData.score));
-  }
-
-  static getPeriodScores(homeData, awayData) {
-
   }
 }

@@ -1,0 +1,208 @@
+{
+  "sports_content": {
+    "sports_meta": {
+      "date_time": "20160930 1444",
+      "season_meta": {
+        "calendar_date": "20160930",
+        "season_year": "2016",
+        "stats_season_year": "2016",
+        "stats_season_id": "42015",
+        "stats_season_stage": "4",
+        "roster_season_year": "2016",
+        "schedule_season_year": "2016",
+        "standings_season_year": "2016",
+        "season_id": "12016",
+        "display_year": "2016-17",
+        "display_season": "Pre Season",
+        "season_stage": "1"
+      },
+      "next": {
+        "url": "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/20160504/games.json"
+      }
+    },
+    "games": {
+      "game": [
+        {
+          "id": "0041500202",
+          "game_url": "20160504/ATLCLE",
+          "season_id": "42015",
+          "date": "20160504",
+          "time": "2000",
+          "arena": "Quicken Loans Arena",
+          "city": "Cleveland",
+          "state": "OH",
+          "country": "",
+          "home_start_date": "20160504",
+          "home_start_time": "2000",
+          "visitor_start_date": "20160504",
+          "visitor_start_time": "2000",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "https://www.flashseats.com/default.aspx?pid=19&eo=1&ss=0&eod=s&fss=660140133"
+          },
+          "period_time": {
+            "period_value": "4",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+              {
+                "name": "TNT",
+                "long_nm": "",
+                "code": "tnt",
+                "url": "http://www.tntdrama.com/watchtnt/",
+                "mobile_url": "",
+                "home_visitor": "natl"
+              }
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "92.9 FM \"The Game\""
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "WTAM 1100 / 87.7 FM (ESP)"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "natl",
+                  "home_visitor": "natl",
+                  "display_name": "TNT"
+                },
+                {
+                  "scope": "can",
+                  "home_visitor": "can",
+                  "display_name": "TSN3/4/5"
+                }
+              ]
+            }
+          },
+          "playoffs": {
+            "round": "",
+            "conference": "",
+            "series": "",
+            "gameId": "0041500202",
+            "gameStatus": "1",
+            "game_number": "2",
+            "game_necessary_flag": "0",
+            "home_seed": "",
+            "visitor_seed": "",
+            "home_wins": "0",
+            "visitor_wins": "0"
+          },
+          "visitor": {
+            "id": "1610612737",
+            "team_key": "ATL",
+            "city": "Atlanta",
+            "abbreviation": "ATL",
+            "nickname": "Hawks",
+            "url_name": "hawks",
+            "team_code": "hawks",
+            "score": "98",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "20"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "18"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "32"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "28"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612739",
+            "team_key": "CLE",
+            "city": "Cleveland",
+            "abbreviation": "CLE",
+            "nickname": "Cavaliers",
+            "url_name": "cavaliers",
+            "team_code": "cavaliers",
+            "score": "123",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "35"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "39"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "32"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "17"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
