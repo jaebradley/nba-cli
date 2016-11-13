@@ -32,7 +32,7 @@ export default class GameScoreboard extends Record(defaults) {
       throw new TypeError('status must be a game status');
     }
 
-    if (startTimestamp !== 'number') {
+    if (typeof startTimestamp !== 'number') {
       throw new TypeError('start timestamp must be a number');
     }
 

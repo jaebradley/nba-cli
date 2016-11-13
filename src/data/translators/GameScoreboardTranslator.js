@@ -30,9 +30,28 @@ export default class GameScoreboardTranslator {
       throw new ReferenceError('broadcasters field missing');
     }
 
+    if (!('home' in data.sports_content.game)) {
+      throw new ReferenceError('home field missing');
+    }
+
+    if (!('visitor' in data.sports_content.game)) {
+      throw new ReferenceError('visitor field missing');
+    }
+
     let gameData = data.sports_content.game;
     let periodTime = gameData.period_time;
     let broadcasters = gameData.broadcasters;
+    let homeData = gameData.home;
+    let awayData = gameData.visitor;
+
+    return new GameScoreboard(gameData.id,
+                              GameScoreboardTranslator.getGameStatus(periodTime),
+                              GameScoreboardTranslator.getStartTimestamp(gameData),
+                              GameScoreboardTranslator.getLocation(gameData),
+                              GameScoreboardTranslator.getPeriod(periodTime),
+                              GameScoreboardTranslator.getBroadcasts(broadcasters),
+                              GameScoreboardTranslator.getMatchup(homeData, awayData),
+                              GameScoreboardTranslator.getScoring(homeData, awayData));
   }
 
   static getGameStatus(periodTime) {
@@ -141,5 +160,112 @@ export default class GameScoreboardTranslator {
     }
 
     return new Broadcast(broadcast.scope, broadcast.display_name, medium);
+  }
+
+  static getMatchup(homeData, awayData) {
+    return new Matchup(GameScoreboardTranslator.getTeam(homeData),
+                       GameScoreboardTranslator.getTeam(awayData));
+  }
+
+  static getTeam(team) {
+    if (!('city' in team)) {
+      throw new ReferenceError('city field missing');
+    }
+
+    if (!('nickname' in team)) {
+      throw new ReferenceError('nickname field missing');
+    }
+
+    if (!('abbreviation' in team)) {
+      throw new ReferenceError('abbreviation field missing');
+    }
+
+    return new Team({
+      city: team.city,
+      nickname: team.nickname,
+      abbreviation: team.abbreviation,
+    });
+  }
+
+  static getScoring(homeData, awayData) {
+    return new GameScoring(GameScoreboardTranslator.getPeriodScores(homeData, awayData),
+                           GameScoreboardTranslator.getTotalScore(homeData, awayData));
+  }
+
+  static getPeriodScores(homeData, awayData) {
+    if (!('linescores' in homeData)) {
+      throw new ReferenceError('home linescores field missing');
+    }
+
+    if (!('linescores' in awayData)) {
+      throw new ReferenceError('away linescores field missing');
+    }
+
+    if (!('period') in homeData.linescores) {
+      throw new ReferenceError('home period field missing');
+    }
+
+    if (!('period' in awayData.linescores)) {
+      throw new ReferenceError('away period field missing');
+    }
+
+    let homePeriodScores = homeData.linescores.period;
+    let awayPeriodScores = awayData.linescores.period;
+
+    if (homePeriodScores.length != awayPeriodScores.length) {
+      throw new Error('home period scores length is not equal to the away period scores length');
+    }
+
+    let periodScores = [];
+
+    for (let index = 0; index < homePeriodScores.length; index++) {
+      let homePeriodScore = homePeriodScores[length];
+      let awayPeriodScore = awayPeriodScores[length];
+      periodScores.push(GameScoreboardTranslator.getPeriodScore(homePeriodScore, awayPeriodScore));
+    }
+
+    return List.of(periodScores);
+  }
+
+  static getPeriodScore(homePeriodScore, awayPeriodScore) {
+    if (!('period_value' in homePeriodScore)){
+      throw new ReferenceError('home period value field missing');
+    }
+
+    if (!('score' in homePeriodScore)) {
+      throw new ReferenceError('home score field missing');
+    }
+
+    if (!('period_value' in awayPeriodScore)){
+      throw new ReferenceError('away period value field missing');
+    }
+
+    if (!('score' in awayPeriodScore)) {
+      throw new ReferenceError('away score field missing');
+    }
+
+    if (homePeriodScore.period_value != awayPeriodScore.period_value) {
+      throw new ReferenceError('different period values');
+    }
+
+    return new PeriodScore(homePeriodScore.period_value,
+                           new Score(homePeriodScore.score, awayPeriodScore.score));
+  }
+
+  static getTotalScore(homeData, awayData) {
+    if (!('score' in homeData)) {
+      throw new ReferenceError('home score field missing');
+    }
+
+    if (!('score' in awayData)) {
+      throw new ReferenceError('visitor score field missing');
+    }
+
+    return new Score(parseInt(homeData.score),
+                     parseInt(awayData.score));
+  }
+
+  static getPeriodScores(homeData, awayData) {
+
   }
 }
