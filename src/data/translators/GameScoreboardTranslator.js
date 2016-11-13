@@ -9,23 +9,25 @@ import GameStatus from '../models/GameStatus';
 import Constants from '../../constants/Constants';
 import Location from '../models/Location';
 import Period from '../models/Period';
+import Broadcast from '../models/Broadcast';
+import BroadcastMedium from '../models/BroadcastMedium';
 
 export default class GameScoreboardTranslator {
   static translate(data) {
     if (!('sports_content' in data)) {
-      throw new Error('sports_content field missing');
+      throw new ReferenceError('sports_content field missing');
     }
 
     if (!('game' in data.sports_content)) {
-      throw new Error('game field missing');
+      throw new ReferenceError('game field missing');
     }
 
     if (!('period_time' in data.sports_content.game)) {
-      throw new Error('period_time field missing');
+      throw new ReferenceError('period_time field missing');
     }
 
     if (!('broadcasters' in data.sports_content.game)) {
-      throw new Error('broadcasters field missing');
+      throw new ReferenceError('broadcasters field missing');
     }
 
     let gameData = data.sports_content.game;
@@ -35,7 +37,7 @@ export default class GameScoreboardTranslator {
 
   static getGameStatus(periodTime) {
     if (!('game_status') in periodTime) {
-      throw new Error('game_status field not in data');
+      throw new ReferenceError('game_status field not in data');
     }
 
     return GameStatus.from(periodTime.game_status);
@@ -43,11 +45,11 @@ export default class GameScoreboardTranslator {
 
   static getStartTimestamp(gameData) {
     if (!('date' in gameData)) {
-      throw new Error('date field missing');
+      throw new ReferenceError('date field missing');
     }
 
     if (!('time' in gameData)) {
-      throw new Error('time field missing');
+      throw new ReferenceError('time field missing');
     }
 
     let rawStartTime = `${gameData.date}${gameData.time}`;
@@ -61,15 +63,15 @@ export default class GameScoreboardTranslator {
 
   static getLocation(gameData) {
     if (!('arena' in gameData)) {
-      throw new Error('arena field missing');
+      throw new ReferenceError('arena field missing');
     }
 
     if (!('city' in gameData)) {
-      throw new Error('city field missing');
+      throw new ReferenceError('city field missing');
     }
 
     if (!('state' in gameData)) {
-      throw new Error('state field missing');
+      throw new ReferenceError('state field missing');
     }
 
     return new Location({
@@ -81,15 +83,15 @@ export default class GameScoreboardTranslator {
 
   static getPeriod(periodTime) {
     if (!('period_status' in periodTime)) {
-      throw new Error('period_status field missing');
+      throw new ReferenceError('period_status field missing');
     }
 
     if (!('period_value' in periodTime)) {
-      throw new Error('period_value field missing');
+      throw new ReferenceError('period_value field missing');
     }
 
     if (!('game_clock' in periodTime)) {
-      throw new Error('game_clock field missing');
+      throw new ReferenceError('game_clock field missing');
     }
 
     return new Period(parseInt(periodTime.period_value),
@@ -99,44 +101,45 @@ export default class GameScoreboardTranslator {
 
   static getBroadcasts(broadcasters) {
     if (!('radio' in broadcasters)) {
-      throw new Error('radio field missing');
+      throw new ReferenceError('radio field missing');
     }
 
     if (!('tv' in broadcasters)) {
-      throw new Error('tv field missing');
+      throw new ReferenceError('tv field missing');
     }
 
     if (!('broadcaster' in broadcasters.radio)) {
-      throw new Error('radio broadcasters field missing');
+      throw new ReferenceError('radio broadcasters field missing');
     }
 
     if (!('broadcaster' in broadcasters.tv)) {
-      throw new Error('tv broadcasters field missing');
+      throw new ReferenceError('tv broadcasters field missing');
     }
 
-    let broadcasts = new List();
-
+    let broadcasts = [];
     let radioBroadcasters = broadcasters.radio.broadcaster;
     let tvBroadcasters = broadcasters.tv.broadcaster;
 
     radioBroadcasters.map(broadcast =>
-                          broadcasts.push(GameScoreboardTranslator.getBroadcast(broadcast,
-                                                                                BroadcastMedium.RADIO)));
+                          broadcasts.push(GameScoreboardTranslator
+                                            .getBroadcast(broadcast,
+                                                          BroadcastMedium.RADIO)));
 
     tvBroadcasters.map(broadcast =>
-                       broadcasts.push(GameScoreboardTranslator.getBroadcast(broadcast,
-                                                                             BroadcastMedium.TV)));                                                                                BroadcastMedium.RADIO)));
+                       broadcasts.push(GameScoreboardTranslator
+                                        .getBroadcast(broadcast,
+                                                      BroadcastMedium.TV)));                                                                                BroadcastMedium.RADIO)));
 
-    return broadcasts;                                                                         
+    return List.of(broadcasts);
   }
 
   static getBroadcast(broadcast, medium) {
     if (!('scope' in broadcast)) {
-      throw new Error('broadcast scope field missing');
+      throw new ReferenceError('broadcast scope field missing');
     }
 
     if (!('display_name' in broadcast)) {
-      throw new Error('broadcast display name field missing');
+      throw new ReferenceError('broadcast display name field missing');
     }
 
     if (!(medium instanceof BroadcastMedium)) {
