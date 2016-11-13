@@ -1,0 +1,1871 @@
+{
+  "sports_content": {
+    "sports_meta": {
+      "date_time": "20160930 1423",
+      "season_meta": {
+        "calendar_date": "20160930",
+        "season_year": "2016",
+        "stats_season_year": "2016",
+        "stats_season_id": "42015",
+        "stats_season_stage": "4",
+        "roster_season_year": "2016",
+        "schedule_season_year": "2016",
+        "standings_season_year": "2016",
+        "season_id": "12016",
+        "display_year": "2016-17",
+        "display_season": "Pre Season",
+        "season_stage": "1"
+      },
+      "next": {
+        "url": "http://data.nba.com/data/5s/json/cms/noseason/scoreboard/20160102/games.json"
+      }
+    },
+    "games": {
+      "game": [
+        {
+          "id": "0021500495",
+          "game_url": "20160102/BKNBOS",
+          "season_id": "22015",
+          "date": "20160102",
+          "time": "1500",
+          "arena": "TD Garden",
+          "city": "Boston",
+          "state": "MA",
+          "country": "",
+          "home_start_date": "20160102",
+          "home_start_time": "1500",
+          "visitor_start_date": "20160102",
+          "visitor_start_time": "1500",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "http://m.ticketmaster.com/boston-celtics-vs-brooklyn-nets-boston-massachusetts-01-02-2016/event/01004F2316838C95?brand=nba&extcmp=gw501789&wt.mc_id=NBA_LEAGUE_SCHED_PG_PRI_BOS"
+          },
+          "period_time": {
+            "period_value": "4",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+              {
+                "name": "CSN-NE",
+                "long_nm": "Comcast Sports Net New England",
+                "code": "bosr",
+                "url": "http://www.csnne.com/CelticsStream",
+                "mobile_url": "",
+                "home_visitor": "home"
+              }
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "WFAN"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "98.5 The Sports Hub"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "CSNHD"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "YES"
+                }
+              ]
+            }
+          },
+          "visitor": {
+            "id": "1610612751",
+            "team_key": "BKN",
+            "city": "Brooklyn",
+            "abbreviation": "BKN",
+            "nickname": "Nets",
+            "url_name": "nets",
+            "team_code": "nets",
+            "score": "100",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "31"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "25"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "25"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "19"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612738",
+            "team_key": "BOS",
+            "city": "Boston",
+            "abbreviation": "BOS",
+            "nickname": "Celtics",
+            "url_name": "celtics",
+            "team_code": "celtics",
+            "score": "97",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "29"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "26"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "16"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "26"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "0021500496",
+          "game_url": "20160102/PHXSAC",
+          "season_id": "22015",
+          "date": "20160102",
+          "time": "1700",
+          "arena": "Sleep Train Arena",
+          "city": "Sacramento",
+          "state": "CA",
+          "country": "",
+          "home_start_date": "20160102",
+          "home_start_time": "1400",
+          "visitor_start_date": "20160102",
+          "visitor_start_time": "1500",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "http://m.ticketmaster.com/sacramento-kings-vs-phoenix-suns-sacramento-california-01-02-2016/event/1C004F19F29A6546?brand=nba&extcmp=gw502608&wt.mc_id=NBA_LEAGUE_SCHED_PG_PRI_SAC"
+          },
+          "period_time": {
+            "period_value": "4",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+              {
+                "name": "CSN-S",
+                "long_nm": "Comcast Sportsnet - Sacramento",
+                "code": "sacr",
+                "url": "http://www.csncalifornia.com/KingsStream",
+                "mobile_url": "",
+                "home_visitor": "home"
+              }
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "AZ Sports 98.7 FM"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "KHTK Sports 1140 AM"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "natl",
+                  "home_visitor": "natl",
+                  "display_name": "NBATV"
+                },
+                {
+                  "scope": "can",
+                  "home_visitor": "can",
+                  "display_name": "NBATV Canada"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "CSN-CA"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "FSAZ"
+                }
+              ]
+            }
+          },
+          "visitor": {
+            "id": "1610612756",
+            "team_key": "PHX",
+            "city": "Phoenix",
+            "abbreviation": "PHX",
+            "nickname": "Suns",
+            "url_name": "suns",
+            "team_code": "suns",
+            "score": "119",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "18"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "35"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "34"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "32"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612758",
+            "team_key": "SAC",
+            "city": "Sacramento",
+            "abbreviation": "SAC",
+            "nickname": "Kings",
+            "url_name": "kings",
+            "team_code": "kings",
+            "score": "142",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "31"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "28"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "44"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "39"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "0021500497",
+          "game_url": "20160102/OKCCHA",
+          "season_id": "22015",
+          "date": "20160102",
+          "time": "1900",
+          "arena": "Time Warner Cable Arena",
+          "city": "Charlotte",
+          "state": "NC",
+          "country": "",
+          "home_start_date": "20160102",
+          "home_start_time": "1900",
+          "visitor_start_date": "20160102",
+          "visitor_start_time": "1800",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "http://m.ticketmaster.com/charlotte-hornets-vs-oklahoma-city-thunder-charlotte-north-carolina-01-02-2016/event/0E004F13C840678F?brand=nba&extcmp=gw501873&wt.mc_id=NBA_LEAGUE_SCHED_PG_PRI_CHA"
+          },
+          "period_time": {
+            "period_value": "4",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "WWLS 98.1FM OKC"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "WFNZ 610 AM"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "Fox Sports Southeast - Charlotte"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "FS Oklahoma HD"
+                }
+              ]
+            }
+          },
+          "visitor": {
+            "id": "1610612760",
+            "team_key": "OKC",
+            "city": "Oklahoma City",
+            "abbreviation": "OKC",
+            "nickname": "Thunder",
+            "url_name": "thunder",
+            "team_code": "thunder",
+            "score": "109",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "34"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "32"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "21"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "22"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612766",
+            "team_key": "CHA",
+            "city": "Charlotte",
+            "abbreviation": "CHA",
+            "nickname": "Hornets",
+            "url_name": "hornets",
+            "team_code": "hornets",
+            "score": "90",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "22"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "32"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "22"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "14"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "0021500498",
+          "game_url": "20160102/DETIND",
+          "season_id": "22015",
+          "date": "20160102",
+          "time": "1900",
+          "arena": "Bankers Life Fieldhouse",
+          "city": "Indianapolis",
+          "state": "IN",
+          "country": "US",
+          "home_start_date": "20160102",
+          "home_start_time": "1900",
+          "visitor_start_date": "20160102",
+          "visitor_start_time": "1900",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "http://m.ticketmaster.com/indiana-pacers-vs-detroit-pistons-indianapolis-indiana-01-02-2016/event/05004F0DBADE426D?brand=nba&extcmp=gw502075&wt.mc_id=NBA_LEAGUE_SCHED_PG_PRI_IND"
+          },
+          "period_time": {
+            "period_value": "4",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "105.1 FM"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "1070 The Fan"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "FSI"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "FS Detroit"
+                }
+              ]
+            }
+          },
+          "visitor": {
+            "id": "1610612765",
+            "team_key": "DET",
+            "city": "Detroit",
+            "abbreviation": "DET",
+            "nickname": "Pistons",
+            "url_name": "pistons",
+            "team_code": "pistons",
+            "score": "82",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "20"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "22"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "17"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "23"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612754",
+            "team_key": "IND",
+            "city": "Indiana",
+            "abbreviation": "IND",
+            "nickname": "Pacers",
+            "url_name": "pacers",
+            "team_code": "pacers",
+            "score": "94",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "24"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "17"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "23"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "30"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "0021500499",
+          "game_url": "20160102/ORLCLE",
+          "season_id": "22015",
+          "date": "20160102",
+          "time": "1930",
+          "arena": "Quicken Loans Arena",
+          "city": "Cleveland",
+          "state": "OH",
+          "country": "",
+          "home_start_date": "20160102",
+          "home_start_time": "1930",
+          "visitor_start_date": "20160102",
+          "visitor_start_time": "1930",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "http://www.nba.com/cavaliers/tickets/individual/?&utm_source=nba&utm_medium=link&utm_campaign=nba-mobile"
+          },
+          "period_time": {
+            "period_value": "4",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "ESPN 580 / Salsa 98.1 FM (ESP)"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "WTAM 1100 / 100.7 WMMS / 87.7 FM (ESP)"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "can",
+                  "home_visitor": "can",
+                  "display_name": "Sportsnet One"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "FSOhio"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "FS Florida"
+                }
+              ]
+            }
+          },
+          "visitor": {
+            "id": "1610612753",
+            "team_key": "ORL",
+            "city": "Orlando",
+            "abbreviation": "ORL",
+            "nickname": "Magic",
+            "url_name": "magic",
+            "team_code": "magic",
+            "score": "79",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "13"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "19"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "21"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "26"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612739",
+            "team_key": "CLE",
+            "city": "Cleveland",
+            "abbreviation": "CLE",
+            "nickname": "Cavaliers",
+            "url_name": "cavaliers",
+            "team_code": "cavaliers",
+            "score": "104",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "29"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "26"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "26"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "23"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "0021500500",
+          "game_url": "20160102/MILMIN",
+          "season_id": "22015",
+          "date": "20160102",
+          "time": "2000",
+          "arena": "Target Center",
+          "city": "Minneapolis",
+          "state": "MN",
+          "country": "",
+          "home_start_date": "20160102",
+          "home_start_time": "1900",
+          "visitor_start_date": "20160102",
+          "visitor_start_time": "1900",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "http://www.nba.com/timberwolves/tickets"
+          },
+          "period_time": {
+            "period_value": "4",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "AM 620 WTMJ"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "830 WCCO"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "can",
+                  "home_visitor": "can",
+                  "display_name": "TSN2"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "FS North"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "Fox Sports Wisconsin"
+                }
+              ]
+            }
+          },
+          "visitor": {
+            "id": "1610612749",
+            "team_key": "MIL",
+            "city": "Milwaukee",
+            "abbreviation": "MIL",
+            "nickname": "Bucks",
+            "url_name": "bucks",
+            "team_code": "bucks",
+            "score": "95",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "15"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "29"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "28"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "23"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612750",
+            "team_key": "MIN",
+            "city": "Minnesota",
+            "abbreviation": "MIN",
+            "nickname": "Timberwolves",
+            "url_name": "timberwolves",
+            "team_code": "timberwolves",
+            "score": "85",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "28"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "19"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "23"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "15"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "0021500501",
+          "game_url": "20160102/NOPDAL",
+          "season_id": "22015",
+          "date": "20160102",
+          "time": "2030",
+          "arena": "American Airlines Center",
+          "city": "Dallas",
+          "state": "TX",
+          "country": "",
+          "home_start_date": "20160102",
+          "home_start_time": "1930",
+          "visitor_start_date": "20160102",
+          "visitor_start_time": "1930",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "http://m.ticketmaster.com/dallas-mavericks-vs-new-orleans-pelicans-dallas-texas-01-02-2016/event/0C004F0B95E43029?brand=nba&extcmp=gw501951&wt.mc_id=NBA_LEAGUE_SCHED_PG_PRI_DAL"
+          },
+          "period_time": {
+            "period_value": "4",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "WRNO 99.5FM"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "103.3 ESPN"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "FSSW"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "FSNOLA"
+                }
+              ]
+            }
+          },
+          "visitor": {
+            "id": "1610612740",
+            "team_key": "NOP",
+            "city": "New Orleans",
+            "abbreviation": "NOP",
+            "nickname": "Pelicans",
+            "url_name": "pelicans",
+            "team_code": "pelicans",
+            "score": "105",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "26"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "22"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "26"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "31"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612742",
+            "team_key": "DAL",
+            "city": "Dallas",
+            "abbreviation": "DAL",
+            "nickname": "Mavericks",
+            "url_name": "mavericks",
+            "team_code": "mavericks",
+            "score": "98",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "25"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "22"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "19"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "32"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "0021500502",
+          "game_url": "20160102/HOUSAS",
+          "season_id": "22015",
+          "date": "20160102",
+          "time": "2030",
+          "arena": "AT&T Center",
+          "city": "San Antonio",
+          "state": "TX",
+          "country": "",
+          "home_start_date": "20160102",
+          "home_start_time": "1930",
+          "visitor_start_date": "20160102",
+          "visitor_start_time": "1930",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "http://m.ticketmaster.com/san-antonio-spurs-vs-houston-rockets-san-antonio-texas-01-02-2016/event/3A004F1BC13E2D4B?brand=nba&extcmp=gw502652&wt.mc_id=NBA_LEAGUE_SCHED_PG_PRI_SAN"
+          },
+          "period_time": {
+            "period_value": "4",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "790 AM"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "WOAI 1200AM"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "natl",
+                  "home_visitor": "natl",
+                  "display_name": "NBATV"
+                },
+                {
+                  "scope": "can",
+                  "home_visitor": "can",
+                  "display_name": "NBATV Canada"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "FSSW"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "ROOT"
+                }
+              ]
+            }
+          },
+          "visitor": {
+            "id": "1610612745",
+            "team_key": "HOU",
+            "city": "Houston",
+            "abbreviation": "HOU",
+            "nickname": "Rockets",
+            "url_name": "rockets",
+            "team_code": "rockets",
+            "score": "103",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "27"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "28"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "17"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "31"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612759",
+            "team_key": "SAS",
+            "city": "San Antonio",
+            "abbreviation": "SAS",
+            "nickname": "Spurs",
+            "url_name": "spurs",
+            "team_code": "spurs",
+            "score": "121",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "29"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "31"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "36"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "25"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "0021500503",
+          "game_url": "20160102/MEMUTA",
+          "season_id": "22015",
+          "date": "20160102",
+          "time": "2100",
+          "arena": "Vivint Smart Home Arena",
+          "city": "Salt Lake City",
+          "state": "UT",
+          "country": "",
+          "home_start_date": "20160102",
+          "home_start_time": "1900",
+          "visitor_start_date": "20160102",
+          "visitor_start_time": "2000",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "http://www.ticketingcentral.com/V2/Home.aspx?I=ZhmDAAAAAADga3bNAQAAAAAs%2fv%2f%2f%2fwD%2f%2f%2f%2f%2fBGphenoA%2f%2f%2f%2f%2f%2f%2f%2f%2f%2f8%3d"
+          },
+          "period_time": {
+            "period_value": "5",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "WMFS"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "KZNS"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "ROOT"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "Fox Sports Southeast"
+                }
+              ]
+            }
+          },
+          "visitor": {
+            "id": "1610612763",
+            "team_key": "MEM",
+            "city": "Memphis",
+            "abbreviation": "MEM",
+            "nickname": "Grizzlies",
+            "url_name": "grizzlies",
+            "team_code": "grizzlies",
+            "score": "87",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "25"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "20"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "24"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "15"
+                },
+                {
+                  "period_value": "5",
+                  "period_name": "OT1",
+                  "score": "3"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612762",
+            "team_key": "UTA",
+            "city": "Utah",
+            "abbreviation": "UTA",
+            "nickname": "Jazz",
+            "url_name": "jazz",
+            "team_code": "jazz",
+            "score": "92",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "28"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "18"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "20"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "18"
+                },
+                {
+                  "period_value": "5",
+                  "period_name": "OT1",
+                  "score": "8"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "0021500504",
+          "game_url": "20160102/DENGSW",
+          "season_id": "22015",
+          "date": "20160102",
+          "time": "2230",
+          "arena": "ORACLE Arena",
+          "city": "Oakland",
+          "state": "CA",
+          "country": "",
+          "home_start_date": "20160102",
+          "home_start_time": "1930",
+          "visitor_start_date": "20160102",
+          "visitor_start_time": "2030",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "http://m.ticketmaster.com/golden-state-warriors-vs-denver-nuggets-oakland-california-01-02-2016/event/1C004F05DB245928?brand=nba&extcmp=gw502033&wt.mc_id=NBA_LEAGUE_SCHED_PG_PRI_GSW"
+          },
+          "period_time": {
+            "period_value": "5",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+              {
+                "name": "CSN-BA",
+                "long_nm": "Comcast Sports Net - Bay Area",
+                "code": "gswr",
+                "url": "http://www.csnbayarea.com/WarriorsStream",
+                "mobile_url": "",
+                "home_visitor": "home"
+              }
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "KKFN 104.3FM"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "KNBR 680 AM"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "can",
+                  "home_visitor": "can",
+                  "display_name": "TSN2"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "CSN Bay Area"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "Altitude"
+                }
+              ]
+            }
+          },
+          "visitor": {
+            "id": "1610612743",
+            "team_key": "DEN",
+            "city": "Denver",
+            "abbreviation": "DEN",
+            "nickname": "Nuggets",
+            "url_name": "nuggets",
+            "team_code": "nuggets",
+            "score": "108",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "13"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "34"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "30"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "25"
+                },
+                {
+                  "period_value": "5",
+                  "period_name": "OT1",
+                  "score": "6"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612744",
+            "team_key": "GSW",
+            "city": "Golden State",
+            "abbreviation": "GSW",
+            "nickname": "Warriors",
+            "url_name": "warriors",
+            "team_code": "warriors",
+            "score": "111",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "37"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "26"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "27"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "12"
+                },
+                {
+                  "period_value": "5",
+                  "period_name": "OT1",
+                  "score": "9"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "0021500505",
+          "game_url": "20160102/PHILAC",
+          "season_id": "22015",
+          "date": "20160102",
+          "time": "2230",
+          "arena": "Staples Center",
+          "city": "Los Angeles",
+          "state": "CA",
+          "country": "",
+          "home_start_date": "20160102",
+          "home_start_time": "1930",
+          "visitor_start_date": "20160102",
+          "visitor_start_time": "2230",
+          "previewAvailable": "1",
+          "recapAvailable": "1",
+          "notebookAvailable": "0",
+          "tnt_ot": "0",
+          "buzzerBeater": "0",
+          "ticket": {
+            "ticket_link": "http://m.ticketsnow.com/NBA/ViewTickets/1771809/Philadelphia%2076ers%20at%20Los%20Angeles%20Clippers%20at%20STAPLES%20Center%20on%20Saturday%2c%20January%2002%2c%202016%20730%20PM.html?extcmp=gw504212&wt.mc_id=NBA_LEAGUE_SCHED_PG_RESALE_LAC"
+          },
+          "period_time": {
+            "period_value": "4",
+            "period_status": "Final",
+            "game_status": "3",
+            "game_clock": "",
+            "total_periods": "4",
+            "period_name": "Qtr"
+          },
+          "lp": {
+            "lp_video": "false",
+            "condensed_bb": "false",
+            "visitor": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            },
+            "home": {
+              "audio": {
+                "ENG": "false",
+                "SPA": "false"
+              },
+              "video": {
+                "avl": "false",
+                "onAir": "false",
+                "archBB": "false"
+              }
+            }
+          },
+          "dl": {
+            "link": [
+              {
+                "name": "CSN-P",
+                "long_nm": "Comcast Sportsnet - Philadelphia",
+                "code": "phir",
+                "url": "http://www.csnphilly.com/SixersStream",
+                "mobile_url": "",
+                "home_visitor": "visitor"
+              }
+            ]
+          },
+          "broadcasters": {
+            "radio": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "97.5 The Fanatic"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "The Beast 980/KWKW 1330AM"
+                }
+              ]
+            },
+            "tv": {
+              "broadcaster": [
+                {
+                  "scope": "local",
+                  "home_visitor": "home",
+                  "display_name": "PRIME TICKET"
+                },
+                {
+                  "scope": "local",
+                  "home_visitor": "visitor",
+                  "display_name": "CSN"
+                }
+              ]
+            }
+          },
+          "visitor": {
+            "id": "1610612755",
+            "team_key": "PHI",
+            "city": "Philadelphia",
+            "abbreviation": "PHI",
+            "nickname": "76ers",
+            "url_name": "sixers",
+            "team_code": "sixers",
+            "score": "99",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "29"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "23"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "22"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "25"
+                }
+              ]
+            }
+          },
+          "home": {
+            "id": "1610612746",
+            "team_key": "LAC",
+            "city": "Los Angeles",
+            "abbreviation": "LAC",
+            "nickname": "Clippers",
+            "url_name": "clippers",
+            "team_code": "clippers",
+            "score": "130",
+            "linescores": {
+              "period": [
+                {
+                  "period_value": "1",
+                  "period_name": "Q1",
+                  "score": "31"
+                },
+                {
+                  "period_value": "2",
+                  "period_name": "Q2",
+                  "score": "38"
+                },
+                {
+                  "period_value": "3",
+                  "period_name": "Q3",
+                  "score": "34"
+                },
+                {
+                  "period_value": "4",
+                  "period_name": "Q4",
+                  "score": "27"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}
