@@ -23,7 +23,7 @@ let defaults = {
 };
 
 export default class GameScoreboard extends Record(defaults) {
-  constructor(id, status, startTimestamp, location, period, broadcasts, matchup, gameScoring) {
+  constructor(id, status, startTimestamp, location, period, broadcasts, matchup, scoring) {
     if (typeof id !== 'string') {
       throw new TypeError('id must be a string');
     }

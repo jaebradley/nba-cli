@@ -6,9 +6,13 @@ import jstz from 'jstimezonedetect';
 
 import HtmlEscaper from '../../utils/HtmlEscaper';
 import GameStatus from '../models/GameStatus';
+import GameScoring from '../models/GameScoring';
+import GameScoreboard from '../models/GameScoreboard';
 import Constants from '../../constants/Constants';
 import Location from '../models/Location';
 import Period from '../models/Period';
+import PeriodScore from '../models/PeriodScore';
+import Score from '../models/Score';
 import Matchup from '../models/Matchup';
 import Team from '../models/Team';
 import Broadcast from '../models/Broadcast';
@@ -38,7 +42,7 @@ export default class ScoreboardGameTranslator {
     let homeData = data.home;
     let awayData = data.visitor;
 
-    return new GameScoreboard(gameData.id,
+    return new GameScoreboard(data.id,
                               ScoreboardGameTranslator.getGameStatus(periodTime),
                               ScoreboardGameTranslator.getStartTimestamp(data),
                               ScoreboardGameTranslator.getLocation(data),
@@ -53,7 +57,12 @@ export default class ScoreboardGameTranslator {
       throw new ReferenceError('game_status field not in data');
     }
 
-    return GameStatus.from(periodTime.game_status);
+    for (let status of GameStatus.enumValues) {
+      if (status.nbaStatsGameStatus == periodTime.game_status) {
+        return status;
+      }
+    }
+    throw new ReferenceError('unknown nba stats game status');
   }
 
   static getStartTimestamp(gameData) {
@@ -213,8 +222,8 @@ export default class ScoreboardGameTranslator {
     let periodScores = [];
 
     for (let index = 0; index < homePeriodScores.length; index++) {
-      let homePeriodScore = homePeriodScores[length];
-      let awayPeriodScore = awayPeriodScores[length];
+      let homePeriodScore = homePeriodScores[index];
+      let awayPeriodScore = awayPeriodScores[index];
       periodScores.push(ScoreboardGameTranslator.getPeriodScore(homePeriodScore, awayPeriodScore));
     }
 
@@ -242,8 +251,8 @@ export default class ScoreboardGameTranslator {
       throw new ReferenceError('different period values');
     }
 
-    return new PeriodScore(homePeriodScore.period_value,
-                           new Score(homePeriodScore.score, awayPeriodScore.score));
+    return new PeriodScore(parseInt(homePeriodScore.period_value),
+                           new Score(parseInt(homePeriodScore.score), parseInt(awayPeriodScore.score)));
   }
 
   static getTotalScore(homeData, awayData) {

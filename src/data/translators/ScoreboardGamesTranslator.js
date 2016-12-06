@@ -24,7 +24,7 @@ export default class ScoreboardGamesTranslator {
 
     let translatedGames = [];
 
-    games.map(game => translatedGames.push(ScoreboardGameTranslator.translate(games)));
+    games.map(game => translatedGames.push(ScoreboardGameTranslator.translate(game)));
 
     return List.of(translatedGames);
   }

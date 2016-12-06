@@ -14,10 +14,6 @@ let defaults = {
 
 export default class GameScoring extends Record(defaults) {
   constructor(periodScores, totalScore) {
-    if (!(periodScores instanceof List)) {
-      throw new TypeError('period scores must be an array');
-    }
-
     if (!(totalScore instanceof Score)) {
       throw new TypeError('total score must be a Score object');
     }

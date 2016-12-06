@@ -3,15 +3,6 @@
 import {Enum} from 'enumify';
 
 export default class GameStatus extends Enum {
-  static from(nbaStatsGameStatus) {
-    for (let status of GameStatus.enumValues) {
-      if (status.nbaStatsGameStatus == nbaStatsGameStatus) {
-        return GameStatus.enumValueOf(status);
-      }
-    }
-
-    throw new ReferenceError('unknown nba stats game status');
-  }
 };
 
 GameStatus.initEnum({
@@ -24,7 +15,7 @@ GameStatus.initEnum({
   HALFTIME: {
     nbaStatsGameStatus: 'Halftime'
   },
-  FINAl: {
+  FINAL: {
     nbaStatsGameStatus: 3,
   },
 });
