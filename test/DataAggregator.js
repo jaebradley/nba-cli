@@ -21,4 +21,9 @@ describe('Test Data Aggregator', function() {
     return DataAggregator.getTranslatedPlayByPlays(2016, 5, 8, List.of("0041500234"))
                          .then(playByPlay => console.log(playByPlay));
   });
+
+  it('tests data aggregation', function() {
+    return DataAggregator.aggregate(2016, 1, 2)
+                         .then(data => console.log(data));
+  });
 });
