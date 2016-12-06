@@ -2,6 +2,8 @@
 
 import Client from 'nba-stats-client';
 
+import {List} from 'immutable';
+
 import ScoreboardGamesTranslator from '../translators/ScoreboardGamesTranslator';
 
 export default class DataAggregator {

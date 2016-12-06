@@ -1,6 +1,9 @@
 'use es6';
 
-import {expect, assert} from 'chai';
+import chai from 'chai';
+import chaiImmutable from 'chai-immutable';
+import {List} from 'immutable';
+
 import BoxScoreDataTranslator from '../src/translators/data/BoxScoreDataTranslator';
 import GameBoxScoreLeaders from '../src/data/models/GameBoxScoreLeaders';
 import TeamBoxScoreLeaders from '../src/data/models/TeamBoxScoreLeaders';
@@ -13,26 +16,26 @@ import pregameBoxScore from './data/boxscore/pregame.json';
 
 describe('Box score data translator', function() {
   it('translate pregame box score data', function() {
-    assert.isOk(BoxScoreDataTranslator.translateBoxScoreData(pregameBoxScore).equals(new GameBoxScoreLeaders()), 'pregame box score and empty game box score leaders are equal');
+    chai.assert.isOk(BoxScoreDataTranslator.translateBoxScoreData(pregameBoxScore).equals(new GameBoxScoreLeaders()), 'pregame box score and empty game box score leaders are equal');
   });
 
   it('translate first quarter box score data', function() {
     const visitorPointsLeaders = new StatisticalLeaders({
       value: 2,
-      leaders: [
+      leaders: List.of([
         new Player('Kevin', 'Durant'),
         new Player('Serge', 'Ibaka'),
         new Player('Andre', 'Roberson'),
         new Player('Steven', 'Adams'),
-      ]
+      ])
     });
     const visitorAssistsLeaders = new StatisticalLeaders({
       value: 2,
-      leaders: [new Player('Russell', 'Westbrook')]
+      leaders: List.of([new Player('Russell', 'Westbrook')])
     });
     const visitorReboundsLeaders = new StatisticalLeaders({
       value: 2,
-      leaders: [new Player('Steven', 'Adams')]
+      leaders: List.of([new Player('Steven', 'Adams')])
     })
     const visitorBoxScoreLeaders = new TeamBoxScoreLeaders({
       points: visitorPointsLeaders,
@@ -42,19 +45,19 @@ describe('Box score data translator', function() {
 
     const homePointsLeaders = new StatisticalLeaders({
       value: 4,
-      leaders: [new Player('Klay', 'Thompson')]
+      leaders: List.of([new Player('Klay', 'Thompson')])
     });
     const homeAssistsLeaders = new StatisticalLeaders({
       value: 1,
-      leaders: [
+      leaders: List.of([
         new Player('Andrew', 'Bogut'),
         new Player('Stephen', 'Curry'),
         new Player('Draymond', 'Green'),
-      ]
+      ])
     });
     const homeReboundsLeaders = new StatisticalLeaders({
       value: 1,
-      leaders: [new Player('Draymond', 'Green')]
+      leaders: List.of([new Player('Draymond', 'Green')])
     })
     const homeBoxScoreLeaders = new TeamBoxScoreLeaders({
       points: homePointsLeaders,
@@ -63,7 +66,7 @@ describe('Box score data translator', function() {
     });
 
     const expected = new GameBoxScoreLeaders({home: homeBoxScoreLeaders, visitor: visitorBoxScoreLeaders});
-    expect(BoxScoreDataTranslator.translateBoxScoreData(firstQuarterBoxScore)).to.eql(expected);
+    chai.expect(BoxScoreDataTranslator.translateBoxScoreData(firstQuarterBoxScore)).to.eql(expected);
   });
 
   it('translate first quarter stat leader', function() {
@@ -72,20 +75,20 @@ describe('Box score data translator', function() {
 
     const expectedPoints = new StatisticalLeaders({
       value: 2,
-      leaders: [
+      leaders: List.of([
         new Player('Kevin', 'Durant'),
         new Player('Serge', 'Ibaka'),
         new Player('Andre', 'Roberson'),
         new Player('Steven', 'Adams'),
-      ]
+      ])
     });
 
     const expectedAssists = new StatisticalLeaders({
       value: 2,
-      leaders: [new Player('Russell', 'Westbrook')]
+      leaders: List.of([new Player('Russell', 'Westbrook')])
     });
 
-    expect(BoxScoreDataTranslator.translateStatLeaders(visitorPointsLeaders)).to.eql(expectedPoints);
-    expect(BoxScoreDataTranslator.translateStatLeaders(visitorAssistsLeaders)).to.eql(expectedAssists);
+    chai.expect(BoxScoreDataTranslator.translateStatLeaders(visitorPointsLeaders)).to.eql(expectedPoints);
+    chai.expect(BoxScoreDataTranslator.translateStatLeaders(visitorAssistsLeaders)).to.eql(expectedAssists);
   });
 });

@@ -28,7 +28,7 @@ describe('translate scoreboard game', function() {
   });
 
   it('tests getting game status', function() {
-    chai.expect(ScoreboardGameTranslator.getGameStatus(periodTime)).to.equal(GameStatus.FINAL);
+    chai.expect(ScoreboardGameTranslator.getGameStatus(periodTime)).to.eql(GameStatus.FINAL);
   });
 
   it('tests getting start timestamp', function() {
@@ -50,14 +50,14 @@ describe('translate scoreboard game', function() {
   });
 
   it('tests getting broadcasts', function() {
-    // let expectedBroadcasts = Immutable.List.of(
-    //   new Broadcast('local', 'WTAM 1100 / 87.7 FM (ESP)', BroadcastMedium.RADIO),
-    //   new Broadcast('local', '92.9 FM \"The Game\"', BroadcastMedium.RADIO),
-    //   new Broadcast('natl', 'ABC', BroadcastMedium.TV),
-    //   new Broadcast('can', 'TSN', BroadcastMedium.TV),
-    // );
-    // let translatedBroadcasts = ScoreboardGameTranslator.getBroadcasts(broadcasters);
-    // chai.expect(translatedBroadcasts).to.equal(expectedBroadcasts);
+    let expectedBroadcasts = Immutable.List.of([
+      new Broadcast('local', 'WTAM 1100 / 87.7 FM (ESP)', BroadcastMedium.RADIO),
+      new Broadcast('local', '92.9 FM \"The Game\"', BroadcastMedium.RADIO),
+      new Broadcast('natl', 'ABC', BroadcastMedium.TV),
+      new Broadcast('can', 'TSN', BroadcastMedium.TV),
+    ]);
+    let translatedBroadcasts = ScoreboardGameTranslator.getBroadcasts(broadcasters);
+    chai.expect(translatedBroadcasts).to.eql(expectedBroadcasts);
   });
 
   it('tests getting team', function() {
