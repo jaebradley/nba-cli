@@ -32,7 +32,7 @@ describe('translate scoreboard game', function() {
   });
 
   it('tests getting start timestamp', function() {
-    chai.expect(ScoreboardGameTranslator.getStartTimestamp(finalGame)).to.equal(1462735800000);
+    chai.expect(ScoreboardGameTranslator.getStartTimestamp(finalGame)).to.equal(1462721400000);
   });
 
   it('tests getting location', function() {
