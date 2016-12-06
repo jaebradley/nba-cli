@@ -15,7 +15,7 @@ GameStatus.initEnum({
   HALFTIME: {
     nbaStatsGameStatus: 'Halftime'
   },
-  FINAl: {
+  FINAL: {
     nbaStatsGameStatus: 3,
   },
 });
