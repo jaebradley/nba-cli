@@ -28,6 +28,9 @@ export default class DataAggregator {
                                });
                                data = data.push(aggregatedGame);
                              }
+                             data = data.sortBy(function(value) {
+                               return value.metadata.id;
+                             });
                              return data;
                            });
                          });
