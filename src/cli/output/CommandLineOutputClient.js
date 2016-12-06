@@ -11,14 +11,13 @@ export default class CommandLineOutputClient {
   constructor() {
     this.client = new GameDataClient();
     this.startedGameTableCreator = new StartedGameTableCreator();
-    this.playByPlayTableCreator = new PlayByPlayTableCreator();
     this.upcomingGameTableCreator = new UpcomingGameTableCreator();
     this.boxScoreTableCreator = new BoxScoreTableCreator();
   }
 
   generateFirstRow(data) {
     const row = [this.startedGameTableCreator.create(data)];
-    row.push(this.playByPlayTableCreator.create(data.playByPlay));
+    row.push(PlayByPlayTableCreator.create(data.playByPlay));
     return row;
   }
 

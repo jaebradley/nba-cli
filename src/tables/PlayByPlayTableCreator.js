@@ -5,7 +5,7 @@ import Formatter from './formatters/Formatter';
 
 export default class PlayByPlayTableCreator {
 
-  create(playByPlayData)  {
+  static create(playByPlayData)  {
     let table = new Table({ head: PlayByPlayTableCreator.getHeader() });
     playByPlayData.forEach(play => table.push(PlayByPlayTableCreator.generateRow(play)));
     return table.toString();
