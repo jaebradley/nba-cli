@@ -27,8 +27,9 @@
     "q": "1.4.1",
     "immutable": "3.8.1",
     "enumify": "1.0.4",
-    "nba-stats-client": "0.0.2",
-    "chai-immutable": "1.6.0"
+    "nba-stats-client": "0.0.3",
+    "chai-immutable": "1.6.0",
+    "bluebird": "3.4.5"
   },
   "devDependencies": {
     "chai": "3.5.0",
