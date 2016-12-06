@@ -19,7 +19,6 @@ export default class DataAggregator {
     }
 
     return Client.getGames(year, month, day)
-                 .then(games => console.log(games))
                  .then(games => ScoreboardGamesTranslator.translate(games));
   }
 };
