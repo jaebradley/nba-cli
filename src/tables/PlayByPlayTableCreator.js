@@ -1,25 +1,27 @@
 import Table from 'cli-table2';
+import {List} from 'immutable';
 
 import Formatter from './formatters/Formatter';
 
 export default class PlayByPlayTableCreator {
 
-  constructor() {
-    this.header = ['Clock', 'Description'];
-  }
-
-  create(playByPlayData)  {
-    const table = new Table({ head: this.header });
-    playByPlayData.map(play => table.push(PlayByPlayTableCreator.generateRow(play)));
+  static create(playByPlayData)  {
+    let table = new Table({ head: PlayByPlayTableCreator.getHeader() });
+    playByPlayData.forEach(play => table.push(PlayByPlayTableCreator.generateRow(play)));
     return table.toString();
   }
 
   static generateFormattedPlayClock(playClock, playPeriod) {
-    const formattedGamePeriod = Formatter.formatLiveGamePeriod(playPeriod);
+    let formattedGamePeriod = Formatter.formatLiveGamePeriod(playPeriod);
     return `${playClock} ${formattedGamePeriod}`;
   }
 
   static generateRow(play) {
-    return [PlayByPlayTableCreator.generateFormattedPlayClock(play.clock, play.period), play.description];
+    let playClock = PlayByPlayTableCreator.generateFormattedPlayClock(play.clock, play.period);
+    return List.of(playClock, play.description);
+  }
+
+  static getHeader() {
+    return List.of('Clock', 'Description');
   }
 }
