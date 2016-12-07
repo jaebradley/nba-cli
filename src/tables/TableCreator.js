@@ -7,7 +7,7 @@ import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';
 export default class TableCreator {
   static create(data) {
     console.log(TableCreator.createActiveGamesTables(data.active));
-    console.log(TableCreator.createActiveGamesTables(data.upcoming));
+    console.log(TableCreator.createUpcomingGamesTable(data.upcoming));
   }
 
   static createUpcomingGamesTable(games) {
