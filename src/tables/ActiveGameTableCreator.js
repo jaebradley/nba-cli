@@ -56,7 +56,7 @@ export default class ActiveGameTableCreator {
     );
   }
 
-  generateLinescoresRows(homeAbbreviation, visitorAbbreviation, periodScores, totalScore) {
+  static generateLinescoresRows(homeAbbreviation, visitorAbbreviation, periodScores, totalScore) {
     let homeRow = List.of(emoji.get(Constants.HOME_EMOJI_VALUE), Formatter.formatTeamAbbreviation(homeAbbreviation));
     let visitorRow = List.of(emoji.get(Constants.VISITOR_EMOJI_VALUE), Formatter.formatTeamAbbreviation(visitorAbbreviation));
     periodScores.map(periodScore => {
