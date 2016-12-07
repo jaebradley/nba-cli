@@ -1,16 +1,16 @@
 import Table from 'cli-table2';
 import Colors from 'colors';
 import emoji from 'node-emoji';
-import {List} from 'immutable';
+import {List, Map} from 'immutable';
 
 import Constants from '../constants/Constants';
 import Formatter from './formatters/Formatter';
 
 export default class TeamBoxScoreLeadersTableCreator {
-  static create(boxScoreData) {
-    let table = new Table(TeamBoxScoreLeadersTableCreator.getTableConfiguration());
-    TeamBoxScoreLeadersTableCreator.generateRows(boxScoreData)
-                                   .forEach(row => table.push(row));
+  static create(data) {
+    let table = new Table(TeamBoxScoreLeadersTableCreator.getTableConfiguration().toJS());
+    TeamBoxScoreLeadersTableCreator.buildRows(data)
+                                   .forEach(row => table.push(row.toJS()));
     return table.toString();
   }
 
@@ -29,14 +29,14 @@ export default class TeamBoxScoreLeadersTableCreator {
   }
 
   static getTableConfiguration() {
-    return {
-      head: [
-        {
+    return Map({
+      head: List.of(
+        Map({
           content: TeamBoxScoreLeadersTableCreator.getContentValue(),
-          colSpan: TeamBoxScoreLeadersTableCreator.getColumnSpan(),
-        }
-      ]
-    };
+          colSpan: TeamBoxScoreLeadersTableCreator.getColumnSpan()
+        })
+      )
+    });
   }
 
   static getContentValue() {

@@ -9,8 +9,9 @@ export default class Formatter {
   constructor() {}
 
   static formatLiveGamePeriod(period) {
-    if (parseInt(period) > 4) {
-      return 'OT'.concat(period - 4);
+    let value = parseInt(period) - 4;
+    if (value > 0) {
+      return 'OT'.concat(value);
     }
 
     return 'Q'.concat(period);
