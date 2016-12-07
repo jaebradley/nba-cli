@@ -4,7 +4,7 @@ import {List} from 'immutable';
 export default class UpcomingGamesTableCreator {
 
   static create(data) {
-    let table = new Table(UpcomingGameTableCreator.getTableConfiguration());
+    let table = new Table(UpcomingGamesTableCreator.getTableConfiguration());
     data.forEach(metadata => table.push(UpcomingGamesTableCreator.formatMetadata(metadata)));
     return table.toString();
   }
@@ -21,7 +21,7 @@ export default class UpcomingGamesTableCreator {
 
   static getTableConfiguration() {
     return {
-      head: UpcomingGameTableCreator.getHeader().toJS()
+      head: UpcomingGamesTableCreator.getHeader().toJS()
     }
   }
 
