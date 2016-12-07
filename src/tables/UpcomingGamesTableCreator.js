@@ -1,11 +1,14 @@
 import Table from 'cli-table2';
-import {List} from 'immutable';
+import {List, Map} from 'immutable';
 
 export default class UpcomingGamesTableCreator {
 
   static create(data) {
-    let table = new Table(UpcomingGamesTableCreator.getTableConfiguration());
-    data.forEach(metadata => table.push(UpcomingGamesTableCreator.formatMetadata(metadata)));
+    let table = new Table(UpcomingGamesTableCreator.getTableConfiguration()
+                                                   .toJS());
+    data.forEach(metadata =>
+                 table.push(UpcomingGamesTableCreator.formatMetadata(metadata)
+                                                     .toJS()));
     return table.toString();
   }
 
@@ -20,9 +23,9 @@ export default class UpcomingGamesTableCreator {
   }
 
   static getTableConfiguration() {
-    return {
-      head: UpcomingGamesTableCreator.getHeader().toJS()
-    }
+    return Map({
+      head: UpcomingGamesTableCreator.getHeader()
+    });
   }
 
   static getHeader() {
