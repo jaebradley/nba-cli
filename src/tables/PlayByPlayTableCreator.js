@@ -1,13 +1,13 @@
 import Table from 'cli-table2';
-import {List} from 'immutable';
+import {List, Map} from 'immutable';
 
 import Formatter from './formatters/Formatter';
 
 export default class PlayByPlayTableCreator {
 
   static create(data)  {
-    let table = new Table(PlayByPlayTableCreator.getTableConfiguration());
-    data.forEach(play => table.push(PlayByPlayTableCreator.generateRow(play)));
+    let table = new Table(PlayByPlayTableCreator.getTableConfiguration().toJS());
+    data.forEach(play => table.push(PlayByPlayTableCreator.generateRow(play).toJS()));
     return table.toString();
   }
 
@@ -22,9 +22,9 @@ export default class PlayByPlayTableCreator {
   }
 
   static getTableConfiguration() {
-    return {
-      head: PlayByPlayTableCreator.getHeader().toJS()
-    };
+    return Map({
+      head: PlayByPlayTableCreator.getHeader()
+    });
   }
 
   static getHeader() {
