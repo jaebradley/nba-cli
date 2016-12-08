@@ -24,7 +24,7 @@ export default class TeamBoxScoreLeadersTableCreator {
                              data.assists.getLeadersAbbreviatedNames()));
     rows = rows.push(List.of(TeamBoxScoreLeadersTableCreator.getReboundsHeaderValue(),
                              data.rebounds.value,
-                             boxScoreData.rebounds.getLeadersAbbreviatedNames()));
+                             data.rebounds.getLeadersAbbreviatedNames()));
     return rows;
   }
 
