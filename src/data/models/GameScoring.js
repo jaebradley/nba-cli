@@ -4,6 +4,7 @@ import {Record, List} from 'immutable';
 
 import PeriodScore from './PeriodScore';
 import Score from './Score';
+import Formatter from '../../tables/formatters/Formatter';
 
 
 let defaults = {
@@ -22,5 +23,9 @@ export default class GameScoring extends Record(defaults) {
       periodScores: periodScores,
       totalScore: totalScore,
     });
+  }
+
+  getPeriodValues() {
+    return this.periodScores.map(periodScore => Formatter.formatPeriodValue(periodScore.period));
   }
 }
