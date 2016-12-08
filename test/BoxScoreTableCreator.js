@@ -1,6 +1,7 @@
 'use es6';
 
 import {expect, assert} from 'chai';
+import chaiImmutable from 'chai-immutable';
 
 import boxscore from './data/boxscore/final';
 
@@ -57,7 +58,6 @@ describe('Box score table creator', function() {
       ['Rebounds', 3, 'L.James'],
     ];
 
-    expect(tableCreator.generateRows(new GameBoxScoreLeaders().home)).to.eql(emptyRows);
     expect(tableCreator.generateRows(boxScore.home)).to.eql(filledRows);
   });
 
