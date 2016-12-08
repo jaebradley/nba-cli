@@ -1,6 +1,8 @@
 'use es6'
 
 import {List, Map} from 'immutable';
+import Table from 'cli-table2';
+import Colors from 'colors';
 
 export default class ActiveGameTableCreator {
   static create(data) {
