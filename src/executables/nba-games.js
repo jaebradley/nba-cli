@@ -11,7 +11,11 @@ program
       throw new TypeError('Expected option to be a string');
     }
     try {
-      console.log(CommandExecutionService.executeGamesCommand(option.trim()));
+      return CommandExecutionService.executeGamesCommand(option.trim())
+                                    .then(gamesTables => {
+                                      console.log(gamesTables.active);
+                                      console.log(gamesTables.upcoming);
+                                    });
     } catch (Error) {
       console.error('Could not get NBA games');
     }

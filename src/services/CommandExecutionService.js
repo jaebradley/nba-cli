@@ -8,10 +8,10 @@ import GamesOption from '../data/models/GamesOption';
 import TableCreator from '../tables/TableCreator';
 
 export default class CommandExecutionService {
-  static identifyDateFromOption(option) {
-    let date = deserializeDateFromOption(option);
-    let data = DataAggregator.aggregate(date.year(), date.month(), date.day());
-    return TableCreator.create(data);
+  static executeGamesCommand(option) {
+    let date = CommandExecutionService.identifyDateFromOption(option);
+    return DataAggregator.aggregate(date.year(), date.month() + 1, date.day())
+                         .then(data => TableCreator.create(data));
   }
 
   static identifyDateFromOption(option) {
@@ -34,17 +34,16 @@ export default class CommandExecutionService {
 
   static identifyDateFromGamesOption(option) {
     let userTimezone = jstz.determine().name();
-    let startOfToday = moment().tz(this.userTimezone).startOf("day");
-
+    let startOfToday = moment().tz(userTimezone).startOf("day");
     switch (option) {
       case GamesOption.YESTERDAY:
         return moment().subtract(1, "days")
-                       .tz(this.userTimezone)
+                       .tz(userTimezone)
                        .startOf("day");
 
       case GamesOption.TOMORROW:
         return moment().add(1, "days")
-                       .tz(this.userTimezone)
+                       .tz(userTimezone)
                        .startOf("day");
 
       default:
@@ -53,12 +52,11 @@ export default class CommandExecutionService {
   }
 
   static identifyGamesOption(option) {
-    GamesOption.values.forEach(gamesOption => {
-      if (gamesOption.value == option) {
+    for (let i = 0; i < GamesOption.enumValues.length; i++) {
+      let gamesOption = GamesOption.enumValues[i];
+      if (gamesOption.value == option.toUpperCase()) {
         return gamesOption;
       }
-    });
-
-    return undefined;
+    }
   }
 }

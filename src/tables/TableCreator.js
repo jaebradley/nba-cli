@@ -1,14 +1,15 @@
 'use es6';
 
-import GamesTables from '../../data/models/GamesTables';
+import Table from 'cli-table2';
 
+import GamesTables from '../data/models/GamesTables';
 import PlayByPlayTableCreator from './PlayByPlayTableCreator';
 import ActiveGameTableCreator from './ActiveGameTableCreator';
 import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';
 
 export default class TableCreator {
   static create(data) {
-    return new GamesTable({
+    return new GamesTables({
       active: TableCreator.createActiveGamesTables(data.active),
       upcoming: TableCreator.createUpcomingGamesTable(data.upcoming)
     });
