@@ -1,24 +1,55 @@
 'use es6';
 
-import DataAggregator form '../data/services/DataAggregator';
+import jstz from 'jstimezonedetect';
+import moment from 'moment-timezone';
+
+import DataAggregator from '../data/services/DataAggregator';
 import GamesOption from '../data/models/GamesOption';
 import TableCreator from '../tables/TableCreator';
 
 export default class CommandExecutionService {
-  static executeGamesCommand(option) {
+  static identifyDateFromOption(option) {
     let date = deserializeDateFromOption(option);
-    let data = DataAggregator.aggregate(date);
+    let data = DataAggregator.aggregate(date.year(), date.month(), date.day());
     return TableCreator.create(data);
   }
 
-  static deserializeDateFromOption(option) {
+  static identifyDateFromOption(option) {
     let gamesOption = CommandExecutionService.identifyGamesOption(option);
     if (gamesOption instanceof GamesOption) {
-      return gamesOption.getDate();
+      let userDate = CommandExecutionService.identifyDateFromGamesOption(gamesOption);
+      return CommandExecutionService.convertUserDateToApiTimezone(userDate);
+    } else if (moment(option).isValid()) {
+      return CommandExecutionService.convertUserDateToApiTimezone(moment(option));
     }
 
-    // validate date format and return a Date object
-    // else return undefined
+    throw new Error('Unable to identify date from input option');
+  }
+
+  static convertUserDateToApiTimezone(datetime) {
+    // NBA Stats API takes EST Days
+    return moment(datetime).tz('America/New_York')
+                           .startOf('day');
+  }
+
+  static identifyDateFromGamesOption(option) {
+    let userTimezone = jstz.determine().name();
+    let startOfToday = moment().tz(this.userTimezone).startOf("day");
+
+    switch (option) {
+      case GamesOption.YESTERDAY:
+        return moment().subtract(1, "days")
+                       .tz(this.userTimezone)
+                       .startOf("day");
+
+      case GamesOption.TOMORROW:
+        return moment().add(1, "days")
+                       .tz(this.userTimezone)
+                       .startOf("day");
+
+      default:
+        return startOfToday;
+    }
   }
 
   static identifyGamesOption(option) {

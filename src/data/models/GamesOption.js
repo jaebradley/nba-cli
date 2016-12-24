@@ -5,15 +5,12 @@ import {Enum} from 'enumify';
 export default class GamesOption extends Enum {};
 Outcome.initEnum([
   TODAY: {
-    value: 'TODAY',
-    getDate: new Date()
+    value: 'TODAY'
   },
   YESTERDAY: {
-    value: 'YESTERDAY',
-    getDate: new Date()
+    value: 'YESTERDAY'
   },
   TOMORROW: {
-    value: 'TOMORROW',
-    getDate: new Date()
+    value: 'TOMORROW'
   }
 ]);
