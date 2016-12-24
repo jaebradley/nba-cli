@@ -9,6 +9,7 @@ import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';
 
 export default class TableCreator {
   static create(data) {
+    console.log(data);
     return new GamesTables({
       active: TableCreator.createActiveGamesTables(data.active),
       upcoming: TableCreator.createUpcomingGamesTable(data.upcoming)

@@ -13,27 +13,55 @@ import AggregatedGame from '../models/AggregatedGame';
 export default class DataAggregator {
   static aggregate(year, month, day) {
     return DataAggregator.getTranslatedGames(year, month, day)
-                         .then(function(games) {
-                           let gameIds = List(games.map(game => game.id));
-                           return Promise.join(
-                             DataAggregator.getTranslatedBoxScores(year, month, day, gameIds),
-                             DataAggregator.getTranslatedPlayByPlays(year, month, day, gameIds),
-                             function(boxScores, playByPlays) {
-                               let data = List();
-                               for (let i = 0; i < gameIds.size; i++) {
-                               let aggregatedGame = new AggregatedGame({
-                                 metadata: games.get(i),
-                                 boxScoreLeaders: boxScores.get(i),
-                                 playByPlay: playByPlays.get(i),
-                               });
-                               data = data.push(aggregatedGame);
-                             }
-                             data = data.sortBy(function(value) {
-                               return value.metadata.id;
-                             });
-                             return data;
-                           });
-                         });
+                         .then(games => {
+                            let ids = List(games.map(game => game.id));
+                            return Promise.all([
+                              DataAggregator.getTranslatedBoxScores(year, month, day, ids),
+                              DataAggregator.getTranslatedPlayByPlays(year, month, day, ids),
+                              games])
+                         })
+                         .then(data =>
+                           DataAggregator.buildSortedGames(DataAggregator.buildAggregatedGames(data[0], data[1], data[2]))
+                         );
+  }
+
+  static buildSortedGames(games) {
+    let upcoming = List();
+    let active = List();
+    games.forEach(game => {
+      if (game.metadata.isUpcoming()) {
+        upcoming = upcoming.push(game);
+      } else {
+        active = active.push(game);
+      }
+    });
+
+    return Map({
+      upcoming: upcoming,
+      active: active
+    });
+  }
+
+  static buildAggregatedGames(boxScores, playByPlays, games) {
+    if (boxScores.size !== playByPlays.size) {
+      throw new RangeError('box scores and play by plays must have same size');
+    }
+
+    if (boxScores.size !== games.size) {
+      throw new RangeError('box scores and play by plays must have same size');
+    }
+
+    let data = List();
+    for (let i = 0; i < games.size; i++) {
+      let aggregatedGame = new AggregatedGame({
+        metadata: games.get(i),
+        boxScoreLeaders: boxScores.get(i),
+        playByPlay: playByPlays.get(i),
+      });
+      data = data.push(aggregatedGame);
+    }
+
+    return data.sortBy(value => value.metadata.id);
   }
 
   static getTranslatedGames(year, month, day) {
