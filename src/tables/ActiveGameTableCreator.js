@@ -14,7 +14,8 @@ export default class ActiveGameTableCreator {
     let gameStatus = data.status;
     let periodValues = data.scoring.getPeriodValues();
     let table = new Table(ActiveGameTableCreator.getTableConfiguration(periodValues, gameStatus));
-    ActiveGameTableCreator.generateRows(data).map(row => table.push(row.toJS()));
+    ActiveGameTableCreator.generateRows(data)
+                          .forEach(row => table.push(row.toJS()));
     return table.toString();
   }
 
@@ -35,8 +36,8 @@ export default class ActiveGameTableCreator {
     let linescoresRows = ActiveGameTableCreator.generateLinescoresRows(homeAbbreviation, visitorAbbreviation, periodScores, totalScore);
     let metadataRows = ActiveGameTableCreator.generateMetadataRows(startTime, broadcasts, numberOfColumns);
     let rows = List();
-    rows = rows.push.apply(rows, linescoresRows);
-    rows = rows.push.apply(rows, metadataRows);
+    rows = rows.push(linescoresRows);
+    rows = rows.push(metadataRows);
     return rows;
   }
 

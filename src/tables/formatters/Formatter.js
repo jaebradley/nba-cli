@@ -6,7 +6,6 @@ import Constants from '../../constants/Constants';
 import Score from '../../data/models/Score';
 
 export default class Formatter {
-  constructor() {}
 
   static formatLiveGamePeriod(period) {
     let value = parseInt(period) - 4;
