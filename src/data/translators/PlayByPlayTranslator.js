@@ -7,7 +7,7 @@ export default class PlayByPlayTranslator {
     let playByPlayData = data.sports_content.game.play;
     let index = Math.min(PlayByPlayTranslator.getMaximumPlaysNumber(), playByPlayData.length);
     let recentPlays = playByPlayData.slice(-index);
-    return List.of(recentPlays.map(play =>
+    return List(recentPlays.map(play =>
       new PlayByPlay({ description: play.description,
                        clock: play.clock,
                        period: play.period,

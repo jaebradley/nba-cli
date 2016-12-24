@@ -6,13 +6,13 @@ import GamesTables from '../data/models/GamesTables';
 import PlayByPlayTableCreator from './PlayByPlayTableCreator';
 import ActiveGameTableCreator from './ActiveGameTableCreator';
 import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';
+import BoxScoreTableCreator from './BoxScoreTableCreator';
 
 export default class TableCreator {
   static create(data) {
-    console.log(data);
     return new GamesTables({
-      active: TableCreator.createActiveGamesTables(data.active),
-      upcoming: TableCreator.createUpcomingGamesTable(data.upcoming)
+      active: TableCreator.createActiveGamesTables(data.get('active')),
+      upcoming: TableCreator.createUpcomingGamesTable(data.get('upcoming'))
     });
   }
 
@@ -22,14 +22,17 @@ export default class TableCreator {
 
   static createActiveGamesTables(games) {
     let table = new Table();
-    table.push([
-      ActiveGameTableCreator.create(games),
-      PlayByPlayTableCreator.create(games.playByPlay)
-    ]);
-    table.push([
-      BoxScoreTableCreator.create(games.boxScoreLeaders.home),
-      BoxScoreTableCreator.create(games.boxScoreLeaders.visitor)
-    ]);
+    games.forEach(game => {
+      table.push([
+        ActiveGameTableCreator.create(game.metadata),
+        PlayByPlayTableCreator.create(game.playByPlay)
+      ]);
+      table.push([
+        BoxScoreTableCreator.create(game.boxScoreLeaders.home),
+        BoxScoreTableCreator.create(game.boxScoreLeaders.visitor)
+      ]);
+    });
+
     return table.toString();
   }
 }

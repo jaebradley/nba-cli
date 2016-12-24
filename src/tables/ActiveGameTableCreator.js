@@ -2,11 +2,15 @@
 
 import {List, Map} from 'immutable';
 import Table from 'cli-table2';
-import Colors from 'colors';
+import colors from 'colors';
+import emoji from 'node-emoji';
+
+import Constants from '../constants/Constants';
+import Formatter from './formatters/Formatter';
+import Score from '../data/models/Score';
 
 export default class ActiveGameTableCreator {
   static create(data) {
-    console.log(data);
     let gameStatus = data.status;
     let periodValues = data.scoring.getPeriodValues();
     let table = new Table(ActiveGameTableCreator.getTableConfiguration(periodValues, gameStatus));
@@ -22,7 +26,7 @@ export default class ActiveGameTableCreator {
 
   static generateRows(data) {
     let periodScores = data.scoring.periodScores;
-    let totalScore = data.scores.totalScore;
+    let totalScore = data.scoring.totalScore;
     let homeAbbreviation = data.matchup.homeTeam.abbreviation;
     let visitorAbbreviation = data.matchup.awayTeam.abbreviation;
     let startTime = data.getLocalizedStartDateTime();
@@ -63,29 +67,29 @@ export default class ActiveGameTableCreator {
       homeRow = homeRow.push(Formatter.formatScore(periodScore.score));
       visitorRow = visitorRow.push(Formatter.formatScore(new Score(periodScore.score.away, periodScore.score.home)));
     });
-    homeRow = homeRow.push(StartedGameTableCreator.applyTotalFormatting(Formatter.formatScore(totalScore)));
-    visitorRow = visitorRow.push(StartedGameTableCreator.applyTotalFormatting(Formatter.formatScore(new Score(totalScore.away, totalScore.home))));
+    homeRow = homeRow.push(ActiveGameTableCreator.applyTotalFormatting(Formatter.formatScore(totalScore)));
+    visitorRow = visitorRow.push(ActiveGameTableCreator.applyTotalFormatting(Formatter.formatScore(new Score(totalScore.away, totalScore.home))));
     return List.of(homeRow, visitorRow);
   }
 
   static generateHeaders(periodScores, gameSituation) {
-    let headers = List.of('', StartedGameTableCreator.applyGameSituationFormatting(gameSituation));
-    let periodHeaders = List(periodScores.map(period => StartedGameTableCreator.applyPeriodFormatting(period)));
+    let headers = List.of('', ActiveGameTableCreator.applyGameSituationFormatting(gameSituation));
+    let periodHeaders = List(periodScores.map(period => ActiveGameTableCreator.applyPeriodFormatting(period)));
     headers = headers.merge(periodHeaders);
     headers = headers.merge(ActiveGameTableCreator.generateFormattedTotalHeader());
     return headers;
   }
 
   static generateFormattedTotalHeader() {
-    return StartedGameTableCreator.applyTotalFormatting(StartedGameTableCreator.getTotalHeaderValue());
+    return ActiveGameTableCreator.applyTotalFormatting(ActiveGameTableCreator.getTotalHeaderValue());
   }
 
   static getTableColumnLength(linescoresLength) {
-    return linescoresLength + StartedGameTableCreator.getNonLineScoresColumnsLength();
+    return linescoresLength + ActiveGameTableCreator.getNonLineScoresColumnsLength();
   }
 
   static applyGameSituationFormatting(gameSituation) {
-    return gameSituation.bold.magenta;
+    return gameSituation.name.bold.magenta;
   }
 
   static applyPeriodFormatting(period) {

@@ -220,14 +220,13 @@ export default class ScoreboardGameTranslator {
     }
 
     let periodScores = [];
-
     for (let index = 0; index < homePeriodScores.length; index++) {
       let homePeriodScore = homePeriodScores[index];
       let awayPeriodScore = awayPeriodScores[index];
       periodScores.push(ScoreboardGameTranslator.getPeriodScore(homePeriodScore, awayPeriodScore));
     }
 
-    return List.of(periodScores);
+    return List(periodScores);
   }
 
   static getPeriodScore(homePeriodScore, awayPeriodScore) {
@@ -251,8 +250,10 @@ export default class ScoreboardGameTranslator {
       throw new ReferenceError('different period values');
     }
 
-    return new PeriodScore(parseInt(homePeriodScore.period_value),
-                           new Score(parseInt(homePeriodScore.score), parseInt(awayPeriodScore.score)));
+    return new PeriodScore({
+      period: parseInt(homePeriodScore.period_value),
+      score: new Score(parseInt(homePeriodScore.score), parseInt(awayPeriodScore.score))
+    });
   }
 
   static getTotalScore(homeData, awayData) {
