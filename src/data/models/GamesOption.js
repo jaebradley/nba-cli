@@ -3,7 +3,8 @@
 import {Enum} from 'enumify';
 
 export default class GamesOption extends Enum {};
-Outcome.initEnum([
+
+GamesOption.initEnum({
   TODAY: {
     value: 'TODAY'
   },
@@ -13,4 +14,4 @@ Outcome.initEnum([
   TOMORROW: {
     value: 'TOMORROW'
   }
-]);
+});
