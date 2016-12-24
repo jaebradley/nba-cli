@@ -1,13 +1,17 @@
 'use es6';
 
+import GamesTables from '../../data/models/GamesTables';
+
 import PlayByPlayTableCreator from './PlayByPlayTableCreator';
 import ActiveGameTableCreator from './ActiveGameTableCreator';
 import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';
 
 export default class TableCreator {
   static create(data) {
-    console.log(TableCreator.createActiveGamesTables(data.active));
-    console.log(TableCreator.createUpcomingGamesTable(data.upcoming));
+    return new GamesTable({
+      active: TableCreator.createActiveGamesTables(data.active),
+      upcoming: TableCreator.createUpcomingGamesTable(data.upcoming)
+    });
   }
 
   static createUpcomingGamesTable(games) {
