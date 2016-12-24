@@ -6,6 +6,7 @@ import Colors from 'colors';
 
 export default class ActiveGameTableCreator {
   static create(data) {
+    console.log(data);
     let gameStatus = data.status;
     let periodValues = data.scoring.getPeriodValues();
     let table = new Table(ActiveGameTableCreator.getTableConfiguration(periodValues, gameStatus));
