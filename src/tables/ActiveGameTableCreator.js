@@ -1,16 +1,15 @@
 'use es6'
 
 import {List, Map} from 'immutable';
+import Table from 'cli-table2';
+import Colors from 'colors';
 
 export default class ActiveGameTableCreator {
   static create(data) {
-    let periodScores = data.scores.periodScores;
-    let gameStatus = data.metadata.status;
-    let periodValue = data.metadata.periodValue;
-    let gameClock = data.metadata.gameClock;
-    let periodValues = data.scores.getPeriodValues();
-    let table = new Table(ActiveGameTableCreator.getTableConfiguration());
-    ActiveGameTableCreator.generateRows(gameData).map(row => table.push(row.toJS()));
+    let gameStatus = data.status;
+    let periodValues = data.scoring.getPeriodValues();
+    let table = new Table(ActiveGameTableCreator.getTableConfiguration(periodValues, gameStatus));
+    ActiveGameTableCreator.generateRows(data).map(row => table.push(row.toJS()));
     return table.toString();
   }
 
@@ -21,12 +20,12 @@ export default class ActiveGameTableCreator {
   }
 
   static generateRows(data) {
-    let periodScores = data.scores.periodScores;
+    let periodScores = data.scoring.periodScores;
     let totalScore = data.scores.totalScore;
-    let homeAbbreviation = data.metadata.home.abbreviation;
-    let visitorAbbreviation = data.metadata.visitor.abbreviation;
-    let startTime = data.metadata.getLocalizedStartDateTime();
-    let broadcasts = data.metadata.getBroadcastsString();
+    let homeAbbreviation = data.matchup.homeTeam.abbreviation;
+    let visitorAbbreviation = data.matchup.awayTeam.abbreviation;
+    let startTime = data.getLocalizedStartDateTime();
+    let broadcasts = data.getBroadcastsString();
     let numberOfColumns = ActiveGameTableCreator.getTableColumnLength(periodScores.length);
     let linescoresRows = ActiveGameTableCreator.generateLinescoresRows(homeAbbreviation, visitorAbbreviation, periodScores, totalScore);
     let metadataRows = ActiveGameTableCreator.generateMetadataRows(startTime, broadcasts, numberOfColumns);
