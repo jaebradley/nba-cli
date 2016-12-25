@@ -13,7 +13,7 @@
   "license": "MIT",
   "preferGlobal": true,
   "bin": {
-    "nba": "build/index.js"
+    "nba": "build/executables/nba.js"
   },
   "dependencies": {
     "commander": "2.9.0",
