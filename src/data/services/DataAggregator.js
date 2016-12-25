@@ -5,7 +5,7 @@ import Promise from 'bluebird';
 import {List, Map} from 'immutable';
 
 import ScoreboardGamesTranslator from '../translators/ScoreboardGamesTranslator';
-import BoxScoreDataTranslator from '../../translators/data/BoxScoreDataTranslator';
+import BoxScoreDataTranslator from '../../translators/BoxScoreDataTranslator';
 import PlayByPlayTranslator from '../translators/PlayByPlayTranslator';
 
 import AggregatedGame from '../models/AggregatedGame';
