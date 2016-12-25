@@ -1,55 +1,62 @@
 'use es6';
 
 import Table from 'cli-table2';
-import {List} from 'immutable';
+import {List, Map} from 'immutable';
 
+import ActiveGameTableCreator from './ActiveGameTableCreator';
 import GamesTables from '../../data/GamesTables';
 import PlayByPlayTableCreator from './PlayByPlayTableCreator';
-import ActiveGameTableCreator from './ActiveGameTableCreator';
-import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';
 import TeamBoxScoreLeadersTableCreator from './TeamBoxScoreLeadersTableCreator';
+import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';
 
 export default class TableCreator {
   static create(data) {
     return new GamesTables({
-      active: TableCreator.createActiveGamesTables(data.get('active')),
-      upcoming: UpcomingGamesTableCreator.create(data.get('upcoming'))
+      active: List(data.active.map(game => TableCreator.createGameTable(game))),
+      upcoming: UpcomingGamesTableCreator.create(data.upcoming)
     });
   }
 
-  static createActiveGamesTables(games) {
-    let tables = List();
-    games.forEach(game => {
-      let table = new Table();
-      table.push([
-        {
-          content: ActiveGameTableCreator.create(game.metadata),
-          colSpan: 2,
-          hAlign: 'center'
-        }
-      ]);
-      table.push([
-        {
-          content: TeamBoxScoreLeadersTableCreator.create(game.boxScoreLeaders.home, true),
-          colSpan: 1,
-          hAlign: 'center'
-        },
-        {
-          content: TeamBoxScoreLeadersTableCreator.create(game.boxScoreLeaders.visitor, false),
-          colSpan: 1,
-          hAlign: 'center'
-        }
-      ]);
-      table.push([
-        {
-          content: PlayByPlayTableCreator.create(game.playByPlay),
-          colSpan: 2,
-          hAlign: 'center'
-        }
-      ]);
-      tables = tables.push(table.toString());
-    });
+  static createGameTable(game) {
+    let table = new Table();
+    table.push(TableCreator.createActiveGameTable(game.metadata).toJS());
+    table.push(TableCreator.createBoxScoreLeadersTables(game.boxScoreLeaders).toJS());
+    table.push(TableCreator.createPlayByPlayTable(game.playByPlay).toJS());
+    return table.toString();
+  }
 
-    return tables;
+  static createActiveGameTable(data) {
+    return List.of(
+      Map({
+        content: ActiveGameTableCreator.create(data),
+        colSpan: 2,
+        hAlign: 'center'
+      })
+    );
+  }
+
+  static createBoxScoreLeadersTables(boxScoreLeaders) {
+    return List.of(
+      Map({
+        content: TeamBoxScoreLeadersTableCreator.create(boxScoreLeaders.home, true),
+        colSpan: 1,
+        hAlign: 'center'
+      }),
+      Map({
+        content: TeamBoxScoreLeadersTableCreator.create(boxScoreLeaders.visitor, false),
+        colSpan: 1,
+        hAlign: 'center'
+      }),
+    );
+  }
+
+  static createPlayByPlayTable(playByPlay) {
+    return List.of(
+      Map({
+        content: PlayByPlayTableCreator.create(playByPlay),
+        colSpan: 2,
+        hAlign: 'center'
+      })
+    )
   }
 }

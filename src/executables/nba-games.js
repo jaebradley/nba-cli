@@ -12,9 +12,11 @@ program
     }
     try {
       return CommandExecutionService.executeGamesCommand(option.trim())
-                                    .then(gamesTables => {
-                                      gamesTables.active.forEach(table => console.log(table));
-                                      console.log(gamesTables.upcoming);
+                                    .then(tables => {
+                                      tables.active.forEach(table => console.log(table));
+                                      if (tables.upcoming.size == 0) {
+                                        console.log(tables.upcoming);
+                                      }
                                     });
     } catch (Error) {
       console.error('Could not get NBA games');
