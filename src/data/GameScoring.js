@@ -9,7 +9,7 @@ import Formatter from '../../tables/formatters/Formatter';
 
 let defaults = {
   periods: new List(),
-  total: new Score(0, 0),
+  total: new Score(),
 }
 
 

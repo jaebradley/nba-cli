@@ -9,28 +9,6 @@ const defaults = {
 }
 
 export default class Score extends Record(defaults){
-  constructor(home, away) {
-    if (typeof home !== 'number') {
-      throw new TypeError('expected home score to be a number');
-    }
-
-    if (typeof away !== 'number') {
-      throw new TypeError('expected visitor score to be a number');
-    }
-
-    if (home < 0) {
-      throw new RangeError('score cannot be negative');
-    }
-
-    if (away < 0) {
-      throw new RangeError('score cannot be negative');
-    }
-
-    super({
-      home: home,
-      away: away,
-    });
-  }
 
   getOutcome() {
     let scoreDifferential = this.home - this.away;

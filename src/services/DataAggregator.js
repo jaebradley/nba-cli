@@ -12,17 +12,16 @@ import AggregatedGame from '../models/AggregatedGame';
 
 export default class DataAggregator {
   static aggregate(year, month, day) {
-    return DataAggregator.getTranslatedGames(year, month, day)
-                         .then(games => {
-                            let ids = List(games.map(game => game.id));
-                            return Promise.all([
-                              DataAggregator.getTranslatedBoxScores(year, month, day, ids),
-                              DataAggregator.getTranslatedPlayByPlays(year, month, day, ids),
-                              games])
-                         })
-                         .then(data =>
-                           DataAggregator.buildSortedGames(DataAggregator.buildAggregatedGames(data[0], data[1], data[2]))
-                         );
+    return DataAggregator
+      .getTranslatedGames(year, month, day)
+      .then(games => {
+         let ids = List(games.map(game => game.id));
+         return Promise.all([
+           DataAggregator.getTranslatedBoxScores(year, month, day, ids),
+           DataAggregator.getTranslatedPlayByPlays(year, month, day, ids),
+           games])
+      })
+      .then(data => DataAggregator.buildSortedGames(DataAggregator.buildAggregatedGames(data[0], data[1], data[2])));
   }
 
   static buildSortedGames(games) {

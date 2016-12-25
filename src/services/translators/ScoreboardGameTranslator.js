@@ -5,18 +5,18 @@ import moment from 'moment-timezone';
 import jstz from 'jstimezonedetect';
 
 import HtmlEscaper from '../../utils/HtmlEscaper';
-import GameStatus from '../models/GameStatus';
-import GameScoring from '../models/GameScoring';
-import GameScoreboard from '../models/GameScoreboard';
+import GameStatus from '../../data/GameStatus';
+import GameScoring from '../../data/GameScoring';
+import GameScoreboard from '../../data/GameScoreboard';
 import Constants from '../../constants/Constants';
-import Location from '../models/Location';
-import Period from '../models/Period';
-import PeriodScore from '../models/PeriodScore';
-import Score from '../models/Score';
-import Matchup from '../models/Matchup';
-import Team from '../models/Team';
-import Broadcast from '../models/Broadcast';
-import BroadcastMedium from '../models/BroadcastMedium';
+import Location from '../../data/Location';
+import Period from '../../data/Period';
+import PeriodScore from '../../data/PeriodScore';
+import Score from '../../data/Score';
+import Matchup from '../../data/Matchup';
+import Team from '../../data/Team';
+import Broadcast from '../../data/Broadcast';
+import BroadcastMedium from '../../data/BroadcastMedium';
 
 export default class ScoreboardGameTranslator {
   static translate(data) {
@@ -261,7 +261,10 @@ export default class ScoreboardGameTranslator {
 
     return new PeriodScore({
       period: parseInt(homePeriodScore.period_value),
-      score: new Score(parseInt(homePeriodScore.score), parseInt(awayPeriodScore.score))
+      score: new Score({
+        home: parseInt(homePeriodScore.score),
+        away: parseInt(awayPeriodScore.score)
+      })
     });
   }
 

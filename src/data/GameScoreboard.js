@@ -20,10 +20,10 @@ let defaults = {
   status: GameStatus.FINAL,
   startTimestamp: 0,
   location: new Location(),
-  period: new Period(0, '', ''),
+  period: new Period(),
   broadcasts: new List(),
-  matchup: new Matchup(new Team(), new Team()),
-  scoring: new GameScoring(List(), new Score(0, 0)),
+  matchup: new Matchup(),
+  scoring: new GameScoring(),
 };
 
 export default class GameScoreboard extends Record(defaults) {

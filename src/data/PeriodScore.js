@@ -3,7 +3,7 @@ import Score from './Score';
 
 const defaults = {
   period: 1,
-  score: new Score(0, 0),
+  score: new Score(),
 }
 
 export default class PeriodScore extends Record(defaults){

@@ -66,10 +66,16 @@ export default class ActiveGameTableCreator {
     let visitorRow = List.of(emoji.get(Constants.VISITOR_EMOJI_VALUE), Formatter.formatTeamAbbreviation(visitorAbbreviation));
     periodScores.map(periodScore => {
       homeRow = homeRow.push(Formatter.formatScore(periodScore.score));
-      visitorRow = visitorRow.push(Formatter.formatScore(new Score(periodScore.score.away, periodScore.score.home)));
+      visitorRow = visitorRow.push(Formatter.formatScore(new Score({
+        away: periodScore.score.away,
+        home: periodScore.score.home
+      })));
     });
     homeRow = homeRow.push(ActiveGameTableCreator.applyTotalFormatting(Formatter.formatScore(totalScore)));
-    visitorRow = visitorRow.push(ActiveGameTableCreator.applyTotalFormatting(Formatter.formatScore(new Score(totalScore.away, totalScore.home))));
+    visitorRow = visitorRow.push(ActiveGameTableCreator.applyTotalFormatting(Formatter.formatScore(new Score({
+      away: totalScore.away,
+      home: totalScore.home
+    }))));
     return List.of(homeRow, visitorRow);
   }
 
