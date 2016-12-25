@@ -1,6 +1,6 @@
 import {List} from 'immutable';
 
-import PlayByPlay from '../models/PlayByPlay';
+import PlayByPlay from '../../data/PlayByPlay';
 
 export default class PlayByPlayTranslator {
   static translate(data) {

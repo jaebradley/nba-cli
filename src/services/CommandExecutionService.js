@@ -3,9 +3,9 @@
 import jstz from 'jstimezonedetect';
 import moment from 'moment-timezone';
 
-import DataAggregator from '../data/services/DataAggregator';
-import GamesOption from '../data/models/GamesOption';
-import TableCreator from '../tables/TableCreator';
+import DataAggregator from '../services/DataAggregator';
+import GamesOption from '../data/GamesOption';
+import TableCreator from '../services/tables/TableCreator';
 
 export default class CommandExecutionService {
   static executeGamesCommand(option) {

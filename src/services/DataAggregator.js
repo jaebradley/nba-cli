@@ -8,7 +8,7 @@ import ScoreboardGamesTranslator from '../translators/ScoreboardGamesTranslator'
 import BoxScoreDataTranslator from '../translators/BoxScoreDataTranslator';
 import PlayByPlayTranslator from '../translators/PlayByPlayTranslator';
 
-import AggregatedGame from '../models/AggregatedGame';
+import AggregatedGame from '../data/AggregatedGame';
 
 export default class DataAggregator {
   static aggregate(year, month, day) {
