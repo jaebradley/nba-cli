@@ -13,7 +13,7 @@ program
     try {
       return CommandExecutionService.executeGamesCommand(option.trim())
                                     .then(gamesTables => {
-                                      console.log(gamesTables.active);
+                                      gamesTables.active.forEach(table => console.log(table));
                                       console.log(gamesTables.upcoming);
                                     });
     } catch (Error) {

@@ -146,7 +146,7 @@ export default class ScoreboardGameTranslator {
 
     tvBroadcasters.map(broadcast => broadcasts.push(ScoreboardGameTranslator.getBroadcast(broadcast, BroadcastMedium.TV)));
 
-    return List.of(broadcasts);
+    return List(broadcasts);
   }
 
   static getBroadcast(broadcast, medium) {

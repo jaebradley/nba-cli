@@ -84,12 +84,15 @@ export default class GameScoreboard extends Record(defaults) {
                                       .format(Constants.TRANSLATED_DATE_FORMAT);
   }
 
-  getBroadcastsString(){
-    return this.broadcasts.map(function(broadcast) {
-      if (broadcast.medium == BroadcastMedium.TV) {
-        return broadcast.name;
+  getTvBroadcastsString() {
+    let tvBroadcasts = List();
+    for (let i = 0; i < this.broadcasts.size; i++) {
+      let broadcast = this.broadcasts.get(i);
+      if (broadcast.medium === BroadcastMedium.TV) {
+        tvBroadcasts = tvBroadcasts.push(broadcast.name);
       }
-    }).toString();
+    }
+    return tvBroadcasts.toJS().toString();
   }
 
   isUpcoming() {

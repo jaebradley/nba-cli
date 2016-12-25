@@ -31,13 +31,13 @@ export default class ActiveGameTableCreator {
     let homeAbbreviation = data.matchup.homeTeam.abbreviation;
     let visitorAbbreviation = data.matchup.awayTeam.abbreviation;
     let startTime = data.getLocalizedStartDateTime();
-    let broadcasts = data.getBroadcastsString();
-    let numberOfColumns = ActiveGameTableCreator.getTableColumnLength(periodScores.length);
+    let broadcasts = data.getTvBroadcastsString();
+    let numberOfColumns = ActiveGameTableCreator.getTableColumnLength(periodScores.size);
     let linescoresRows = ActiveGameTableCreator.generateLinescoresRows(homeAbbreviation, visitorAbbreviation, periodScores, totalScore);
     let metadataRows = ActiveGameTableCreator.generateMetadataRows(startTime, broadcasts, numberOfColumns);
     let rows = List();
-    rows = rows.push(linescoresRows);
-    rows = rows.push(metadataRows);
+    rows = rows.concat(linescoresRows);
+    rows = rows.concat(metadataRows);
     return rows;
   }
 
@@ -52,7 +52,7 @@ export default class ActiveGameTableCreator {
     return List.of(
       Map({
         content: label,
-        colSpan: this.metadataLabelColSpan,
+        colSpan: 1,
       }),
       Map({
         content: value,

@@ -1,6 +1,7 @@
 'use es6';
 
 import Table from 'cli-table2';
+import {List} from 'immutable';
 
 import GamesTables from '../data/models/GamesTables';
 import PlayByPlayTableCreator from './PlayByPlayTableCreator';
@@ -21,18 +22,38 @@ export default class TableCreator {
   }
 
   static createActiveGamesTables(games) {
-    let table = new Table();
+    let tables = List();
     games.forEach(game => {
+      let table = new Table();
       table.push([
-        ActiveGameTableCreator.create(game.metadata),
-        PlayByPlayTableCreator.create(game.playByPlay)
+        {
+          content: ActiveGameTableCreator.create(game.metadata),
+          colSpan: 2,
+          hAlign: 'center'
+        }
       ]);
       table.push([
-        BoxScoreTableCreator.create(game.boxScoreLeaders.home),
-        BoxScoreTableCreator.create(game.boxScoreLeaders.visitor)
+        {
+          content: BoxScoreTableCreator.create(game.boxScoreLeaders.home),
+          colSpan: 1,
+          hAlign: 'center'
+        },
+        {
+          content: BoxScoreTableCreator.create(game.boxScoreLeaders.visitor),
+          colSpan: 1,
+          hAlign: 'center'
+        }
       ]);
+      table.push([
+        {
+          content: PlayByPlayTableCreator.create(game.playByPlay),
+          colSpan: 2,
+          hAlign: 'center'
+        }
+      ]);
+      tables = tables.push(table.toString());
     });
 
-    return table.toString();
+    return tables;
   }
 }
