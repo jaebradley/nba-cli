@@ -2,12 +2,12 @@ import {List} from 'immutable';
 
 import Play from '../../data/Play';
 
-export default class PlayByPlayTranslator {
+export default class PlaysTranslator {
   static translate(data) {
     let plays = data.sports_content.game.play;
     let index = Math.min(5, plays.length);
     let recentPlays = plays.slice(-index);
-    return List(recentPlays.map(play => PlayByPlayTranslator.Play(play)));
+    return List(recentPlays.map(play => PlaysTranslator.Play(play)));
   }
 
   static buildPlay(play) {
