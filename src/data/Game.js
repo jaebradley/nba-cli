@@ -8,5 +8,5 @@ const defaults = {
   playByPlay: List(),
 };
 
-export default class AggregatedGame extends Record(defaults) {
+export default class Game extends Record(defaults) {
 }
