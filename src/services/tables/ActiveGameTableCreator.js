@@ -1,9 +1,9 @@
 'use es6'
 
-import {List, Map} from 'immutable';
-import Table from 'cli-table2';
 import colors from 'colors';
 import emoji from 'node-emoji';
+import {List, Map} from 'immutable';
+import Table from 'cli-table2';
 
 import Constants from '../../constants/Constants';
 import Formatter from './formatters/Formatter';
@@ -11,41 +11,39 @@ import Score from '../../data/Score';
 
 export default class ActiveGameTableCreator {
   static create(data) {
-    let gameStatus = data.status;
-    let periodValues = data.scoring.getPeriodValues();
-    let table = new Table(ActiveGameTableCreator.getTableConfiguration(periodValues, gameStatus));
+    let table = new Table({
+      head: ActiveGameTableCreator.generateHeaders(data).toJS()
+    });
+
     ActiveGameTableCreator.generateRows(data)
                           .forEach(row => table.push(row.toJS()));
+
     return table.toString();
   }
 
-  static getTableConfiguration(periodValues, gameStatus) {
-    return {
-      head: ActiveGameTableCreator.generateHeaders(periodValues, gameStatus)
-    };
+  static generateHeaders(data) {
+    let headers = List.of('', data.status.name.bold.magenta);
+    let periodHeaders = List(data.scoring.getPeriodValues()
+                                         .map(period => period.bold.cyan));
+    return headers.concat(periodHeaders)
+                  .concat('Total'.bold.underline.cyan);
   }
 
   static generateRows(data) {
-    let periodScores = data.scoring.periods;
-    let totalScore = data.scoring.total;
-    let homeAbbreviation = data.matchup.homeTeam.abbreviation;
-    let visitorAbbreviation = data.matchup.awayTeam.abbreviation;
-    let startTime = data.getLocalizedStartDateTime();
-    let broadcasts = data.getTvBroadcastsString();
-    let numberOfColumns = ActiveGameTableCreator.getTableColumnLength(periodScores.size);
-    let linescoresRows = ActiveGameTableCreator.generateLinescoresRows(homeAbbreviation, visitorAbbreviation, periodScores, totalScore);
-    let metadataRows = ActiveGameTableCreator.generateMetadataRows(startTime, broadcasts, numberOfColumns);
-    let rows = List();
-    rows = rows.concat(linescoresRows);
-    rows = rows.concat(metadataRows);
-    return rows;
+    let linescoresRows = ActiveGameTableCreator.generateLinescoresRows(data);
+    let metadataRows = ActiveGameTableCreator.generateMetadataRows(data);
+    return List(linescoresRows).concat(metadataRows);
   }
 
-  static generateMetadataRows(startTime, broadcasts, numberOfColumns) {
+  static generateMetadataRows(data) {
+    let rowNumbers = data.scoring.periods.size + 3;
     let rows = List();
-    rows = rows.push(ActiveGameTableCreator.generateMetadataRow(emoji.get(Constants.START_TIME_EMOJI_VALUE), startTime, numberOfColumns));
-    rows = rows.push(ActiveGameTableCreator.generateMetadataRow(emoji.get(Constants.BROADCASTS_EMOJI_VALUE), broadcasts, numberOfColumns));
-    return rows;
+    rows = rows.push(ActiveGameTableCreator.generateMetadataRow(emoji.get(Constants.START_TIME_EMOJI_VALUE),
+                                                                data.getLocalizedStartDateTime(),
+                                                                rowNumbers));
+    return rows.push(ActiveGameTableCreator.generateMetadataRow(emoji.get(Constants.BROADCASTS_EMOJI_VALUE),
+                                                                data.getTvBroadcastsString(),
+                                                                rowNumbers));
   }
 
   static generateMetadataRow(label, value, numberOfColumns) {
@@ -61,61 +59,22 @@ export default class ActiveGameTableCreator {
     );
   }
 
-  static generateLinescoresRows(homeAbbreviation, visitorAbbreviation, periodScores, totalScore) {
-    let homeRow = List.of(emoji.get(Constants.HOME_EMOJI_VALUE), Formatter.formatTeamAbbreviation(homeAbbreviation));
-    let visitorRow = List.of(emoji.get(Constants.VISITOR_EMOJI_VALUE), Formatter.formatTeamAbbreviation(visitorAbbreviation));
-    periodScores.map(periodScore => {
-      homeRow = homeRow.push(Formatter.formatScore(periodScore.score));
-      visitorRow = visitorRow.push(Formatter.formatScore(new Score({
-        away: periodScore.score.away,
-        home: periodScore.score.home
-      })));
+  static generateLinescoresRows(data) {
+    let homeRow = List.of(emoji.get(Constants.HOME_EMOJI_VALUE),
+                          data.matchup.homeTeam.getFormattedTeamAbbreviation());
+    let visitorRow = List.of(emoji.get(Constants.VISITOR_EMOJI_VALUE),
+                             data.matchup.awayTeam.getFormattedTeamAbbreviation());
+
+    data.scoring.periods.forEach(periodScore => {
+      let formattedScore = periodScore.score.format();
+      homeRow = homeRow.push(formattedScore.home);
+      visitorRow = visitorRow.push(formattedScore.away);
     });
-    homeRow = homeRow.push(ActiveGameTableCreator.applyTotalFormatting(Formatter.formatScore(totalScore)));
-    visitorRow = visitorRow.push(ActiveGameTableCreator.applyTotalFormatting(Formatter.formatScore(new Score({
-      away: totalScore.away,
-      home: totalScore.home
-    }))));
+
+    let formattedTotalScore = data.scoring.total.format();
+    homeRow = homeRow.push(formattedTotalScore.home.bold.underline.cyan);
+    visitorRow = visitorRow.push(formattedTotalScore.away.bold.underline.cyan);
+
     return List.of(homeRow, visitorRow);
-  }
-
-  static generateHeaders(periodScores, gameSituation) {
-    let headers = List.of('', ActiveGameTableCreator.applyGameSituationFormatting(gameSituation));
-    let periodHeaders = List(periodScores.map(period => ActiveGameTableCreator.applyPeriodFormatting(period)));
-    headers = headers.merge(periodHeaders);
-    headers = headers.merge(ActiveGameTableCreator.generateFormattedTotalHeader());
-    return headers;
-  }
-
-  static generateFormattedTotalHeader() {
-    return ActiveGameTableCreator.applyTotalFormatting(ActiveGameTableCreator.getTotalHeaderValue());
-  }
-
-  static getTableColumnLength(linescoresLength) {
-    return linescoresLength + ActiveGameTableCreator.getNonLineScoresColumnsLength();
-  }
-
-  static applyGameSituationFormatting(gameSituation) {
-    return gameSituation.name.bold.magenta;
-  }
-
-  static applyPeriodFormatting(period) {
-    return period.bold.cyan;
-  }
-
-  static applyTotalFormatting(total) {
-    return total.bold.underline.cyan;
-  }
-
-  static getNonLineScoresColumnsLength() {
-    return 3;
-  }
-
-  static getTotalHeaderValue() {
-    return 'Total';
-  }
-
-  static getMetadataLabelColumnLength() {
-    return 1;
   }
 }
