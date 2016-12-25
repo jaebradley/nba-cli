@@ -16,17 +16,18 @@ describe('Test Data Aggregator', function() {
   });
 
   it('tests box score fetching', function() {
-    return DataAggregator.getBoxScore(anotherDate, List.of("0041500234"))
+    return DataAggregator.getBoxScore(anotherDate, "0041500234")
                          .then(boxScore => console.log(boxScore));
   });
 
   it('tests play by play fetching', function() {
-    return DataAggregator.getPlayByPlay(anotherDate, List.of("0041500234"))
+    return DataAggregator.getPlayByPlay(anotherDate, "0041500234")
                          .then(playByPlay => console.log(playByPlay));
   });
 
   it('tests data aggregation', function() {
     return DataAggregator.aggregate(date)
-                         .then(data => console.log(data));
+                         .then(data => console.log(data))
+                         .done();
   });
 });
