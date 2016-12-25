@@ -2,10 +2,10 @@
 
 import {expect, assert} from 'chai';
 
-import UpcomingGameTableCreator from '../src/tables/UpcomingGameTableCreator';
-import GameMetadata from '../src/data/models/GameMetadata';
-import Team from '../src/data/models/Team';
-import Location from '../src/data/models/Location';
+import UpcomingGameTableCreator from '../src/services/tables/UpcomingGameTableCreator';
+import GameMetadata from '../src/data/GameMetadata';
+import Team from '../src/data/Team';
+import Location from '../src/data/Location';
 
 describe('test UpcomingGameTableCreator', function() {
 
