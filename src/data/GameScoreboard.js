@@ -4,6 +4,7 @@ import jstz from 'jstimezonedetect';
 import moment from 'moment-timezone';
 import {List, Record} from 'immutable';
 
+import BroadcastMedium from './BroadcastMedium';
 import Constants from '../constants/Constants';
 import GameScoring from './GameScoring';
 import GameStatus from './GameStatus';

@@ -26,8 +26,8 @@ export default class ActiveGameTableCreator {
   }
 
   static generateRows(data) {
-    let periodScores = data.scoring.periodScores;
-    let totalScore = data.scoring.totalScore;
+    let periodScores = data.scoring.periods;
+    let totalScore = data.scoring.total;
     let homeAbbreviation = data.matchup.homeTeam.abbreviation;
     let visitorAbbreviation = data.matchup.awayTeam.abbreviation;
     let startTime = data.getLocalizedStartDateTime();

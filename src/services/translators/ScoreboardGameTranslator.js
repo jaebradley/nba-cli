@@ -277,7 +277,9 @@ export default class ScoreboardGameTranslator {
       throw new ReferenceError('visitor score field missing');
     }
 
-    return new Score(parseInt(homeData.score),
-                     parseInt(awayData.score));
+    return new Score({
+      home: parseInt(homeData.score),
+      away: parseInt(awayData.score)
+    });
   }
 }
