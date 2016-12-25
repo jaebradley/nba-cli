@@ -7,7 +7,7 @@ import GamesTables from '../data/models/GamesTables';
 import PlayByPlayTableCreator from './PlayByPlayTableCreator';
 import ActiveGameTableCreator from './ActiveGameTableCreator';
 import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';
-import BoxScoreTableCreator from './BoxScoreTableCreator';
+import TeamBoxScoreLeadersTableCreator from './TeamBoxScoreLeadersTableCreator';
 
 export default class TableCreator {
   static create(data) {
@@ -34,12 +34,12 @@ export default class TableCreator {
       ]);
       table.push([
         {
-          content: BoxScoreTableCreator.create(game.boxScoreLeaders.home),
+          content: TeamBoxScoreLeadersTableCreator.create(game.boxScoreLeaders.home),
           colSpan: 1,
           hAlign: 'center'
         },
         {
-          content: BoxScoreTableCreator.create(game.boxScoreLeaders.visitor),
+          content: TeamBoxScoreLeadersTableCreator.create(game.boxScoreLeaders.visitor),
           colSpan: 1,
           hAlign: 'center'
         }
