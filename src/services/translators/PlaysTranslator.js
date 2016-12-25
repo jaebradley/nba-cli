@@ -7,7 +7,7 @@ export default class PlaysTranslator {
     let plays = data.sports_content.game.play;
     let index = Math.min(5, plays.length);
     let recentPlays = plays.slice(-index);
-    return List(recentPlays.map(play => PlaysTranslator.Play(play)));
+    return List(recentPlays.map(play => PlaysTranslator.buildPlay(play)));
   }
 
   static buildPlay(play) {
