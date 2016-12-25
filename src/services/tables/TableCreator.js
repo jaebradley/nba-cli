@@ -24,7 +24,7 @@ export default class TableCreator {
     let table = new Table();
     table.push(TableCreator.createActiveGameTable(game.metadata).toJS());
     table.push(TableCreator.createBoxScoreLeadersTables(game.boxScoreLeaders).toJS());
-    table.push(TableCreator.createPlaysTable(game.playByPlay).toJS());
+    table.push(TableCreator.createPlaysTable(game.plays).toJS());
     return table.toString();
   }
 
@@ -53,10 +53,10 @@ export default class TableCreator {
     );
   }
 
-  static createPlaysTable(playByPlay) {
+  static createPlaysTable(plays) {
     return List.of(
       Map({
-        content: PlaysTableCreator.create(playByPlay),
+        content: PlaysTableCreator.create(plays),
         colSpan: 2,
         hAlign: 'center'
       })
