@@ -7,4 +7,7 @@ const defaults = {
 }
 
 export default class PeriodScore extends Record(defaults){
+  formatPeriod() {
+    return this.period > 4 ? `OT${this.period - 4}` : `Q${this.period}`;
+  }
 };

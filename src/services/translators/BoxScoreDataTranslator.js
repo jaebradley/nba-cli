@@ -13,7 +13,7 @@ export default class BoxScoreDataTranslator {
       firstName: leader.FirstName,
       lastName: leader.LastName
     })));
-    return new StatisticalLeaders({value: parseInt(data.StatValue), leaders: leaders});
+    return new StatisticalLeaders({ value: parseInt(data.StatValue), leaders: leaders });
   }
 
   static translateBoxScoreData(data) {
