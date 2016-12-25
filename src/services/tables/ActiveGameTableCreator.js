@@ -6,7 +6,6 @@ import {List, Map} from 'immutable';
 import Table from 'cli-table2';
 
 import Constants from '../../constants/Constants';
-import Formatter from './formatters/Formatter';
 import Score from '../../data/Score';
 
 export default class ActiveGameTableCreator {
