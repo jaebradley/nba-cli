@@ -21,8 +21,8 @@ describe('Test Data Aggregator', function() {
   });
 
   it('tests play by play fetching', function() {
-    return DataAggregator.getPlayByPlay(anotherDate, "0041500234")
-                         .then(playByPlay => console.log(playByPlay));
+    return DataAggregator.getPlays(anotherDate, "0041500234")
+                         .then(plays => console.log(plays));
   });
 
   it('tests data aggregation', function() {

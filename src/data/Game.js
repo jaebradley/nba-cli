@@ -5,7 +5,7 @@ import {List, Record} from 'immutable';
 let defaults = {
   metadata: undefined,
   boxScoreLeaders: List(),
-  playByPlay: List(),
+  plays: List(),
 };
 
 export default class Game extends Record(defaults) {

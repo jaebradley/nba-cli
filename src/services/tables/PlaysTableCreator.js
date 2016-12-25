@@ -4,7 +4,7 @@ import emoji from 'node-emoji';
 import Table from 'cli-table2';
 import {List, Map} from 'immutable';
 
-export default class PlayByPlayTableCreator {
+export default class PlaysTableCreator {
   static create(data)  {
     let table = new Table({
       head: [

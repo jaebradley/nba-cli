@@ -7,7 +7,7 @@ import {List, Map} from 'immutable';
 import Game from '../data/Game';
 import Games from '../data/Games';
 import BoxScoreDataTranslator from './translators/BoxScoreDataTranslator';
-import PlayByPlayTranslator from './translators/PlayByPlayTranslator';
+import PlaysTranslator from './translators/PlaysTranslator';
 import ScoreboardGamesTranslator from './translators/ScoreboardGamesTranslator';
 
 export default class DataAggregator {
@@ -28,17 +28,17 @@ export default class DataAggregator {
 
     return Promise.all([
       DataAggregator.getBoxScores(date, ids),
-      DataAggregator.getPlayByPlays(date, ids),
+      DataAggregator.getAllPlays(date, ids),
       games
     ]);
   };
 
   static aggregateGames(data) {
     let boxScores = data[0];
-    let playByPlays = data[1];
+    let plays = data[1];
     let games = data[2];
 
-    if (boxScores.size !== playByPlays.size) {
+    if (boxScores.size !== plays.size) {
       throw new RangeError('box scores and play by plays must have same size');
     }
 
@@ -52,7 +52,7 @@ export default class DataAggregator {
         active = active.push(new Game({
           metadata: metadata,
           boxScoreLeaders: boxScores.get(gameId),
-          playByPlay: playByPlays.get(gameId),
+          plays: plays.get(gameId),
         }));
       }
     }
@@ -86,8 +86,8 @@ export default class DataAggregator {
                  .catch(err => console.error(err));
   }
 
-  static getPlayByPlays(date, gameIds) {
-    let translations = gameIds.map(gameId => DataAggregator.getPlayByPlay(date, gameId));
+  static getAllPlays(date, gameIds) {
+    let translations = gameIds.map(gameId => DataAggregator.getPlays(date, gameId));
     return Promise.all(translations)
                   .then(results => {
                     let mapping = Map();
@@ -98,9 +98,9 @@ export default class DataAggregator {
                   });
   }
 
-  static getPlayByPlay(date, gameId) {
+  static getPlays(date, gameId) {
     return Client.getPlayByPlay(date.year(), date.month() + 1, date.date(), gameId)
-                 .then(playByPlay => PlayByPlayTranslator.translate(playByPlay))
+                 .then(plays => PlaysTranslator.translate(plays))
                  .catch(err => console.error(err));
   }
 };

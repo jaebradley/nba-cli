@@ -1,13 +1,15 @@
+'use es6';
+
 import {Record} from 'immutable';
 
 let defaults = {
-  description: "",
-  clock: "",
+  description: '',
+  clock: '',
   period: 1,
-  teamAbbreviation: "",
+  teamAbbreviation: '',
 };
 
-export default class PlayByPlay extends Record(defaults) {
+export default class Play extends Record(defaults) {
   formatPeriod() {
     let value = this.period - 4;
     if (value > 0) {
@@ -16,4 +18,4 @@ export default class PlayByPlay extends Record(defaults) {
 
     return 'Q'.concat(this.period);
   }
-};
+}
