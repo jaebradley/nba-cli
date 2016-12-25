@@ -5,7 +5,7 @@ import {List, Map} from 'immutable';
 
 import ActiveGameTableCreator from './ActiveGameTableCreator';
 import GamesTables from '../../data/GamesTables';
-import PlayByPlayTableCreator from './PlayByPlayTableCreator';
+import PlaysTableCreator from './PlaysTableCreator';
 import TeamBoxScoreLeadersTableCreator from './TeamBoxScoreLeadersTableCreator';
 import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';
 
@@ -24,7 +24,7 @@ export default class TableCreator {
     let table = new Table();
     table.push(TableCreator.createActiveGameTable(game.metadata).toJS());
     table.push(TableCreator.createBoxScoreLeadersTables(game.boxScoreLeaders).toJS());
-    table.push(TableCreator.createPlayByPlayTable(game.playByPlay).toJS());
+    table.push(TableCreator.createPlaysTable(game.playByPlay).toJS());
     return table.toString();
   }
 
@@ -53,10 +53,10 @@ export default class TableCreator {
     );
   }
 
-  static createPlayByPlayTable(playByPlay) {
+  static createPlaysTable(playByPlay) {
     return List.of(
       Map({
-        content: PlayByPlayTableCreator.create(playByPlay),
+        content: PlaysTableCreator.create(playByPlay),
         colSpan: 2,
         hAlign: 'center'
       })
