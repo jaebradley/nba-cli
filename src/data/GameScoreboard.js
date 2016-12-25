@@ -27,50 +27,6 @@ let defaults = {
 };
 
 export default class GameScoreboard extends Record(defaults) {
-  constructor(id, status, startTimestamp, location, period, broadcasts, matchup, scoring) {
-    if (typeof id !== 'string') {
-      throw new TypeError('id must be a string');
-    }
-
-    if (!(status instanceof GameStatus)) {
-      throw new TypeError('status must be a game status');
-    }
-
-    if (typeof startTimestamp !== 'number') {
-      throw new TypeError('start timestamp must be a number');
-    }
-
-    if (!(location instanceof Location)) {
-      throw new TypeError('location must be a Location');
-    }
-
-    if (!(period instanceof Period)) {
-      throw new TypeError('period must be a Period');
-    }
-
-    if (!(broadcasts instanceof List)) {
-      throw new TypeError('broadcasts must be an array');
-    }
-
-    if (!(matchup instanceof Matchup)) {
-      throw new TypeError('matchup must be a Matchup');
-    }
-
-    if (!(scoring instanceof GameScoring)) {
-      throw new TypeError('scoring must be a GameScoring object');
-    }
-
-    super({
-      id: id,
-      status: status,
-      startTimestamp: startTimestamp,
-      location: location,
-      period: period,
-      broadcasts: broadcasts,
-      matchup: matchup,
-      scoring: scoring,
-    });
-  }
 
   getNbaStatsFormattedStartDate() {
     let userTimezone = jstz.determine().name();

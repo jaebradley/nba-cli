@@ -8,24 +8,13 @@ import Formatter from '../../tables/formatters/Formatter';
 
 
 let defaults = {
-  periodScores: new List(),
-  totalScore: new Score(0, 0),
+  periods: new List(),
+  total: new Score(0, 0),
 }
 
 
 export default class GameScoring extends Record(defaults) {
-  constructor(periodScores, totalScore) {
-    if (!(totalScore instanceof Score)) {
-      throw new TypeError('total score must be a Score object');
-    }
-
-    super({
-      periodScores: periodScores,
-      totalScore: totalScore,
-    });
-  }
-
   getPeriodValues() {
-    return this.periodScores.map(periodScore => Formatter.formatPeriodValue(periodScore.period));
+    return this.periods.map(periodScore => Formatter.formatPeriodValue(periodScore.period));
   }
 }

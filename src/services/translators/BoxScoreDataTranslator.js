@@ -7,7 +7,6 @@ import TeamBoxScoreLeaders from '../../data/TeamBoxScoreLeaders';
 import StatisticalLeaders from '../../data/StatisticalLeaders';
 import Player from '../../data/Player';
 
-
 export default class BoxScoreDataTranslator {
   static translateStatLeaders(data) {
     let leaders = List(data.leader.map(leader => new Player({

@@ -42,14 +42,16 @@ export default class ScoreboardGameTranslator {
     let homeData = data.home;
     let awayData = data.visitor;
 
-    return new GameScoreboard(data.id,
-                              ScoreboardGameTranslator.getGameStatus(periodTime),
-                              ScoreboardGameTranslator.getStartTimestamp(data),
-                              ScoreboardGameTranslator.getLocation(data),
-                              ScoreboardGameTranslator.getPeriod(periodTime),
-                              ScoreboardGameTranslator.getBroadcasts(broadcasters),
-                              ScoreboardGameTranslator.getMatchup(homeData, awayData),
-                              ScoreboardGameTranslator.getScoring(homeData, awayData));
+    return new GameScoreboard({
+      id: data.id,
+      status: ScoreboardGameTranslator.getGameStatus(periodTime),
+      startTimestamp: ScoreboardGameTranslator.getStartTimestamp(data),
+      location: ScoreboardGameTranslator.getLocation(data),
+      period: ScoreboardGameTranslator.getPeriod(periodTime),
+      broadcasts: ScoreboardGameTranslator.getBroadcasts(broadcasters),
+      matchup: ScoreboardGameTranslator.getMatchup(homeData, awayData),
+      scoring: ScoreboardGameTranslator.getScoring(homeData, awayData)
+    });
   }
 
   static getGameStatus(periodTime) {
@@ -62,6 +64,7 @@ export default class ScoreboardGameTranslator {
         return status;
       }
     }
+
     throw new ReferenceError('unknown nba stats game status');
   }
 
@@ -79,8 +82,7 @@ export default class ScoreboardGameTranslator {
     return moment(rawStartTime, Constants.TRANSLATED_NBA_DATE_TIME_FORMAT)
             .tz(Constants.DEFAULT_TIMEZONE)
             .clone()
-            .tz("UTC")
-            .valueOf();
+            .tz("UTC");
   }
 
   static getLocation(gameData) {
@@ -116,9 +118,11 @@ export default class ScoreboardGameTranslator {
       throw new ReferenceError('game_clock field missing');
     }
 
-    return new Period(parseInt(periodTime.period_value),
-                      periodTime.period_status,
-                      periodTime.game_clock);
+    return new Period({
+      value: parseInt(periodTime.period_value),
+      status: periodTime.period_status,
+      clock: periodTime.game_clock
+    });
   }
 
   static getBroadcasts(broadcasters) {
@@ -138,15 +142,12 @@ export default class ScoreboardGameTranslator {
       throw new ReferenceError('tv broadcasters field missing');
     }
 
-    let broadcasts = [];
-    let radioBroadcasters = broadcasters.radio.broadcaster;
-    let tvBroadcasters = broadcasters.tv.broadcaster;
+    let radioBroadcasters = List(broadcasters.radio.broadcaster
+                                             .map(broadcast => ScoreboardGameTranslator.getBroadcast(broadcast, BroadcastMedium.RADIO)));
+    let tvBroadcasters = List(broadcasters.tv.broadcaster
+                                          .map(broadcast => ScoreboardGameTranslator.getBroadcast(broadcast, BroadcastMedium.TV)));
 
-    radioBroadcasters.map(broadcast => broadcasts.push(ScoreboardGameTranslator.getBroadcast(broadcast, BroadcastMedium.RADIO)));
-
-    tvBroadcasters.map(broadcast => broadcasts.push(ScoreboardGameTranslator.getBroadcast(broadcast, BroadcastMedium.TV)));
-
-    return List(broadcasts);
+    return tvBroadcasters.concat(radioBroadcasters);
   }
 
   static getBroadcast(broadcast, medium) {
@@ -162,12 +163,18 @@ export default class ScoreboardGameTranslator {
       throw new TypeError('medium must be a BroadcastMedium');
     }
 
-    return new Broadcast(broadcast.scope, broadcast.display_name, medium);
+    return new Broadcast({
+      scope: broadcast.scope,
+      name: broadcast.display_name,
+      medium: medium
+    });
   }
 
   static getMatchup(homeData, awayData) {
-    return new Matchup(ScoreboardGameTranslator.getTeam(homeData),
-                       ScoreboardGameTranslator.getTeam(awayData));
+    return new Matchup({
+      homeTeam: ScoreboardGameTranslator.getTeam(homeData),
+      awayTeam: ScoreboardGameTranslator.getTeam(awayData)
+    });
   }
 
   static getTeam(team) {
@@ -191,8 +198,10 @@ export default class ScoreboardGameTranslator {
   }
 
   static getScoring(homeData, awayData) {
-    return new GameScoring(ScoreboardGameTranslator.getPeriodScores(homeData, awayData),
-                           ScoreboardGameTranslator.getTotalScore(homeData, awayData));
+    return new GameScoring({
+      periods: ScoreboardGameTranslator.getPeriodScores(homeData, awayData),
+      total: ScoreboardGameTranslator.getTotalScore(homeData, awayData)
+    });
   }
 
   static getPeriodScores(homeData, awayData) {
@@ -219,14 +228,14 @@ export default class ScoreboardGameTranslator {
       throw new Error('home period scores length is not equal to the away period scores length');
     }
 
-    let periodScores = [];
+    let periodScores = List();
     for (let index = 0; index < homePeriodScores.length; index++) {
       let homePeriodScore = homePeriodScores[index];
       let awayPeriodScore = awayPeriodScores[index];
-      periodScores.push(ScoreboardGameTranslator.getPeriodScore(homePeriodScore, awayPeriodScore));
+      periodScores = periodScores.push(ScoreboardGameTranslator.getPeriodScore(homePeriodScore, awayPeriodScore));
     }
 
-    return List(periodScores);
+    return periodScores;
   }
 
   static getPeriodScore(homePeriodScore, awayPeriodScore) {
