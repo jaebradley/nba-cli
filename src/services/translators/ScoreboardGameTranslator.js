@@ -205,20 +205,21 @@ export default class ScoreboardGameTranslator {
   }
 
   static getPeriodScores(homeData, awayData) {
+    // if period scores are not found, return an empty list
     if (!('linescores' in homeData)) {
-      throw new ReferenceError('home linescores field missing');
+      return List();
     }
 
     if (!('linescores' in awayData)) {
-      throw new ReferenceError('away linescores field missing');
+      return List();
     }
 
     if (!('period') in homeData.linescores) {
-      throw new ReferenceError('home period field missing');
+      return List();
     }
 
     if (!('period' in awayData.linescores)) {
-      throw new ReferenceError('away period field missing');
+      return List();
     }
 
     let homePeriodScores = homeData.linescores.period;
@@ -270,11 +271,11 @@ export default class ScoreboardGameTranslator {
 
   static getTotalScore(homeData, awayData) {
     if (!('score' in homeData)) {
-      throw new ReferenceError('home score field missing');
+      return new Score();
     }
 
     if (!('score' in awayData)) {
-      throw new ReferenceError('visitor score field missing');
+      return new Score();
     }
 
     return new Score({

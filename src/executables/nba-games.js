@@ -13,9 +13,16 @@ program
     try {
       return CommandExecutionService.executeGamesCommand(option.trim())
                                     .then(tables => {
-                                      tables.active.forEach(table => console.log(table));
-                                      if (tables.upcoming.size == 0) {
+                                      if (tables.active.size !== 0) {
+                                        tables.active.forEach(table => console.log(table));
+                                      }
+
+                                      if (typeof tables.upcoming !== 'undefined') {
                                         console.log(tables.upcoming);
+                                      }
+
+                                      if ((tables.active.size == 0) && (typeof tables.upcoming == 'undefined')) {
+                                        console.log('Could not find games');
                                       }
                                     });
     } catch (Error) {

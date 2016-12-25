@@ -11,9 +11,12 @@ import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';
 
 export default class TableCreator {
   static create(data) {
+    let upcomingTable = data.upcoming.isEmpty()
+        ? undefined
+        : UpcomingGamesTableCreator.create(data.upcoming)
     return new GamesTables({
       active: List(data.active.map(game => TableCreator.createGameTable(game))),
-      upcoming: UpcomingGamesTableCreator.create(data.upcoming)
+      upcoming: upcomingTable
     });
   }
 

@@ -15,12 +15,17 @@ export default class DataAggregator {
     return DataAggregator
       .getScoreboards(date)
       .then(scoreboards => DataAggregator.getAllGameSpecificData(date, scoreboards))
-      .then(allGameData => DataAggregator.aggregateGames(allGameData))
-      .then(games => DataAggregator.buildGames(games));
+      .then(allGameData => DataAggregator.aggregateGames(allGameData));
   }
 
   static getAllGameSpecificData(date, games) {
-    let ids = List(games.map(game => game.id));
+    let ids = List();
+    for (let game of games) {
+      if (!game.isUpcoming()) {
+        ids = ids.push(game.id);
+      }
+    }
+
     return Promise.all([
       DataAggregator.getBoxScores(date, ids),
       DataAggregator.getPlayByPlays(date, ids),
@@ -37,67 +42,65 @@ export default class DataAggregator {
       throw new RangeError('box scores and play by plays must have same size');
     }
 
-    if (boxScores.size !== games.size) {
-      throw new RangeError('box scores and play by plays must have same size');
-    }
-
-    let aggregatedGames = List();
-    for (let i = 0; i < games.size; i++) {
-      let aggregatedGame = new Game({
-        metadata: games.get(i),
-        boxScoreLeaders: boxScores.get(i),
-        playByPlay: playByPlays.get(i),
-      });
-      aggregatedGames = aggregatedGames.push(aggregatedGame);
-    }
-
-    return aggregatedGames.sortBy(game => game.metadata.id);
-  }
-
-  static buildGames(games) {
-    let upcoming = List();
     let active = List();
-
-    games.forEach(game => {
-      if (game.metadata.isUpcoming()) {
-        upcoming = upcoming.push(game);
+    let upcoming = List();
+    for (let metadata of games) {
+      if (metadata.isUpcoming()) {
+        upcoming = upcoming.push(metadata);
       } else {
-        active = active.push(game);
+        let gameId = metadata.id;
+        active = active.push(new Game({
+          metadata: metadata,
+          boxScoreLeaders: boxScores.get(gameId),
+          playByPlay: playByPlays.get(gameId),
+        }));
       }
-    });
+    }
 
     return new Games({
-      upcoming: upcoming,
-      active: active
+      active: active.sortBy(game => game.metadata.id),
+      upcoming: upcoming.sortBy(metadata => metadata.id)
     });
   }
 
   static getScoreboards(date) {
-    return Client.getGames(date.year(), date.month() + 1, date.day())
+    return Client.getGames(date.year(), date.month() + 1, date.date())
                  .then(games => ScoreboardGamesTranslator.translate(games));
   }
 
   static getBoxScores(date, gameIds) {
     let translations = gameIds.map(gameId => DataAggregator.getBoxScore(date, gameId));
     return Promise.all(translations)
-                  .then(results => List(results))
-                  .catch(reason => console.log(reason));
+                  .then(results => {
+                    let mapping = Map();
+                    for (let i = 0; i < results.length; i++) {
+                      mapping = mapping.set(gameIds.get(i), results[i]);
+                    }
+                    return mapping;
+                  });
   }
 
   static getBoxScore(date, gameId) {
-    return Client.getBoxScore(date.year(), date.month() + 1, date.day(), gameId)
-                 .then(boxScore => BoxScoreDataTranslator.translateBoxScoreData(boxScore));
+    return Client.getBoxScore(date.year(), date.month() + 1, date.date(), gameId)
+                 .then(boxScore => BoxScoreDataTranslator.translateBoxScoreData(boxScore))
+                 .catch(err => console.error(err));
   }
 
   static getPlayByPlays(date, gameIds) {
     let translations = gameIds.map(gameId => DataAggregator.getPlayByPlay(date, gameId));
     return Promise.all(translations)
-                  .then(results => List(results))
-                  .catch(reason => console.log(reason));
+                  .then(results => {
+                    let mapping = Map();
+                    for (let i = 0; i < results.length; i++) {
+                      mapping = mapping.set(gameIds.get(i), results[i]);
+                    }
+                    return mapping;
+                  });
   }
 
   static getPlayByPlay(date, gameId) {
-    return Client.getPlayByPlay(date.year(), date.month() + 1, date.day(), gameId)
-                 .then(playByPlay => PlayByPlayTranslator.translate(playByPlay));
+    return Client.getPlayByPlay(date.year(), date.month() + 1, date.date(), gameId)
+                 .then(playByPlay => PlayByPlayTranslator.translate(playByPlay))
+                 .catch(err => console.error(err));
   }
 };

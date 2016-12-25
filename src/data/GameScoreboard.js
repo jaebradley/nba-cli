@@ -33,8 +33,9 @@ export default class GameScoreboard extends Record(defaults) {
 
   getLocalizedStartDateTime() {
     let userTimezone = jstz.determine().name();
-    return moment(this.startTimestamp).tz(userTimezone)
+    let formattedTime = moment(this.startTimestamp).tz(userTimezone)
                                       .format(Constants.TRANSLATED_DATE_FORMAT);
+    return `${formattedTime}`;
   }
 
   getTvBroadcastsString() {
