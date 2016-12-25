@@ -1,7 +1,7 @@
 'use es6';
 
 import {expect} from 'chai';
-import Team from '../src/data/models/Team';
+import Team from '../src/data/Team';
 
 describe('Team model', function() {
   it('creates team model', function() {

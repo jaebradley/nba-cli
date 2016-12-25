@@ -3,13 +3,13 @@
 import {expect} from 'chai';
 import {List} from 'immutable';
 
-import TeamBoxScoreLeaders from '../src/data/models/TeamBoxScoreLeaders';
-import StatisticalLeaders from '../src/data/models/StatisticalLeaders';
-import Player from '../src/data/models/Player';
-import TeamBoxScoreLeadersTableCreator from '../src/tables/TeamBoxScoreLeadersTableCreator';
+import TeamBoxScoreLeaders from '../src/data/TeamBoxScoreLeaders';
+import StatisticalLeaders from '../src/data/StatisticalLeaders';
+import Player from '../src/data/Player';
+import TeamBoxScoreLeadersTableCreator from '../src/services/tables/TeamBoxScoreLeadersTableCreator';
 
 describe('Team Box Score Leaders Table Creator', function() {
-  let player = new Player('jae', 'baebae');
+  let player = new Player({ firstName:'jae', lastName: 'baebae' });
   let statLeaders = new StatisticalLeaders({
     value: 1,
     leaders: List.of(player, player, player)
