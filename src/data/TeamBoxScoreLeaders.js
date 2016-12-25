@@ -3,7 +3,7 @@
 import {Record} from 'immutable';
 import StatisticalLeaders from './StatisticalLeaders';
 
-const defaults = {
+let defaults = {
   points : new StatisticalLeaders(),
   assists: new StatisticalLeaders(),
   rebounds: new StatisticalLeaders(),

@@ -18,7 +18,7 @@ export default class BoxScoreDataTranslator {
 
   static translateBoxScoreData(data) {
     let visitorLeaders = data.sports_content.game.visitor.Leaders;
-    const homeLeaders = data.sports_content.game.home.Leaders;
+    let homeLeaders = data.sports_content.game.home.Leaders;
 
     let visitorPointsLeaders = new StatisticalLeaders();
     if (visitorLeaders.hasOwnProperty('Points')) {

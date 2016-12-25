@@ -3,8 +3,8 @@
 import {expect} from 'chai';
 import {List} from 'immutable';
 
-import PlayByPlayTableCreator from '../src/tables/PlayByPlayTableCreator';
-import PlayByPlay from '../src/data/models/PlayByPlay';
+import PlayByPlayTableCreator from '../src/services/tables/PlayByPlayTableCreator';
+import PlayByPlay from '../src/data/PlayByPlay';
 
 describe('Play By Play Table Creator', function() {
   let pbp1 = new PlayByPlay({

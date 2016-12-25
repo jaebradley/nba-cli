@@ -1,7 +1,7 @@
 import {Record} from 'immutable';
 import Score from './Score';
 
-const defaults = {
+let defaults = {
   period: 1,
   score: new Score(),
 }

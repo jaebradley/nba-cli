@@ -3,7 +3,7 @@
 import {Record} from 'immutable';
 import TeamBoxScoreLeaders from './TeamBoxScoreLeaders';
 
-const defaults = {
+let defaults = {
   home: new TeamBoxScoreLeaders(),
   visitor: new TeamBoxScoreLeaders(),
 };

@@ -1,4 +1,4 @@
-const entityMap = {
+let entityMap = {
     "&": "&amp;",
     "<": "&lt;",
     ">": "&gt;",

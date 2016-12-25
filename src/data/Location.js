@@ -2,7 +2,7 @@
 
 import {Record} from 'immutable';
 
-const defaults = {
+let defaults = {
   arena: '',
   city: '',
   state: '',

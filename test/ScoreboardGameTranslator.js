@@ -4,14 +4,14 @@ import chai from 'chai';
 import chaiImmutable from 'chai-immutable';
 import Immutable from 'immutable';
 
-import Broadcast from '../src/data/models/Broadcast';
-import BroadcastMedium from '../src/data/models/BroadcastMedium';
-import GameStatus from '../src/data/models/GameStatus';
-import Location from '../src/data/models/Location';
-import Period from '../src/data/models/Period';
-import Matchup from '../src/data/models/Matchup';
-import Team from '../src/data/models/Team';
-import ScoreboardGameTranslator from '../src/data/translators/ScoreboardGameTranslator';
+import Broadcast from '../src/data/Broadcast';
+import BroadcastMedium from '../src/data/BroadcastMedium';
+import GameStatus from '../src/data/GameStatus';
+import Location from '../src/data/Location';
+import Period from '../src/data/Period';
+import Matchup from '../src/data/Matchup';
+import Team from '../src/data/Team';
+import ScoreboardGameTranslator from '../src/services/translators/ScoreboardGameTranslator';
 
 import finalGame from './data/scoreboard/final-game';
 

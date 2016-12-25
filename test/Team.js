@@ -5,8 +5,8 @@ import Team from '../src/data/models/Team';
 
 describe('Team model', function() {
   it('creates team model', function() {
-    const defaultTeam = new Team();
-    const customTeam = new Team({
+    let defaultTeam = new Team();
+    let customTeam = new Team({
       city: 'city',
       nickname: 'nickname',
       abbreviation: 'abbreviation',
@@ -22,7 +22,7 @@ describe('Team model', function() {
   });
 
   it('get formatted name', function() {
-    const customTeam = new Team({
+    let customTeam = new Team({
       city: 'city',
       nickname: 'nickname',
       abbreviation: 'abbreviation',

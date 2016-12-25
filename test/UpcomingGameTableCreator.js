@@ -9,16 +9,16 @@ import Location from '../src/data/models/Location';
 
 describe('test UpcomingGameTableCreator', function() {
 
-  const tableCreator = new UpcomingGameTableCreator();
-  const upcomingGameMetadata = new GameMetadata({
+  let tableCreator = new UpcomingGameTableCreator();
+  let upcomingGameMetadata = new GameMetadata({
     unixMillisecondsStartTime: 1451606400000, // 2016-01-01 00:00:00AM UTC
     home: new Team({city: 'jae', nickname: 'bae', abbrevation: 'bae'}),
     visitor: new Team({city: 'jae', nickname: 'bro', abbrevation: 'jadley'}),
     broadcasts: ['jae', 'bradley'],
     location: new Location({arena: 'jae', city: 'bae', state: 'bae'}),
   });
-  const singleGameMetadata = [upcomingGameMetadata];
-  const doubleGameMetadata = [upcomingGameMetadata, upcomingGameMetadata];
+  let singleGameMetadata = [upcomingGameMetadata];
+  let doubleGameMetadata = [upcomingGameMetadata, upcomingGameMetadata];
 
   it('tests constructor', function() {
     expect(tableCreator.header).to.eql(['UPCOMING', 'HOME', 'AWAY', 'WATCH', 'ARENA']);

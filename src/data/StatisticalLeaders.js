@@ -1,6 +1,6 @@
 import {List, Record} from 'immutable';
 
-const defaults = {
+let defaults = {
   value: 0,
   leaders: List(),
 };

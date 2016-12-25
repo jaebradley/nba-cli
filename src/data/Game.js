@@ -2,7 +2,7 @@
 
 import {List, Record} from 'immutable';
 
-const defaults = {
+let defaults = {
   metadata: undefined,
   boxScoreLeaders: List(),
   playByPlay: List(),
