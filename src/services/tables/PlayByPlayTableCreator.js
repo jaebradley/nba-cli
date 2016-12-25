@@ -4,8 +4,6 @@ import emoji from 'node-emoji';
 import Table from 'cli-table2';
 import {List, Map} from 'immutable';
 
-import Formatter from './formatters/Formatter';
-
 export default class PlayByPlayTableCreator {
   static create(data)  {
     let table = new Table({
