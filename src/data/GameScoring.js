@@ -1,8 +1,7 @@
 'use es6';
 
-import {Record, List} from 'immutable';
+import {List, Record} from 'immutable';
 
-import Formatter from '../services/tables/formatters/Formatter';
 import Score from './Score';
 
 let defaults = {

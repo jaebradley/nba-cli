@@ -16,12 +16,12 @@ describe('Test Data Aggregator', function() {
   });
 
   it('tests box score fetching', function() {
-    return DataAggregator.getTranslatedBoxScores(anotherDate, List.of("0041500234"))
+    return DataAggregator.getBoxScore(anotherDate, List.of("0041500234"))
                          .then(boxScore => console.log(boxScore));
   });
 
   it('tests play by play fetching', function() {
-    return DataAggregator.getTranslatedPlayByPlays(2anotherDate, List.of("0041500234"))
+    return DataAggregator.getPlayByPlay(anotherDate, List.of("0041500234"))
                          .then(playByPlay => console.log(playByPlay));
   });
 

@@ -60,7 +60,7 @@ describe('Box score data translator', function() {
   it('translate first quarter box score data', function() {
     let visitorPointsLeaders = new StatisticalLeaders({
       value: 2,
-      leaders: List.of(kevinDurant, sergeIbaka, andreRoberson, stevenAdams);
+      leaders: List.of(kevinDurant, sergeIbaka, andreRoberson, stevenAdams)
     });
     let visitorAssistsLeaders = new StatisticalLeaders({
       value: 2,
@@ -82,7 +82,7 @@ describe('Box score data translator', function() {
     });
     let homeAssistsLeaders = new StatisticalLeaders({
       value: 1,
-      leaders: List.of(andrewBogut, stephCurry, draymondGreen);
+      leaders: List.of(andrewBogut, stephCurry, draymondGreen)
     });
     let homeReboundsLeaders = new StatisticalLeaders({
       value: 1,

@@ -1,8 +1,8 @@
 'use es6';
 
 import {expect} from 'chai';
-import Score from '../src/data/models/Score';
-import Outcome from '../src/data/models/Outcome';
+import Score from '../src/data/Score';
+import Outcome from '../src/data/Outcome';
 
 describe('Score object', function() {
   let loserScore = 1;

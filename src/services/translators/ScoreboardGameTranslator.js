@@ -4,7 +4,6 @@ import {List} from 'immutable';
 import moment from 'moment-timezone';
 import jstz from 'jstimezonedetect';
 
-import HtmlEscaper from '../../utils/HtmlEscaper';
 import GameStatus from '../../data/GameStatus';
 import GameScoring from '../../data/GameScoring';
 import GameScoreboard from '../../data/GameScoreboard';
