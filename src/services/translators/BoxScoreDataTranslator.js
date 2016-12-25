@@ -2,20 +2,23 @@
 
 import {List} from 'immutable';
 
-import GameBoxScoreLeaders from '../../data/models/GameBoxScoreLeaders';
-import TeamBoxScoreLeaders from '../../data/models/TeamBoxScoreLeaders';
-import StatisticalLeaders from '../../data/models/StatisticalLeaders';
-import Player from '../../data/models/Player';
+import GameBoxScoreLeaders from '../../data/GameBoxScoreLeaders';
+import TeamBoxScoreLeaders from '../../data/TeamBoxScoreLeaders';
+import StatisticalLeaders from '../../data/StatisticalLeaders';
+import Player from '../../data/Player';
 
 
 export default class BoxScoreDataTranslator {
-  static translateStatLeaders(leaderData) {
-    const leaders = List(leaderData.leader.map(leader => new Player(leader.FirstName, leader.LastName)));
-    return new StatisticalLeaders({value: parseInt(leaderData.StatValue), leaders: leaders});
+  static translateStatLeaders(data) {
+    let leaders = List(data.leader.map(leader => new Player({
+      firstName: leader.FirstName,
+      lastName: leader.LastName
+    })));
+    return new StatisticalLeaders({value: parseInt(data.StatValue), leaders: leaders});
   }
 
   static translateBoxScoreData(data) {
-    const visitorLeaders = data.sports_content.game.visitor.Leaders;
+    let visitorLeaders = data.sports_content.game.visitor.Leaders;
     const homeLeaders = data.sports_content.game.home.Leaders;
 
     let visitorPointsLeaders = new StatisticalLeaders();
@@ -48,13 +51,13 @@ export default class BoxScoreDataTranslator {
       homeReboundsLeaders = BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Rebounds);
     }
 
-    const visitorBoxScoreLeaders = new TeamBoxScoreLeaders({
+    let visitorBoxScoreLeaders = new TeamBoxScoreLeaders({
       points: visitorPointsLeaders,
       assists: visitorAssistsLeaders,
       rebounds: visitorReboundsLeaders,
     });
 
-    const homeBoxScoreLeaders = new TeamBoxScoreLeaders({
+    let homeBoxScoreLeaders = new TeamBoxScoreLeaders({
       points: homePointsLeaders,
       assists: homeAssistsLeaders,
       rebounds: homeReboundsLeaders,
