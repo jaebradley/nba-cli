@@ -10,7 +10,7 @@ import TableCreator from '../services/tables/TableCreator';
 export default class CommandExecutionService {
   static executeGamesCommand(option) {
     let date = CommandExecutionService.identifyDateFromOption(option);
-    return DataAggregator.aggregate(date.year(), date.month() + 1, date.day())
+    return DataAggregator.aggregate(date)
                          .then(data => TableCreator.create(data));
   }
 

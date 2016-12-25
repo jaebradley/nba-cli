@@ -11,19 +11,19 @@ import PlayByPlayTranslator from './translators/PlayByPlayTranslator';
 import ScoreboardGamesTranslator from './translators/ScoreboardGamesTranslator';
 
 export default class DataAggregator {
-  static aggregate(year, month, day) {
+  static aggregate(date) {
     return DataAggregator
-      .getScoreboards(year, month, day)
-      .then(scoreboards => DataAggregator.fetchAllGameSpecificData(scoreboards))
+      .getScoreboards(date)
+      .then(scoreboards => DataAggregator.getAllGameSpecificData(date, scoreboards))
       .then(allGameData => DataAggregator.aggregateGames(allGameData))
       .then(games => DataAggregator.buildGames(games));
   }
 
-  static getAllGameSpecificData(games) {
+  static getAllGameSpecificData(date, games) {
     let ids = List(games.map(game => game.id));
     return Promise.all([
-      DataAggregator.getBoxScores(year, month, day, ids),
-      DataAggregator.getPlayByPlays(year, month, day, ids),
+      DataAggregator.getBoxScores(date, ids),
+      DataAggregator.getPlayByPlays(date, ids),
       games
     ]);
   };
@@ -43,7 +43,7 @@ export default class DataAggregator {
 
     let aggregatedGames = List();
     for (let i = 0; i < games.size; i++) {
-      let aggregatedGame = new AggregatedGame({
+      let aggregatedGame = new Game({
         metadata: games.get(i),
         boxScoreLeaders: boxScores.get(i),
         playByPlay: playByPlays.get(i),
@@ -57,7 +57,7 @@ export default class DataAggregator {
   static buildGames(games) {
     let upcoming = List();
     let active = List();
-    
+
     games.forEach(game => {
       if (game.metadata.isUpcoming()) {
         upcoming = upcoming.push(game);
@@ -72,32 +72,32 @@ export default class DataAggregator {
     });
   }
 
-  static getScoreboards(year, month, day) {
-    return Client.getGames(year, month, day)
+  static getScoreboards(date) {
+    return Client.getGames(date.year(), date.month() + 1, date.day())
                  .then(games => ScoreboardGamesTranslator.translate(games));
   }
 
-  static getBoxScores(year, month, day, gameIds) {
-    let translations = gameIds.map(gameId => DataAggregator.getBoxScore(year, month, day, gameId));
+  static getBoxScores(date, gameIds) {
+    let translations = gameIds.map(gameId => DataAggregator.getBoxScore(date, gameId));
     return Promise.all(translations)
                   .then(results => List(results))
                   .catch(reason => console.log(reason));
   }
 
-  static getBoxScore(year, month, day, gameId) {
-    return Client.getBoxScore(year, month, day, gameId)
+  static getBoxScore(date, gameId) {
+    return Client.getBoxScore(date.year(), date.month() + 1, date.day(), gameId)
                  .then(boxScore => BoxScoreDataTranslator.translateBoxScoreData(boxScore));
   }
 
-  static getPlayByPlays(year, month, day, gameIds) {
-    let translations = gameIds.map(gameId => DataAggregator.getPlayByPlay(year, month, day, gameId));
+  static getPlayByPlays(date, gameIds) {
+    let translations = gameIds.map(gameId => DataAggregator.getPlayByPlay(date, gameId));
     return Promise.all(translations)
                   .then(results => List(results))
                   .catch(reason => console.log(reason));
   }
 
-  static getPlayByPlay(year, month, day, gameId) {
-    return Client.getPlayByPlay(year, month, day, gameId)
+  static getPlayByPlay(date, gameId) {
+    return Client.getPlayByPlay(date.year(), date.month() + 1, date.day(), gameId)
                  .then(playByPlay => PlayByPlayTranslator.translate(playByPlay));
   }
 };

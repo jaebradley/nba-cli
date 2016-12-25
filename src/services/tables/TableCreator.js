@@ -13,12 +13,8 @@ export default class TableCreator {
   static create(data) {
     return new GamesTables({
       active: TableCreator.createActiveGamesTables(data.get('active')),
-      upcoming: TableCreator.createUpcomingGamesTable(data.get('upcoming'))
+      upcoming: UpcomingGamesTableCreator.create(data.get('upcoming'))
     });
-  }
-
-  static createUpcomingGamesTable(games) {
-    return UpcomingGamesTableCreator.create(games);
   }
 
   static createActiveGamesTables(games) {
@@ -34,12 +30,12 @@ export default class TableCreator {
       ]);
       table.push([
         {
-          content: TeamBoxScoreLeadersTableCreator.create(game.boxScoreLeaders.home),
+          content: TeamBoxScoreLeadersTableCreator.create(game.boxScoreLeaders.home, true),
           colSpan: 1,
           hAlign: 'center'
         },
         {
-          content: TeamBoxScoreLeadersTableCreator.create(game.boxScoreLeaders.visitor),
+          content: TeamBoxScoreLeadersTableCreator.create(game.boxScoreLeaders.visitor, false),
           colSpan: 1,
           hAlign: 'center'
         }
