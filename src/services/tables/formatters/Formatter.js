@@ -1,9 +1,9 @@
 import NbaEmoji from 'nba-emoji';
 import emoji from 'node-emoji';
 
-import Outcome from '../../data/models/Outcome';
-import Constants from '../../constants/Constants';
-import Score from '../../data/models/Score';
+import Outcome from '../../../data/Outcome';
+import Constants from '../../../constants/Constants';
+import Score from '../../../data/Score';
 
 export default class Formatter {
 

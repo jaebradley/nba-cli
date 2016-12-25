@@ -1,9 +1,11 @@
-import Table from 'cli-table2';
-import Colors from 'colors';
+'use es6';
+
+import colors from 'colors';
 import emoji from 'node-emoji';
+import Table from 'cli-table2';
 import {List, Map} from 'immutable';
 
-import Constants from '../constants/Constants';
+import Constants from '../../constants/Constants';
 import Formatter from './formatters/Formatter';
 
 export default class TeamBoxScoreLeadersTableCreator {

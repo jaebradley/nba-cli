@@ -3,7 +3,7 @@
 import Table from 'cli-table2';
 import {List} from 'immutable';
 
-import GamesTables from '../data/models/GamesTables';
+import GamesTables from '../../data/GamesTables';
 import PlayByPlayTableCreator from './PlayByPlayTableCreator';
 import ActiveGameTableCreator from './ActiveGameTableCreator';
 import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';

@@ -2,16 +2,13 @@
 
 import {Record, List} from 'immutable';
 
-import PeriodScore from './PeriodScore';
+import Formatter from '../services/tables/formatters/Formatter';
 import Score from './Score';
-import Formatter from '../../tables/formatters/Formatter';
-
 
 let defaults = {
   periods: new List(),
   total: new Score(),
 }
-
 
 export default class GameScoring extends Record(defaults) {
   getPeriodValues() {

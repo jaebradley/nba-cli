@@ -1,24 +1,20 @@
 'use es6';
 
-import {Record, List} from 'immutable';
-import moment from 'moment-timezone';
 import jstz from 'jstimezonedetect';
+import moment from 'moment-timezone';
+import {List, Record} from 'immutable';
 
+import Constants from '../constants/Constants';
+import GameScoring from './GameScoring';
 import GameStatus from './GameStatus';
 import Location from './Location';
-import Period from './Period';
-import Broadcast from './Broadcast';
-import BroadcastMedium from './BroadcastMedium';
 import Matchup from './Matchup';
-import Team from './Team';
-import GameScoring from './GameScoring';
-import Score from './Score';
-import Constants from '../../constants/Constants';
+import Period from './Period';
 
 let defaults = {
   id: '',
   status: GameStatus.FINAL,
-  startTimestamp: 0,
+  startTimestamp: moment(),
   location: new Location(),
   period: new Period(),
   broadcasts: new List(),

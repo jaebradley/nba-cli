@@ -1,15 +1,17 @@
-import {Record} from 'immutable';
+'use es6';
+
 import emoji from 'node-emoji';
-import Constants from '../../constants/Constants';
+import {Record} from 'immutable';
+
+import Constants from '../constants/Constants';
 import Outcome from './Outcome';
 
-const defaults = {
+let defaults = {
   home: 0,
   away: 0,
 }
 
 export default class Score extends Record(defaults){
-
   getOutcome() {
     let scoreDifferential = this.home - this.away;
 

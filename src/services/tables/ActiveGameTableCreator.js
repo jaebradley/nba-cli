@@ -5,9 +5,9 @@ import Table from 'cli-table2';
 import colors from 'colors';
 import emoji from 'node-emoji';
 
-import Constants from '../constants/Constants';
+import Constants from '../../constants/Constants';
 import Formatter from './formatters/Formatter';
-import Score from '../data/models/Score';
+import Score from '../../data/Score';
 
 export default class ActiveGameTableCreator {
   static create(data) {

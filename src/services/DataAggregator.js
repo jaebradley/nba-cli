@@ -4,9 +4,9 @@ import Client from 'nba-stats-client';
 import Promise from 'bluebird';
 import {List, Map} from 'immutable';
 
-import ScoreboardGamesTranslator from '../translators/ScoreboardGamesTranslator';
-import BoxScoreDataTranslator from '../translators/BoxScoreDataTranslator';
-import PlayByPlayTranslator from '../translators/PlayByPlayTranslator';
+import ScoreboardGamesTranslator from './translators/ScoreboardGamesTranslator';
+import BoxScoreDataTranslator from './translators/BoxScoreDataTranslator';
+import PlayByPlayTranslator from './translators/PlayByPlayTranslator';
 
 import AggregatedGame from '../data/AggregatedGame';
 
