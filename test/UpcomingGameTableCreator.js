@@ -1,13 +1,48 @@
 'use es6';
 
-import {expect, assert} from 'chai';
+import chai from 'chai';
+import chaiImmutable from 'chai-immutable';
+import emoji from 'node-emoji';
+import jstz from 'jstimezonedetect';
+import {List, Map, Record} from 'immutable';
 
-import UpcomingGamesTableCreator from '../src/services/tables/UpcomingGamesTableCreator';
 import GameScoreboard from '../src/data/GameScoreboard';
-import Team from '../src/data/Team';
 import Location from '../src/data/Location';
+import Team from '../src/data/Team';
+import UpcomingGamesTableCreator from '../src/services/tables/UpcomingGamesTableCreator';
 
-describe('test UpcomingGameTableCreator', function() {
+chai.use(chaiImmutable);
+
+let expect = chai.expect;
+
+describe('Test Upcoming Games Table Creation', function() {
+  let hAlignValue = 'center';
+  let headers = List.of(
+    Map({
+      content: `${emoji.get('alarm_clock')}  ${jstz.determine().name()}`,
+      hAlign: hAlignValue
+    }),
+    Map({
+      content: emoji.get('house'),
+      hAlign: hAlignValue
+    }),
+    Map({
+      content: emoji.get('bus'),
+      hAlign: hAlignValue
+    }),
+    Map({
+      content: emoji.get('tv'),
+      hAlign: hAlignValue
+    }),
+    Map({
+      content: emoji.get('round_pushpin'),
+      hAlign: hAlignValue
+    })
+  );
+
+  it('should test headers', function() {
+    expect(headers).to.eql(UpcomingGamesTableCreator.getHeaders());
+  })
   //
   // let upcomingGameMetadata = new GameScoreboard({
   //   startTimestamp: 1451606400000, // 2016-01-01 00:00:00AM UTC
