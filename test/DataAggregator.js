@@ -24,7 +24,7 @@ describe('Test Data Aggregator', function() {
     return DataAggregator.getPlays(anotherDate, "0041500234")
                          .then(plays => console.log(plays));
   });
-  
+
   it('tests data aggregation', function() {
     return DataAggregator.aggregate(date)
                          .then(data => console.log(data))
