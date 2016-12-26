@@ -40,8 +40,7 @@ export default class GameScoreboard extends Record(defaults) {
 
   getTvBroadcastsString() {
     let tvBroadcasts = List();
-    for (let i = 0; i < this.broadcasts.size; i++) {
-      let broadcast = this.broadcasts.get(i);
+    for (let broadcast of this.broadcasts) {
       if (broadcast.medium === BroadcastMedium.TV) {
         tvBroadcasts = tvBroadcasts.push(broadcast.name);
       }

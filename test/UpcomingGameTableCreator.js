@@ -5,9 +5,12 @@ import chaiImmutable from 'chai-immutable';
 import emoji from 'node-emoji';
 import jstz from 'jstimezonedetect';
 import {List, Map, Record} from 'immutable';
+import moment from 'moment-timezone';
 
+import Broadcast from '../src/data/Broadcast';
 import GameScoreboard from '../src/data/GameScoreboard';
 import Location from '../src/data/Location';
+import Matchup from '../src/data/Matchup';
 import Team from '../src/data/Team';
 import UpcomingGamesTableCreator from '../src/services/tables/UpcomingGamesTableCreator';
 
@@ -42,7 +45,73 @@ describe('Test Upcoming Games Table Creation', function() {
 
   it('should test headers', function() {
     expect(headers).to.eql(UpcomingGamesTableCreator.getHeaders());
-  })
+  });
+
+  it('should test row format', function() {
+    let id = 'jae';
+    let timestamp = moment().year(2016)
+                            .month(12)
+                            .date(30)
+                            .tz('UTC');
+    let teamCity1 = 'Boston';
+    let teamNickname1 = 'Celtics';
+    let teamAbbreviation1 = 'BOS';
+    let teamCity2 = 'Los Angeles';
+    let teamNickname2 = 'Lakers';
+    let teamAbbreviation2 = 'LAL';
+
+    let homeTeam = new Team({
+      city: teamCity1,
+      nickname: teamNickname1,
+      abbreviation: teamAbbreviation1
+    });
+
+    let awayTeam = new Team({
+      city: teamCity2,
+      nickname: teamNickname2,
+      abbreviation: teamAbbreviation2
+    });
+
+    let matchup = new Matchup({
+      homeTeam: homeTeam,
+      awayTeam: awayTeam
+    });
+
+    let broadcastScope = 'national';
+    let broadcastName = 'jaebaebae';
+
+    let broadcast = new Broadcast({
+      scope: broadcastScope,
+      name: broadcastName
+    });
+
+    let arena = 'TD Garden';
+    let city = 'Boston';
+    let state = 'MA';
+    let location = new Location({
+      arena: arena,
+      city: city,
+      state: state
+    });
+
+    let scoreboard = new GameScoreboard({
+      id: id,
+      startTimestamp: timestamp,
+      matchup: matchup,
+      broadcasts: List.of(broadcast, broadcast),
+      location: location
+    });
+
+    let expected = List.of(
+      scoreboard.getLocalizedStartDateTime(),
+      scoreboard.matchup.homeTeam.getName(),
+      scoreboard.matchup.awayTeam.getName(),
+      scoreboard.getTvBroadcastsString(),
+      scoreboard.location.getFormattedLocation()
+    );
+
+    expect(expected).to.eql(UpcomingGamesTableCreator.format(scoreboard));
+  });
   //
   // let upcomingGameMetadata = new GameScoreboard({
   //   startTimestamp: 1451606400000, // 2016-01-01 00:00:00AM UTC
