@@ -78,7 +78,7 @@ describe('GameScoreboard Tests', function() {
   });
 
   it('should test localized start date', function() {
-    let expected = 'January 29, 2017 7:00 PM';
+    let expected = 'January 30, 2017 12:00 AM';
     expect(scoreboard.getLocalizedStartDateTime()).to.equal(expected);
   });
 
