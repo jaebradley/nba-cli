@@ -28,8 +28,6 @@ describe('Score object', function() {
     away: loserScore
   });
 
-  // test formatting
-
   it('should test outcome', function() {
     expect(losingScore.getOutcome()).to.eql(Outcome.AWAY_WIN);
     expect(winningScore.getOutcome()).to.eql(Outcome.HOME_WIN);
