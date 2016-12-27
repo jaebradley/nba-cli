@@ -11,6 +11,6 @@ let defaults = {
 
 export default class GameScoring extends Record(defaults) {
   getPeriodValues() {
-    return this.periods.map(periodScore => periodScore.formatPeriod());
+    return List(this.periods.map(periodScore => periodScore.formatPeriod()));
   }
 }
