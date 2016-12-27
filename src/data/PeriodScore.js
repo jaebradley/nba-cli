@@ -1,5 +1,6 @@
 import {Record} from 'immutable';
 import Score from './Score';
+import PeriodFormatter from '../services/PeriodFormatter';
 
 let defaults = {
   period: 1,
@@ -8,6 +9,6 @@ let defaults = {
 
 export default class PeriodScore extends Record(defaults){
   formatPeriod() {
-    return this.period > 4 ? `OT${this.period - 4}` : `Q${this.period}`;
+    return PeriodFormatter.format(this.period);
   }
 };
