@@ -1,1 +1,342 @@
-{"sports_content":{"sports_meta":{"date_time":"20160516 2108","season_meta":{"calendar_date":"20160516","season_year":"2015","stats_season_year":"2015","stats_season_id":"42015","stats_season_stage":"4","roster_season_year":"2015","schedule_season_year":"2015","standings_season_year":"2015","season_id":"42015","display_year":"2015-16","display_season":"Post Season","season_stage":"4"},"next":{"url":"http:\/\/data.nba.com\/data\/10s\/json\/cms\/noseason\/game\/20160516\/0041500311\/pbp_all.json"}},"game":{"id":"0041500311","game_url":"20160516\/OKCGSW","season_id":"42015","date":"20160516","time":"2100","arena":"ORACLE Arena","city":"Oakland","state":"CA","country":"","home_start_date":"20160516","home_start_time":"1800","visitor_start_date":"20160516","visitor_start_time":"2000","previewAvailable":"1","recapAvailable":"0","notebookAvailable":"0","tnt_ot":"1","play":[{"event":"0","clock":"","description":"Start Period","player_code":"","person_id":"","home_score":"0","visitor_score":"0","team_abr":"","period":"1"},{"event":"1","clock":"","description":"Jump Ball Bogut vs Adams (Roberson gains possession)","player_code":"andrew_bogut","person_id":"101106","home_score":"0","visitor_score":"0","team_abr":"GSW","period":"1"},{"event":"2","clock":"11:45","description":"[OKC] Adams Alley Oop Layup shot: Missed","player_code":"steven_adams","person_id":"203500","home_score":"0","visitor_score":"0","team_abr":"OKC","period":"1"},{"event":"3","clock":"11:43","description":"[GSW] Team Rebound","player_code":"","person_id":"","home_score":"0","visitor_score":"0","team_abr":"GSW","period":"1"},{"event":"4","clock":"11:25","description":"[GSW 2-0] K Thompson Turnaround Jump Shot: Made (2 PTS) Assist: Bogut (1 AST)","player_code":"klay_thompson","person_id":"202691","home_score":"2","visitor_score":"0","team_abr":"GSW","period":"1"},{"event":"5","clock":"11:11","description":"[OKC 2-2] Roberson Reverse Layup Shot: Made (2 PTS) Assist: Durant (1 AST)","player_code":"andre_roberson","person_id":"203460","home_score":"2","visitor_score":"2","team_abr":"OKC","period":"1"},{"event":"6","clock":"10:57","description":"[GSW] Curry Jump Shot: Missed","player_code":"stephen_curry","person_id":"201939","home_score":"2","visitor_score":"2","team_abr":"GSW","period":"1"},{"event":"7","clock":"10:57","description":"[OKC] Adams Rebound (Off:0 Def:1)","player_code":"steven_adams","person_id":"203500","home_score":"2","visitor_score":"2","team_abr":"OKC","period":"1"},{"event":"8","clock":"10:42","description":"[OKC] Ibaka 3pt Shot: Missed","player_code":"serge_ibaka","person_id":"201586","home_score":"2","visitor_score":"2","team_abr":"OKC","period":"1"},{"event":"9","clock":"10:42","description":"[GSW] Green Rebound (Off:0 Def:1)","player_code":"draymond_green","person_id":"203110","home_score":"2","visitor_score":"2","team_abr":"GSW","period":"1"},{"event":"10","clock":"10:38","description":"[OKC] Roberson Foul: Shooting (1 PF) (2 FTA) (D Stafford)","player_code":"andre_roberson","person_id":"203460","home_score":"2","visitor_score":"2","team_abr":"OKC","period":"1"},{"event":"11","clock":"10:38","description":"[GSW] Green Free Throw 1 of 2 Missed","player_code":"draymond_green","person_id":"203110","home_score":"2","visitor_score":"2","team_abr":"GSW","period":"1"},{"event":"12","clock":"10:38","description":"[GSW] Team Rebound","player_code":"","person_id":"","home_score":"2","visitor_score":"2","team_abr":"GSW","period":"1"},{"event":"13","clock":"10:38","description":"[GSW 3-2] Green Free Throw 2 of 2 (1 PTS)","player_code":"draymond_green","person_id":"203110","home_score":"3","visitor_score":"2","team_abr":"GSW","period":"1"},{"event":"15","clock":"10:15","description":"[OKC] Durant Fadeaway Jump Shot: Missed","player_code":"kevin_durant","person_id":"201142","home_score":"3","visitor_score":"2","team_abr":"OKC","period":"1"},{"event":"16","clock":"10:14","description":"[OKC] Ibaka Rebound (Off:1 Def:0)","player_code":"serge_ibaka","person_id":"201586","home_score":"3","visitor_score":"2","team_abr":"OKC","period":"1"},{"event":"17","clock":"10:12","description":"[OKC 4-3] Ibaka Turnaround Hook Shot: Made (2 PTS)","player_code":"serge_ibaka","person_id":"201586","home_score":"3","visitor_score":"4","team_abr":"OKC","period":"1"},{"event":"18","clock":"10:01","description":"[GSW 5-4] K Thompson Jump Shot: Made (4 PTS) Assist: Curry (1 AST)","player_code":"klay_thompson","person_id":"202691","home_score":"5","visitor_score":"4","team_abr":"GSW","period":"1"},{"event":"19","clock":"09:49","description":"[OKC 6-5] Durant Fadeaway Jump Shot: Made (2 PTS) Assist: Westbrook (1 AST)","player_code":"kevin_durant","person_id":"201142","home_score":"5","visitor_score":"6","team_abr":"OKC","period":"1"},{"event":"20","clock":"09:35","description":"[GSW] Curry 3pt Shot: Missed","player_code":"stephen_curry","person_id":"201939","home_score":"5","visitor_score":"6","team_abr":"GSW","period":"1"},{"event":"21","clock":"09:35","description":"[OKC] Adams Rebound (Off:0 Def:2)","player_code":"steven_adams","person_id":"203500","home_score":"5","visitor_score":"6","team_abr":"OKC","period":"1"},{"event":"22","clock":"09:22","description":"[OKC] Westbrook Turnover : Bad Pass (1 TO) Steal:Curry (1 ST)","player_code":"russell_westbrook","person_id":"201566","home_score":"5","visitor_score":"6","team_abr":"OKC","period":"1"},{"event":"23","clock":"09:16","description":"[OKC] Durant Foul: Personal (1 PF) (2 FTA) (T Washington)","player_code":"kevin_durant","person_id":"201142","home_score":"5","visitor_score":"6","team_abr":"OKC","period":"1"},{"event":"24","clock":"09:16","description":"[GSW 6-6] Curry Free Throw 1 of 2 (1 PTS)","player_code":"stephen_curry","person_id":"201939","home_score":"6","visitor_score":"6","team_abr":"GSW","period":"1"},{"event":"26","clock":"09:16","description":"[GSW 7-6] Curry Free Throw 2 of 2 (2 PTS)","player_code":"stephen_curry","person_id":"201939","home_score":"7","visitor_score":"6","team_abr":"GSW","period":"1"},{"event":"28","clock":"08:59","description":"[OKC 8-7] Adams Hook Shot: Made (2 PTS) Assist: Westbrook (2 AST)","player_code":"steven_adams","person_id":"203500","home_score":"7","visitor_score":"8","team_abr":"OKC","period":"1"},{"event":"29","clock":"08:51","description":"[GSW 9-8] Barnes Pullup Jump shot: Made (2 PTS) Assist: Green (1 AST)","player_code":"harrison_barnes","person_id":"203084","home_score":"9","visitor_score":"8","team_abr":"GSW","period":"1"}]}}}
+{
+  "sports_content": {
+    "sports_meta": {
+      "date_time": "20160516 2108",
+      "season_meta": {
+        "calendar_date": "20160516",
+        "season_year": "2015",
+        "stats_season_year": "2015",
+        "stats_season_id": "42015",
+        "stats_season_stage": "4",
+        "roster_season_year": "2015",
+        "schedule_season_year": "2015",
+        "standings_season_year": "2015",
+        "season_id": "42015",
+        "display_year": "2015-16",
+        "display_season": "Post Season",
+        "season_stage": "4"
+      },
+      "next": {
+        "url": "http://data.nba.com/data/10s/json/cms/noseason/game/20160516/0041500311/pbp_all.json"
+      }
+    },
+    "game": {
+      "id": "0041500311",
+      "game_url": "20160516/OKCGSW",
+      "season_id": "42015",
+      "date": "20160516",
+      "time": "2100",
+      "arena": "ORACLE Arena",
+      "city": "Oakland",
+      "state": "CA",
+      "country": "",
+      "home_start_date": "20160516",
+      "home_start_time": "1800",
+      "visitor_start_date": "20160516",
+      "visitor_start_time": "2000",
+      "previewAvailable": "1",
+      "recapAvailable": "0",
+      "notebookAvailable": "0",
+      "tnt_ot": "1",
+      "play": [
+        {
+          "event": "0",
+          "clock": "",
+          "description": "Start Period",
+          "player_code": "",
+          "person_id": "",
+          "home_score": "0",
+          "visitor_score": "0",
+          "team_abr": "",
+          "period": "1"
+        },
+        {
+          "event": "1",
+          "clock": "",
+          "description": "Jump Ball Bogut vs Adams (Roberson gains possession)",
+          "player_code": "andrew_bogut",
+          "person_id": "101106",
+          "home_score": "0",
+          "visitor_score": "0",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "2",
+          "clock": "11:45",
+          "description": "[OKC] Adams Alley Oop Layup shot: Missed",
+          "player_code": "steven_adams",
+          "person_id": "203500",
+          "home_score": "0",
+          "visitor_score": "0",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "3",
+          "clock": "11:43",
+          "description": "[GSW] Team Rebound",
+          "player_code": "",
+          "person_id": "",
+          "home_score": "0",
+          "visitor_score": "0",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "4",
+          "clock": "11:25",
+          "description": "[GSW 2-0] K Thompson Turnaround Jump Shot: Made (2 PTS) Assist: Bogut (1 AST)",
+          "player_code": "klay_thompson",
+          "person_id": "202691",
+          "home_score": "2",
+          "visitor_score": "0",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "5",
+          "clock": "11:11",
+          "description": "[OKC 2-2] Roberson Reverse Layup Shot: Made (2 PTS) Assist: Durant (1 AST)",
+          "player_code": "andre_roberson",
+          "person_id": "203460",
+          "home_score": "2",
+          "visitor_score": "2",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "6",
+          "clock": "10:57",
+          "description": "[GSW] Curry Jump Shot: Missed",
+          "player_code": "stephen_curry",
+          "person_id": "201939",
+          "home_score": "2",
+          "visitor_score": "2",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "7",
+          "clock": "10:57",
+          "description": "[OKC] Adams Rebound (Off:0 Def:1)",
+          "player_code": "steven_adams",
+          "person_id": "203500",
+          "home_score": "2",
+          "visitor_score": "2",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "8",
+          "clock": "10:42",
+          "description": "[OKC] Ibaka 3pt Shot: Missed",
+          "player_code": "serge_ibaka",
+          "person_id": "201586",
+          "home_score": "2",
+          "visitor_score": "2",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "9",
+          "clock": "10:42",
+          "description": "[GSW] Green Rebound (Off:0 Def:1)",
+          "player_code": "draymond_green",
+          "person_id": "203110",
+          "home_score": "2",
+          "visitor_score": "2",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "10",
+          "clock": "10:38",
+          "description": "[OKC] Roberson Foul: Shooting (1 PF) (2 FTA) (D Stafford)",
+          "player_code": "andre_roberson",
+          "person_id": "203460",
+          "home_score": "2",
+          "visitor_score": "2",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "11",
+          "clock": "10:38",
+          "description": "[GSW] Green Free Throw 1 of 2 Missed",
+          "player_code": "draymond_green",
+          "person_id": "203110",
+          "home_score": "2",
+          "visitor_score": "2",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "12",
+          "clock": "10:38",
+          "description": "[GSW] Team Rebound",
+          "player_code": "",
+          "person_id": "",
+          "home_score": "2",
+          "visitor_score": "2",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "13",
+          "clock": "10:38",
+          "description": "[GSW 3-2] Green Free Throw 2 of 2 (1 PTS)",
+          "player_code": "draymond_green",
+          "person_id": "203110",
+          "home_score": "3",
+          "visitor_score": "2",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "15",
+          "clock": "10:15",
+          "description": "[OKC] Durant Fadeaway Jump Shot: Missed",
+          "player_code": "kevin_durant",
+          "person_id": "201142",
+          "home_score": "3",
+          "visitor_score": "2",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "16",
+          "clock": "10:14",
+          "description": "[OKC] Ibaka Rebound (Off:1 Def:0)",
+          "player_code": "serge_ibaka",
+          "person_id": "201586",
+          "home_score": "3",
+          "visitor_score": "2",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "17",
+          "clock": "10:12",
+          "description": "[OKC 4-3] Ibaka Turnaround Hook Shot: Made (2 PTS)",
+          "player_code": "serge_ibaka",
+          "person_id": "201586",
+          "home_score": "3",
+          "visitor_score": "4",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "18",
+          "clock": "10:01",
+          "description": "[GSW 5-4] K Thompson Jump Shot: Made (4 PTS) Assist: Curry (1 AST)",
+          "player_code": "klay_thompson",
+          "person_id": "202691",
+          "home_score": "5",
+          "visitor_score": "4",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "19",
+          "clock": "09:49",
+          "description": "[OKC 6-5] Durant Fadeaway Jump Shot: Made (2 PTS) Assist: Westbrook (1 AST)",
+          "player_code": "kevin_durant",
+          "person_id": "201142",
+          "home_score": "5",
+          "visitor_score": "6",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "20",
+          "clock": "09:35",
+          "description": "[GSW] Curry 3pt Shot: Missed",
+          "player_code": "stephen_curry",
+          "person_id": "201939",
+          "home_score": "5",
+          "visitor_score": "6",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "21",
+          "clock": "09:35",
+          "description": "[OKC] Adams Rebound (Off:0 Def:2)",
+          "player_code": "steven_adams",
+          "person_id": "203500",
+          "home_score": "5",
+          "visitor_score": "6",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "22",
+          "clock": "09:22",
+          "description": "[OKC] Westbrook Turnover : Bad Pass (1 TO) Steal:Curry (1 ST)",
+          "player_code": "russell_westbrook",
+          "person_id": "201566",
+          "home_score": "5",
+          "visitor_score": "6",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "23",
+          "clock": "09:16",
+          "description": "[OKC] Durant Foul: Personal (1 PF) (2 FTA) (T Washington)",
+          "player_code": "kevin_durant",
+          "person_id": "201142",
+          "home_score": "5",
+          "visitor_score": "6",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "24",
+          "clock": "09:16",
+          "description": "[GSW 6-6] Curry Free Throw 1 of 2 (1 PTS)",
+          "player_code": "stephen_curry",
+          "person_id": "201939",
+          "home_score": "6",
+          "visitor_score": "6",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "26",
+          "clock": "09:16",
+          "description": "[GSW 7-6] Curry Free Throw 2 of 2 (2 PTS)",
+          "player_code": "stephen_curry",
+          "person_id": "201939",
+          "home_score": "7",
+          "visitor_score": "6",
+          "team_abr": "GSW",
+          "period": "1"
+        },
+        {
+          "event": "28",
+          "clock": "08:59",
+          "description": "[OKC 8-7] Adams Hook Shot: Made (2 PTS) Assist: Westbrook (2 AST)",
+          "player_code": "steven_adams",
+          "person_id": "203500",
+          "home_score": "7",
+          "visitor_score": "8",
+          "team_abr": "OKC",
+          "period": "1"
+        },
+        {
+          "event": "29",
+          "clock": "08:51",
+          "description": "[GSW 9-8] Barnes Pullup Jump shot: Made (2 PTS) Assist: Green (1 AST)",
+          "player_code": "harrison_barnes",
+          "person_id": "203084",
+          "home_score": "9",
+          "visitor_score": "8",
+          "team_abr": "GSW",
+          "period": "1"
+        }
+      ]
+    }
+  }
+}
