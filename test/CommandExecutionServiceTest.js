@@ -22,10 +22,12 @@ describe('Tests Command Execution Service', function() {
                                             .subtract(1, 'days')
                                             .tz(Constants.DEFAULT_TIMEZONE)
                                             .startOf('day');
-  let convertedDate = moment().tz(Constants.DEFAULT_TIMEZONE)
-                              .year(2016)
+  let convertedDate = moment().year(2016)
                               .month(1)
                               .date(1)
+                              .tz(jstz.determine().name())
+                              .startOf('day')
+                              .tz(Constants.DEFAULT_TIMEZONE)
                               .startOf('day');
   it('should identify games option', function() {
     let option = GamesOption.TODAY;
