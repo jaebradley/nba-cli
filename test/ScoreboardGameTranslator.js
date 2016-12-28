@@ -33,6 +33,14 @@ describe('translate scoreboard game', function() {
     home: homeScore1,
     away: awayScore1
   });
+  let homePeriodScore = {
+    'period_value': period1Value,
+    'score': homeScore1
+  };
+  let awayPeriodScore = {
+    'period_value': period1Value,
+    'score': awayScore1
+  };
 
   it('should test total score parsing', function() {
     let homeData = {
@@ -47,19 +55,25 @@ describe('translate scoreboard game', function() {
   });
 
   it('should test period score parsing', function() {
-    let homePeriodScore = {
-      'period_value': period1Value,
-      'score': homeScore1
-    };
-    let awayPeriodScore = {
-      'period_value': period1Value,
-      'score': awayScore1
-    };
     let periodScore1 = new PeriodScore({
       period: period1,
       score: score1
     });
     let periodScore = ScoreboardGameTranslator.getPeriodScore(homePeriodScore, awayPeriodScore);
     expect(periodScore).to.eql(periodScore1);
+  });
+
+  it('should test throwing exceptions when parsing period scores', function() {
+    let illegallyFormattedPeriodScore = {};
+    expect(() => ScoreboardGameTranslator.getPeriodScore(illegallyFormattedPeriodScore, awayPeriodScore)).to.throw(ReferenceError);
+    expect(() => ScoreboardGameTranslator.getPeriodScore(homePeriodScore, illegallyFormattedPeriodScore)).to.throw(ReferenceError);
+
+    illegallyFormattedPeriodScore['period_value'] = 'foo';
+    expect(() => ScoreboardGameTranslator.getPeriodScore(illegallyFormattedPeriodScore, awayPeriodScore)).to.throw(ReferenceError);
+    expect(() => ScoreboardGameTranslator.getPeriodScore(homePeriodScore, illegallyFormattedPeriodScore)).to.throw(ReferenceError);
+
+    illegallyFormattedPeriodScore['score'] = 'bar';
+    expect(() => ScoreboardGameTranslator.getPeriodScore(illegallyFormattedPeriodScore, awayPeriodScore)).to.throw(ReferenceError);
+    expect(() => ScoreboardGameTranslator.getPeriodScore(homePeriodScore, illegallyFormattedPeriodScore)).to.throw(ReferenceError);
   });
 });
