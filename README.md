@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/jaebradley/nba-cli.svg?branch=master)](https://travis-ci.org/jaebradley/nba-cli)
-<a href='https://coveralls.io/github/jaebradley/nba-cli'><img src='https://coveralls.io/repos/github/jaebradley/nba-cli/badge.svg' alt='Coverage Status' /></a>
+[![Coverage Status](https://coveralls.io/repos/github/jaebradley/nba-cli/badge.svg?branch=master)](https://coveralls.io/github/jaebradley/nba-cli?branch=master)
 
 
 ### Get NBA Data From The Command Line
