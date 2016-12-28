@@ -67,7 +67,7 @@ describe('translate scoreboard game', function() {
     expectedPeriodScore
   );
 
-  let teamCity = 'Boston',
+  let teamCity = 'Boston';
   let teamNickname = 'Celtics';
   let teamAbbreviation = 'BOS';
 
@@ -84,14 +84,14 @@ describe('translate scoreboard game', function() {
 
   let broadcastScope = 'scope';
   let broadcastDisplayName = 'displayName';
-  let broadcastMedium = broadcastMedium.TV;
+  let broadcastMedium = BroadcastMedium.TV;
   let broadcast = {
     'scope': broadcastScope,
     'display_name': broadcastDisplayName
   };
   let expectedBroadcast = new Broadcast({
     scope: broadcastScope,
-    display_name: broadcastDisplayName,
+    name: broadcastDisplayName,
     medium: broadcastMedium
   });
 
