@@ -3,7 +3,7 @@
 import {List, Record} from 'immutable';
 
 let defaults = {
-  active: List(),
+  started: List(),
   upcoming: undefined
 };
 

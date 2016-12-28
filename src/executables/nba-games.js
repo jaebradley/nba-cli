@@ -13,8 +13,8 @@ program
     try {
       return CommandExecutionService.executeGamesCommand(option.trim())
                                     .then(tables => {
-                                      if (tables.active.size !== 0) {
-                                        tables.active.forEach(table => console.log(table));
+                                      if (tables.started.size !== 0) {
+                                        tables.started.forEach(table => console.log(table));
                                       }
 
                                       if (typeof tables.upcoming !== 'undefined') {
