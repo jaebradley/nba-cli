@@ -67,6 +67,17 @@ describe('translate scoreboard game', function() {
     expectedPeriodScore
   );
 
+  let team = {
+    'city': 'Boston',
+    'nickname': 'Celtics',
+    'abbreviation': 'BOS'
+  };
+  let expectedTeam = new Team({
+    city: 'Boston',
+    nickname: 'Celtics',
+    abbreviation: 'BOS'
+  });
+
   it('should test total score parsing', function() {
     let homeData = {
       'score': homeScore1Value
@@ -111,5 +122,20 @@ describe('translate scoreboard game', function() {
     illegallyFormattedPeriodScore['linescores'] = {};
     expect(ScoreboardGameTranslator.getPeriodScores(illegallyFormattedPeriodScore, awayPeriodScores)).to.eql(List());
     expect(ScoreboardGameTranslator.getPeriodScores(homePeriodScores, illegallyFormattedPeriodScore)).to.eql(List());
+  });
+
+  it('should test get team', function() {
+    expect(ScoreboardGameTranslator.getTeam(team)).to.eql(expectedTeam);
+  });
+
+  it('should test throwing exceptions when parsing team', function() {
+    let illegallyFormattedTeam = {};
+    expect(() => ScoreboardGameTranslator.getTeam(illegallyFormattedTeam)).to.throw(ReferenceError);
+
+    illegallyFormattedTeam['city'] = 'foo';
+    expect(() => ScoreboardGameTranslator.getTeam(illegallyFormattedTeam)).to.throw(ReferenceError);
+
+    illegallyFormattedTeam['nickname'] = 'bar';
+    expect(() => ScoreboardGameTranslator.getTeam(illegallyFormattedTeam)).to.throw(ReferenceError);
   });
 });
