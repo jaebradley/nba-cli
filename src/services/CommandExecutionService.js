@@ -52,9 +52,8 @@ export default class CommandExecutionService {
   }
 
   static identifyGamesOption(option) {
-    for (let i = 0; i < GamesOption.enumValues.length; i++) {
-      let gamesOption = GamesOption.enumValues[i];
-      if (gamesOption.value == option.toUpperCase()) {
+    for (let gamesOption of GamesOption.enumValues) {
+      if (option.toUpperCase() == gamesOption.value) {
         return gamesOption;
       }
     }
