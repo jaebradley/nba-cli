@@ -8,6 +8,14 @@ import CommandExecutionService from '../src/services/CommandExecutionService';
 import GamesOption from '../src/data/GamesOption';
 
 describe('Tests Command Execution Service', function() {
+  let startOfToday = moment().tz(jstz.determine().name())
+                             .startOf('day');
+  let tomorrowExpected = moment().tz(jstz.determine().name())
+                             .startOf('day')
+                             .add(1, 'days');
+  let yesterdayExpected = moment().tz(jstz.determine().name())
+                             .startOf('day')
+                             .subtract(1, 'days');
   it('should identify games option', function() {
     let option = GamesOption.TODAY;
     let optionValue = option.value;
@@ -16,9 +24,8 @@ describe('Tests Command Execution Service', function() {
   });
 
   it('should identify date from games option', function() {
-    let startOfToday = moment().tz(jstz.determine().name())
-                               .startOf('day');
-    let yesterday = GamesOption.YESTERDAY;
-    expect(CommandExecutionService.identifyDateFromGamesOption(yesterday)).to.eql(startOfToday.subtract(1, 'days'));
+    expect(CommandExecutionService.identifyDateFromGamesOption(GamesOption.YESTERDAY)).to.eql(yesterdayExpected);
+    expect(CommandExecutionService.identifyDateFromGamesOption(GamesOption.TOMORROW)).to.eql(tomorrowExpected);
+    expect(CommandExecutionService.identifyDateFromGamesOption(GamesOption.TODAY)).to.eql(startOfToday);
   });
 });
