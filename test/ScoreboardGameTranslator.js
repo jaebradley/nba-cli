@@ -67,15 +67,32 @@ describe('translate scoreboard game', function() {
     expectedPeriodScore
   );
 
+  let teamCity = 'Boston',
+  let teamNickname = 'Celtics';
+  let teamAbbreviation = 'BOS';
+
   let team = {
-    'city': 'Boston',
-    'nickname': 'Celtics',
-    'abbreviation': 'BOS'
+    'city': teamCity,
+    'nickname': teamNickname,
+    'abbreviation': teamAbbreviation
   };
   let expectedTeam = new Team({
-    city: 'Boston',
-    nickname: 'Celtics',
-    abbreviation: 'BOS'
+    city: teamCity,
+    nickname: teamNickname,
+    abbreviation: teamAbbreviation
+  });
+
+  let broadcastScope = 'scope';
+  let broadcastDisplayName = 'displayName';
+  let broadcastMedium = broadcastMedium.TV;
+  let broadcast = {
+    'scope': broadcastScope,
+    'display_name': broadcastDisplayName
+  };
+  let expectedBroadcast = new Broadcast({
+    scope: broadcastScope,
+    display_name: broadcastDisplayName,
+    medium: broadcastMedium
   });
 
   it('should test total score parsing', function() {
@@ -137,5 +154,20 @@ describe('translate scoreboard game', function() {
 
     illegallyFormattedTeam['nickname'] = 'bar';
     expect(() => ScoreboardGameTranslator.getTeam(illegallyFormattedTeam)).to.throw(ReferenceError);
+  });
+
+  it('should test getting broadcast', function() {
+    expect(ScoreboardGameTranslator.getBroadcast(broadcast, broadcastMedium)).to.eql(expectedBroadcast);
+  });
+
+  it('should test throwing exceptions when parsing broadcast', function() {
+    let illegallyFormattedBroadcast = {};
+    expect(() => ScoreboardGameTranslator.getBroadcast(illegallyFormattedBroadcast, broadcastMedium)).to.throw(ReferenceError);
+
+    illegallyFormattedBroadcast['scope'] = 'foo';
+    expect(() => ScoreboardGameTranslator.getBroadcast(illegallyFormattedBroadcast, broadcastMedium)).to.throw(ReferenceError);
+
+    illegallyFormattedBroadcast['display_name'] = 'bar';
+    expect(() => ScoreboardGameTranslator.getBroadcast(illegallyFormattedBroadcast, 'baz')).to.throw(TypeError);
   });
 });
