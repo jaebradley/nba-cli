@@ -21,7 +21,7 @@ export default class CommandExecutionService {
       let userDate = CommandExecutionService.identifyDateFromGamesOption(gamesOption);
       return CommandExecutionService.convertUserDateToApiTimezone(userDate);
     } else if (moment(option).isValid()) {
-      return CommandExecutionService.convertUserDateToApiTimezone(moment(option));
+      return CommandExecutionService.convertUserDateToApiTimezone(moment(option).startOf('day'));
     }
 
     throw new Error('Unable to identify date from input option');
