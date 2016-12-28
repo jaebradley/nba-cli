@@ -102,4 +102,14 @@ describe('translate scoreboard game', function() {
     let translatedPeriodScores = ScoreboardGameTranslator.getPeriodScores(homePeriodScores, awayPeriodScores);
     expect(translatedPeriodScores).to.eql(expectedPeriodScores);
   });
+
+  it('should test missing fields when parsing period scores', function() {
+    let illegallyFormattedPeriodScore = {};
+    expect(ScoreboardGameTranslator.getPeriodScores(illegallyFormattedPeriodScore, awayPeriodScores)).to.eql(List());
+    expect(ScoreboardGameTranslator.getPeriodScores(homePeriodScores, illegallyFormattedPeriodScore)).to.eql(List());
+
+    illegallyFormattedPeriodScore['linescores'] = {};
+    expect(ScoreboardGameTranslator.getPeriodScores(illegallyFormattedPeriodScore, awayPeriodScores)).to.eql(List());
+    expect(ScoreboardGameTranslator.getPeriodScores(homePeriodScores, illegallyFormattedPeriodScore)).to.eql(List());
+  });
 });
