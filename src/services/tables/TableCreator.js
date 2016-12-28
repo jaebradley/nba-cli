@@ -15,7 +15,7 @@ export default class TableCreator {
         ? undefined
         : UpcomingGamesTableCreator.create(data.upcoming)
     return new GamesTables({
-      started: List(data.active.map(game => TableCreator.createGameTable(game))),
+      started: List(data.started.map(game => TableCreator.createGameTable(game))),
       upcoming: upcomingTable
     });
   }
