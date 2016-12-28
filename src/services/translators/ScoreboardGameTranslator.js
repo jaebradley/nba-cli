@@ -213,7 +213,7 @@ export default class ScoreboardGameTranslator {
       return List();
     }
 
-    if (!('period') in homeData.linescores) {
+    if (!('period' in homeData.linescores)) {
       return List();
     }
 
