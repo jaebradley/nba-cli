@@ -30,4 +30,14 @@ describe('Team model', function() {
 
     expect(customTeam.getName()).to.equal('city nickname');
   });
+
+  it('get formatted team abbreviation', function() {
+    let bostonCeltics = new Team({
+      city: 'Boston',
+      nickname: 'Celtics',
+      abbreviation: 'BOS'
+    });
+
+    expect(bostonCeltics.getFormattedTeamAbbreviation()).to.eql('BOS 🍀');
+  });
 });

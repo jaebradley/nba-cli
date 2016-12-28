@@ -2,6 +2,8 @@
 
 import {Record} from 'immutable';
 
+import PeriodFormatter from '../services/PeriodFormatter';
+
 let defaults = {
   description: '',
   clock: '',
@@ -11,11 +13,6 @@ let defaults = {
 
 export default class Play extends Record(defaults) {
   formatPeriod() {
-    let value = this.period - 4;
-    if (value > 0) {
-      return 'OT'.concat(value);
-    }
-
-    return 'Q'.concat(this.period);
+    return PeriodFormatter.format(this.period);
   }
 }
