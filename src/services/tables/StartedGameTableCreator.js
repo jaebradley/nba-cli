@@ -8,13 +8,13 @@ import Table from 'cli-table2';
 import Constants from '../../constants/Constants';
 import Score from '../../data/Score';
 
-export default class ActiveGameTableCreator {
+export default class StartedGameTableCreator {
   static create(data) {
     let table = new Table({
-      head: ActiveGameTableCreator.generateHeaders(data).toJS()
+      head: StartedGameTableCreator.generateHeaders(data).toJS()
     });
 
-    ActiveGameTableCreator.generateRows(data)
+    StartedGameTableCreator.generateRows(data)
                           .forEach(row => table.push(row.toJS()));
 
     return table.toString();
@@ -29,18 +29,18 @@ export default class ActiveGameTableCreator {
   }
 
   static generateRows(data) {
-    let linescoresRows = ActiveGameTableCreator.generateLinescoresRows(data);
-    let metadataRows = ActiveGameTableCreator.generateMetadataRows(data);
+    let linescoresRows = StartedGameTableCreator.generateLinescoresRows(data);
+    let metadataRows = StartedGameTableCreator.generateMetadataRows(data);
     return List(linescoresRows).concat(metadataRows);
   }
 
   static generateMetadataRows(data) {
     let rowNumbers = data.scoring.periods.size + 3;
     let rows = List();
-    rows = rows.push(ActiveGameTableCreator.generateMetadataRow(emoji.get(Constants.START_TIME_EMOJI_VALUE),
+    rows = rows.push(StartedGameTableCreator.generateMetadataRow(emoji.get(Constants.START_TIME_EMOJI_VALUE),
                                                                 data.getLocalizedStartDateTime(),
                                                                 rowNumbers));
-    return rows.push(ActiveGameTableCreator.generateMetadataRow(emoji.get(Constants.BROADCASTS_EMOJI_VALUE),
+    return rows.push(StartedGameTableCreator.generateMetadataRow(emoji.get(Constants.BROADCASTS_EMOJI_VALUE),
                                                                 data.getTvBroadcastsString(),
                                                                 rowNumbers));
   }

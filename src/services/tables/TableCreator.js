@@ -3,7 +3,7 @@
 import Table from 'cli-table2';
 import {List, Map} from 'immutable';
 
-import ActiveGameTableCreator from './ActiveGameTableCreator';
+import StartedGameTableCreator from './StartedGameTableCreator';
 import GamesTables from '../../data/GamesTables';
 import PlaysTableCreator from './PlaysTableCreator';
 import TeamBoxScoreLeadersTableCreator from './TeamBoxScoreLeadersTableCreator';
@@ -15,23 +15,23 @@ export default class TableCreator {
         ? undefined
         : UpcomingGamesTableCreator.create(data.upcoming)
     return new GamesTables({
-      active: List(data.active.map(game => TableCreator.createGameTable(game))),
+      started: List(data.active.map(game => TableCreator.createGameTable(game))),
       upcoming: upcomingTable
     });
   }
 
   static createGameTable(game) {
     let table = new Table();
-    table.push(TableCreator.createActiveGameTable(game.metadata).toJS());
+    table.push(TableCreator.createStartedeGameTable(game.metadata).toJS());
     table.push(TableCreator.createBoxScoreLeadersTables(game.boxScoreLeaders).toJS());
     table.push(TableCreator.createPlaysTable(game.plays).toJS());
     return table.toString();
   }
 
-  static createActiveGameTable(data) {
+  static createStartedeGameTable(data) {
     return List.of(
       Map({
-        content: ActiveGameTableCreator.create(data),
+        content: StartedGameTableCreator.create(data),
         colSpan: 2,
         hAlign: 'center'
       })
