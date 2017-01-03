@@ -20,8 +20,8 @@ export default class CommandExecutionService {
     if (gamesOption instanceof GamesOption) {
       let userDate = CommandExecutionService.identifyDateFromGamesOption(gamesOption);
       return CommandExecutionService.convertUserDateToApiTimezone(userDate);
-    } else if (moment(option).isValid()) {
-      let userDate = moment(option).tz(jstz.determine().name()).startOf('day');
+    } else if (moment(option, 'YYYY-MM-DD', true).isValid()) {
+      let userDate = moment(option, 'YYYY-MM-DD', true).tz(jstz.determine().name()).startOf('day');
       return CommandExecutionService.convertUserDateToApiTimezone(userDate);
     }
 
