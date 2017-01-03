@@ -42,14 +42,14 @@ export default class DataAggregator {
       throw new RangeError('box scores and play by plays must have same size');
     }
 
-    let active = List();
+    let started = List();
     let upcoming = List();
     for (let metadata of games) {
       if (metadata.isUpcoming()) {
         upcoming = upcoming.push(metadata);
       } else {
         let gameId = metadata.id;
-        active = active.push(new Game({
+        started = started.push(new Game({
           metadata: metadata,
           boxScoreLeaders: boxScores.get(gameId),
           plays: plays.get(gameId),
@@ -58,7 +58,7 @@ export default class DataAggregator {
     }
 
     return new Games({
-      active: active.sortBy(game => game.metadata.id),
+      started: started.sortBy(game => game.metadata.id),
       upcoming: upcoming.sortBy(metadata => metadata.id)
     });
   }
