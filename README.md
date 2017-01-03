@@ -17,7 +17,10 @@ Are you a huge NBA fan? Do you :heart: the command line as much as you :heart: :
 ### Example output
 
 #### Upcoming Games
-![alt text](https://i.imgur.com/stO4zhm.png)
+![alt text](http://imgur.com/CJOspKN.png)
 
 ### Current and Final Games
-![alt text](https://i.imgur.com/6OCYR9S.png)
+![alt text](http://imgur.com/2gNcY18.png)
+
+### Games On A Date
+![alt_text](http://imgur.com/9tKlzBC.png)
