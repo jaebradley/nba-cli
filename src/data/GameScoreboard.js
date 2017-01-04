@@ -26,12 +26,12 @@ let defaults = {
 export default class GameScoreboard extends Record(defaults) {
 
   getNbaStatsFormattedStartDate() {
-    return moment(this.startTimestamp).tz(Constants.DEFAULT_TIMEZONE)
+    return this.startTimestamp.clone().tz(Constants.DEFAULT_TIMEZONE)
                                       .format(Constants.DEFAULT_DATE_FORMAT);
   }
 
   getLocalizedStartDateTime() {
-    return moment(this.startTimestamp).tz(jstz.determine().name())
+    return this.startTimestamp.clone().tz(jstz.determine().name())
                                       .format(Constants.TRANSLATED_DATE_FORMAT);
   }
 

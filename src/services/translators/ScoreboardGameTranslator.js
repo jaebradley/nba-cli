@@ -78,10 +78,9 @@ export default class ScoreboardGameTranslator {
 
     let rawStartTime = `${gameData.date}${gameData.time}`;
 
-    return moment(rawStartTime, Constants.TRANSLATED_NBA_DATE_TIME_FORMAT)
-            .tz(Constants.DEFAULT_TIMEZONE)
-            .clone()
-            .tz("UTC");
+    return moment.tz(rawStartTime, Constants.TRANSLATED_NBA_DATE_TIME_FORMAT, Constants.DEFAULT_TIMEZONE)
+                 .clone()
+                 .tz("UTC");
   }
 
   static getLocation(gameData) {
