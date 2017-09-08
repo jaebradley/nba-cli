@@ -25,7 +25,7 @@ export default class GameMetadataTranslator {
     return new GameScoreboard({
       id: data.id,
       status: GameStatus.identifyFromValue(periodTime.game_status),
-      startTimestamp: ScoreboardGameTranslator.getStartTimestamp(data),
+      startTimestamp: GameMetadataTranslator.getStartTimestamp(data),
       location: new Location({
         arena: data.arena,
         city: data.city,
@@ -36,7 +36,7 @@ export default class GameMetadataTranslator {
         status: periodTime.period_status,
         clock: periodTime.game_clock
       });,
-      broadcasts: ScoreboardGameTranslator.getBroadcasts(broadcasters),
+      broadcasts: GameMetadataTranslator.getBroadcasts(broadcasters),
       matchup: new Matchup({
         homeTeam: new Team({
           city: homeTeam.city,
@@ -50,7 +50,7 @@ export default class GameMetadataTranslator {
         }),
       }),
       scoring: new GameScoring({
-        periods: ScoreboardGameTranslator.getPeriodScores(homeData, awayData),
+        periods: GameMetadataTranslator.getPeriodScores(homeData, awayData),
         total: new Score({
           home: parseInt(homeData.score),
           away: parseInt(awayData.score)
