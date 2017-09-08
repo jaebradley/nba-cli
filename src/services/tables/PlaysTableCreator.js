@@ -23,7 +23,7 @@ export default class PlaysTableCreator {
 
   static buildRow(play) {
     return [
-      `${play.clock} ${PeriodFormatter.format(play)}`,
+      `${play.clock} ${PeriodFormatter.format(play.period)}`,
       play.description,
     ];
   }
