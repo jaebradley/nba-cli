@@ -48,7 +48,7 @@
     "test": "test"
   },
   "repository": {
-     "type": "git",
-     "url": "https://github.com/jaebradley/nba-cli/tree/master"
-   }
+    "type": "git",
+    "url": "https://github.com/jaebradley/nba-cli/tree/master"
+  }
 }
