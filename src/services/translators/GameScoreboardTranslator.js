@@ -15,7 +15,7 @@ import Team from '../../data/Team';
 import Broadcast from '../../data/Broadcast';
 import BroadcastMedium from '../../data/BroadcastMedium';
 
-export default class GameMetadataTranslator {
+export default class GameScoreboardTranslator {
   static translate(data) {
     const periodTime = data.period_time;
     const broadcasters = data.broadcasters;
@@ -25,7 +25,7 @@ export default class GameMetadataTranslator {
     return new GameScoreboard({
       id: data.id,
       status: GameStatus.identifyFromValue(periodTime.game_status),
-      startTimestamp: GameMetadataTranslator.getStartTimestamp(data),
+      startTimestamp: GameScoreboardTranslator.getStartTimestamp(data),
       location: new Location({
         arena: data.arena,
         city: data.city,
@@ -35,8 +35,8 @@ export default class GameMetadataTranslator {
         value: parseInt(periodTime.period_value),
         status: periodTime.period_status,
         clock: periodTime.game_clock
-      });,
-      broadcasts: GameMetadataTranslator.getBroadcasts(broadcasters),
+      }),
+      broadcasts: GameScoreboardTranslator.getBroadcasts(broadcasters),
       matchup: new Matchup({
         homeTeam: new Team({
           city: homeTeam.city,
@@ -50,7 +50,7 @@ export default class GameMetadataTranslator {
         }),
       }),
       scoring: new GameScoring({
-        periods: GameMetadataTranslator.getPeriodScores(homeData, awayData),
+        periods: GameScoreboardTranslator.getPeriodScores(homeData, awayData),
         total: new Score({
           home: parseInt(homeData.score),
           away: parseInt(awayData.score)

@@ -8,7 +8,7 @@ import Game from '../data/Game';
 import Games from '../data/Games';
 import BoxScoreDataTranslator from './translators/BoxScoreDataTranslator';
 import PlaysTranslator from './translators/PlaysTranslator';
-import GameScoreboardsTranslator from './translators/GameScoreboardsTranslator';
+import GameScoreboardTranslator from './translators/GameScoreboardTranslator';
 
 export default class DataAggregator {
   static aggregate(date) {
@@ -66,7 +66,7 @@ export default class DataAggregator {
   static getScoreboards(date) {
     return Client.getGames(date.year(), date.month() + 1, date.date())
       .then(data => List(data.sports_content.games.game
-        .map(game => GameScoreboardsTranslator.translate(game)));
+        .map(game => GameScoreboardTranslator.translate(game))));
   }
 
   static getBoxScores(date, gameIds) {
