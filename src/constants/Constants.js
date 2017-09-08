@@ -1,3 +1,5 @@
+import emoji from 'node-emoji';
+
 let BASE_NBA_DATA_URL = "http://data.nba.com/";
 let BASE_NBA_DATA_SCOREBOARD_URL = BASE_NBA_DATA_URL.concat("data/5s/json/cms/noseason/scoreboard/");
 let BASE_NBA_DATA_PLAY_BY_PLAY_URL = BASE_NBA_DATA_URL.concat("data/5s/json/cms/noseason/game/");
@@ -33,6 +35,8 @@ let GAMES_OPTIONS = {
   TOMORROW: "TOMORROW"
 };
 
+const PLAY_TIME_EMOJI = emoji.get('hourglass_flowing_sand');
+
 module.exports = {
   BASE_NBA_DATA_SCOREBOARD_URL: BASE_NBA_DATA_SCOREBOARD_URL,
   BASE_NBA_DATA_PLAY_BY_PLAY_URL: BASE_NBA_DATA_PLAY_BY_PLAY_URL,
@@ -52,4 +56,5 @@ module.exports = {
   PLAY_TIME_EMOJI_VALUE: PLAY_TIME_EMOJI_VALUE,
   GAMES_OPTIONS: GAMES_OPTIONS,
   ONE_HUNDRED: ONE_HUNDRED,
+  PLAY_TIME_EMOJI: PLAY_TIME_EMOJI,
 };

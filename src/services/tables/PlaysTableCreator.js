@@ -1,24 +1,30 @@
-'use es6';
-
-import emoji from 'node-emoji';
 import Table from 'cli-table2';
-import {List, Map} from 'immutable';
+
+import { PLAY_TIME_EMOJI } from '../../constants/Constants';
+import PeriodFormatter from '../PeriodFormatter';
 
 export default class PlaysTableCreator {
   static create(data)  {
-    let table = new Table({
+    const table = new Table({
       head: [
         {
-          content: emoji.get('hourglass_flowing_sand'),
+          content: PLAY_TIME_EMOJI,
           hAlign: 'center'
         },
         {
           content: 'Description',
           hAlign: 'center'
-        }
-      ]
+        },
+      ],
     });
-    data.forEach(play => table.push([`${play.clock} ${play.formatPeriod()}`, play.description]));
+    data.forEach((play) => table.push(PlaysTableCreator.buildRow(play)));
     return table.toString();
+  }
+
+  static buildRow(play) {
+    return [
+      `${play.clock} ${PeriodFormatter.format(play)}`,
+      play.description,
+    ];
   }
 }
