@@ -1,85 +1,78 @@
-'use es6';
-
 import chai from 'chai';
 import chaiImmutable from 'chai-immutable';
 
-import {List} from 'immutable';
+import { List } from 'immutable';
+
 import Play from '../src/data/Play';
 import PlaysTranslator from '../src/services/translators/PlaysTranslator';
 
 chai.use(chaiImmutable);
 
-let expect = chai.expect;
+const expect = chai.expect;
 
 describe('Test Plays Translator', function() {
-  let clock = 'jae';
-  let description = 'baebae';
-  let teamAbbreviation = 'jbb';
-  let period = '1';
-  let period2 = '2';
-  let play = {
+  const clock = 'jae';
+  const description = 'baebae';
+  const teamAbbreviation = 'jbb';
+  const period = '1';
+  const period2 = '2';
+  const play = {
     'clock': clock,
     'description': description,
     'team_abr': teamAbbreviation,
-    'period': period
+    'period': period,
   };
 
-  let translatedPlay = new Play({
+  const translatedPlay = new Play({
     description: description,
     clock: clock,
     period: parseInt(period),
-    teamAbbreviation: teamAbbreviation
+    teamAbbreviation: teamAbbreviation,
   });
 
-  let play2 = {
+  const play2 = {
     'clock': clock,
     'description': description,
     'team_abr': teamAbbreviation,
-    'period': period2
-  }
+    'period': period2,
+  };
 
-  let translatedPlay2 = new Play({
+  const translatedPlay2 = new Play({
     description: description,
     clock: clock,
     period: parseInt(period2),
-    teamAbbreviation: teamAbbreviation
+    teamAbbreviation: teamAbbreviation,
   });
 
-  let data = {
-    'sports_content': {
-      'game': {
-        'play': [
-          play,
-          play,
-          play
-        ]
-      }
-    }
-  }
-
-  let data2 = {
+  const data = {
     'sports_content': {
       'game': {
         'play': [
           play,
           play,
           play,
-          play,
-          play,
-          play2
-        ]
-      }
-    }
-  }
-  it('should build play', function() {
-    expect(PlaysTranslator.buildPlay(play)).to.eql(translatedPlay);
-  });
+        ],
+      },
+    },
+  };
 
-  it('should translate play', function() {
-    let expected = List.of(translatedPlay, translatedPlay, translatedPlay);
+  const data2 = {
+    'sports_content': {
+      'game': {
+        'play': [
+          play,
+          play,
+          play,
+          play,
+          play,
+          play2,
+        ],
+      },
+    },
+  };
+
+  it('should translate plays', () => {
+    const expected = List.of(translatedPlay, translatedPlay, translatedPlay);
     expect(PlaysTranslator.translate(data)).to.eql(expected);
-
-    let expected2 = List.of(translatedPlay, translatedPlay, translatedPlay, translatedPlay, translatedPlay2);
-    expect(PlaysTranslator.translate(data2)).to.eql(expected2);
   });
 });

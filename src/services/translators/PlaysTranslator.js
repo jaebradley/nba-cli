@@ -1,21 +1,16 @@
-import {List} from 'immutable';
+import { List } from 'immutable';
 
 import Play from '../../data/Play';
 
 export default class PlaysTranslator {
   static translate(data) {
-    let plays = data.sports_content.game.play;
-    let index = Math.min(5, plays.length);
-    let recentPlays = plays.slice(-index);
-    return List(recentPlays.map(play => PlaysTranslator.buildPlay(play)));
-  }
-
-  static buildPlay(play) {
-    return new Play({
+    // At most, use the last 5 plays
+    const recentPlays = data.sports_content.game.play.slice(-Math.min(5, data.length));
+    return List(recentPlays.map(play => new Play({
       description: play.description,
       clock: play.clock,
       period: parseInt(play.period),
-      teamAbbreviation: play.team_abr
-    });
+      teamAbbreviation: play.team_abr,
+    })));
   }
 }
