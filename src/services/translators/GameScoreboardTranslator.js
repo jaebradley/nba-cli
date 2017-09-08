@@ -39,14 +39,14 @@ export default class GameScoreboardTranslator {
       broadcasts: GameScoreboardTranslator.getBroadcasts(broadcasters),
       matchup: new Matchup({
         homeTeam: new Team({
-          city: homeTeam.city,
-          nickname: homeTeam.nickname,
-          abbreviation: homeTeam.abbreviation,
+          city: homeData.city,
+          nickname: homeData.nickname,
+          abbreviation: homeData.abbreviation,
         }),
         awayTeam: new Team({
-          city: awayTeam.city,
-          nickname: awayTeam.nickname,
-          abbreviation: awayTeam.abbreviation,
+          city: awayData.city,
+          nickname: awayData.nickname,
+          abbreviation: awayData.abbreviation,
         }),
       }),
       scoring: new GameScoring({
