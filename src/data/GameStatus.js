@@ -1,8 +1,15 @@
-'use es6';
-
-import {Enum} from 'enumify';
+import { Enum } from 'enumify';
 
 export default class GameStatus extends Enum {
+  static identifyFromValue(value) {
+    for (let status of GameStatus.enumValues) {
+      if (status.nbaStatsGameStatus == value) {
+        return status;
+      }
+    }
+
+    throw new ReferenceError(`Unknown Game Status: ${value}`);
+  }
 };
 
 GameStatus.initEnum({
