@@ -33,8 +33,8 @@ export default class TableCreator {
         colSpan: 2,
         hAlign: 'center',
       },
-    ],
-  };
+    ];
+  }
 
   static createBoxScoreLeadersTables(boxScoreLeaders) {
     return [

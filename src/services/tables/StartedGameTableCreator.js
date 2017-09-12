@@ -1,5 +1,4 @@
 import colors from 'colors';
-import {List, Map} from 'immutable';
 import Table from 'cli-table2';
 
 import Constants from '../../constants/Constants';
@@ -10,7 +9,7 @@ export default class StartedGameTableCreator {
     const table = new Table({ head: StartedGameTableCreator.buildHeaders(data) });
 
     StartedGameTableCreator.generateRows(data)
-                          .forEach(row => table.push(row.toJS()));
+                          .forEach(row => table.push(row));
 
     return table.toString();
   }

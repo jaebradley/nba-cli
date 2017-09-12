@@ -1,40 +1,33 @@
-'use es6';
-
-import emoji from 'node-emoji';
 import jstz from 'jstimezonedetect';
 import Table from 'cli-table2';
-import {List, Map} from 'immutable';
+import Constants from '../../constants/Constants';
 
 export default class UpcomingGamesTableCreator {
   static create(data) {
-    let table = new Table({
-      head: UpcomingGamesTableCreator.getHeaders().toJS()
-    });
-    data.forEach(metadata =>
-                 table.push(UpcomingGamesTableCreator.format(metadata).toJS()));
+    const table = new Table({ head: UpcomingGamesTableCreator.getHeaders() });
+    data.forEach((metadata) => table.push(UpcomingGamesTableCreator.format(metadata)));
     return table.toString();
   }
 
   static format(data) {
-    return List.of(
+    return [
       data.getLocalizedStartDateTime(),
       data.matchup.homeTeam.getName(),
       data.matchup.awayTeam.getName(),
       data.getTvBroadcastsString(),
       data.location.getFormattedLocation(),
-    );
+    ];
   }
 
   static getHeaders() {
-    let values = List.of(`${emoji.get('alarm_clock')}  ${jstz.determine().name()}`,
-                         emoji.get('house'),
-                         emoji.get('bus'),
-                         emoji.get('tv'),
-                         emoji.get('round_pushpin'));
+    const values = [
+      `${Constants.START_TIME_EMOJI} ${jstz.determine().name()}`,
+      Constants.HOME_EMOJI,
+      Constants.VISITOR_EMOJI,
+      Constants.BROADCASTS_EMOJI,
+      Constants.LOCATION_EMOJI,
+    ];
 
-    return values.map(value => Map({
-      content: value,
-      hAlign: 'center'
-    }));
+    return values.map((value) => ({ content: value, hAlign: 'center' }));
   }
 }
