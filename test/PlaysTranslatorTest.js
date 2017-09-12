@@ -10,7 +10,7 @@ chai.use(chaiImmutable);
 
 const expect = chai.expect;
 
-describe('Test Plays Translator', function() {
+describe('Test Plays Translator', () => {
   const clock = 'jae';
   const description = 'baebae';
   const teamAbbreviation = 'jbb';
@@ -30,49 +30,10 @@ describe('Test Plays Translator', function() {
     teamAbbreviation: teamAbbreviation,
   });
 
-  const play2 = {
-    'clock': clock,
-    'description': description,
-    'team_abr': teamAbbreviation,
-    'period': period2,
-  };
-
-  const translatedPlay2 = new Play({
-    description: description,
-    clock: clock,
-    period: parseInt(period2),
-    teamAbbreviation: teamAbbreviation,
-  });
-
-  const data = {
-    'sports_content': {
-      'game': {
-        'play': [
-          play,
-          play,
-          play,
-        ],
-      },
-    },
-  };
-
-  const data2 = {
-    'sports_content': {
-      'game': {
-        'play': [
-          play,
-          play,
-          play,
-          play,
-          play,
-          play2,
-        ],
-      },
-    },
-  };
+  const plays = [play, play, play];
 
   it('should translate plays', () => {
     const expected = List.of(translatedPlay, translatedPlay, translatedPlay);
-    expect(PlaysTranslator.translate(data)).to.eql(expected);
+    expect(PlaysTranslator.translate(plays)).to.eql(expected);
   });
 });
