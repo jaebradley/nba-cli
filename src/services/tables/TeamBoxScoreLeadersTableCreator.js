@@ -12,14 +12,14 @@ export default class TeamBoxScoreLeadersTableCreator {
       ]
     });
 
-    table.push(TeamBoxScoreLeadersTableCreator.getDataRow('Points', data.points));
-    table.push(TeamBoxScoreLeadersTableCreator.getDataRow('Assists', data.assists));
-    table.push(TeamBoxScoreLeadersTableCreator.getDataRow('Rebounds', data.rebounds));
+    table.push(TeamBoxScoreLeadersTableCreator.buildRow('Points', data.points));
+    table.push(TeamBoxScoreLeadersTableCreator.buildRow('Assists', data.assists));
+    table.push(TeamBoxScoreLeadersTableCreator.buildRow('Rebounds', data.rebounds));
 
     return table.toString();
   }
 
-  static getDataRow(rowName, data) {
+  static buildRow(rowName, data) {
     return [
       rowName,
       data.value,
