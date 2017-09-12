@@ -15,21 +15,23 @@ export default class StartedGameTableCreator {
   }
 
   static buildHeaders(data) {
-    const headers = ['', data.status.name.bold.magenta];
     const periodHeaders = data.scoring.getPeriodValues()
-                                      .map((period) => period.bold.cyan);
-    return headers.concat(periodHeaders).concat('Total'.bold.underline.cyan);
+                                      .map((period) => period.bold.cyan)
+                                      .toJS();
+    return ['', data.status.name.bold.magenta]
+      .concat(periodHeaders)
+      .concat('Total'.bold.underline.cyan);
   }
 
   static generateRows(data) {
-    const linescoresRows = StartedGameTableCreator.generateLinescoresRows(data);
-    const metadataRows = StartedGameTableCreator.generateMetadataRows(data);
-    return linescoresRows.concat(metadataRows);
+    return StartedGameTableCreator.generateLinescoresRows(data)
+      .concat(StartedGameTableCreator.generateMetadataRows(data));
   }
 
   static generateMetadataRows(data) {
     const rowNumbers = data.scoring.periods.size + 3;
     const rows = [];
+
     rows.push(StartedGameTableCreator.generateMetadataRow(Constants.START_TIME_EMOJI,
                                                           data.getLocalizedStartDateTime(),
                                                           rowNumbers));
