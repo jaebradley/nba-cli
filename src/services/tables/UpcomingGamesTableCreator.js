@@ -21,7 +21,7 @@ export default class UpcomingGamesTableCreator {
 
   static getHeaders() {
     const values = [
-      `${Constants.START_TIME_EMOJI} ${jstz.determine().name()}`,
+      `${Constants.START_TIME_EMOJI}  ${jstz.determine().name()}`,
       Constants.HOME_EMOJI,
       Constants.VISITOR_EMOJI,
       Constants.BROADCASTS_EMOJI,
