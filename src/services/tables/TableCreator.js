@@ -4,7 +4,8 @@ import { List } from 'immutable';
 import StartedGameTableCreator from './StartedGameTableCreator';
 import GamesTables from '../../data/GamesTables';
 import PlaysTableCreator from './PlaysTableCreator';
-import TeamBoxScoreLeadersTableCreator from './TeamBoxScoreLeadersTableCreator';
+import HomeTeamBoxScoreLeadersTableCreator from './HomeTeamBoxScoreLeadersTableCreator';
+import AwayTeamBoxScoreLeadersTableCreator from './AwayTeamBoxScoreLeadersTableCreator';
 import UpcomingGamesTableCreator from './UpcomingGamesTableCreator';
 
 export default class TableCreator {
@@ -39,12 +40,12 @@ export default class TableCreator {
   static createBoxScoreLeadersTables(boxScoreLeaders) {
     return [
       {
-        content: TeamBoxScoreLeadersTableCreator.create(boxScoreLeaders.home, true),
+        content: HomeTeamBoxScoreLeadersTableCreator.create(boxScoreLeaders.home),
         colSpan: 1,
         hAlign: 'center',
       },
       {
-        content: TeamBoxScoreLeadersTableCreator.create(boxScoreLeaders.visitor, false),
+        content: AwayTeamBoxScoreLeadersTableCreator.create(boxScoreLeaders.visitor),
         colSpan: 1,
         hAlign: 'center',
       },
