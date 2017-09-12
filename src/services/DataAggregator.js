@@ -1,7 +1,4 @@
-'use es6';
-
 import Client from 'nba-stats-client';
-import Promise from 'bluebird';
 import {List, Map} from 'immutable';
 
 import Game from '../data/Game';
@@ -101,7 +98,7 @@ export default class DataAggregator {
 
   static getPlays(date, gameId) {
     return Client.getPlayByPlay(date.year(), date.month() + 1, date.date(), gameId)
-                 .then(plays => PlaysTranslator.translate(plays))
+                 .then(data => PlaysTranslator.translate(data.sports_content.game.play))
                  .catch(err => console.error(err));
   }
 };
