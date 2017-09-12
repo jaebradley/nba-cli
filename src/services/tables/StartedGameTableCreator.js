@@ -1,8 +1,4 @@
-'use es6'
-
 import colors from 'colors';
-import emoji from 'node-emoji';
-import {List, Map} from 'immutable';
 import Table from 'cli-table2';
 
 import Constants from '../../constants/Constants';
@@ -10,70 +6,72 @@ import Score from '../../data/Score';
 
 export default class StartedGameTableCreator {
   static create(data) {
-    let table = new Table({
-      head: StartedGameTableCreator.generateHeaders(data).toJS()
-    });
+    const table = new Table({ head: StartedGameTableCreator.buildHeaders(data) });
 
     StartedGameTableCreator.generateRows(data)
-                          .forEach(row => table.push(row.toJS()));
+                          .forEach(row => table.push(row));
 
     return table.toString();
   }
 
-  static generateHeaders(data) {
-    let headers = List.of('', data.status.name.bold.magenta);
-    let periodHeaders = List(data.scoring.getPeriodValues()
-                                         .map(period => period.bold.cyan));
-    return headers.concat(periodHeaders)
-                  .concat('Total'.bold.underline.cyan);
+  static buildHeaders(data) {
+    const headers = ['', data.status.name.bold.magenta];
+    const periodHeaders = data.scoring.getPeriodValues()
+                                      .map((period) => period.bold.cyan);
+    return headers.concat(periodHeaders).concat('Total'.bold.underline.cyan);
   }
 
   static generateRows(data) {
-    let linescoresRows = StartedGameTableCreator.generateLinescoresRows(data);
-    let metadataRows = StartedGameTableCreator.generateMetadataRows(data);
-    return List(linescoresRows).concat(metadataRows);
+    const linescoresRows = StartedGameTableCreator.generateLinescoresRows(data);
+    const metadataRows = StartedGameTableCreator.generateMetadataRows(data);
+    return linescoresRows.concat(metadataRows);
   }
 
   static generateMetadataRows(data) {
-    let rowNumbers = data.scoring.periods.size + 3;
-    let rows = List();
-    rows = rows.push(StartedGameTableCreator.generateMetadataRow(emoji.get(Constants.START_TIME_EMOJI_VALUE),
-                                                                data.getLocalizedStartDateTime(),
-                                                                rowNumbers));
-    return rows.push(StartedGameTableCreator.generateMetadataRow(emoji.get(Constants.BROADCASTS_EMOJI_VALUE),
-                                                                data.getTvBroadcastsString(),
-                                                                rowNumbers));
+    const rowNumbers = data.scoring.periods.size + 3;
+    const rows = [];
+    rows.push(StartedGameTableCreator.generateMetadataRow(Constants.START_TIME_EMOJI,
+                                                          data.getLocalizedStartDateTime(),
+                                                          rowNumbers));
+    rows.push(StartedGameTableCreator.generateMetadataRow(Constants.BROADCASTS_EMOJI,
+                                                          data.getTvBroadcastsString(),
+                                                          rowNumbers));
+    return rows;
   }
 
   static generateMetadataRow(label, value, numberOfColumns) {
-    return List.of(
-      Map({
+    return [
+      {
         content: label,
         colSpan: 1,
-      }),
-      Map({
+      },
+      {
         content: value,
         colSpan: numberOfColumns - 1,
-      })
-    );
+      },
+    ];
   }
 
   static generateLinescoresRows(data) {
-    let homeRow = List.of(emoji.get(Constants.HOME_EMOJI_VALUE),
-                          data.matchup.homeTeam.getFormattedTeamAbbreviation());
-    let visitorRow = List.of(emoji.get(Constants.VISITOR_EMOJI_VALUE),
-                             data.matchup.awayTeam.getFormattedTeamAbbreviation());
+    const homeRow = [
+      Constants.HOME_EMOJI,
+      data.matchup.homeTeam.getFormattedTeamAbbreviation(),
+    ];
+    const visitorRow = [
+      Constants.VISITOR_EMOJI,
+      data.matchup.awayTeam.getFormattedTeamAbbreviation()
+    ];
 
     data.scoring.periods.forEach(periodScore => {
       let formattedScore = periodScore.score.format();
-      homeRow = homeRow.push(formattedScore.home);
-      visitorRow = visitorRow.push(formattedScore.away);
+      homeRow.push(formattedScore.home);
+      visitorRow.push(formattedScore.away);
     });
 
-    let formattedTotalScore = data.scoring.total.format();
-    homeRow = homeRow.push(formattedTotalScore.home.bold.underline.cyan);
-    visitorRow = visitorRow.push(formattedTotalScore.away.bold.underline.cyan);
+    const formattedTotalScore = data.scoring.total.format();
+    homeRow.push(formattedTotalScore.home.bold.underline.cyan);
+    visitorRow.push(formattedTotalScore.away.bold.underline.cyan);
 
-    return List.of(homeRow, visitorRow);
+    return [homeRow, visitorRow];
   }
 }

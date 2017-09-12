@@ -1,5 +1,3 @@
-'use es6';
-
 import chai from 'chai';
 import chaiImmutable from 'chai-immutable';
 import emoji from 'node-emoji';
@@ -76,39 +74,39 @@ describe('Test Upcoming Games Table Creation', function() {
 
   it('should test headers', function() {
     let hAlignValue = 'center';
-    let headers = List.of(
-      Map({
+    let headers = [
+      {
         content: `${emoji.get('alarm_clock')}  ${jstz.determine().name()}`,
         hAlign: hAlignValue
-      }),
-      Map({
+      },
+      {
         content: emoji.get('house'),
         hAlign: hAlignValue
-      }),
-      Map({
+      },
+      {
         content: emoji.get('bus'),
         hAlign: hAlignValue
-      }),
-      Map({
+      },
+      {
         content: emoji.get('tv'),
         hAlign: hAlignValue
-      }),
-      Map({
+      },
+      {
         content: emoji.get('round_pushpin'),
         hAlign: hAlignValue
-      })
-    );
+      },
+    ];
     expect(UpcomingGamesTableCreator.getHeaders()).to.eql(headers);
   });
 
   it('should test row format', function() {
-    let expected = List.of(
+    let expected = [
       scoreboard.getLocalizedStartDateTime(),
       scoreboard.matchup.homeTeam.getName(),
       scoreboard.matchup.awayTeam.getName(),
       scoreboard.getTvBroadcastsString(),
       scoreboard.location.getFormattedLocation()
-    );
+    ];
     expect(UpcomingGamesTableCreator.format(scoreboard)).to.eql(expected);
   });
 
