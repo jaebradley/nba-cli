@@ -1,15 +1,15 @@
 import Table from 'cli-table2';
 
 export default class TeamBoxScoreLeadersTableCreator {
-  static create(data, isHome) {
+  static create(data) {
     const table = new Table({
       head: [
         {
-          content: `${isHome ? 'Home' : 'Away'} Leaders`,
+          content: `${this.getTeamType()} Leaders`,
           colSpan: 3,
-          hAlign: 'center'
-        }
-      ]
+          hAlign: 'center',
+        },
+      ],
     });
 
     table.push(TeamBoxScoreLeadersTableCreator.buildRow('Points', data.points));
@@ -25,5 +25,9 @@ export default class TeamBoxScoreLeadersTableCreator {
       data.value,
       data.getLeadersAbbreviatedNames(),
     ];
+  }
+
+  static getTeamType() {
+    throw new Error('Not implemented');
   }
 }
