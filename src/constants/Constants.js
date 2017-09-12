@@ -1,35 +1,35 @@
 import emoji from 'node-emoji';
 
-let BASE_NBA_DATA_URL = "http://data.nba.com/";
-let BASE_NBA_DATA_SCOREBOARD_URL = BASE_NBA_DATA_URL.concat("data/5s/json/cms/noseason/scoreboard/");
-let BASE_NBA_DATA_PLAY_BY_PLAY_URL = BASE_NBA_DATA_URL.concat("data/5s/json/cms/noseason/game/");
+const BASE_NBA_DATA_URL = "http://data.nba.com/";
+const BASE_NBA_DATA_SCOREBOARD_URL = BASE_NBA_DATA_URL.concat("data/5s/json/cms/noseason/scoreboard/");
+const BASE_NBA_DATA_PLAY_BY_PLAY_URL = BASE_NBA_DATA_URL.concat("data/5s/json/cms/noseason/game/");
 
-let DEFAULT_DATE_FORMAT = "YYYYMMDD";
-let DEFAULT_TIMEZONE = "America/New_York";
+const DEFAULT_DATE_FORMAT = "YYYYMMDD";
+const DEFAULT_TIMEZONE = "America/New_York";
 
-let TRANSLATED_NBA_DATE_TIME_FORMAT = "YYYYMMDDHHmm";
-let TRANSLATED_DATE_FORMAT = "LLL";
+const TRANSLATED_NBA_DATE_TIME_FORMAT = "YYYYMMDDHHmm";
+const TRANSLATED_DATE_FORMAT = "LLL";
 
-let PREGAME = 'PREGAME';
-let LIVE = 'LIVE';
-let FINAL = 'FINAL';
+const PREGAME = 'PREGAME';
+const LIVE = 'LIVE';
+const FINAL = 'FINAL';
 
-let TRANSLATED_GAME_STATUS_MAP = {
+const TRANSLATED_GAME_STATUS_MAP = {
   1: PREGAME,
   2: LIVE,
   3: FINAL,
 };
 
-let ONE_HUNDRED = 100;
+const ONE_HUNDRED = 100;
 
-let HOME_EMOJI_VALUE = 'house';
-let VISITOR_EMOJI_VALUE = 'bus';
-let START_TIME_EMOJI_VALUE = 'alarm_clock';
-let BROADCASTS_EMOJI_VALUE = 'tv';
-let SCORE_100_EMOJI_VALUE = '100';
-let PLAY_TIME_EMOJI_VALUE = 'hourglass_flowing_sand';
+const HOME_EMOJI_VALUE = 'house';
+const VISITOR_EMOJI_VALUE = 'bus';
+const START_TIME_EMOJI_VALUE = 'alarm_clock';
+const BROADCASTS_EMOJI_VALUE = 'tv';
+const SCORE_100_EMOJI_VALUE = '100';
+const PLAY_TIME_EMOJI_VALUE = 'hourglass_flowing_sand';
 
-let GAMES_OPTIONS = {
+const GAMES_OPTIONS = {
   TODAY: "TODAY",
   YESTERDAY: "YESTERDAY",
   TOMORROW: "TOMORROW"
