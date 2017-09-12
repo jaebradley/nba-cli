@@ -1,10 +1,8 @@
-'use es6';
-
-import {List, Record} from 'immutable';
+import { List, Record } from 'immutable';
 
 import Score from './Score';
 
-let defaults = {
+const defaults = {
   periods: new List(),
   total: new Score(),
 }
