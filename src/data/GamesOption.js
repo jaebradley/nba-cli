@@ -1,17 +1,25 @@
-'use es6';
+import { Enum } from 'enumify';
+import jstz from 'jstimezonedetect';
+import moment from 'moment-timezone';
 
-import {Enum} from 'enumify';
+export default class GamesOption extends Enum {
+  getStartOfDay() {
+    const startOfDay = moment().tz(jstz.determine().name()).startOf('day');
 
-export default class GamesOption extends Enum {};
+    switch (this) {
+      case GamesOption.YESTERDAY:
+        return startOfDay.subtract(1, 'days');
 
-GamesOption.initEnum({
-  TODAY: {
-    value: 'TODAY'
-  },
-  YESTERDAY: {
-    value: 'YESTERDAY'
-  },
-  TOMORROW: {
-    value: 'TOMORROW'
+      case GamesOption.TOMORROW:
+        return startOfDay.add(1, 'days');
+
+      case GamesOption.TODAY:
+        return startOfDay;
+
+      default:
+        throw new Error(`Unknown option: ${this}`);
+    }
   }
-});
+};
+
+GamesOption.initEnum(['TODAY', 'YESTERDAY', 'TOMORROW']);
