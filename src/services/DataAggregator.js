@@ -1,6 +1,8 @@
 import Client from 'nba-stats-client';
 import { List, Map } from 'immutable';
+import moment from 'moment-timezone';
 
+import Constants from '../constants/Constants';
 import Game from '../data/Game';
 import Games from '../data/Games';
 
@@ -10,7 +12,9 @@ import GameScoreboardTranslator from './translators/GameScoreboardTranslator';
 
 export default class DataAggregator {
   static aggregate(date) {
-    return DataAggregator.getScoreboards(date)
+    const startOfDay = DataAggregator.getConvertedStartOfDay(date);
+
+    return DataAggregator.getScoreboards(startOfDay)
       .then((scoreboards) => {
         const startedGames = [];
         const upcomingGames = [];
@@ -25,7 +29,7 @@ export default class DataAggregator {
 
         return { upcomingGames, startedGames };
       }).then((games) => {
-        return DataAggregator.getAllStartedGamesData(date, games.startedGames)
+        return DataAggregator.getAllStartedGamesData(startOfDay, games.startedGames)
           .then((startedGames) => {
             return new Games({
               upcoming: List(games.upcomingGames).sortBy((game) => game.id),
@@ -92,5 +96,10 @@ export default class DataAggregator {
   static getPlays(date, gameId) {
     return Client.getPlayByPlay(date.year(), date.month() + 1, date.date(), gameId)
                  .then((data) => PlaysTranslator.translate(data.sports_content.game.play));
+  }
+
+  static getConvertedStartOfDay(date) {
+    // NBA Stats API takes EST Days
+    return moment(date).tz(Constants.DEFAULT_TIMEZONE).startOf('day');
   }
 };
