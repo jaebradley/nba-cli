@@ -35,7 +35,10 @@ export default class GameScoreboard extends Record(defaults) {
   }
 
   getTvBroadcastsString() {
-    return this.broadcasts.filter(broadcast => broadcast.medium === BroadcastMedium.TV).toString();
+    return this.broadcasts.filter(broadcast => broadcast.medium === BroadcastMedium.TV)
+      .map(broadcast => broadcast.name)
+      .toJS()
+      .toString();
   }
 
   isUpcoming() {
