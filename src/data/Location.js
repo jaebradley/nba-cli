@@ -1,12 +1,10 @@
-'use es6';
+import { Record } from 'immutable';
 
-import {Record} from 'immutable';
-
-let defaults = {
+const defaults = {
   arena: '',
   city: '',
   state: '',
-}
+};
 
 export default class Location extends Record(defaults) {
   getFormattedLocation() {

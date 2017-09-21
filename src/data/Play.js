@@ -1,10 +1,8 @@
-'use es6';
-
-import {Record} from 'immutable';
+import { Record } from 'immutable';
 
 import PeriodFormatter from '../services/PeriodFormatter';
 
-let defaults = {
+const defaults = {
   description: '',
   clock: '',
   period: 1,

@@ -20,6 +20,6 @@ export default class GamesOption extends Enum {
         throw new Error(`Unknown option: ${this}`);
     }
   }
-};
+}
 
 GamesOption.initEnum(['TODAY', 'YESTERDAY', 'TOMORROW']);
