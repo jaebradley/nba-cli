@@ -1,14 +1,11 @@
-'use es6';
-
-import {Record} from 'immutable';
+import { Record } from 'immutable';
 
 import BroadcastMedium from './BroadcastMedium';
 
-let defaults = {
+const defaults = {
   scope: '',
   name: '',
   medium: BroadcastMedium.TV,
 };
 
-export default class Broadcast extends Record(defaults) {
-}
+export default class Broadcast extends Record(defaults) {}

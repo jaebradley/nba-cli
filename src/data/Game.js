@@ -1,12 +1,9 @@
-'use es6';
+import { List, Record } from 'immutable';
 
-import {List, Record} from 'immutable';
-
-let defaults = {
+const defaults = {
   metadata: undefined,
   boxScoreLeaders: List(),
   plays: List(),
 };
 
-export default class Game extends Record(defaults) {
-}
+export default class Game extends Record(defaults) {}
