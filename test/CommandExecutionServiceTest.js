@@ -9,8 +9,6 @@ chai.use(sinonChai);
 const expect = chai.expect;
 
 import CommandExecutionService from '../src/services/CommandExecutionService';
-import Constants from '../src/constants/Constants';
-import GamesOption from '../src/data/GamesOption';
 
 describe('Tests Command Execution Service', () => {
   describe('Tests printing tables', () => {
