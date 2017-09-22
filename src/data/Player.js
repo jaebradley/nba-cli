@@ -1,10 +1,8 @@
-'use es6';
+import { Record } from 'immutable';
 
-import {Record} from 'immutable';
-
-let defaults = {
+const defaults = {
   firstName: '',
-  lastName: ''
+  lastName: '',
 };
 
 export default class Player extends Record(defaults) {
@@ -19,4 +17,4 @@ export default class Player extends Record(defaults) {
   getAbbreviatedName() {
     return `${this.getAbbreviatedFirstName()}.${this.lastName}`;
   }
-};
+}

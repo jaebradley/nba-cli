@@ -1,8 +1,6 @@
-'use es6';
+import { Enum } from 'enumify';
 
-import {Enum} from 'enumify';
-
-export default class BroadcastMedium extends Enum {};
+export default class BroadcastMedium extends Enum {}
 BroadcastMedium.initEnum([
   'RADIO',
   'TV',

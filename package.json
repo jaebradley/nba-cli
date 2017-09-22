@@ -7,7 +7,8 @@
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/.bin/_mocha -- --compilers js:babel-register ",
     "coveralls": "npm run-script coverage && node_modules/.bin/coveralls < coverage/lcov.info",
     "build": "babel src --presets babel-preset-es2015 --out-dir build",
-    "prepublish": "npm run build"
+    "prepublish": "npm run build",
+    "lint": "./node_modules/.bin/eslint src/ test/"
   },
   "author": "Jae Bradley",
   "license": "MIT",
@@ -39,6 +40,9 @@
     "chai": "3.5.0",
     "chai-immutable": "1.6.0",
     "coveralls": "2.11.9",
+    "eslint": "^4.7.2",
+    "eslint-config-airbnb-base": "^12.0.0",
+    "eslint-plugin-import": "^2.7.0",
     "istanbul": "1.0.0-alpha.2",
     "mocha": "2.4.5",
     "mocha-lcov-reporter": "1.2.0 ",

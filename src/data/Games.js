@@ -1,11 +1,8 @@
-'use es6';
+import { List, Record } from 'immutable';
 
-import {List, Record} from 'immutable';
-
-let defaults = {
+const defaults = {
   upcoming: List(),
-  started: List()
+  started: List(),
 };
 
-export default class Games extends Record(defaults){
-}
+export default class Games extends Record(defaults) {}

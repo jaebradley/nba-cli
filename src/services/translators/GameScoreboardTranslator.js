@@ -24,7 +24,7 @@ export default class GameScoreboardTranslator {
 
     return new GameScoreboard({
       id: data.id,
-      status: GameStatus.identifyFromValue(periodTime.game_status),
+      status: GameStatus.enumValueOf(periodTime.game_status),
       startTimestamp: GameScoreboardTranslator.getStartTimestamp(data),
       location: new Location({
         arena: data.arena,

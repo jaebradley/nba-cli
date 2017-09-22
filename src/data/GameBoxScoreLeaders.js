@@ -1,12 +1,9 @@
-'use es6';
-
-import {Record} from 'immutable';
+import { Record } from 'immutable';
 import TeamBoxScoreLeaders from './TeamBoxScoreLeaders';
 
-let defaults = {
+const defaults = {
   home: new TeamBoxScoreLeaders(),
   visitor: new TeamBoxScoreLeaders(),
 };
 
-export default class GameBoxScoreLeaders extends Record(defaults) {
-};
+export default class GameBoxScoreLeaders extends Record(defaults) {}

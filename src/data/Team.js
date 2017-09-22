@@ -1,9 +1,7 @@
-'use es6';
-
-import {Record} from 'immutable';
+import { Record } from 'immutable';
 import NbaEmoji from 'nba-emoji';
 
-let defaults = {
+const defaults = {
   city: '',
   nickname: '',
   abbreviation: '',

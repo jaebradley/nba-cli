@@ -1,8 +1,6 @@
-'use es6';
-
 import jstz from 'jstimezonedetect';
 import moment from 'moment-timezone';
-import {List, Record} from 'immutable';
+import { List, Record } from 'immutable';
 
 import BroadcastMedium from './BroadcastMedium';
 import Constants from '../constants/Constants';
@@ -12,7 +10,7 @@ import Location from './Location';
 import Matchup from './Matchup';
 import Period from './Period';
 
-let defaults = {
+const defaults = {
   id: '',
   status: GameStatus.FINAL,
   startTimestamp: moment(),
@@ -24,25 +22,23 @@ let defaults = {
 };
 
 export default class GameScoreboard extends Record(defaults) {
-
   getNbaStatsFormattedStartDate() {
-    return this.startTimestamp.clone().tz(Constants.DEFAULT_TIMEZONE)
-                                      .format(Constants.DEFAULT_DATE_FORMAT);
+    return this.startTimestamp.clone()
+      .tz(Constants.DEFAULT_TIMEZONE)
+      .format(Constants.DEFAULT_DATE_FORMAT);
   }
 
   getLocalizedStartDateTime() {
-    return this.startTimestamp.clone().tz(jstz.determine().name())
-                                      .format(Constants.TRANSLATED_DATE_FORMAT);
+    return this.startTimestamp.clone()
+      .tz(jstz.determine().name())
+      .format(Constants.TRANSLATED_DATE_FORMAT);
   }
 
   getTvBroadcastsString() {
-    let tvBroadcasts = List();
-    for (let broadcast of this.broadcasts) {
-      if (broadcast.medium === BroadcastMedium.TV) {
-        tvBroadcasts = tvBroadcasts.push(broadcast.name);
-      }
-    }
-    return tvBroadcasts.toJS().toString();
+    return this.broadcasts.filter(broadcast => broadcast.medium === BroadcastMedium.TV)
+      .map(broadcast => broadcast.name)
+      .toJS()
+      .toString();
   }
 
   isUpcoming() {
@@ -50,6 +46,6 @@ export default class GameScoreboard extends Record(defaults) {
   }
 
   hasStarted() {
-    return !this.isUpcoming() && this.status != Constants.PREGAME;
+    return !this.isUpcoming() && this.status !== Constants.PREGAME;
   }
 }
