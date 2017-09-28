@@ -15,7 +15,6 @@ export default class StartedGameTableCreator {
   }
 
   static buildHeaders(data) {
-    console.log(data);
     const periodHeaders = data.scoring.getPeriodValues()
                                       .map((period) => period.bold.cyan)
                                       .toJS();

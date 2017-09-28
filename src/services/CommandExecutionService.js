@@ -18,8 +18,6 @@ export default class CommandExecutionService {
 
     if (tables.upcoming) {
       console.log(tables.upcoming);
-    } else {
-      console.log('No upcoming games');
     }
   }
 }
