@@ -5,7 +5,7 @@ import Constants from '../../constants/Constants';
 export default class UpcomingGamesTableCreator {
   static create(data) {
     const table = new Table({ head: UpcomingGamesTableCreator.getHeaders() });
-    data.forEach((metadata) => table.push(UpcomingGamesTableCreator.format(metadata)));
+    data.forEach(metadata => table.push(UpcomingGamesTableCreator.format(metadata)));
     return table.toString();
   }
 
@@ -28,6 +28,6 @@ export default class UpcomingGamesTableCreator {
       Constants.LOCATION_EMOJI,
     ];
 
-    return values.map((value) => ({ content: value, hAlign: 'center' }));
+    return values.map(value => ({ content: value, hAlign: 'center' }));
   }
 }
