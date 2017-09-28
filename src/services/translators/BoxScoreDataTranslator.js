@@ -1,6 +1,4 @@
-'use es6';
-
-import {List} from 'immutable';
+import { List } from 'immutable';
 
 import GameBoxScoreLeaders from '../../data/GameBoxScoreLeaders';
 import TeamBoxScoreLeaders from '../../data/TeamBoxScoreLeaders';
@@ -9,58 +7,58 @@ import Player from '../../data/Player';
 
 export default class BoxScoreDataTranslator {
   static translateStatLeaders(data) {
-    let leaders = List(data.leader.map(leader => new Player({
-      firstName: leader.FirstName,
-      lastName: leader.LastName
-    })));
-    return new StatisticalLeaders({ value: parseInt(data.StatValue), leaders: leaders });
+    const leaders = List(data.leader.map(leader =>
+      new Player({
+        firstName: leader.FirstName,
+        lastName: leader.LastName,
+      })));
+
+    return new StatisticalLeaders({ value: parseInt(data.StatValue, 10), leaders });
   }
 
   static translateBoxScoreData(data) {
-    let visitorLeaders = data.sports_content.game.visitor.Leaders;
-    let homeLeaders = data.sports_content.game.home.Leaders;
+    const visitorLeaders = data.sports_content.game.visitor.Leaders;
+    const homeLeaders = data.sports_content.game.home.Leaders;
 
-    let visitorPointsLeaders = new StatisticalLeaders();
-    if (visitorLeaders.hasOwnProperty('Points')) {
-      visitorPointsLeaders = BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Points);
-    }
+    const visitorPointsLeaders = 'Points' in visitorLeaders
+      ? BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Points)
+      : new StatisticalLeaders();
 
-    let visitorAssistsLeaders = new StatisticalLeaders();
-    if (visitorLeaders.hasOwnProperty('Assists')) {
-      visitorAssistsLeaders = BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Assists);
-    }
+    const visitorAssistsLeaders = 'Assists' in visitorLeaders
+      ? BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Assists)
+      : new StatisticalLeaders();
 
-    let visitorReboundsLeaders = new StatisticalLeaders();
-    if (visitorLeaders.hasOwnProperty('Rebounds')) {
-      visitorReboundsLeaders = BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Rebounds);
-    }
+    const visitorReboundsLeaders = 'Rebounds' in visitorLeaders
+      ? BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Rebounds)
+      : new StatisticalLeaders();
 
-    let homePointsLeaders = new StatisticalLeaders();
-    if (homeLeaders.hasOwnProperty('Points')) {
-      homePointsLeaders = BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Points);
-    }
+    const homePointsLeaders = 'Points' in homeLeaders
+      ? BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Points)
+      : new StatisticalLeaders();
 
-    let homeAssistsLeaders = new StatisticalLeaders();
-    if (homeLeaders.hasOwnProperty('Assists')) {
-      homeAssistsLeaders = BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Assists);
-    }
+    const homeAssistsLeaders = 'Assists' in homeLeaders
+      ? BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Assists)
+      : new StatisticalLeaders();
 
-    let homeReboundsLeaders = new StatisticalLeaders();
-    if (homeLeaders.hasOwnProperty('Rebounds')) {
-      homeReboundsLeaders = BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Rebounds);
-    }
+    const homeReboundsLeaders = 'Rebounds' in homeLeaders
+      ? BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Rebounds)
+      : new StatisticalLeaders();
 
-    let visitorBoxScoreLeaders = new TeamBoxScoreLeaders({
+    const visitorBoxScoreLeaders = new TeamBoxScoreLeaders({
       points: visitorPointsLeaders,
       assists: visitorAssistsLeaders,
       rebounds: visitorReboundsLeaders,
     });
 
-    let homeBoxScoreLeaders = new TeamBoxScoreLeaders({
+    const homeBoxScoreLeaders = new TeamBoxScoreLeaders({
       points: homePointsLeaders,
       assists: homeAssistsLeaders,
       rebounds: homeReboundsLeaders,
     });
-    return new GameBoxScoreLeaders({home: homeBoxScoreLeaders, visitor: visitorBoxScoreLeaders});
+
+    return new GameBoxScoreLeaders({
+      home: homeBoxScoreLeaders,
+      visitor: visitorBoxScoreLeaders,
+    });
   }
 }

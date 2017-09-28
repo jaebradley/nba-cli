@@ -1,5 +1,3 @@
-'use es6';
-
 export default class PeriodFormatter {
   static format(period) {
     return period > 4
