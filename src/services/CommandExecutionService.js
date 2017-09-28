@@ -6,7 +6,7 @@ export default class CommandExecutionService {
   static executeGamesCommand(dateValue) {
     return DataAggregator.aggregate(StartOfDayIdentifier.identify(dateValue))
                          .then((data) => TableCreator.create(data))
-                         .then((tables) => CommandExecutionService.printTables(tables)).catch((err) => console.error(`Could not get NBA games for ${dateValue} due to error:\n${err}`));
+                         .then((tables) => CommandExecutionService.printTables(tables));
   }
 
   static printTables(tables) {

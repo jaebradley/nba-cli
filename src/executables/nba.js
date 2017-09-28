@@ -4,16 +4,18 @@
 
 import program from 'commander';
 
+import pkg from '../../package.json';
+
 import { HELP } from '../constants/NbaGamesCommandHelp';
 
-program.version('0.0.1');
-
-program.on('help', () => {
-  console.log(HELP);
-  process.exit(1);
-});
-
-program.command('games', 'get nba games')
+program
+  .version(pkg.version)
+  .description('NBA game data')
+  .on('help', () => {
+    console.log(HELP);
+    process.exit(1);
+  })
+  .command('games', 'get nba games')
   .parse(process.argv);
 
 if (program.args.length === 0) {

@@ -1,4 +1,3 @@
-import jstz from 'jstimezonedetect';
 import { List } from 'immutable';
 import moment from 'moment-timezone';
 
@@ -17,14 +16,14 @@ import BroadcastMedium from '../../data/BroadcastMedium';
 
 export default class GameScoreboardTranslator {
   static translate(data) {
+    const { broadcasters } = data;
     const periodTime = data.period_time;
-    const broadcasters = data.broadcasters;
     const homeData = data.home;
     const awayData = data.visitor;
 
     return new GameScoreboard({
       id: data.id,
-      status: GameStatus.enumValueOf(periodTime.game_status),
+      status: GameScoreboardTranslator.getGameStatus(periodTime.game_status),
       startTimestamp: GameScoreboardTranslator.getStartTimestamp(data),
       location: new Location({
         arena: data.arena,
@@ -32,9 +31,9 @@ export default class GameScoreboardTranslator {
         state: data.state,
       }),
       period: new Period({
-        value: parseInt(periodTime.period_value),
+        value: parseInt(periodTime.period_value, 10),
         status: periodTime.period_status,
-        clock: periodTime.game_clock
+        clock: periodTime.game_clock,
       }),
       broadcasts: GameScoreboardTranslator.getBroadcasts(broadcasters),
       matchup: new Matchup({
@@ -52,37 +51,50 @@ export default class GameScoreboardTranslator {
       scoring: new GameScoring({
         periods: GameScoreboardTranslator.getPeriodScores(homeData, awayData),
         total: new Score({
-          home: parseInt(homeData.score),
-          away: parseInt(awayData.score)
+          home: parseInt(homeData.score, 10),
+          away: parseInt(awayData.score, 10),
         }),
       }),
     });
   }
 
+  static getGameStatus(value) {
+    switch (value) {
+      case 1:
+        return GameStatus.PREGAME;
+      case 2:
+        return GameStatus.LIVE;
+      case 'Halftime':
+        return GameStatus.HALFTIME;
+      case '3':
+        return GameStatus.FINAL;
+      default:
+        throw new ReferenceError(`Unknown Game Status: ${value}`);
+    }
+  }
+
   static getStartTimestamp(gameData) {
-    return moment.tz(`${gameData.date}${gameData.time}`,
-                     Constants.TRANSLATED_NBA_DATE_TIME_FORMAT,
-                     Constants.DEFAULT_TIMEZONE)
-                 .clone()
-                 .tz('UTC');
+    return moment.tz(
+      `${gameData.date}${gameData.time}`,
+      Constants.TRANSLATED_NBA_DATE_TIME_FORMAT,
+      Constants.DEFAULT_TIMEZONE,
+    ).clone().tz('UTC');
   }
 
   static getBroadcasts(broadcasters) {
-    const radioBroadcasters = List(broadcasters.radio.broadcaster
-      .map(broadcast => new Broadcast({
+    const radioBroadcasters = List(broadcasters.radio.broadcaster.map(broadcast =>
+      new Broadcast({
         scope: broadcast.scope,
         name: broadcast.display_name,
-        medium: BroadcastMedium.RADIO
-      }))
-    );
+        medium: BroadcastMedium.RADIO,
+      })));
 
-    const tvBroadcasters = List(broadcasters.tv.broadcaster
-      .map(broadcast => new Broadcast({
+    const tvBroadcasters = List(broadcasters.tv.broadcaster.map(broadcast =>
+      new Broadcast({
         scope: broadcast.scope,
         name: broadcast.display_name,
-        medium: BroadcastMedium.TV
-      }))
-    );
+        medium: BroadcastMedium.TV,
+      })));
 
     return tvBroadcasters.concat(radioBroadcasters);
   }
@@ -98,15 +110,15 @@ export default class GameScoreboardTranslator {
     const awayPeriodScores = awayData.linescores.period;
 
     let periodScores = List();
-    for (let index = 0; index < homePeriodScores.length; index++) {
-      let homePeriodScore = homePeriodScores[index];
-      let awayPeriodScore = awayPeriodScores[index];
+    for (let index = 0; index < homePeriodScores.length; index += 1) {
+      const homePeriodScore = homePeriodScores[index];
+      const awayPeriodScore = awayPeriodScores[index];
       periodScores = periodScores.push(new PeriodScore({
-        period: parseInt(homePeriodScore.period_value),
+        period: parseInt(homePeriodScore.period_value, 10),
         score: new Score({
-          home: parseInt(homePeriodScore.score),
-          away: parseInt(awayPeriodScore.score)
-        })
+          home: parseInt(homePeriodScore.score, 10),
+          away: parseInt(awayPeriodScore.score, 10),
+        }),
       }));
     }
 
