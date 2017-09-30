@@ -2,24 +2,17 @@ import colors from 'colors';
 import Table from 'cli-table2';
 
 import Constants from '../../constants/Constants';
-import Score from '../../data/Score';
 
 export default class StartedGameTableCreator {
   static create(data) {
     const table = new Table({ head: StartedGameTableCreator.buildHeaders(data) });
-
-    StartedGameTableCreator.generateRows(data)
-                          .forEach(row => table.push(row));
-
+    StartedGameTableCreator.generateRows(data).forEach(row => table.push(row));
     return table.toString();
   }
 
   static buildHeaders(data) {
-    const periodHeaders = data.scoring.getPeriodValues()
-                                      .map((period) => period.bold.cyan)
-                                      .toJS();
     return ['', data.status.name.bold.magenta]
-      .concat(periodHeaders)
+      .concat(data.scoring.getPeriodValues().map(period => period.bold.cyan).toJS())
       .concat('Total'.bold.underline.cyan);
   }
 
@@ -32,12 +25,18 @@ export default class StartedGameTableCreator {
     const rowNumbers = data.scoring.periods.size + 3;
     const rows = [];
 
-    rows.push(StartedGameTableCreator.generateMetadataRow(Constants.START_TIME_EMOJI,
-                                                          data.getLocalizedStartDateTime(),
-                                                          rowNumbers));
-    rows.push(StartedGameTableCreator.generateMetadataRow(Constants.BROADCASTS_EMOJI,
-                                                          data.getTvBroadcastsString(),
-                                                          rowNumbers));
+    rows.push(StartedGameTableCreator.generateMetadataRow(
+      Constants.START_TIME_EMOJI,
+      data.getLocalizedStartDateTime(),
+      rowNumbers,
+    ));
+
+    rows.push(StartedGameTableCreator.generateMetadataRow(
+      Constants.BROADCASTS_EMOJI,
+      data.getTvBroadcastsString(),
+      rowNumbers,
+    ));
+
     return rows;
   }
 
@@ -61,11 +60,11 @@ export default class StartedGameTableCreator {
     ];
     const visitorRow = [
       Constants.VISITOR_EMOJI,
-      data.matchup.awayTeam.getFormattedTeamAbbreviation()
+      data.matchup.awayTeam.getFormattedTeamAbbreviation(),
     ];
 
-    data.scoring.periods.forEach(periodScore => {
-      let formattedScore = periodScore.score.format();
+    data.scoring.periods.forEach((periodScore) => {
+      const formattedScore = periodScore.score.format();
       homeRow.push(formattedScore.home);
       visitorRow.push(formattedScore.away);
     });
