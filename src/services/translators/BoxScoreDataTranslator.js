@@ -1,3 +1,5 @@
+/* eslint no-prototype-builtins: 0 */
+
 import { List } from 'immutable';
 
 import GameBoxScoreLeaders from '../../data/GameBoxScoreLeaders';
@@ -20,27 +22,27 @@ export default class BoxScoreDataTranslator {
     const visitorLeaders = data.sports_content.game.visitor.Leaders;
     const homeLeaders = data.sports_content.game.home.Leaders;
 
-    const visitorPointsLeaders = 'Points' in visitorLeaders
+    const visitorPointsLeaders = visitorLeaders.hasOwnProperty('Points')
       ? BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Points)
       : new StatisticalLeaders();
 
-    const visitorAssistsLeaders = 'Assists' in visitorLeaders
+    const visitorAssistsLeaders = visitorLeaders.hasOwnProperty('Assists')
       ? BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Assists)
       : new StatisticalLeaders();
 
-    const visitorReboundsLeaders = 'Rebounds' in visitorLeaders
+    const visitorReboundsLeaders = visitorLeaders.hasOwnProperty('Rebounds')
       ? BoxScoreDataTranslator.translateStatLeaders(visitorLeaders.Rebounds)
       : new StatisticalLeaders();
 
-    const homePointsLeaders = 'Points' in homeLeaders
+    const homePointsLeaders = homeLeaders.hasOwnProperty('Points')
       ? BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Points)
       : new StatisticalLeaders();
 
-    const homeAssistsLeaders = 'Assists' in homeLeaders
+    const homeAssistsLeaders = homeLeaders.hasOwnProperty('Assists')
       ? BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Assists)
       : new StatisticalLeaders();
 
-    const homeReboundsLeaders = 'Rebounds' in homeLeaders
+    const homeReboundsLeaders = homeLeaders.hasOwnProperty('Rebounds')
       ? BoxScoreDataTranslator.translateStatLeaders(homeLeaders.Rebounds)
       : new StatisticalLeaders();
 
