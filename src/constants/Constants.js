@@ -1,4 +1,5 @@
 import emoji from 'node-emoji';
+import { Map } from 'immutable';
 
 const BASE_NBA_DATA_URL = 'http://data.nba.com/';
 const BASE_NBA_DATA_SCOREBOARD_URL = BASE_NBA_DATA_URL.concat('data/5s/json/cms/noseason/scoreboard/');
@@ -42,6 +43,10 @@ const BROADCASTS_EMOJI = emoji.get(BROADCASTS_EMOJI_VALUE);
 const HOME_EMOJI = emoji.get(HOME_EMOJI_VALUE);
 const VISITOR_EMOJI = emoji.get(VISITOR_EMOJI_VALUE);
 const LOCATION_EMOJI = emoji.get('round_pushpin');
+
+const NBA_GAME_STATUSES = Map({
+
+});
 
 module.exports = {
   BASE_NBA_DATA_SCOREBOARD_URL,

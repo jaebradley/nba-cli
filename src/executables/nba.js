@@ -1,20 +1,22 @@
 #!/usr/bin/env node
 
-'use es6';
+/* eslint no-console: 0 */
 
-import program from "commander";
+import program from 'commander';
 
-import {HELP} from "../constants/NbaGamesCommandHelp";
+import pkg from '../../package.json';
 
-program.version("0.0.1");
+import { HELP } from '../constants/NbaGamesCommandHelp';
 
-program.on('help', function() {
+program
+  .version(pkg.version)
+  .description('NBA game data')
+  .on('help', () => {
     console.log(HELP);
     process.exit(1);
-});
-
-program.command("games", "get nba games")
-       .parse(process.argv);
+  })
+  .command('games', 'get nba games')
+  .parse(process.argv);
 
 if (program.args.length === 0) {
   console.log(HELP);

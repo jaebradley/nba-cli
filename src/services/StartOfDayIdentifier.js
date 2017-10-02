@@ -10,7 +10,7 @@ export default class StartOfDayIdentifier {
 
     if (gamesOption) {
       return gamesOption.getStartOfDay();
-    } else if (DateIdentifier.isValidDateString(value)) {
+    } else if (StartOfDayIdentifier.isValidDateString(value)) {
       return moment(value, Constants.INPUT_DATE_FORMAT, true).tz(jstz.determine().name()).startOf('day');
     }
 
