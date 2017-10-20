@@ -9,7 +9,7 @@ export default class PlaysTranslator {
     return List(recentPlays.map(play => new Play({
       description: play.description,
       clock: play.clock,
-      period: parseInt(play.period),
+      period: parseInt(play.period, 10),
       teamAbbreviation: play.team_abr,
     })));
   }
